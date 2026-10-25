@@ -1,21 +1,28 @@
 {
-  "_note": "Names and roles are public on srmist.edu.in (CLAUDE.md §7). Degrees, years and career paths for Sriram Krishnan and Ojas Mahapatra are from SRM's notable-alumni page; Varun Chakravarthy's from his Wikipedia biography (read 2026-10-25; SRM's page doesn't list him). Quotes stay TODO until a sourced public quote is found. Portraits only with permission.",
+  "_note": "Names, roles, degrees, years and career paths are from SRM's notable-alumni page (srmist.edu.in/alumni-affairs/notable-alumni/, read 2026-10-25), except Varun Chakravarthy (SRM homepage + Wikipedia; not on that page). Sam Anton's entry gives two different years (2007 and 2012), so none is shown. A quote is shown only when a sourced public quote exists (optional \"line\" field) — none yet. Portraits are SRM's own, from the same page.",
   "alumni": [
     {
       "slug": "sriram-krishnan",
       "name": "Sriram Krishnan",
       "role": "Senior Policy Advisor for AI, The White House",
-      "line": "TODO: one-line quote — use only a sourced public quote",
       "degree": "B.Tech (Information Technology), 2005",
       "path": ["Leadership roles in the tech industry", "Senior Policy Advisor for AI, The White House"],
       "photo": "media/alumni/sriram-krishnan.jpg",
       "sources": ["https://www.srmist.edu.in/alumni-affairs/notable-alumni/"]
     },
     {
+      "slug": "sudha-jamthe",
+      "name": "Sudha Jamthe",
+      "role": "Generative AI author, Business School of AI",
+      "degree": "B.E (Computer Science and Engineering), 1999",
+      "path": ["Technology and entrepreneurship", "Author of books on generative AI in business", "Teaches at the Business School of AI"],
+      "photo": "media/alumni/sudha-jamthe.jpg",
+      "sources": ["https://www.srmist.edu.in/alumni-affairs/notable-alumni/"]
+    },
+    {
       "slug": "varun-chakravarthy",
       "name": "Varun Chakravarthy",
       "role": "Indian cricketer",
-      "line": "TODO: one-line quote — use only a sourced public quote",
       "degree": "B.Arch (Architecture)",
       "path": ["Worked as an architect", "Left architecture at 25 to play cricket", "Leg-spinner for Tamil Nadu, Kolkata Knight Riders and India"],
       "photo": "media/alumni/varun-chakravarthy.jpg",
@@ -25,10 +32,27 @@
       "slug": "ojas-mahapatra",
       "name": "Ojas Mahapatra",
       "role": "Group CEO, MARS Bioimaging",
-      "line": "TODO: one-line quote — use only a sourced public quote",
       "degree": "B.Tech (Biotechnology), 2003",
       "path": ["PhD in Nanotechnology, University of Canterbury", "Led InsituGen, an athlete drug-testing company", "Group CEO, MARS Bioimaging, New Zealand"],
       "photo": "media/alumni/ojas-mahapatra.jpg",
+      "sources": ["https://www.srmist.edu.in/alumni-affairs/notable-alumni/"]
+    },
+    {
+      "slug": "vikraman-vasudevan",
+      "name": "Vikraman Vasudevan, IPS",
+      "role": "Deputy Inspector General of Police, NIA",
+      "degree": "B.Tech (Computer Science and Engineering), 2005",
+      "path": ["Indian Police Service", "Investigations into terrorism, organised crime and national-security threats", "Deputy Inspector General, National Investigation Agency"],
+      "photo": "media/alumni/vikraman-vasudevan.jpg",
+      "sources": ["https://www.srmist.edu.in/alumni-affairs/notable-alumni/"]
+    },
+    {
+      "slug": "sam-anton",
+      "name": "Sam Anton",
+      "role": "Film director and screenwriter",
+      "degree": "B.Tech (Computer Science and Engineering)",
+      "path": ["Debut film: Darling (2015)", "Enakku Innoru Per Irukku (2016)", "Gurkha (2019)"],
+      "photo": "media/alumni/sam-anton.jpg",
       "sources": ["https://www.srmist.edu.in/alumni-affairs/notable-alumni/"]
     }
   ]

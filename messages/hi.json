@@ -149,6 +149,7 @@
       "question": "आप कहाँ नेतृत्व करेंगे?",
       "alumniTitle": "उन्होंने यहीं से शुरुआत की",
       "pathLabel": "{name} का करियर सफ़र",
+      "portraitAlt": "{name} का चित्र",
       "placementsTitle": "प्लेसमेंट {season}",
       "placementsIntro": "कैंपस आने वाली कंपनियाँ और उनके ऑफ़र।"
     },

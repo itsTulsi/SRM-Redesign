@@ -149,6 +149,7 @@
       "question": "Where will you lead?",
       "alumniTitle": "They started here",
       "pathLabel": "Career path of {name}",
+      "portraitAlt": "Portrait of {name}",
       "placementsTitle": "Placements {season}",
       "placementsIntro": "Recruiters who came to campus, and what they offered."
     },

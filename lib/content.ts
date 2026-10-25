@@ -97,7 +97,8 @@ export type Alumnus = {
   slug: string;
   name: string;
   role: string;
-  line: OrTodo<string>;
+  /** A sourced public quote. Omitted when there isn't one — never a placeholder. */
+  line?: string;
   degree: OrTodo<string>;
   path: OrTodo<string>[];
   photo: string;

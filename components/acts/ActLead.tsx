@@ -1,7 +1,7 @@
 import { getLocale, getTranslations } from "next-intl/server";
 import { Photo } from "@/components/ui/Photo";
 import { Fact } from "@/components/ui/Todo";
-import { getContent, isTodo } from "@/lib/content";
+import { getContent } from "@/lib/content";
 import { SECTION } from "@/lib/sections";
 import { ActHeader } from "./ActHeader";
 import { StatFigure } from "./StatFigure";
@@ -16,32 +16,36 @@ export async function ActLead() {
       <div data-curtain aria-hidden="true" className="act-curtain" />
       <ActHeader id="act-lead" kicker={t("kicker")} word={t("word")} title="Lead" question={t("question")} locale={locale} />
 
-      {/* Alumni as people (face, one line, path) — not a logo wall. */}
+      {/* Alumni as people (face, career path, a quote only when one is sourced) — not a logo wall.
+          Phones: a compact row per person so six don't become six screens; 2 then 3 columns above that. */}
       <div id={SECTION.alumni} className="site-container pb-20 lg:pb-32">
         <h3 className="font-display text-section font-bold">{t("alumniTitle")}</h3>
-        <ul className="mt-10 grid gap-10 md:grid-cols-3 md:gap-6">
+        <ul className="mt-10 grid gap-8 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-12 lg:grid-cols-3">
           {alumni.map((a) => (
-            <li key={a.slug} className="flex flex-col gap-4">
-              <Photo src={a.photo} alt={`Portrait of ${a.name}`} sizes="(min-width: 768px) 33vw, 100vw" className="aspect-square w-full rounded-3xl" />
-              <div>
-                <h4 className="font-display text-2xl font-bold">{a.name}</h4>
-                <p className="mt-1 text-lg">{a.role}</p>
-              </div>
-              {isTodo(a.line) ? (
-                <Fact value={a.line} />
-              ) : (
-                <blockquote className="border-l-2 border-tree pl-4 text-lg text-fg-muted">“{a.line}”</blockquote>
-              )}
-              <ol aria-label={t("pathLabel", { name: a.name })} className="flex flex-col gap-1.5 border-l border-line pl-4 text-sm text-fg-muted">
-                <li>
-                  SRM · <Fact value={a.degree} />
-                </li>
-                {a.path.map((step) => (
-                  <li key={step}>
-                    <Fact value={step} />
+            <li key={a.slug} className="grid grid-cols-[6rem_1fr] items-start gap-4 sm:flex sm:flex-col">
+              <Photo
+                src={a.photo}
+                alt={t("portraitAlt", { name: a.name })}
+                sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 96px"
+                className="aspect-square w-24 rounded-2xl sm:w-full sm:rounded-3xl"
+              />
+              <div className="flex min-w-0 flex-col gap-3">
+                <div>
+                  <h4 className="font-display text-xl font-bold sm:text-2xl">{a.name}</h4>
+                  <p className="mt-1 sm:text-lg">{a.role}</p>
+                </div>
+                {a.line ? <blockquote className="border-l-2 border-tree pl-4 text-lg text-fg-muted">“{a.line}”</blockquote> : null}
+                <ol aria-label={t("pathLabel", { name: a.name })} className="flex flex-col gap-1.5 border-l border-line pl-4 text-sm text-fg-muted">
+                  <li>
+                    SRM · <Fact value={a.degree} />
                   </li>
-                ))}
-              </ol>
+                  {a.path.map((step) => (
+                    <li key={step}>
+                      <Fact value={step} />
+                    </li>
+                  ))}
+                </ol>
+              </div>
             </li>
           ))}
         </ul>
