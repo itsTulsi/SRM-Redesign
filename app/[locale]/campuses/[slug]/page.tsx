@@ -49,7 +49,8 @@ export default async function CampusPage({ params }: Params) {
       </h1>
       <p className="mt-4 text-lg text-fg-muted">
         {campus.city}, {campus.state}
-        {campus.distanceFromChennai ? (
+        {/* In production a TODO renders nothing, so don't leave a dangling separator. */}
+        {campus.distanceFromChennai && !(isTodo(campus.distanceFromChennai) && process.env.NODE_ENV === "production") ? (
           <>
             {" · "}
             <Fact value={campus.distanceFromChennai} />

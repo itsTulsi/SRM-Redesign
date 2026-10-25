@@ -1,0 +1,142 @@
+{
+  "_note": "Where each file in public/media came from (collected 2026-10-25). \"owner\" = published by SRM on its own website, used here in a redesign entry for SRM's own Design Challenge; replace with originals from SRM's media office when available. \"license\" = openly licensed (Wikimedia Commons): the site shows the author and licence on the photo, as the licence requires.",
+  "credits": {
+    "media/alumni/ojas-mahapatra.jpg": {
+      "owner": "SRMIST",
+      "source": "https://www.srmist.edu.in/",
+      "image": "https://www.srmist.edu.in/wp-content/uploads/2022/12/ojas-mahapatra.jpg"
+    },
+    "media/alumni/sriram-krishnan.jpg": {
+      "owner": "SRMIST",
+      "source": "https://www.srmist.edu.in/",
+      "image": "https://www.srmist.edu.in/wp-content/uploads/2025/04/Mr.-Sriram-Krishnan-2.jpg"
+    },
+    "media/alumni/varun-chakravarthy.jpg": {
+      "owner": "SRMIST",
+      "source": "https://www.srmist.edu.in/",
+      "image": "https://www.srmist.edu.in/wp-content/uploads/2025/06/varun.jpg"
+    },
+    "media/camber/poster.jpg": {
+      "owner": "SRMIST",
+      "source": "https://www.srmist.edu.in/srmists-team-camber-racing-claims-national-title-at-formula-bharat-2026/",
+      "image": "https://www.srmist.edu.in/wp-content/uploads/2026/01/SRMISTs-Team-Camber-Racing-Claims-National-Title-at-Formula-Bharat-2026-1.jpeg"
+    },
+    "media/campuses/baburayanpettai.jpg": {
+      "owner": "SRMIST",
+      "source": "https://www.srmist.edu.in/baburayanpettai-campus/",
+      "image": "Baburayanpettai-Campus-9.png"
+    },
+    "media/campuses/delhi-ncr.jpg": {
+      "owner": "SRMIST Delhi-NCR",
+      "source": "https://www.srmup.in/",
+      "image": "hero_20261006_164608_f375dcc3139c.png"
+    },
+    "media/campuses/kattankulathur.jpg": {
+      "owner": "SRMIST",
+      "source": "https://www.srmist.edu.in/college/college-of-engineering-technology/",
+      "image": "https://www.srmist.edu.in/wp-content/uploads/2025/09/SRM-Tech-Park.jpg"
+    },
+    "media/campuses/srm-ap.jpg": {
+      "author": "iMahesh",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Entrance_Gateway_of_SRM_University,_Amaravati.jpg"
+    },
+    "media/campuses/tiruchirappalli.jpg": {
+      "author": "SamuelDutta",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Entry_Gate_at_SRM_Institute_of_Science_and_Technology,_Tiruchirapalli_Campus.jpg"
+    },
+    "media/campuses/vadapalani.jpg": {
+      "owner": "SRMIST Vadapalani",
+      "source": "https://www.srmistvdp.edu.in/",
+      "image": "1774852998Transportation-01.webp"
+    },
+    "media/colleges/agriculture.jpg": {
+      "owner": "SRMIST",
+      "source": "https://www.srmist.edu.in/",
+      "image": "https://www.srmist.edu.in/wp-content/uploads/2024/11/0011_Agriculture-Sciences.jpg"
+    },
+    "media/colleges/architecture.jpg": {
+      "owner": "SRMIST",
+      "source": "https://www.srmist.edu.in/",
+      "image": "https://www.srmist.edu.in/wp-content/uploads/2024/11/0010_Architecture.jpg"
+    },
+    "media/colleges/dental.jpg": {
+      "owner": "SRMIST",
+      "source": "https://www.srmist.edu.in/",
+      "image": "https://www.srmist.edu.in/wp-content/uploads/2024/11/0009_Dentistry.jpg"
+    },
+    "media/colleges/engineering.jpg": {
+      "owner": "SRMIST",
+      "source": "https://www.srmist.edu.in/college/college-of-engineering-technology/",
+      "image": "https://www.srmist.edu.in/wp-content/uploads/2022/02/image-046.jpg"
+    },
+    "media/colleges/law.jpg": {
+      "owner": "SRMIST",
+      "source": "https://www.srmist.edu.in/",
+      "image": "https://www.srmist.edu.in/wp-content/uploads/2024/11/0007_LAW-1.jpg"
+    },
+    "media/colleges/management.jpg": {
+      "owner": "SRMIST",
+      "source": "https://www.srmist.edu.in/",
+      "image": "https://www.srmist.edu.in/wp-content/uploads/2024/11/0006_Management.jpg"
+    },
+    "media/colleges/medicine.jpg": {
+      "owner": "SRMIST",
+      "source": "https://www.srmist.edu.in/",
+      "image": "https://www.srmist.edu.in/wp-content/uploads/2024/11/0005_Medicine.jpg"
+    },
+    "media/colleges/nursing.jpg": {
+      "owner": "SRMIST",
+      "source": "https://www.srmist.edu.in/",
+      "image": "https://www.srmist.edu.in/wp-content/uploads/2024/11/boxImg_nursing.jpg"
+    },
+    "media/colleges/pharmacy.jpg": {
+      "owner": "SRMIST",
+      "source": "https://www.srmist.edu.in/",
+      "image": "https://www.srmist.edu.in/wp-content/uploads/2024/11/boxImg_pharmacy.jpg"
+    },
+    "media/colleges/science-humanities.jpg": {
+      "owner": "SRMIST",
+      "source": "https://www.srmist.edu.in/",
+      "image": "https://www.srmist.edu.in/wp-content/uploads/2024/11/boxImg_science_humanities.jpg"
+    },
+    "media/hero/poster.jpg": {
+      "owner": "SRMIST",
+      "source": "https://www.srmist.edu.in/college/college-of-engineering-technology/",
+      "image": "https://www.srmist.edu.in/wp-content/uploads/2022/04/tech_park.jpg"
+    },
+    "media/research/health.jpg": {
+      "owner": "SRMIST",
+      "source": "https://www.srmist.edu.in/college/college-of-engineering-technology/",
+      "image": "https://www.srmist.edu.in/wp-content/uploads/2022/02/image-018.jpg"
+    },
+    "media/research/mobility.jpg": {
+      "owner": "SRMIST",
+      "source": "https://www.srmist.edu.in/college/college-of-engineering-technology/",
+      "image": "https://www.srmist.edu.in/wp-content/uploads/2022/02/image-043.jpg"
+    },
+    "media/research/space-materials.jpg": {
+      "owner": "SRMIST",
+      "source": "https://www.srmist.edu.in/research/",
+      "image": "https://www.srmist.edu.in/wp-content/uploads/2022/03/Chemistry-research-149-1-scaled.jpg"
+    },
+    "media/research/sustainability.jpg": {
+      "owner": "SRMIST",
+      "source": "https://www.srmist.edu.in/research/",
+      "image": "https://www.srmist.edu.in/wp-content/uploads/2025/06/Geopolymer-Concrete-Building.jpeg"
+    },
+    "media/stories/volvo-vtc.jpg": {
+      "owner": "SRMIST",
+      "source": "https://www.srmist.edu.in/srmist-and-volvo-group-partner-to-set-up-volvo-first-university-based-vehicle-technology-centre/",
+      "image": "https://www.srmist.edu.in/wp-content/uploads/2026/10/Dignitaries-at-the-inauguration-of-the-Vehicle-Technology-Centre.jpg"
+    },
+    "media/student-work/swift-challenge.jpg": {
+      "owner": "SRMIST",
+      "source": "https://www.srmist.edu.in/srmist-student-named-distinguished-winner-at-apples-swift-student-challenge-2026/",
+      "image": "https://www.srmist.edu.in/wp-content/uploads/2026/07/Shourya-Thakur-at-Apple-Park.png"
+    }
+  }
+}
