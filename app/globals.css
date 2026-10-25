@@ -481,3 +481,35 @@ html.lenis body {
 .camber-track[data-live]:not([data-started]) .camber-hint {
   display: block;
 }
+
+/* ═══ Step 9: campus constellation ═══
+   Camera = one transform on the stage; pins counter-scale (1/--z) so they stay pin-sized, then nudge in screen px. */
+/* No will-change: it would freeze the SVG's raster at 1× and blur it when zoomed; without it the browser
+   re-rasterises crisply once the fly-in ends. */
+.campus-stage {
+  transition: transform 900ms var(--ease-leap);
+}
+.campus-pin {
+  transform-origin: 0 0;
+  transform: scale(calc(1 / var(--z, 1))) translate(-50%, -50%) translate(var(--nx, 0px), var(--ny, 0px));
+  transition: transform 900ms var(--ease-leap);
+}
+[data-motion="full"] .campus-pin-dot::after {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border-radius: 9999px;
+  border: 2px solid var(--leaf-green-300);
+  animation: pin-pulse 2.4s var(--ease-leap) infinite;
+}
+.campus-pin[aria-current] .campus-pin-dot::after {
+  border-color: var(--leap-lime);
+}
+@keyframes pin-pulse {
+  0% { scale: 0.6; opacity: 0.9; }
+  100% { scale: 1.8; opacity: 0; }
+}
+/* OSM tiles are light; invert + hue-rotate gives an on-brand dark map with water still blue-ish. */
+.street-map {
+  filter: invert(1) hue-rotate(180deg) brightness(0.9) contrast(0.92) saturate(0.7);
+}

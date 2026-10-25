@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { StreetMap } from "@/components/map/StreetMap";
 import { Photo } from "@/components/ui/Photo";
 import { Fact } from "@/components/ui/Todo";
-import { campuses, colleges, getCampus } from "@/lib/content";
+import { campuses, colleges, getCampus, isTodo } from "@/lib/content";
+import { directionsUrl, streetMap } from "@/lib/map";
 import { Link, type Locale } from "@/lib/i18n";
 
 type Params = { params: Promise<{ locale: Locale; slug: string }> };
@@ -29,6 +31,8 @@ export default async function CampusPage({ params }: Params) {
   const t = await getTranslations("Pages");
   const nav = await getTranslations("Nav");
   const here = colleges.filter((c) => c.campus === campus.slug);
+  const ex = await getTranslations("Acts.explore");
+  const street = streetMap(campus);
 
   return (
     <main id="main" tabIndex={-1} className="site-container py-12 lg:py-20">
@@ -69,6 +73,49 @@ export default async function CampusPage({ params }: Params) {
           <p className="text-fg-muted">{t("noTour")}</p>
         )}
       </div>
+
+      <section aria-labelledby="h-find-us" className="mt-14 grid gap-8 lg:grid-cols-12">
+        <div className="flex flex-col gap-4 lg:col-span-5">
+          <h2 id="h-find-us" className="font-display text-section font-bold">
+            {t("findUs")}
+          </h2>
+          <div>
+            <h3 className="text-sm font-semibold tracking-wide text-fg-muted uppercase">{t("address")}</h3>
+            <p className="mt-1 text-lg">
+              {isTodo(campus.address) ? (
+                <>
+                  {campus.city}, {campus.state} <Fact value={campus.address} />
+                </>
+              ) : (
+                campus.address
+              )}
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-3">
+            <a
+              href={directionsUrl(campus)}
+              className="inline-flex min-h-11 items-center rounded-full bg-fg px-5 font-semibold text-bg no-underline"
+            >
+              {ex("directions")}
+            </a>
+            <a
+              href={campus.website}
+              className="inline-flex min-h-11 items-center rounded-full border border-line px-5 font-semibold text-fg no-underline hover:border-fg"
+            >
+              {ex("website")}
+            </a>
+          </div>
+          {campus.coordsApprox ? <p className="text-sm text-fg-muted">{ex("approx")}</p> : null}
+        </div>
+        <StreetMap
+          image={street.image}
+          link={street.link}
+          alt={`${ex("streetMap")}: ${campus.name}`}
+          linkLabel={ex("openMap")}
+          approx={campus.coordsApprox}
+          className="lg:col-span-7"
+        />
+      </section>
 
       {here.length > 0 ? (
         <section aria-labelledby="h-colleges" className="mt-12">

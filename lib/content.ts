@@ -76,9 +76,17 @@ export type Campus = {
   lng: number;
   tour360Url: string | null;
   distanceFromChennai?: OrTodo<string>;
-  website?: OrTodo<string>;
+  website: string;
+  address: OrTodo<string>;
+  /** Official name Google Maps resolves to the campus gate (more reliable than coordinates for directions). */
+  directionsQuery: string;
+  /** Town-level position: the campus itself isn't mapped in OpenStreetMap. */
+  coordsApprox?: boolean;
+  cluster?: "chennai" | "delhi";
   photo: string;
 };
+
+export type CampusCluster = { id: "chennai" | "delhi"; name: string; members: CampusSlug[]; zoom: number };
 
 export type Alumnus = {
   slug: string;
@@ -141,6 +149,7 @@ export const site = siteData;
 export const programmes = programmesData.programmes as Programme[];
 export const colleges = collegesData.colleges as College[];
 export const campuses = campusesData.campuses as Campus[];
+export const campusClusters = campusesData.clusters as CampusCluster[];
 export const alumni = alumniData.alumni as Alumnus[];
 export const stories = storiesData.stories as Story[];
 export const events = storiesData.events as SrmEvent[];

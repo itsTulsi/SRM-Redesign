@@ -1,5 +1,5 @@
 {
-  "_note": "lat/lng are approximate city-level positions for the stylised constellation map only — never shown as text. tour360Url only where a real tour exists.",
+  "_note": "lat/lng from OpenStreetMap (Nominatim, 2026-10-25) at the campus itself; coordsApprox = town-level (campus not mapped in OSM). Addresses are transcribed from each campus's official website; TODO where it couldn't be read. Directions use directionsQuery (official name) so Google resolves the actual gate.",
   "campuses": [
     {
       "slug": "kattankulathur",
@@ -8,11 +8,15 @@
       "state": "Tamil Nadu",
       "kind": "campus",
       "isMain": true,
-      "lat": 12.823,
-      "lng": 80.044,
+      "lat": 12.82344,
+      "lng": 80.04504,
       "tour360Url": "https://webstor.srmist.edu.in/web_assets/srmist-virtual-tour-vo/index.htm",
       "distanceFromChennai": "TODO: road distance from Chennai Central",
-      "photo": "media/campuses/kattankulathur.jpg"
+      "photo": "media/campuses/kattankulathur.jpg",
+      "address": "SRM Nagar, Kattankulathur – 603 203, Chengalpattu District, Tamil Nadu",
+      "website": "https://www.srmist.edu.in/",
+      "directionsQuery": "SRM Institute of Science and Technology, Kattankulathur",
+      "cluster": "chennai"
     },
     {
       "slug": "ramapuram",
@@ -21,11 +25,15 @@
       "state": "Tamil Nadu",
       "kind": "campus",
       "isMain": false,
-      "lat": 13.032,
-      "lng": 80.182,
+      "lat": 13.03378,
+      "lng": 80.18006,
       "tour360Url": null,
       "distanceFromChennai": "Within Chennai",
-      "photo": "media/campuses/ramapuram.jpg"
+      "photo": "media/campuses/ramapuram.jpg",
+      "address": "TODO: official postal address (srmrmp.edu.in blocks automated reads)",
+      "website": "https://srmrmp.edu.in/",
+      "directionsQuery": "SRM Institute of Science and Technology, Ramapuram, Chennai",
+      "cluster": "chennai"
     },
     {
       "slug": "vadapalani",
@@ -34,11 +42,15 @@
       "state": "Tamil Nadu",
       "kind": "campus",
       "isMain": false,
-      "lat": 13.052,
-      "lng": 80.212,
+      "lat": 13.0516,
+      "lng": 80.211,
       "tour360Url": null,
       "distanceFromChennai": "Within Chennai",
-      "photo": "media/campuses/vadapalani.jpg"
+      "photo": "media/campuses/vadapalani.jpg",
+      "address": "C-Block, No. 1, 100 Feet Road, Jawaharlal Nehru Salai, Vadapalani, Chennai – 600 026, Tamil Nadu",
+      "website": "https://www.srmistvdp.edu.in/",
+      "directionsQuery": "SRM Institute of Science and Technology, Vadapalani, Chennai",
+      "cluster": "chennai"
     },
     {
       "slug": "tiruchirappalli",
@@ -47,11 +59,14 @@
       "state": "Tamil Nadu",
       "kind": "campus",
       "isMain": false,
-      "lat": 10.95,
-      "lng": 78.76,
+      "lat": 10.95632,
+      "lng": 78.75387,
       "tour360Url": null,
       "distanceFromChennai": "TODO: road distance from Chennai",
-      "photo": "media/campuses/tiruchirappalli.jpg"
+      "photo": "media/campuses/tiruchirappalli.jpg",
+      "address": "TODO: official postal address (srmtrichy.edu.in renders client-side only)",
+      "website": "https://srmtrichy.edu.in/",
+      "directionsQuery": "SRM Institute of Science and Technology, Irungalur, Tiruchirappalli"
     },
     {
       "slug": "delhi-ncr",
@@ -60,11 +75,15 @@
       "state": "Uttar Pradesh",
       "kind": "campus",
       "isMain": false,
-      "lat": 28.8,
-      "lng": 77.54,
+      "lat": 28.79619,
+      "lng": 77.53824,
       "tour360Url": null,
       "distanceFromChennai": "TODO: travel time from Chennai",
-      "photo": "media/campuses/delhi-ncr.jpg"
+      "photo": "media/campuses/delhi-ncr.jpg",
+      "address": "Delhi-NCR Campus, Delhi-Meerut Road, Modinagar, Ghaziabad, Uttar Pradesh – 201 204",
+      "website": "https://www.srmup.in/",
+      "directionsQuery": "SRM Institute of Science and Technology, Delhi-NCR Campus, Modinagar, Ghaziabad",
+      "cluster": "delhi"
     },
     {
       "slug": "baburayanpettai",
@@ -73,11 +92,16 @@
       "state": "Tamil Nadu",
       "kind": "campus",
       "isMain": false,
-      "lat": 12.4,
-      "lng": 79.82,
+      "lat": 12.4077,
+      "lng": 79.8172,
       "tour360Url": null,
       "distanceFromChennai": "TODO: road distance from Chennai",
-      "photo": "media/campuses/baburayanpettai.jpg"
+      "photo": "media/campuses/baburayanpettai.jpg",
+      "coordsApprox": true,
+      "address": "Vendhar Nagar, Baburayanpettai, Acharapakkam, Chengalpattu District, Tamil Nadu",
+      "website": "https://www.srmist.edu.in/baburayanpettai-campus/",
+      "directionsQuery": "SRM College of Agricultural Sciences, Baburayanpettai, Acharapakkam",
+      "cluster": "chennai"
     },
     {
       "slug": "srm-ap",
@@ -86,11 +110,13 @@
       "state": "Andhra Pradesh",
       "kind": "sister",
       "isMain": false,
-      "lat": 16.46,
-      "lng": 80.51,
+      "lat": 16.46243,
+      "lng": 80.50638,
       "tour360Url": null,
-      "website": "TODO: official URL",
-      "photo": "media/campuses/srm-ap.jpg"
+      "website": "https://srmap.edu.in/",
+      "photo": "media/campuses/srm-ap.jpg",
+      "address": "TODO: official postal address",
+      "directionsQuery": "SRM University AP, Neerukonda, Amaravati"
     },
     {
       "slug": "srm-haryana",
@@ -99,11 +125,14 @@
       "state": "Haryana",
       "kind": "sister",
       "isMain": false,
-      "lat": 28.99,
-      "lng": 77.02,
+      "lat": 28.91904,
+      "lng": 77.12859,
       "tour360Url": null,
-      "website": "TODO: official URL",
-      "photo": "media/campuses/srm-haryana.jpg"
+      "website": "https://srmuniversity.ac.in/",
+      "photo": "media/campuses/srm-haryana.jpg",
+      "address": "39, Rajiv Gandhi Education City, Delhi-NCR, Sonepat – 131 029, Haryana",
+      "directionsQuery": "SRM University, Rajiv Gandhi Education City, Sonepat",
+      "cluster": "delhi"
     },
     {
       "slug": "srm-sikkim",
@@ -112,16 +141,48 @@
       "state": "Sikkim",
       "kind": "sister",
       "isMain": false,
-      "lat": 27.33,
-      "lng": 88.61,
+      "lat": 27.3132,
+      "lng": 88.6,
       "tour360Url": null,
-      "website": "TODO: official URL",
-      "photo": "media/campuses/srm-sikkim.jpg"
+      "website": "https://srmus.ac.in/",
+      "photo": "media/campuses/srm-sikkim.jpg",
+      "coordsApprox": true,
+      "address": "5th Mile, Tadong, Gangtok – 737 102, East Sikkim",
+      "directionsQuery": "SRM University Sikkim, Tadong, Gangtok"
     }
   ],
   "_sources": [
     "CLAUDE.md §7 — campus and sister-university list, 360° tour URL",
     "https://applications.srmist.edu.in/ — 'Delhi NCR, Ghaziabad'; 'SRM AP Amaravati'; 'SRM NCR Sonepat'",
-    "https://applications.srmist.edu.in/agricultural-sciences-form — Baburayanpettai near Acharapakkam"
+    "https://www.srmist.edu.in/contact-us/ — Kattankulathur address",
+    "https://www.srmistvdp.edu.in/ — Vadapalani address",
+    "https://www.srmup.in/ and https://www.srmimt.net/ — Delhi-NCR (Modinagar) address",
+    "https://www.srmist.edu.in/baburayanpettai-campus/ — Baburayanpettai address",
+    "https://srmuniversity.ac.in/ — SRM University Haryana address",
+    "https://srmus.ac.in/ — SRM University Sikkim address",
+    "https://www.srmist.edu.in/ homepage campus menu — official websites of all campuses and sister universities",
+    "OpenStreetMap Nominatim — coordinates (ODbL)"
+  ],
+  "clusters": [
+    {
+      "id": "chennai",
+      "name": "Chennai region",
+      "members": [
+        "kattankulathur",
+        "ramapuram",
+        "vadapalani",
+        "baburayanpettai"
+      ],
+      "zoom": 9
+    },
+    {
+      "id": "delhi",
+      "name": "Delhi NCR",
+      "members": [
+        "delhi-ncr",
+        "srm-haryana"
+      ],
+      "zoom": 12
+    }
   ]
 }

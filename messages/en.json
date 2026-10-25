@@ -76,7 +76,9 @@
     "openTour": "Open the 360° tour",
     "noTour": "A 360° tour for this campus is coming.",
     "collegesHere": "Colleges on this campus",
-    "backHome": "Back to home"
+    "backHome": "Back to home",
+    "findUs": "Find us",
+    "address": "Address"
   },
   "Hero": {
     "title": "What do you want to become?",
@@ -150,7 +152,27 @@
       "main": "Main campus",
       "sisters": "Sister universities",
       "tour": "Take the 360° tour",
-      "visit": "Visit campus"
+      "visit": "Visit campus",
+      "mapLabel": "Map of SRM campuses across India",
+      "findCampus": "Find your campus",
+      "ourCampuses": "SRMIST campuses",
+      "back": "All campuses",
+      "campusesCount": "{count} campuses",
+      "clusterChennai": "Chennai region",
+      "clusterDelhi": "Delhi NCR",
+      "directions": "Get directions",
+      "website": "Official website",
+      "campusPage": "Campus page",
+      "streetMap": "Street map",
+      "openMap": "Open in OpenStreetMap",
+      "approx": "Approximate location — the exact campus isn't on OpenStreetMap yet.",
+      "closeTour": "Close tour",
+      "tourTitle": "{name} — 360° virtual tour",
+      "newTab": "Open in a new tab",
+      "selected": "{name} selected",
+      "exploreCursor": "Explore",
+      "sisterBadge": "Sister university",
+      "mapCredit": "Map: Natural Earth (India boundaries as officially depicted); street maps © OpenStreetMap contributors"
     },
     "thisWeek": {
       "title": "This week at SRM",

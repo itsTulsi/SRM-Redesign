@@ -1,0 +1,137 @@
+/**
+ * Generates the stylised campus map art (public/map/india.svg) and its projection (content/map/projection.json).
+ *
+ *   node scripts/build-map.mts <ne_10m_admin_0_countries_ind.geojson> <ne_10m_admin_1_states_provinces.geojson>
+ *
+ * Source: Natural Earth 10m, public domain — the India point-of-view dataset, so India's boundaries are shown as
+ * India officially depicts them. https://github.com/nvkelso/natural-earth-vector
+ * Output is committed; re-run only to restyle. Pins and labels are HTML layered on top (accessible, translatable).
+ */
+import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { join } from "node:path";
+
+type Pt = [number, number];
+type Ring = Pt[];
+type Geometry = { type: "Polygon"; coordinates: Ring[] } | { type: "MultiPolygon"; coordinates: Ring[][] };
+type Feature = { properties: Record<string, unknown>; geometry: Geometry };
+
+const [countriesPath, statesPath] = process.argv.slice(2);
+if (!countriesPath || !statesPath) throw new Error("usage: build-map.mts <countries_ind.geojson> <states.geojson>");
+const root = join(import.meta.dirname, "..");
+const load = (p: string) => JSON.parse(readFileSync(p, "utf8")) as { features: Feature[] };
+const polygons = (g: Geometry): Ring[][] => (g.type === "Polygon" ? [g.coordinates] : g.coordinates);
+
+const india = load(countriesPath).features.find((f) => f.properties.ADM0_A3 === "IND");
+if (!india) throw new Error("India not found");
+const states = load(statesPath).features.filter((f) => f.properties.adm0_a3 === "IND");
+const state = (name: string) => {
+  const f = states.find((s) => s.properties.name === name);
+  if (!f) throw new Error(`state ${name} not found`);
+  return polygons(f.geometry);
+};
+
+// ── Projection: equirectangular, x scaled by cos(22°) so India keeps its shape ──
+const MIN_LNG = 67.6;
+const MAX_LNG = 97.9;
+const MIN_LAT = 6.2;
+const MAX_LAT = 37.6;
+const K = Math.cos((22 * Math.PI) / 180);
+const S = 40; // SVG units per degree
+const W = Math.round((MAX_LNG - MIN_LNG) * K * S);
+const H = Math.round((MAX_LAT - MIN_LAT) * S);
+const px = ([lng, lat]: Pt): Pt => [(lng - MIN_LNG) * K * S, (MAX_LAT - lat) * S];
+const f1 = (n: number) => Math.round(n * 10) / 10;
+
+// ── Douglas–Peucker on lon/lat ──
+function simplify(ring: Ring, tol: number): Ring {
+  if (ring.length < 4) return ring;
+  const keep = new Uint8Array(ring.length);
+  keep[0] = keep[ring.length - 1] = 1;
+  const stack: [number, number][] = [[0, ring.length - 1]];
+  while (stack.length) {
+    const [a, b] = stack.pop()!;
+    const [ax, ay] = ring[a]!;
+    const [bx, by] = ring[b]!;
+    const dx = bx - ax;
+    const dy = by - ay;
+    const len = Math.hypot(dx, dy);
+    let max = 0;
+    let idx = -1;
+    for (let i = a + 1; i < b; i++) {
+      const [x, y] = ring[i]!;
+      // Closed rings start and end on the same point: measure from that point, not a zero-length line.
+      const d = len === 0 ? Math.hypot(x - ax, y - ay) : Math.abs(dy * x - dx * y + bx * ay - by * ax) / len;
+      if (d > max) {
+        max = d;
+        idx = i;
+      }
+    }
+    if (max > tol && idx > 0) {
+      keep[idx] = 1;
+      stack.push([a, idx], [idx, b]);
+    }
+  }
+  return ring.filter((_, i) => keep[i]);
+}
+
+const pathOf = (polys: Ring[][], tol: number, minPts = 4) =>
+  polys
+    .flatMap((poly) => poly.map((ring) => simplify(ring, tol)))
+    .filter((r) => r.length >= minPts)
+    .map((r) => "M" + r.map((p) => px(p).map(f1).join(" ")).join("L") + "Z")
+    .join("");
+
+// ── Point in polygon (even-odd over all rings) ──
+function inside(polys: Ring[][], [x, y]: Pt): boolean {
+  let hit = false;
+  for (const poly of polys)
+    for (const ring of poly)
+      for (let i = 0, j = ring.length - 1; i < ring.length; j = i++) {
+        const [xi, yi] = ring[i]!;
+        const [xj, yj] = ring[j]!;
+        if (yi > y !== yj > y && x < ((xj - xi) * (y - yi)) / (yj - yi) + xi) hit = !hit;
+      }
+  return hit;
+}
+
+/** All dots in one path: zero-length segments with round caps → one DOM node, any number of dots. */
+function dots(polys: Ring[][], step: number, bbox?: [number, number, number, number]) {
+  const [x0, y0, x1, y1] = bbox ?? [MIN_LNG, MIN_LAT, MAX_LNG, MAX_LAT];
+  let d = "";
+  let n = 0;
+  for (let lat = y0; lat <= y1; lat += step)
+    for (let lng = x0; lng <= x1; lng += step * (1 / K) * 0.95)
+      if (inside(polys, [lng, lat])) {
+        const [x, y] = px([lng, lat]);
+        d += `M${f1(x)} ${f1(y)}h0`;
+        n++;
+      }
+  return { d, n };
+}
+
+const indiaPolys = polygons(india.geometry);
+const tamilNadu = [...state("Tamil Nadu"), ...state("Puducherry")];
+const delhi = state("Delhi");
+const tnDots = dots(tamilNadu, 0.11, [76, 8, 80.5, 13.6]);
+const delhiDots = dots(delhi, 0.035, [76.8, 28.4, 77.4, 28.9]);
+const indiaDots = dots(indiaPolys, 0.42);
+
+const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}">
+<!-- Natural Earth 10m (public domain), India point-of-view boundaries. Generated by scripts/build-map.mts -->
+<path d="${pathOf(indiaPolys, 0.025)}" fill="#10245e" stroke="#6c7bb0" stroke-width="1.2" stroke-linejoin="round"/>
+<path d="${indiaDots.d}" stroke="#3b4f93" stroke-width="3.2" stroke-linecap="round"/>
+<path d="${pathOf(tamilNadu, 0.008)}" fill="#16307a" stroke="#9db7ff" stroke-width="1" stroke-opacity=".7"/>
+<path d="${tnDots.d}" stroke="#9db7ff" stroke-opacity=".55" stroke-width="1.6" stroke-linecap="round"/>
+<path d="${pathOf(delhi, 0.002)}" fill="#16307a" stroke="#9db7ff" stroke-width=".8" stroke-opacity=".7"/>
+<path d="${delhiDots.d}" stroke="#9db7ff" stroke-opacity=".55" stroke-width=".6" stroke-linecap="round"/>
+</svg>
+`;
+
+mkdirSync(join(root, "public/map"), { recursive: true });
+mkdirSync(join(root, "content/map"), { recursive: true });
+writeFileSync(join(root, "public/map/india.svg"), svg);
+writeFileSync(
+  join(root, "content/map/projection.json"),
+  JSON.stringify({ width: W, height: H, minLng: MIN_LNG, maxLat: MAX_LAT, k: K, scale: S, source: "Natural Earth 10m, India POV (public domain)" }, null, 2) + "\n",
+);
+console.log(`✓ public/map/india.svg ${W}×${H}, ${(svg.length / 1024).toFixed(1)} KB · dots: India ${indiaDots.n}, TN ${tnDots.n}, Delhi ${delhiDots.n}`);

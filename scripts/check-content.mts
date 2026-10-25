@@ -88,7 +88,12 @@ uniqueSlugs("campuses.json", arr(files.campuses.campuses));
 for (const c of arr(files.campuses.campuses) as Obj[]) {
   if (!isNum(c.lat) || !isNum(c.lng)) fail(`campuses.json ${c.slug}`, "lat/lng must be numbers");
   if (c.kind !== "campus" && c.kind !== "sister") fail(`campuses.json ${c.slug}`, "kind must be campus|sister");
+  if (!isStr(c.website) || !String(c.website).startsWith("https://")) fail(`campuses.json ${c.slug}`, "website must be an https URL");
+  if (!isStr(c.directionsQuery)) fail(`campuses.json ${c.slug}`, "directionsQuery missing");
+  if (!isStr(c.address)) fail(`campuses.json ${c.slug}`, "address missing (use TODO: …)");
 }
+for (const cl of arr(files.campuses.clusters) as Obj[])
+  for (const m of arr(cl.members)) if (!campusSlugs.has(m)) fail(`campuses.json cluster ${cl.id}`, `unknown member "${m}"`);
 
 // ── Stories / events ──
 uniqueSlugs("stories.json", arr(files.stories.stories));

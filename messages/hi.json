@@ -76,7 +76,9 @@
     "openTour": "360° टूर खोलें",
     "noTour": "इस कैंपस का 360° टूर जल्द आएगा।",
     "collegesHere": "इस कैंपस के कॉलेज",
-    "backHome": "होम पर वापस जाएँ"
+    "backHome": "होम पर वापस जाएँ",
+    "findUs": "हमें खोजें",
+    "address": "पता"
   },
   "Hero": {
     "title": "आप क्या बनना चाहते हैं?",
@@ -150,7 +152,27 @@
       "main": "मुख्य कैंपस",
       "sisters": "सहयोगी विश्वविद्यालय",
       "tour": "360° टूर देखें",
-      "visit": "कैंपस देखें"
+      "visit": "कैंपस देखें",
+      "mapLabel": "पूरे भारत में SRM कैंपसों का नक्शा",
+      "findCampus": "अपना कैंपस खोजें",
+      "ourCampuses": "SRMIST कैंपस",
+      "back": "सभी कैंपस",
+      "campusesCount": "{count} कैंपस",
+      "clusterChennai": "चेन्नई क्षेत्र",
+      "clusterDelhi": "दिल्ली NCR",
+      "directions": "रास्ता देखें",
+      "website": "आधिकारिक वेबसाइट",
+      "campusPage": "कैंपस पेज",
+      "streetMap": "सड़क नक्शा",
+      "openMap": "OpenStreetMap में खोलें",
+      "approx": "अनुमानित स्थान — यह कैंपस अभी OpenStreetMap पर नहीं है।",
+      "closeTour": "टूर बंद करें",
+      "tourTitle": "{name} — 360° वर्चुअल टूर",
+      "newTab": "नए टैब में खोलें",
+      "selected": "{name} चुना गया",
+      "exploreCursor": "देखें",
+      "sisterBadge": "सहयोगी विश्वविद्यालय",
+      "mapCredit": "नक्शा: Natural Earth (आधिकारिक भारतीय सीमाएँ); सड़क नक्शे © OpenStreetMap योगदानकर्ता"
     },
     "thisWeek": {
       "title": "इस सप्ताह SRM में",
