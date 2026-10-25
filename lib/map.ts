@@ -24,8 +24,12 @@ export function streetMap(c: Campus) {
   };
 }
 
-// Display-only nudges (px) where two campuses sit closer than a pin is wide, even fully zoomed.
-const NUDGE: Partial<Record<Campus["slug"], [number, number]>> = { ramapuram: [-30, 8], vadapalani: [6, -26] };
+/**
+ * Campuses closer together than a tap target is wide even when zoomed into their region (Ramapuram and
+ * Vadapalani are 3.5 km apart). They share one marker at their true midpoint until one is chosen; pins are
+ * never displaced from their real coordinates.
+ */
+const NEAR_GROUPS = [{ id: "chennai-city", members: ["ramapuram", "vadapalani"], parent: "chennai" }] as const;
 // Which side a pin's label sits on in the overview, so labels don't collide.
 const LABEL_LEFT = new Set(["tiruchirappalli", "srm-sikkim", "ramapuram"]);
 
@@ -38,7 +42,6 @@ export type MapCampus = {
   isMain: boolean;
   x: number;
   y: number;
-  nudge: [number, number];
   labelLeft: boolean;
   cluster: Campus["cluster"] | null;
   address: string | null;
@@ -49,8 +52,9 @@ export type MapCampus = {
   tour: string | null;
 };
 export type MapCluster = { id: "chennai" | "delhi"; members: Campus["slug"][]; zoom: number; x: number; y: number };
+export type MapGroup = { id: "chennai-city"; members: Campus["slug"][]; parent: MapCluster["id"]; x: number; y: number };
 
-export function getMapData(): { campuses: MapCampus[]; clusters: MapCluster[] } {
+export function getMapData(): { campuses: MapCampus[]; clusters: MapCluster[]; groups: MapGroup[] } {
   const list: MapCampus[] = campuses.map((c) => ({
     slug: c.slug,
     name: c.name,
@@ -59,7 +63,6 @@ export function getMapData(): { campuses: MapCampus[]; clusters: MapCluster[] } 
     kind: c.kind,
     isMain: c.isMain,
     ...project(c.lat, c.lng),
-    nudge: NUDGE[c.slug] ?? [0, 0],
     labelLeft: LABEL_LEFT.has(c.slug),
     cluster: c.cluster ?? null,
     address: isTodo(c.address) ? null : c.address,
@@ -75,5 +78,15 @@ export function getMapData(): { campuses: MapCampus[]; clusters: MapCluster[] } 
     const y = members.reduce((s, m) => s + m.y, 0) / members.length;
     return { id: cl.id, members: cl.members, zoom: cl.zoom, x, y };
   });
-  return { campuses: list, clusters };
+  const groups = NEAR_GROUPS.map((g) => {
+    const members = list.filter((c) => (g.members as readonly string[]).includes(c.slug));
+    return {
+      id: g.id,
+      members: members.map((m) => m.slug),
+      parent: g.parent,
+      x: members.reduce((s, m) => s + m.x, 0) / members.length,
+      y: members.reduce((s, m) => s + m.y, 0) / members.length,
+    };
+  });
+  return { campuses: list, clusters, groups };
 }

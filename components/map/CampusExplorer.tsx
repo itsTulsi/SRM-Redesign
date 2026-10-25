@@ -3,10 +3,14 @@
 import { useTranslations } from "next-intl";
 import { useEffect, useRef, useState } from "react";
 import { Link } from "@/lib/i18n";
-import type { MapCampus, MapCluster } from "@/lib/map";
+import type { MapCampus, MapCluster, MapGroup } from "@/lib/map";
 import { StreetMap } from "./StreetMap";
 
-type View = { kind: "all" } | { kind: "cluster"; id: MapCluster["id"] } | { kind: "campus"; slug: MapCampus["slug"] };
+type View =
+  | { kind: "all" }
+  | { kind: "cluster"; id: MapCluster["id"] }
+  | { kind: "group"; id: MapGroup["id"] }
+  | { kind: "campus"; slug: MapCampus["slug"] };
 
 /**
  * Campus constellation (CLAUDE.md §1.5 / step 9). Stylised India (static SVG image) with pins as real links:
@@ -17,11 +21,13 @@ type View = { kind: "all" } | { kind: "cluster"; id: MapCluster["id"] } | { kind
 export function CampusExplorer({
   campuses,
   clusters,
+  groups,
   aspect,
   mapSrc,
 }: {
   campuses: MapCampus[];
   clusters: MapCluster[];
+  groups: MapGroup[];
   aspect: number;
   mapSrc: string;
 }) {
@@ -42,8 +48,10 @@ export function CampusExplorer({
   }, []);
 
   const bySlug = (slug: string) => campuses.find((c) => c.slug === slug)!;
-  const clusterName = (id: MapCluster["id"]) => (id === "chennai" ? t("clusterChennai") : t("clusterDelhi"));
+  const clusterName = (id: MapCluster["id"] | MapGroup["id"]) =>
+    id === "chennai" ? t("clusterChennai") : id === "delhi" ? t("clusterDelhi") : t("clusterChennaiCity");
   const selected = view.kind === "campus" ? bySlug(view.slug) : null;
+  const groupOf = (slug: MapCampus["slug"]) => groups.find((g) => g.members.includes(slug));
 
   // Camera target: point (fraction of map) to centre + zoom.
   const camera = (() => {
@@ -51,6 +59,11 @@ export function CampusExplorer({
     if (view.kind === "cluster") {
       const cl = clusters.find((c) => c.id === view.id)!;
       return { x: cl.x, y: cl.y, z: cl.zoom * boost };
+    }
+    if (view.kind === "group") {
+      const g = groups.find((gr) => gr.id === view.id)!;
+      const parent = clusters.find((c) => c.id === g.parent)!;
+      return { x: g.x, y: g.y, z: parent.zoom * boost };
     }
     if (selected) {
       const cl = selected.cluster ? clusters.find((c) => c.id === selected.cluster) : null;
@@ -128,21 +141,40 @@ export function CampusExplorer({
             ? campuses
                 // Only pins inside the visible window: off-screen pins would still take (invisible) keyboard focus.
                 .filter((c) => Math.abs((c.x - camera.x) * camera.z) < 0.5 && Math.abs((c.y - camera.y) * camera.z) < 0.5)
+                // Grouped campuses show as one marker unless one of them is the selected campus.
+                .filter((c) => !groupOf(c.slug) || selected?.slug === c.slug)
                 .map((c) => (
-                <Pin
-                  key={c.slug}
-                  x={c.x}
-                  y={c.y}
-                  nudge={c.nudge}
-                  label={c.name}
-                  href={`/campuses/${c.slug}`}
-                  onClick={select({ kind: "campus", slug: c.slug }, c.name)}
-                  active={selected?.slug === c.slug}
-                  sister={c.kind === "sister"}
-                  left={c.labelLeft}
-                  cursorLabel={t("exploreCursor")}
-                />
-              ))
+                  <Pin
+                    key={c.slug}
+                    x={c.x}
+                    y={c.y}
+                    label={c.name}
+                    href={`/campuses/${c.slug}`}
+                    onClick={select({ kind: "campus", slug: c.slug }, c.name)}
+                    active={selected?.slug === c.slug}
+                    sister={c.kind === "sister"}
+                    left={c.labelLeft}
+                    cursorLabel={t("exploreCursor")}
+                  />
+                ))
+            : null}
+          {zoomed
+            ? groups
+                .filter((g) => !(selected && g.members.includes(selected.slug)))
+                .filter((g) => Math.abs((g.x - camera.x) * camera.z) < 0.5 && Math.abs((g.y - camera.y) * camera.z) < 0.5)
+                .map((g) => (
+                  <Pin
+                    key={g.id}
+                    x={g.x}
+                    y={g.y}
+                    label={`${clusterName(g.id)} · ${t("campusesCount", { count: g.members.length })}`}
+                    href={`/campuses/${g.members[0]}`}
+                    onClick={select({ kind: "group", id: g.id }, clusterName(g.id))}
+                    count={g.members.length}
+                    active={view.kind === "group" && view.id === g.id}
+                    cursorLabel={t("exploreCursor")}
+                  />
+                ))
             : null}
         </div>
         {zoomed ? (
@@ -164,11 +196,11 @@ export function CampusExplorer({
 
         {selected ? (
           <CampusDetail campus={selected} onTour={() => setTourOpen(true)} />
-        ) : view.kind === "cluster" ? (
+        ) : view.kind === "cluster" || view.kind === "group" ? (
           <div className="flex flex-col gap-4">
             <h3 className="font-display text-3xl font-bold">{clusterName(view.id)}</h3>
             <CampusList
-              items={clusters.find((c) => c.id === view.id)!.members.map(bySlug)}
+              items={(view.kind === "cluster" ? clusters.find((c) => c.id === view.id)! : groups.find((g) => g.id === view.id)!).members.map(bySlug)}
               onSelect={(c) => select({ kind: "campus", slug: c.slug }, c.name)}
             />
           </div>
@@ -303,7 +335,6 @@ function CampusList({ items, onSelect }: { items: MapCampus[]; onSelect: (c: Map
 function Pin({
   x,
   y,
-  nudge = [0, 0],
   label,
   href,
   onClick,
@@ -315,7 +346,6 @@ function Pin({
 }: {
   x: number;
   y: number;
-  nudge?: [number, number];
   label: string;
   href: string;
   onClick: (e?: React.MouseEvent) => void;
@@ -337,15 +367,13 @@ function Pin({
         {
           left: `${x * 100}%`,
           top: `${y * 100}%`,
-          "--nx": `${nudge[0]}px`,
-          "--ny": `${nudge[1]}px`,
         } as React.CSSProperties
       }
     >
       <span
         aria-hidden="true"
         className={`campus-pin-dot relative grid place-items-center rounded-full border-2 font-display text-xs font-bold ${
-          count ? "size-8 border-bg bg-tree text-ink" : active ? "size-5 border-bg bg-action" : sister ? "size-4 border-tree bg-bg" : "size-4 border-bg bg-tree"
+          count && active ? "size-8 border-bg bg-action text-ink" : count ? "size-8 border-bg bg-tree text-ink" : active ? "size-5 border-bg bg-action" : sister ? "size-4 border-tree bg-bg" : "size-4 border-bg bg-tree"
         }`}
       >
         {count || null}

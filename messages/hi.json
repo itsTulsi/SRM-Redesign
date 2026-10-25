@@ -159,7 +159,7 @@
       "back": "सभी कैंपस",
       "campusesCount": "{count} कैंपस",
       "clusterChennai": "चेन्नई क्षेत्र",
-      "clusterDelhi": "दिल्ली NCR",
+      "clusterDelhi": "दिल्ली NCR क्षेत्र",
       "directions": "रास्ता देखें",
       "website": "आधिकारिक वेबसाइट",
       "campusPage": "कैंपस पेज",
@@ -172,7 +172,8 @@
       "selected": "{name} चुना गया",
       "exploreCursor": "देखें",
       "sisterBadge": "सहयोगी विश्वविद्यालय",
-      "mapCredit": "नक्शा: Natural Earth (आधिकारिक भारतीय सीमाएँ); सड़क नक्शे © OpenStreetMap योगदानकर्ता"
+      "mapCredit": "नक्शा: Natural Earth (आधिकारिक भारतीय सीमाएँ); सड़क नक्शे © OpenStreetMap योगदानकर्ता",
+      "clusterChennaiCity": "चेन्नई शहर"
     },
     "thisWeek": {
       "title": "इस सप्ताह SRM में",

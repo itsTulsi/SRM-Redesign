@@ -6,7 +6,7 @@ import { CampusExplorer } from "./CampusExplorer";
 /** Explore (CLAUDE.md §1.5): campus constellation + detail panel + in-page 360° tour. */
 export async function Explore() {
   const t = await getTranslations("Acts.explore");
-  const { campuses, clusters } = getMapData();
+  const { campuses, clusters, groups } = getMapData();
 
   return (
     <section id={SECTION.explore} aria-labelledby="explore-title" className="bg-bg py-24 text-fg lg:py-36">
@@ -15,7 +15,7 @@ export async function Explore() {
           {t("title")}
         </h2>
         <p className="mt-4 mb-12 max-w-prose text-lg text-fg-muted">{t("intro")}</p>
-        <CampusExplorer campuses={campuses} clusters={clusters} aspect={mapAspect} mapSrc="/map/india.svg" />
+        <CampusExplorer campuses={campuses} clusters={clusters} groups={groups} aspect={mapAspect} mapSrc="/map/india.svg" />
         <p className="mt-6 text-xs text-fg-muted">{t("mapCredit")}</p>
       </div>
     </section>

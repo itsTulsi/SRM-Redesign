@@ -159,7 +159,7 @@
       "back": "அனைத்து வளாகங்கள்",
       "campusesCount": "{count} வளாகங்கள்",
       "clusterChennai": "சென்னை பகுதி",
-      "clusterDelhi": "டெல்லி NCR",
+      "clusterDelhi": "டெல்லி NCR பகுதி",
       "directions": "வழி காட்டு",
       "website": "அதிகாரப்பூர்வ இணையதளம்",
       "campusPage": "வளாகப் பக்கம்",
@@ -172,7 +172,8 @@
       "selected": "{name} தேர்ந்தெடுக்கப்பட்டது",
       "exploreCursor": "ஆராய்",
       "sisterBadge": "சகோதரப் பல்கலைக்கழகம்",
-      "mapCredit": "வரைபடம்: Natural Earth (அதிகாரப்பூர்வ இந்திய எல்லைகள்); தெரு வரைபடங்கள் © OpenStreetMap பங்களிப்பாளர்கள்"
+      "mapCredit": "வரைபடம்: Natural Earth (அதிகாரப்பூர்வ இந்திய எல்லைகள்); தெரு வரைபடங்கள் © OpenStreetMap பங்களிப்பாளர்கள்",
+      "clusterChennaiCity": "சென்னை நகரம்"
     },
     "thisWeek": {
       "title": "இந்த வாரம் SRM-இல்",

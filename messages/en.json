@@ -159,7 +159,7 @@
       "back": "All campuses",
       "campusesCount": "{count} campuses",
       "clusterChennai": "Chennai region",
-      "clusterDelhi": "Delhi NCR",
+      "clusterDelhi": "Delhi NCR region",
       "directions": "Get directions",
       "website": "Official website",
       "campusPage": "Campus page",
@@ -172,7 +172,8 @@
       "selected": "{name} selected",
       "exploreCursor": "Explore",
       "sisterBadge": "Sister university",
-      "mapCredit": "Map: Natural Earth (India boundaries as officially depicted); street maps © OpenStreetMap contributors"
+      "mapCredit": "Map: Natural Earth (India boundaries as officially depicted); street maps © OpenStreetMap contributors",
+      "clusterChennaiCity": "Chennai city"
     },
     "thisWeek": {
       "title": "This week at SRM",

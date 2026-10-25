@@ -483,7 +483,7 @@ html.lenis body {
 }
 
 /* ═══ Step 9: campus constellation ═══
-   Camera = one transform on the stage; pins counter-scale (1/--z) so they stay pin-sized, then nudge in screen px. */
+   Camera = one transform on the stage; pins counter-scale (1/--z) so they stay pin-sized at their exact point. */
 /* No will-change: it would freeze the SVG's raster at 1× and blur it when zoomed; without it the browser
    re-rasterises crisply once the fly-in ends. */
 .campus-stage {
@@ -491,7 +491,7 @@ html.lenis body {
 }
 .campus-pin {
   transform-origin: 0 0;
-  transform: scale(calc(1 / var(--z, 1))) translate(-50%, -50%) translate(var(--nx, 0px), var(--ny, 0px));
+  transform: scale(calc(1 / var(--z, 1))) translate(-50%, -50%);
   transition: transform 900ms var(--ease-leap);
 }
 [data-motion="full"] .campus-pin-dot::after {
