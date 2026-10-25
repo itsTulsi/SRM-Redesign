@@ -223,3 +223,12 @@ html:has(dialog[open]:modal) {
 :lang(ta) .nav-label {
   font-size: 0.9375rem;
 }
+
+/* Tamil words are long and can't break mid-word; scale display type down so they fit at 360px. */
+:lang(ta) .text-hero {
+  font-size: clamp(1.875rem, 5.2vw, 4.75rem);
+  line-height: 1.15;
+}
+:lang(hi) .text-hero {
+  line-height: 1.1;
+}

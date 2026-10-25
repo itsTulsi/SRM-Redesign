@@ -12,6 +12,7 @@
     "prebuild": "npm run check:content"
   },
   "dependencies": {
+    "fuse.js": "7.5.0",
     "next": "15.5.28",
     "next-intl": "4.14.9",
     "react": "19.3.1",

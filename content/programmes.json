@@ -22,7 +22,9 @@
         "programming",
         "apps",
         "it",
-        "tech"
+        "tech",
+        "cse",
+        "cs"
       ],
       "outcomes": [
         "Software engineer",
@@ -56,7 +58,9 @@
         "data",
         "deep learning",
         "computers",
-        "robots"
+        "robots",
+        "cse",
+        "aiml"
       ],
       "outcomes": [
         "Machine learning engineer",
@@ -87,7 +91,8 @@
         "hacking",
         "networks",
         "computers",
-        "privacy"
+        "privacy",
+        "cse"
       ],
       "outcomes": [
         "Security analyst",
@@ -120,7 +125,8 @@
         "communication",
         "wireless",
         "iot",
-        "hardware"
+        "hardware",
+        "ece"
       ],
       "outcomes": [
         "Embedded engineer",
@@ -152,7 +158,8 @@
         "renewable",
         "ev",
         "electric vehicles",
-        "solar"
+        "solar",
+        "eee"
       ],
       "outcomes": [
         "Power systems engineer",
@@ -184,7 +191,8 @@
         "manufacturing",
         "cars",
         "engines",
-        "robots"
+        "robots",
+        "mech"
       ],
       "outcomes": [
         "Design engineer",
@@ -375,7 +383,8 @@
         "automation",
         "ai",
         "masters",
-        "postgraduate"
+        "postgraduate",
+        "mtech"
       ],
       "outcomes": [
         "Robotics R&D engineer",
@@ -407,7 +416,8 @@
         "machine learning",
         "analytics",
         "masters",
-        "postgraduate"
+        "postgraduate",
+        "mtech"
       ],
       "outcomes": [
         "Data scientist",
@@ -439,7 +449,8 @@
         "health",
         "hospital",
         "neet",
-        "surgery"
+        "surgery",
+        "medical"
       ],
       "outcomes": [
         "Doctor (after internship and registration)",

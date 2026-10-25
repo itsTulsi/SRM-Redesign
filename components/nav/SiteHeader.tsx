@@ -114,7 +114,8 @@ export function SiteHeader({ nav }: { nav: NavData }) {
           className="inline-flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-full px-3 font-medium xl:hidden"
         >
           <MenuIcon />
-          <span>{nav.labels.menu}</span>
+          {/* Icon-only below 400px (Tamil/Hindi labels would squeeze the icon out); name stays for AT. */}
+          <span className="max-[25rem]:sr-only">{nav.labels.menu}</span>
         </button>
       </div>
 
@@ -256,7 +257,7 @@ function Chevron({ open }: { open: boolean }) {
 
 function MenuIcon() {
   return (
-    <svg aria-hidden="true" viewBox="0 0 20 20" className="size-5">
+    <svg aria-hidden="true" viewBox="0 0 20 20" className="size-5 shrink-0">
       <path d="M3 6h14M3 14h14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
     </svg>
   );

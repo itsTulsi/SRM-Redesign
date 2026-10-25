@@ -17,10 +17,6 @@
       "user": "You turned this on."
     }
   },
-  "Home": {
-    "tagline": "Learn. Leap. Lead.",
-    "scaffoldNote": "Foundation in place. The homepage is built section by section from here."
-  },
   "Nav": {
     "primary": "Main",
     "home": "SRMIST home",
@@ -84,5 +80,34 @@
     "noTour": "A 360° tour for this campus is coming.",
     "collegesHere": "Colleges on this campus",
     "backHome": "Back to home"
+  },
+  "Hero": {
+    "title": "What do you want to become?",
+    "inputLabel": "Describe what you want to study or become",
+    "submit": "Find",
+    "examples": [
+      "robots",
+      "becoming a doctor",
+      "designing buildings",
+      "working in AI",
+      "law and justice",
+      "electric cars",
+      "growing food"
+    ],
+    "tryLabel": "Try",
+    "peekTitle": "Find your programme",
+    "peekMeta": "{programmes} programmes · {colleges} colleges · {campuses} campuses",
+    "seeAll": "See all programmes",
+    "status": "{count, plural, =0 {No programme matches that yet.} one {# programme matches.} other {# programmes match.}}",
+    "noMatch": "Not sure where you fit? Talk to a person:",
+    "years": "{count, plural, one {# yr} other {# yrs}}",
+    "audienceLabel": "Explore as",
+    "students": "Students",
+    "parents": "Parents",
+    "international": "International",
+    "research": "Research",
+    "alumni": "Alumni",
+    "pauseVideo": "Pause background video",
+    "playVideo": "Play background video"
   }
 }

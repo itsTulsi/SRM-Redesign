@@ -2,7 +2,7 @@
 
 Kept up to date as the build progresses (CLAUDE.md §10). Items marked ⏳ are not built yet.
 
-1. ⏳ Hero: type "robotics" → three matching programmes appear instantly.
+1. ✅ Hero: type "robotics" → matching programmes appear instantly in the lime block (also try a sentence: "I like robots and want to work abroad").
 2. ⏳ Scroll to Act II → Team Camber Racing pinned scene.
 3. ⏳ Explore map → click Kattankulathur pin → camera flies in.
 4. ⏳ Kattankulathur 360° tour opens in-page.

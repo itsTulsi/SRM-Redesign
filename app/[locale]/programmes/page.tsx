@@ -64,7 +64,11 @@ function ProgrammeList({
   return (
     <ul className="mt-4 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
       {list.map((p) => (
-        <li key={p.slug} className="flex flex-col gap-2 rounded-2xl border border-line-subtle p-5">
+        <li
+          key={p.slug}
+          id={p.slug}
+          className="flex flex-col gap-2 rounded-2xl border border-line-subtle p-5 target:border-link target:ring-2 target:ring-link"
+        >
           <Heading className="font-semibold leading-snug">{p.name}</Heading>
           <p className="text-fg-muted">{p.summary}</p>
           <p className="mt-auto text-sm text-fg-muted">
