@@ -2,7 +2,7 @@
 
 Production build (`npm run build:verify` then `npm run start:verify -- -p 3123`), headless Chrome.
 
-**Re-run on 2026-10-25 with 27 real photos and the filled-in content:** home 96 / 100 / 100 / 100 (LCP 2.8 s simulated, CLS 0), B.Tech CSE programme page 98 / 100 / 100 / 100 (LCP 2.5 s); all 135 sitemap URLs pass the 360 px axe + overflow crawl. The hero video and Camber car video are still missing, so re-run once they arrive.
+**Re-run on 2026-10-25 with 27 real photos, the filled-in content and the official SRM logo in the header:** home 94 / 100 / 100 / 100 (LCP 3.1 s simulated, CLS 0; it was 96 before the logo's extra 7 kB request), B.Tech CSE programme page 98 / 100 / 100 / 100 (LCP 2.5 s); all 135 sitemap URLs pass the 360 px axe + overflow crawl. The hero video and Camber car video are still missing, so re-run once they arrive.
 
 ## Lighthouse (mobile)
 

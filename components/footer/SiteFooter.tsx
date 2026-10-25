@@ -1,8 +1,10 @@
+import Image from "next/image";
 import { getLocale, getTranslations } from "next-intl/server";
 import { LanguageSwitcher } from "@/components/nav/LanguageSwitcher";
 import { ParentModeToggle } from "@/components/programme/ParentModeToggle";
 import { LiteModeToggle } from "@/components/ui/LiteModeToggle";
 import { SmartLink } from "@/components/ui/SmartLink";
+import srmLogo from "@/public/brand/srm-logo-white.png";
 import { Link } from "@/lib/i18n";
 import { getContent } from "@/lib/content";
 import { SECTION } from "@/lib/sections";
@@ -94,6 +96,8 @@ export async function SiteFooter() {
         </section>
 
         <div className="mb-10 flex flex-col gap-2">
+          {/* self-start: a flex column would otherwise stretch the logo to full width. */}
+          <Image src={srmLogo} alt={site.name} sizes="180px" className="mb-4 h-14 w-auto self-start" />
           <p className="font-display text-3xl font-bold tracking-tight">{site.tagline}</p>
           <p className="text-fg-muted">
             {site.name} · {site.location} · NAAC {site.accreditation.naac}

@@ -1,10 +1,12 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useId, useRef, useState } from "react";
 import { SmartLink } from "@/components/ui/SmartLink";
 import { Link, usePathname } from "@/lib/i18n";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import type { NavData, NavSection } from "./types";
+import srmLogo from "@/public/brand/srm-logo-white.png";
 
 /**
  * Five-item header (CLAUDE.md §1, UATX "few nav links") with Harvard-style progressive disclosure:
@@ -242,14 +244,10 @@ function MobileSection({ section, uid, externalHint }: { section: NavSection; ui
 }
 
 /** Text wordmark — the official emblem is SRM's to supply; we never trace it. */
+/** SRM's official logo (white version from srmist.edu.in, rasterised from its 170 kB SVG; next/image serves ~10 kB).
+    Decorative here: the link around it carries the accessible name. */
 function Wordmark() {
-  return (
-    <span className="flex items-baseline gap-2">
-      <span aria-hidden="true" className="inline-block size-2.5 translate-y-[-0.1em] rounded-full bg-tree" />
-      <span className="font-display text-2xl leading-none font-bold tracking-tight">SRM</span>
-      <span className="hidden text-sm leading-none text-fg-muted 2xl:inline">Institute of Science and Technology</span>
-    </span>
-  );
+  return <Image src={srmLogo} alt="" loading="eager" sizes="120px" className="h-9 w-auto sm:h-10" />;
 }
 
 function Chevron({ open }: { open: boolean }) {
