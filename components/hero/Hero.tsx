@@ -1,9 +1,6 @@
 import { getLocale, getTranslations } from "next-intl/server";
 import { SmartLink } from "@/components/ui/SmartLink";
-import lexicon from "@/content/lexicon.json";
 import { getContent } from "@/lib/content";
-import type { Lexicon } from "@/lib/ask";
-import { toSearchDocs } from "@/lib/search";
 import { SECTION } from "@/lib/sections";
 import { HeroSeed } from "@/components/tree/HeroSeed";
 import { HeroMedia } from "./HeroMedia";
@@ -13,7 +10,6 @@ export async function Hero() {
   const t = await getTranslations("Hero");
   const { campuses, colleges, programmes, site } = getContent(await getLocale());
   const nav = await getTranslations("Nav");
-  const docs = toSearchDocs(programmes, colleges, campuses);
   const counts = {
     programmes: programmes.length,
     colleges: colleges.length,
@@ -41,7 +37,7 @@ export async function Hero() {
           {t("title")}
         </h1>
 
-        <HeroSearch docs={docs} lexicon={lexicon as Lexicon} counts={counts} phones={site.admissions.phones.slice(0, 2)} />
+        <HeroSearch counts={counts} phones={site.admissions.phones.slice(0, 2)} />
 
         <nav aria-label={t("audienceLabel")} className="mt-6">
           <ul className="flex flex-wrap items-center gap-2">

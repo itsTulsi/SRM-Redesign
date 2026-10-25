@@ -6,6 +6,7 @@ import { AskSenior, type SeniorThread } from "@/components/programme/AskSenior";
 import { ParentModeToggle } from "@/components/programme/ParentModeToggle";
 import { getContent, isTodo, programmes } from "@/lib/content";
 import { Link, type Locale } from "@/lib/i18n";
+import { alternatesFor } from "@/lib/page-metadata";
 import { directionsUrl } from "@/lib/map";
 
 type Params = { params: Promise<{ locale: Locale; slug: string }> };
@@ -19,7 +20,9 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const { locale, slug } = await params;
   const p = getContent(locale).getProgramme(slug);
-  return p ? { title: `${p.name} — SRMIST`, description: p.summary } : {};
+  return p
+    ? { title: `${p.name} — SRMIST`, description: p.summary, alternates: alternatesFor(locale, `/programmes/${slug}`) }
+    : {};
 }
 
 /** ISO 8601 duration for schema.org (5.5 → P5Y6M). */
@@ -128,13 +131,13 @@ export default async function ProgrammePage({ params }: Params) {
       </header>
 
       <div className="mt-8 flex flex-wrap gap-3">
-        <a
-          href={site.admissions.applyUrl}
+        <Link
+          href="/admissions#apply"
           data-magnetic
           className="relative inline-flex min-h-12 items-center overflow-hidden rounded-full bg-action px-6 font-semibold text-on-action no-underline"
         >
           {t("apply")}
-        </a>
+        </Link>
         <Link
           href={`/admissions?programme=${p.slug}#enquiry`}
           className="inline-flex min-h-12 items-center rounded-full border border-line px-6 font-semibold text-fg no-underline hover:border-fg"

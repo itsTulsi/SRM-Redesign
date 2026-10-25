@@ -20,7 +20,8 @@ export async function getNavData(): Promise<NavData> {
       external: t("external"),
       apply: t("apply"),
     },
-    apply: { label: t("applyLong"), href: site.admissions.applyUrl },
+    // Apply goes to our hub, not straight to the portal: SRM's portal sometimes answers 403, and the hub has the fallbacks.
+    apply: { label: t("applyLong"), href: "/admissions#apply" },
     enquiry: { label: t("enquiry"), href: "/admissions#enquiry" },
     sections: [
       {

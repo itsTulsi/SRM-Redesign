@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { notFound } from "next/navigation";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
-import { getTranslations, setRequestLocale } from "next-intl/server";
+import { getMessages, getTranslations, setRequestLocale } from "next-intl/server";
 import { AssistantLauncher } from "@/components/assistant/AssistantLauncher";
 import { SiteFooter } from "@/components/footer/SiteFooter";
 import { MotionDirector } from "@/components/motion/MotionDirector";
@@ -15,6 +15,8 @@ import { applyParentMode, PARENT_STORAGE_KEY } from "@/lib/parent-mode";
 import "../globals.css";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+// Keep in sync with useTranslations() calls in "use client" components (check: grep -rl useTranslations).
+const CLIENT_NAMESPACES = ["Lite", "Hero", "Ask", "Enquiry", "Senior", "Parent", "Assistant"] as const;
 
 // Runs before first paint so Lite Mode and Parent Mode never flash. Failure is harmless: defaults apply.
 const initScript = `try{(${applyLiteMode.toString()})(${JSON.stringify(LITE_STORAGE_KEY)})}catch(e){}try{(${applyParentMode.toString()})(${JSON.stringify(PARENT_STORAGE_KEY)})}catch(e){}`;
@@ -30,10 +32,6 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     metadataBase: new URL(siteUrl),
     title: t("title"),
     description: t("description"),
-    alternates: {
-      canonical: locale === routing.defaultLocale ? "/" : `/${locale}`,
-      languages: { en: "/", ta: "/ta", hi: "/hi", "x-default": "/" },
-    },
   };
 }
 
@@ -56,6 +54,13 @@ export default async function LocaleLayout({
   setRequestLocale(locale);
   const t = await getTranslations("A11y");
   const nav = await getNavData();
+  // Only the namespaces client components use go to the browser; everything else renders on the server.
+  // (Sending all messages cost ~40 kB raw per Tamil/Hindi page.)
+  const all = await getMessages();
+  const clientMessages = {
+    ...Object.fromEntries(CLIENT_NAMESPACES.map((ns) => [ns, all[ns]])),
+    Acts: { explore: all.Acts.explore },
+  };
 
   return (
     <html lang={locale} className={fontVariables(locale)} suppressHydrationWarning>
@@ -63,7 +68,7 @@ export default async function LocaleLayout({
         <script dangerouslySetInnerHTML={{ __html: initScript }} />
       </head>
       <body>
-        <NextIntlClientProvider>
+        <NextIntlClientProvider messages={clientMessages}>
           <SkipLink label={t("skipToContent")} />
           <SiteHeader nav={nav} />
           {children}

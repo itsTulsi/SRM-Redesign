@@ -1,0 +1,52 @@
+# Audit: CLAUDE.md §13 (2026-10-25)
+
+Production build (`npm run build:verify` then `npm run start:verify -- -p 3123`), headless Chrome. Placeholder media only: re-run Lighthouse once real photos and video are in `public/media/`.
+
+## Lighthouse (mobile)
+
+Median of 3 runs per page.
+
+| Page | Performance | Accessibility | Best Practices | SEO | CLS |
+|---|---|---|---|---|---|
+| `/` (English) | 96 | 100 | 100 | 100 | 0 |
+| `/ta` (Tamil) | 95 | 100 | 100 | 100 | 0 |
+| `/hi` (Hindi) | 95 | 100 | 100 | 100 | 0 |
+
+- **LCP, Lighthouse simulated throttling:** 2.77–2.92 s on the three homepages and about 2.5 s on inner pages. This is above the 2.5 s bar on the homepages.
+- **LCP, applied throttling (4G + 4× CPU slowdown):** 1.47–1.55 s, with Performance 99–100. The real-device budget in §8 is closer to this setting.
+- **LCP, no throttling:** 370 ms.
+- **INP:** not measurable in the lab. Check field data after deploy (Vercel Speed Insights or CrUX).
+- **Homepage first-load JS:** 136 KB, against a 180 KB budget. GSAP, Lenis, Fuse and the search index load after first use or after idle.
+
+## Accessibility and layout
+
+| Run | Scope | Result |
+|---|---|---|
+| axe-core 4.10 (WCAG 2.0/2.1/2.2 A+AA + best practice) | All 132 sitemap URLs (every page × en/ta/hi) at 360 × 800 | 0 violations |
+| Horizontal overflow | Same 132 URLs, checked while scrolling the full page | None |
+| Headings, console | Same 132 URLs | Exactly one `h1` per page; no console errors |
+| Keyboard only (Tab through the whole page) | Home at 1280 and 360 px; programme, admissions and campus pages | Skip link first. Every stop shows a focus ring, is on screen and is not hidden behind the sticky header; Tab cycles through with no trap. The hero input's ring is drawn on its wrapper (`focus-within`). |
+| Reduced motion (`prefers-reduced-motion: reduce`) | Home en/ta, programme page, at 1280 and 360 px | Lite Mode on with the reason shown. No Lenis, no pinning, no video or 3D. Tree drawn fully grown. |
+| Lite Mode, manual toggle | Home en/hi, admissions, at 360 px | Same as above |
+| Lite Mode, automatic | Emulated slow 3G connection | Switches on with reason "slow-network" |
+| Map labels and tap targets | Overview map at 360, 412, 768, 1024 and 1440 px × en/ta/hi | No label overlaps another label or pin. No label is clipped. Tapping any dot or label opens that pin. |
+
+## Fixed during the audit
+
+- **Wrong canonical URL (SEO 92).** Every page canonicalised to the homepage. Each page now declares its own canonical and hreflang alternates (`lib/page-metadata.ts`). Added a sitemap (132 URLs with per-locale alternates), `robots.txt` and a favicon.
+- **Tamil layout shift (CLS 0.31).** The Noto font swapped in after first paint. Tamil and Devanagari web fonts now use `display: optional`, and the installed system Tamil/Devanagari fonts (local() "SRM Script" faces) come first. Hindi Performance rose from 85 to 95.
+- **Initial JS and HTML weight.** The search index moved to a static per-locale `/api/search-index/[locale]`, fetched on first use. The motion layer and Fuse warm-up now wait for load plus idle. Client messages are trimmed to the namespaces the client actually uses.
+- **Map at 360 px:**
+  - Delhi's and Sikkim's labels collided; labels can now sit above or below a pin.
+  - The Tamil "Tiruchirappalli" label was clipped.
+  - The decorative pulse ring caught taps meant for the neighbouring Trichy pin.
+  - Pins stay at their true coordinates throughout.
+- **Apply landed on a dead end.** SRM's application portal sometimes answers "403 Forbidden" to ordinary browsers; it's a bot filter on SRM's servers. Every Apply button now goes to `/admissions#apply`. That section links to the portal and, right beside it, gives the fallbacks: SRM's Admissions 2026 page, phone numbers and the enquiry form.
+
+## How to re-run
+
+```sh
+NEXT_PUBLIC_SITE_URL=http://localhost:3123 npm run build:verify
+npm run start:verify -- -p 3123
+npx lighthouse http://localhost:3123/ --form-factor=mobile --only-categories=performance,accessibility,best-practices,seo
+```

@@ -30,8 +30,10 @@ export function streetMap(c: Campus) {
  * never displaced from their real coordinates.
  */
 const NEAR_GROUPS = [{ id: "chennai-city", members: ["ramapuram", "vadapalani"], parent: "chennai" }] as const;
-// Which side a pin's label sits on in the overview, so labels don't collide.
-const LABEL_LEFT = new Set(["tiruchirappalli", "srm-sikkim", "ramapuram"]);
+// Which side a pin's label sits on (default right), so labels don't collide — checked down to a 360 px map,
+// where Delhi's and Sikkim's labels met head-on when both sat beside their pins.
+export type LabelSide = "left" | "right" | "above" | "below";
+const LABEL_SIDE: Record<string, LabelSide> = { tiruchirappalli: "below", ramapuram: "left", "srm-sikkim": "below", delhi: "above" };
 
 export type MapCampus = {
   slug: Campus["slug"];
@@ -42,7 +44,7 @@ export type MapCampus = {
   isMain: boolean;
   x: number;
   y: number;
-  labelLeft: boolean;
+  labelSide: LabelSide;
   cluster: Campus["cluster"] | null;
   address: string | null;
   coordsApprox: boolean;
@@ -51,7 +53,7 @@ export type MapCampus = {
   street: { image: string; link: string };
   tour: string | null;
 };
-export type MapCluster = { id: "chennai" | "delhi"; members: Campus["slug"][]; zoom: number; x: number; y: number };
+export type MapCluster = { id: "chennai" | "delhi"; members: Campus["slug"][]; zoom: number; x: number; y: number; labelSide: LabelSide };
 export type MapGroup = { id: "chennai-city"; members: Campus["slug"][]; parent: MapCluster["id"]; x: number; y: number };
 
 export function getMapData(locale = "en"): { campuses: MapCampus[]; clusters: MapCluster[]; groups: MapGroup[] } {
@@ -64,7 +66,7 @@ export function getMapData(locale = "en"): { campuses: MapCampus[]; clusters: Ma
     kind: c.kind,
     isMain: c.isMain,
     ...project(c.lat, c.lng),
-    labelLeft: LABEL_LEFT.has(c.slug),
+    labelSide: LABEL_SIDE[c.slug] ?? "right",
     cluster: c.cluster ?? null,
     address: isTodo(c.address) ? null : c.address,
     coordsApprox: !!c.coordsApprox,
@@ -77,7 +79,7 @@ export function getMapData(locale = "en"): { campuses: MapCampus[]; clusters: Ma
     const members = list.filter((c) => cl.members.includes(c.slug));
     const x = members.reduce((s, m) => s + m.x, 0) / members.length;
     const y = members.reduce((s, m) => s + m.y, 0) / members.length;
-    return { id: cl.id, members: cl.members, zoom: cl.zoom, x, y };
+    return { id: cl.id, members: cl.members, zoom: cl.zoom, x, y, labelSide: LABEL_SIDE[cl.id] ?? "right" };
   });
   const groups = NEAR_GROUPS.map((g) => {
     const members = list.filter((c) => (g.members as readonly string[]).includes(c.slug));

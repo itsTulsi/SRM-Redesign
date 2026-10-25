@@ -5,6 +5,7 @@ import { Photo } from "@/components/ui/Photo";
 import { Fact } from "@/components/ui/Todo";
 import { getContent, isTodo, stories } from "@/lib/content";
 import type { Locale } from "@/lib/i18n";
+import { alternatesFor } from "@/lib/page-metadata";
 
 type Params = { params: Promise<{ locale: Locale; slug: string }> };
 
@@ -18,7 +19,9 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const { locale, slug } = await params;
   const story = getContent(locale).getStory(slug);
-  return story ? { title: `${story.title} — SRMIST`, description: story.dek } : {};
+  return story
+    ? { title: `${story.title} — SRMIST`, description: story.dek, alternates: alternatesFor(locale, `/stories/${slug}`) }
+    : {};
 }
 
 export default async function StoryPage({ params }: Params) {

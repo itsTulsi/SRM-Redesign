@@ -27,6 +27,7 @@
   --action: var(--leap-lime);
   --on-action: var(--ink);
   --action-edge: transparent;
+  --script-fonts: "SRM Script";
 
   color-scheme: dark;
 }
@@ -52,10 +53,13 @@
   --color-action: var(--action);
   --color-on-action: var(--on-action);
 
-  --font-sans: var(--font-inter), var(--font-noto-tamil, ""), var(--font-noto-devanagari, ""), ui-sans-serif,
-    system-ui, sans-serif;
-  --font-display: var(--font-space-grotesk), var(--font-noto-tamil, ""), var(--font-noto-devanagari, ""),
+  /* Tamil / Devanagari: installed fonts first ("SRM Script", local() faces below) — Android ships Noto Sans Tamil
+     + Noto Sans Devanagari (the faces §4 specifies), Apple and Windows have their own — so phones download 0 kB
+     instead of 50–120 kB. The self-hosted Noto (next/font) is the last resort, on its own locale only. */
+  --font-sans: var(--font-inter), var(--script-fonts), var(--font-noto-tamil, ""), var(--font-noto-devanagari, ""),
     ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-space-grotesk), var(--script-fonts), var(--font-noto-tamil, ""),
+    var(--font-noto-devanagari, ""), ui-sans-serif, system-ui, sans-serif;
 }
 
 @theme {
@@ -71,6 +75,40 @@
   --text-section--letter-spacing: -0.02em;
 
   --ease-leap: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* "SRM Script": the device's own Tamil / Devanagari fonts via local(). A distinct family name is essential —
+   next/font registers its web font AS "Noto Sans Tamil", so naming that family directly would fetch the web font.
+   unicode-range keeps these faces to their scripts; regular + bold are real faces (no faux bold, §4). */
+@font-face {
+  font-family: "SRM Script";
+  font-weight: 100 500;
+  unicode-range: U+0B80-0BFF;
+  src: local("Noto Sans Tamil"), local("NotoSansTamil-Regular"), local("Noto Sans Tamil UI"), local("Tamil Sangam MN"),
+    local("TamilSangamMN"), local("Nirmala UI"), local("NirmalaUI"), local("Latha");
+}
+@font-face {
+  font-family: "SRM Script";
+  font-weight: 600 900;
+  unicode-range: U+0B80-0BFF;
+  src: local("Noto Sans Tamil Bold"), local("NotoSansTamil-Bold"), local("Noto Sans Tamil UI Bold"),
+    local("Tamil Sangam MN Bold"), local("TamilSangamMN-Bold"), local("Nirmala UI Bold"), local("NirmalaUI-Bold"), local("Latha Bold");
+}
+@font-face {
+  font-family: "SRM Script";
+  font-weight: 100 500;
+  unicode-range: U+0900-097F, U+1CD0-1CFF, U+A8E0-A8FF;
+  src: local("Noto Sans Devanagari"), local("NotoSansDevanagari-Regular"), local("Noto Sans Devanagari UI"),
+    local("Kohinoor Devanagari Regular"), local("KohinoorDevanagari-Regular"), local("Devanagari Sangam MN"),
+    local("DevanagariSangamMN"), local("Nirmala UI"), local("NirmalaUI"), local("Mangal");
+}
+@font-face {
+  font-family: "SRM Script";
+  font-weight: 600 900;
+  unicode-range: U+0900-097F, U+1CD0-1CFF, U+A8E0-A8FF;
+  src: local("Noto Sans Devanagari Bold"), local("NotoSansDevanagari-Bold"), local("Noto Sans Devanagari UI Bold"),
+    local("Kohinoor Devanagari Bold"), local("KohinoorDevanagari-Bold"), local("Devanagari Sangam MN Bold"),
+    local("DevanagariSangamMN-Bold"), local("Nirmala UI Bold"), local("NirmalaUI-Bold"), local("Mangal Bold");
 }
 
 /* ── Base ── */
@@ -501,6 +539,8 @@ html.lenis body {
   border-radius: 9999px;
   border: 2px solid var(--leaf-green-300);
   animation: pin-pulse 2.4s var(--ease-leap) infinite;
+  /* Decorative: at 1.8× the ring would otherwise catch taps meant for a neighbouring pin. */
+  pointer-events: none;
 }
 .campus-pin[aria-current] .campus-pin-dot::after {
   border-color: var(--leap-lime);

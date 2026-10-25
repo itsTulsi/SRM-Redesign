@@ -3,13 +3,14 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { EnquiryForm } from "@/components/admissions/EnquiryForm";
 import { getContent } from "@/lib/content";
 import type { Locale } from "@/lib/i18n";
+import { alternatesFor } from "@/lib/page-metadata";
 
 type Params = { params: Promise<{ locale: Locale }> };
 
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "Pages" });
-  return { title: `${t("admissionsTitle")} — SRMIST` };
+  return { title: `${t("admissionsTitle")} — SRMIST`, alternates: alternatesFor(locale, "/admissions") };
 }
 
 export default async function AdmissionsPage({ params }: Params) {
@@ -43,14 +44,38 @@ export default async function AdmissionsPage({ params }: Params) {
         ))}
       </ul>
 
-      <a
-        href={site.admissions.applyUrl}
-        data-magnetic
-        className="relative mt-10 inline-flex overflow-hidden min-h-12 items-center rounded-full border-2 border-[var(--action-edge)] bg-action px-8 text-lg font-semibold text-on-action no-underline"
-      >
-        {nav("applyLong")}
-        <span className="sr-only"> {nav("external")}</span>
-      </a>
+      {/* Every Apply button on the site lands here. SRM's portal sometimes answers "403 Forbidden" to ordinary
+          browsers, so the way forward never depends on it alone. */}
+      <section id="apply" aria-labelledby="apply-title" className="mt-12 max-w-3xl scroll-mt-20 rounded-3xl border border-line p-6 lg:p-8">
+        <h2 id="apply-title" className="font-display text-section font-bold">
+          {nav("applyLong")}
+        </h2>
+        <p className="mt-3 text-lg text-fg-muted">{t("applyIntro")}</p>
+        <a
+          href={site.admissions.applyUrl}
+          rel="noreferrer"
+          data-magnetic
+          className="relative mt-6 inline-flex min-h-12 items-center overflow-hidden rounded-full border-2 border-[var(--action-edge)] bg-action px-8 text-lg font-semibold text-on-action no-underline"
+        >
+          {t("applyPortal")}
+          <span className="sr-only"> {nav("external")}</span>
+        </a>
+        <h3 className="mt-8 font-semibold">{t("applyTroubleTitle")}</h3>
+        <p className="mt-1 text-fg-muted">{t("applyTrouble")}</p>
+        <ul className="mt-2 flex flex-wrap gap-x-6">
+          <li>
+            <a href={site.admissions.officialAdmissionsUrl} className="inline-flex min-h-11 items-center font-semibold">
+              {t("officialAdmissions")}
+              <span className="sr-only"> {nav("external")}</span>
+            </a>
+          </li>
+          <li>
+            <a href="#enquiry" className="inline-flex min-h-11 items-center font-semibold">
+              {nav("enquiry")}
+            </a>
+          </li>
+        </ul>
+      </section>
 
       <section id="enquiry" aria-labelledby="enquiry-title" className="mt-20 max-w-3xl scroll-mt-20">
         <h2 id="enquiry-title" className="font-display text-section font-bold">

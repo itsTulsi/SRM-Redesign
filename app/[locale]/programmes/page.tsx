@@ -4,13 +4,14 @@ import { Fact } from "@/components/ui/Todo";
 import { getContent, type Campus, type Programme } from "@/lib/content";
 import { Link } from "@/lib/i18n";
 import type { Locale } from "@/lib/i18n";
+import { alternatesFor } from "@/lib/page-metadata";
 
 type Params = { params: Promise<{ locale: Locale }> };
 
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "Pages" });
-  return { title: `${t("programmesTitle")} — SRMIST` };
+  return { title: `${t("programmesTitle")} — SRMIST`, alternates: alternatesFor(locale, "/programmes") };
 }
 
 // Static, complete list (SSR, crawlable). The interactive finder with filters + Fuse search replaces the top of

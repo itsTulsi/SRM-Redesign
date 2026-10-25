@@ -3,7 +3,7 @@
 import { useTranslations } from "next-intl";
 import { useEffect, useRef, useState } from "react";
 import { Link } from "@/lib/i18n";
-import type { MapCampus, MapCluster, MapGroup } from "@/lib/map";
+import type { LabelSide, MapCampus, MapCluster, MapGroup } from "@/lib/map";
 import { StreetMap } from "./StreetMap";
 
 type View =
@@ -96,7 +96,7 @@ export function CampusExplorer({
       href: `/campuses/${cl.members[0]}`,
       onClick: select({ kind: "cluster", id: cl.id }, clusterName(cl.id)),
       count: cl.members.length,
-      left: false,
+      side: cl.labelSide,
     })),
     ...campuses
       .filter((c) => !c.cluster)
@@ -108,7 +108,7 @@ export function CampusExplorer({
         href: `/campuses/${c.slug}`,
         onClick: select({ kind: "campus", slug: c.slug }, c.name),
         count: 0,
-        left: c.labelLeft,
+        side: c.labelSide,
       })),
   ];
 
@@ -135,7 +135,7 @@ export function CampusExplorer({
           <img src={mapSrc} alt="" aria-hidden="true" loading="lazy" decoding="async" className="size-full select-none" draggable={false} />
 
           {(zoomed ? [] : overviewMarkers).map((m) => (
-            <Pin key={m.key} x={m.x} y={m.y} label={m.label} href={m.href} onClick={m.onClick} count={m.count} left={m.left} cursorLabel={t("exploreCursor")} />
+            <Pin key={m.key} x={m.x} y={m.y} label={m.label} href={m.href} onClick={m.onClick} count={m.count} side={m.side} cursorLabel={t("exploreCursor")} />
           ))}
           {zoomed
             ? campuses
@@ -153,7 +153,7 @@ export function CampusExplorer({
                     onClick={select({ kind: "campus", slug: c.slug }, c.name)}
                     active={selected?.slug === c.slug}
                     sister={c.kind === "sister"}
-                    left={c.labelLeft}
+                    side={c.labelSide}
                     cursorLabel={t("exploreCursor")}
                   />
                 ))
@@ -334,6 +334,13 @@ function CampusList({ items, onSelect }: { items: MapCampus[]; onSelect: (c: Map
   );
 }
 
+const LABEL_PLACEMENT: Record<LabelSide, string> = {
+  left: "top-1/2 right-full mr-0.5 -translate-y-1/2",
+  right: "top-1/2 left-full ml-0.5 -translate-y-1/2",
+  above: "bottom-full left-1/2 -mb-1 -translate-x-1/2 text-center",
+  below: "top-full left-1/2 -mt-1 -translate-x-1/2 text-center",
+};
+
 function Pin({
   x,
   y,
@@ -343,7 +350,7 @@ function Pin({
   count = 0,
   active = false,
   sister = false,
-  left = false,
+  side = "right",
   cursorLabel,
 }: {
   x: number;
@@ -354,7 +361,7 @@ function Pin({
   count?: number;
   active?: boolean;
   sister?: boolean;
-  left?: boolean;
+  side?: LabelSide;
   cursorLabel: string;
 }) {
   return (
@@ -364,7 +371,10 @@ function Pin({
       aria-label={label}
       aria-current={active ? "true" : undefined}
       data-cursor-label={cursorLabel}
-      className="campus-pin group absolute flex min-h-11 min-w-11 items-center justify-center text-fg no-underline"
+      // True positions can sit closer than a 44 px box (Chennai and Trichy are 26 px apart on a 360 px map).
+      // On phones the box is 40 px so no box covers a neighbour's dot centre; the label is part of the target,
+      // so box + label still exceeds 44 px. Cluster pins stack above plain ones.
+      className={`campus-pin group absolute flex min-h-10 min-w-10 items-center justify-center text-fg no-underline focus-visible:z-20 sm:min-h-11 sm:min-w-11 ${count ? "z-10" : ""}`}
       style={
         {
           left: `${x * 100}%`,
@@ -375,15 +385,15 @@ function Pin({
       <span
         aria-hidden="true"
         className={`campus-pin-dot relative grid place-items-center rounded-full border-2 font-display text-xs font-bold ${
-          count && active ? "size-8 border-bg bg-action text-ink" : count ? "size-8 border-bg bg-tree text-ink" : active ? "size-5 border-bg bg-action" : sister ? "size-4 border-tree bg-bg" : "size-4 border-bg bg-tree"
+          count && active ? "size-6 border-bg bg-action text-ink sm:size-8" : count ? "size-6 border-bg bg-tree text-ink sm:size-8" : active ? "size-5 border-bg bg-action" : sister ? "size-4 border-tree bg-bg" : "size-4 border-bg bg-tree"
         }`}
       >
         {count || null}
       </span>
       <span
         aria-hidden="true"
-        className={`pointer-events-none absolute top-1/2 w-max max-w-[8rem] -translate-y-1/2 rounded-md bg-bg/85 px-2 py-0.5 text-xs leading-tight font-semibold sm:max-w-none sm:whitespace-nowrap ${
-          left ? "right-full mr-0.5" : "left-full ml-0.5"
+        className={`absolute w-max max-w-32 rounded-md bg-bg/85 px-2 py-0.5 text-xs leading-tight font-semibold sm:max-w-none sm:whitespace-nowrap ${
+          LABEL_PLACEMENT[side]
         } ${active ? "text-action" : ""}`}
       >
         {label}

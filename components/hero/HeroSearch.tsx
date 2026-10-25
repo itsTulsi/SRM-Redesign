@@ -2,6 +2,7 @@
 
 import { useLocale, useTranslations } from "next-intl";
 import { useEffect, useId, useMemo, useRef, useState } from "react";
+import { afterLoadIdle } from "@/lib/after-load";
 import { understand, type Answer, type Lexicon } from "@/lib/ask";
 import { getPathname, Link } from "@/lib/i18n";
 import { motionAllowed } from "@/lib/motion";
@@ -10,8 +11,6 @@ import { AnswerPanel, type AnswerState } from "./AnswerPanel";
 
 type Phone = { display: string; tel: string; label: string };
 type Props = {
-  docs: SearchDoc[];
-  lexicon: Lexicon;
   counts: { programmes: number; colleges: number; campuses: number };
   phones: Phone[];
 };
@@ -21,13 +20,14 @@ type Props = {
  * Without JS the form GETs /programmes (the full list). With JS, results appear as you type (en/ta/hi via the
  * lexicon), and "Find" asks /api/ask for answer cards with fees / eligibility / deadline from programmes.json.
  */
-export function HeroSearch({ docs, lexicon, counts, phones }: Props) {
+export function HeroSearch({ counts, phones }: Props) {
   const phone = phones[0]!;
   const t = useTranslations("Hero");
   const locale = useLocale();
   const examples = t.raw("examples") as string[];
   const [query, setQuery] = useState("");
   const [searcher, setSearcher] = useState<Searcher | null>(null);
+  const [lexicon, setLexicon] = useState<Lexicon | null>(null);
   const [exampleIndex, setExampleIndex] = useState(0);
   const [focused, setFocused] = useState(false);
   const [announced, setAnnounced] = useState("");
@@ -39,22 +39,26 @@ export function HeroSearch({ docs, lexicon, counts, phones }: Props) {
   const ensureSearcher = () => {
     if (loading.current) return;
     loading.current = true;
-    loadSearcher(docs).then(
-      // The searcher is a function: wrap it, or React treats it as a state updater and calls it.
-      (fn) => setSearcher(() => fn),
-      () => {
+    // Index (docs + lexicon) is a static per-language JSON fetched with Fuse on first use — not in the HTML.
+    fetch(`/api/search-index/${locale}`)
+      .then((res) => res.json() as Promise<{ docs: SearchDoc[]; lexicon: Lexicon }>)
+      .then(async ({ docs, lexicon: lex }) => {
+        const fn = await loadSearcher(docs);
+        setLexicon(lex);
+        // The searcher is a function: wrap it, or React treats it as a state updater and calls it.
+        setSearcher(() => fn);
+      })
+      .catch(() => {
         loading.current = false;
-      },
-    );
+      });
   };
 
-  // Warm up Fuse when the browser is idle, so the first keystroke is instant.
-  useEffect(() => {
-    const idle = window.requestIdleCallback ?? ((cb: () => void) => window.setTimeout(cb, 1200));
-    const handle = idle(() => ensureSearcher());
-    return () => (window.cancelIdleCallback ?? window.clearTimeout)(handle);
+  // Warm up Fuse after load + idle (never during first paint); typing or focusing loads it immediately anyway.
+  useEffect(
+    () => afterLoadIdle(() => ensureSearcher()),
     // eslint-disable-next-line react-hooks/exhaustive-deps -- run once
-  }, []);
+    [],
+  );
 
   // Rotate example prompts in the placeholder — only while idle, and never under reduced motion / Lite Mode.
   useEffect(() => {
@@ -66,7 +70,7 @@ export function HeroSearch({ docs, lexicon, counts, phones }: Props) {
   const trimmed = query.trim();
   // Tamil / Hindi words are mapped to English tags first, so instant results work in every language.
   const results = useMemo(
-    () => (searcher && trimmed ? searcher(understand(trimmed, lexicon).searchText) : []),
+    () => (searcher && lexicon && trimmed ? searcher(understand(trimmed, lexicon).searchText) : []),
     [searcher, trimmed, lexicon],
   );
   const searching = trimmed.length > 0;

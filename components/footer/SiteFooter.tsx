@@ -28,7 +28,7 @@ export async function SiteFooter() {
         { label: nav("postgraduate"), href: "/programmes#level-pg" },
         { label: nav("admissions"), href: "/admissions" },
         { label: nav("enquiry"), href: "/admissions#enquiry" },
-        { label: nav("applyLong"), href: site.admissions.applyUrl },
+        { label: nav("applyLong"), href: "/admissions#apply" },
       ],
     },
     {

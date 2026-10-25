@@ -7,6 +7,7 @@ import { Fact } from "@/components/ui/Todo";
 import { campuses, getContent, isTodo } from "@/lib/content";
 import { directionsUrl, streetMap } from "@/lib/map";
 import { Link, type Locale } from "@/lib/i18n";
+import { alternatesFor } from "@/lib/page-metadata";
 
 type Params = { params: Promise<{ locale: Locale; slug: string }> };
 
@@ -19,7 +20,10 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const campus = getContent(locale).getCampus(slug);
   if (!campus) return {};
   const t = await getTranslations({ locale, namespace: "Pages" });
-  return { title: `${campus.kind === "sister" ? campus.name : t("campusTitle", { name: campus.name })} — SRMIST` };
+  return {
+    title: `${campus.kind === "sister" ? campus.name : t("campusTitle", { name: campus.name })} — SRMIST`,
+    alternates: alternatesFor(locale, `/campuses/${slug}`),
+  };
 }
 
 // Basic campus page. The constellation map + in-page 360° modal (step 9) link here.

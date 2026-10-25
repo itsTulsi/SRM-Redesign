@@ -17,16 +17,18 @@ export const fontDisplay = Space_Grotesk({
 });
 
 // Script fonts are only attached (and only downloaded) on their own locale.
+// display "optional": use the web font only if it's ready at first paint, otherwise keep the system Tamil /
+// Devanagari font (Noto on Android) — no swap, so no layout shift (Tamil CLS was 0.31 with "swap").
 export const fontTamil = Noto_Sans_Tamil({
   subsets: ["tamil"],
-  display: "swap",
+  display: "optional",
   variable: "--font-noto-tamil",
   preload: false,
 });
 
 export const fontDevanagari = Noto_Sans_Devanagari({
   subsets: ["devanagari"],
-  display: "swap",
+  display: "optional",
   variable: "--font-noto-devanagari",
   preload: false,
 });
