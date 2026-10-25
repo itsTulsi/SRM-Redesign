@@ -93,11 +93,11 @@ public/media/               # user-supplied photos/video go here
 **Colour tokens** (each has a meaning — RISD rule):
 - `--srm-blue-900: #0B1B4D` — the institution, trust (primary background in dark theme)
 - `--srm-blue-500: #1F4FD8` — links, focus
-- `--leap-lime: #C6F432` — **action only** (Apply, primary CTAs, Imperial-style peek block). Never decorative.
+- `--srm-gold: #F2B632` — **action only** (Apply, primary CTAs, Imperial-style peek block). Never decorative. The gold of SRM's emblem ring; replaced the earlier neon lime `#C6F432` at the team's request (2026-10-25).
 - `--leaf-green: #2E8B57` — the tree, growth, progress
 - `--paper: #F5F3EE` — light theme background (canvas)
 - `--ink: #0E0E10` — text
-- Every text/background pair must pass WCAG 2.2 AA (4.5:1 body, 3:1 large). Check lime on blue and lime on paper; use ink text on lime.
+- Every text/background pair must pass WCAG 2.2 AA (4.5:1 body, 3:1 large). Gold on blue-900 is 9.0:1; use ink text on gold (10.6:1).
 
 **Type:**
 - Display: a bold grotesk/condensed face (e.g. *Clash Display* or *Space Grotesk* via self-host) — huge, tight leading, set in clamp() sizes up to ~14vw for act titles.

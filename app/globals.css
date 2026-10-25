@@ -3,18 +3,18 @@
 /* ─────────────────────────────────────────────────────────────────────────────
    Brand tokens (CLAUDE.md §4). Each colour has one meaning. Dark only (light mode removed 2026-10-25).
    Contrast (WCAG 2.2) measured on blue-900:
-     paper 14.8 · fg-muted 8.9 · blue-300 links/focus 8.3 · lime 12.8 · ink on lime 15.1 · line 4.0
+     paper 14.8 · fg-muted 8.9 · blue-300 links/focus 8.3 · gold 9.0 · ink on gold 10.6 · line 4.0
      leaf-green-300 8.5 (tree) · blue-500 2.5 → never used as text/focus on dark
    ───────────────────────────────────────────────────────────────────────────── */
 :root {
   --srm-blue-900: #0b1b4d; /* the institution, trust — the page background */
   --srm-blue-500: #1f4fd8; /* brand blue (decorative only on dark) */
   --srm-blue-300: #9db7ff; /* links, focus */
-  --leap-lime: #c6f432; /* ACTION ONLY: Apply, primary CTAs, programme peek block */
+  --srm-gold: #f2b632; /* ACTION ONLY: Apply, primary CTAs, programme peek block — the gold of SRM's emblem ring */
   --leaf-green: #2e8b57; /* the tree, growth, progress */
   --leaf-green-300: #5fd08f; /* tree highlights */
   --paper: #f5f3ee; /* text on dark; input fields */
-  --ink: #0e0e10; /* text on lime / paper */
+  --ink: #0e0e10; /* text on gold / paper */
 
   --bg: var(--srm-blue-900);
   --fg: var(--paper);
@@ -24,7 +24,7 @@
   --link: var(--srm-blue-300);
   --focus: var(--srm-blue-300);
   --tree: var(--leaf-green-300);
-  --action: var(--leap-lime);
+  --action: var(--srm-gold);
   --on-action: var(--ink);
   --action-edge: transparent;
   --script-fonts: "SRM Script";
@@ -37,7 +37,7 @@
   --color-srm-blue-900: var(--srm-blue-900);
   --color-srm-blue-500: var(--srm-blue-500);
   --color-srm-blue-300: var(--srm-blue-300);
-  --color-lime: var(--leap-lime);
+  --color-gold: var(--srm-gold);
   --color-leaf: var(--leaf-green);
   --color-paper: var(--paper);
   --color-ink: var(--ink);
@@ -171,7 +171,7 @@
   }
 
   ::selection {
-    background: var(--leap-lime);
+    background: var(--srm-gold);
     color: var(--ink);
   }
 }
@@ -563,7 +563,7 @@ html.lenis body {
   pointer-events: none;
 }
 .campus-pin[aria-current] .campus-pin-dot::after {
-  border-color: var(--leap-lime);
+  border-color: var(--srm-gold);
 }
 @keyframes pin-pulse {
   0% { scale: 0.6; opacity: 0.9; }

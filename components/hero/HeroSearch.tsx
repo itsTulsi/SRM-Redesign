@@ -16,7 +16,7 @@ type Props = {
 };
 
 /**
- * Stanford "search is the front door" + Imperial lime peek block + York St John example prompts.
+ * Stanford "search is the front door" + Imperial-style peek block + York St John example prompts.
  * Without JS the form GETs /programmes (the full list). With JS, results appear as you type (en/ta/hi via the
  * lexicon), and "Find" asks /api/ask for answer cards with fees / eligibility / deadline from programmes.json.
  */
@@ -144,7 +144,7 @@ export function HeroSearch({ counts, phones }: Props) {
         </button>
       </div>
 
-      {/* Lime = action (§4). Ink focus rings and links inside it: blue would fail contrast on lime. */}
+      {/* Gold = action (§4). Ink focus rings and links inside it: blue would fail contrast on gold. */}
       <div className="rounded-b-3xl bg-action p-4 text-on-action [--focus:var(--ink)] [--link:var(--ink)] lg:p-6">
         <p id={`${id}-status`} aria-live="polite" className="sr-only">
           {announced}
