@@ -102,7 +102,8 @@ export function SiteHeader({ nav }: { nav: NavData }) {
         <SmartLink
           href={nav.apply.href}
           externalHint={nav.labels.external}
-          className="inline-flex min-h-11 items-center rounded-full border-2 border-[var(--action-edge)] bg-action px-5 font-semibold whitespace-nowrap text-on-action no-underline"
+          data-magnetic
+          className="relative inline-flex min-h-11 items-center overflow-hidden rounded-full border-2 border-[var(--action-edge)] bg-action px-5 font-semibold whitespace-nowrap text-on-action no-underline"
         >
           {nav.labels.apply}
         </SmartLink>

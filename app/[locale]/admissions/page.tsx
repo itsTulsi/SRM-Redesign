@@ -39,7 +39,8 @@ export default async function AdmissionsPage({ params }: Params) {
 
       <a
         href={site.admissions.applyUrl}
-        className="mt-10 inline-flex min-h-12 items-center rounded-full border-2 border-[var(--action-edge)] bg-action px-8 text-lg font-semibold text-on-action no-underline"
+        data-magnetic
+        className="relative mt-10 inline-flex overflow-hidden min-h-12 items-center rounded-full border-2 border-[var(--action-edge)] bg-action px-8 text-lg font-semibold text-on-action no-underline"
       >
         {nav("applyLong")}
         <span className="sr-only"> {nav("external")}</span>

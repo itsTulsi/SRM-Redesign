@@ -123,7 +123,8 @@
       "rank": "தரவரிசை",
       "naac": "NAAC தரம்",
       "moreRanks": "பிற NIRF {year} பிரிவுகள்",
-      "source": "ஆதாரம்: SRMIST வெளியிட்ட NIRF {year} அட்டவணை"
+      "source": "ஆதாரம்: SRMIST வெளியிட்ட NIRF {year} அட்டவணை",
+      "drag": "இழு"
     },
     "leap": {
       "kicker": "அங்கம் II",

@@ -123,7 +123,8 @@
       "rank": "रैंक",
       "naac": "NAAC ग्रेड",
       "moreRanks": "NIRF {year} की अन्य श्रेणियाँ",
-      "source": "स्रोत: SRMIST द्वारा प्रकाशित NIRF {year} तालिका"
+      "source": "स्रोत: SRMIST द्वारा प्रकाशित NIRF {year} तालिका",
+      "drag": "खींचें"
     },
     "leap": {
       "kicker": "अंक II",

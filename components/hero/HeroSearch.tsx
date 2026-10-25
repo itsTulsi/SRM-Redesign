@@ -115,7 +115,8 @@ export function HeroSearch({ docs, counts, phone }: Props) {
         />
         <button
           type="submit"
-          className="inline-flex min-h-12 shrink-0 items-center rounded-full bg-ink px-5 font-semibold text-paper lg:min-h-14 lg:px-7 lg:text-lg"
+          data-magnetic
+          className="relative inline-flex min-h-12 overflow-hidden shrink-0 items-center rounded-full bg-ink px-5 font-semibold text-paper lg:min-h-14 lg:px-7 lg:text-lg"
         >
           {t("submit")}
         </button>

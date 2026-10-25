@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { SiteFooter } from "@/components/footer/SiteFooter";
+import { MotionDirector } from "@/components/motion/MotionDirector";
 import { getNavData } from "@/components/nav/nav-data";
 import { SiteHeader } from "@/components/nav/SiteHeader";
 import { SkipLink } from "@/components/ui/SkipLink";
@@ -68,6 +69,7 @@ export default async function LocaleLayout({
           <SiteHeader nav={nav} />
           {children}
           <SiteFooter />
+          <MotionDirector />
         </NextIntlClientProvider>
       </body>
     </html>

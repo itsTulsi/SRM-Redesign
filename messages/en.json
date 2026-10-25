@@ -123,7 +123,8 @@
       "rank": "Rank",
       "naac": "NAAC grade",
       "moreRanks": "Other NIRF {year} categories",
-      "source": "Source: NIRF {year} table published by SRMIST"
+      "source": "Source: NIRF {year} table published by SRMIST",
+      "drag": "Drag"
     },
     "leap": {
       "kicker": "Act II",

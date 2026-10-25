@@ -40,7 +40,8 @@ export async function Explore() {
                   {main.tour360Url ? (
                     <a
                       href={main.tour360Url}
-                      className="inline-flex min-h-11 items-center rounded-full bg-fg px-5 font-semibold text-bg no-underline"
+                      data-magnetic
+                      className="relative inline-flex min-h-11 overflow-hidden items-center rounded-full bg-fg px-5 font-semibold text-bg no-underline"
                     >
                       {t("tour")}
                       <span className="sr-only"> {nav("external")}</span>

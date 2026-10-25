@@ -12,7 +12,8 @@ export async function ActLeap() {
   const locale = await getLocale();
 
   return (
-    <section id={SECTION.leap} aria-labelledby="act-leap" data-surface="dark" data-act="leap" className="bg-bg text-fg">
+    <section id={SECTION.leap} aria-labelledby="act-leap" data-surface="dark" data-act="leap" className="relative bg-bg text-fg">
+      <div data-curtain aria-hidden="true" className="act-curtain" />
       <ActHeader id="act-leap" kicker={t("kicker")} word={t("word")} title="Leap" question={t("question")} locale={locale} />
 
       <div id={SECTION.studentWork}>
@@ -122,7 +123,8 @@ function StudentWorkPanel({ story, index, readLabel }: { story: Story; index: nu
         ) : null}
         <Link
           href={`/stories/${story.slug}`}
-          className="inline-flex min-h-11 w-fit items-center gap-2 rounded-full border border-line px-5 font-semibold text-fg no-underline hover:border-fg"
+          data-magnetic
+          className="relative inline-flex min-h-11 w-fit overflow-hidden items-center gap-2 rounded-full border border-line px-5 font-semibold text-fg no-underline hover:border-fg"
         >
           {readLabel} <span aria-hidden="true">→</span>
         </Link>

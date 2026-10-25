@@ -338,3 +338,155 @@ html:has(dialog[open]:modal) {
     display: none;
   }
 }
+
+/* ═══ Step 7 motion layer. Everything below is inert unless lib/motion-scenes runs or data-motion="full". ═══ */
+
+/* Lenis (recommended base styles) */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* Act title fragments: each letter = top half + bottom half. Negative insets so tight leading never clips glyphs. */
+.act-letter {
+  position: relative;
+  display: inline-block;
+}
+.act-frag {
+  display: inline-block;
+  will-change: transform, opacity;
+}
+.act-frag-top {
+  clip-path: inset(-50% -15% 50% -15%);
+}
+.act-frag-bottom {
+  position: absolute;
+  top: 0;
+  left: 0;
+  clip-path: inset(50% -15% -50% -15%);
+}
+
+/* Pinned act title becomes a watermark: everything else in the act stacks above it. */
+[data-act] > header,
+[data-act] > :not(header, [data-curtain], .sr-only) {
+  position: relative;
+  z-index: 1;
+}
+[data-act] > header > :not([data-act-title]) {
+  position: relative;
+  z-index: 1;
+}
+[data-act-title] {
+  position: relative;
+  z-index: 0;
+}
+
+/* Curtains: the previous act's colour lifting off the new one. display:none until motion runs. */
+.act-curtain {
+  display: none;
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  height: 100vh;
+  z-index: 2;
+  pointer-events: none;
+  background: var(--curtain, transparent);
+}
+:root:not([data-theme="light"]) [data-act="leap"] {
+  --curtain: var(--srm-blue-900);
+}
+:root:not([data-theme="light"]) [data-act="lead"] {
+  --curtain: #0a0a0d;
+}
+
+/* College strip hover reveal (VCU): pure CSS, mouse users with motion on only. Touch/reduced = full photo. */
+@media (hover: hover) and (pointer: fine) {
+  [data-motion="full"] [data-college-strip] .college-media {
+    opacity: 0.35;
+    scale: 1.08;
+    transition:
+      opacity 500ms var(--ease-leap),
+      scale 900ms var(--ease-leap);
+  }
+  [data-motion="full"] [data-college-strip] a:is(:hover, :focus) .college-media {
+    opacity: 1;
+    scale: 1;
+  }
+  [data-motion="full"] [data-college-strip] .college-outcome {
+    translate: 0 0.5rem;
+    transition: translate 500ms var(--ease-leap);
+  }
+  [data-motion="full"] [data-college-strip] a:is(:hover, :focus) .college-outcome {
+    translate: 0 0;
+  }
+  [data-motion="full"] [data-college-strip] {
+    cursor: grab;
+  }
+}
+
+/* Leaf ripple (Hull) */
+.leaf-ripple {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  margin: -10px 0 0 -10px;
+  border-radius: 0 100% 0 100%;
+  background: currentColor;
+  pointer-events: none;
+}
+
+/* Desktop cursor accent (native cursor stays visible) */
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 90;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 200ms;
+}
+.cursor-ring.is-visible {
+  opacity: 1;
+}
+.cursor-ring::before {
+  content: "";
+  position: absolute;
+  top: -6px;
+  left: -6px;
+  width: 12px;
+  height: 12px;
+  border: 1.5px solid var(--leaf-green-300);
+  border-radius: 9999px;
+  background: color-mix(in srgb, var(--leaf-green-300) 35%, transparent);
+  transition:
+    transform 250ms var(--ease-leap),
+    background-color 250ms;
+}
+.cursor-ring[data-state="hover"]::before {
+  transform: scale(2.8);
+  background: transparent;
+}
+.cursor-ring[data-state="label"]::before {
+  transform: scale(5.5);
+  background: var(--leaf-green-300);
+}
+.cursor-ring > span {
+  position: absolute;
+  translate: -50% -50%;
+  color: var(--ink);
+  font: 600 0.75rem/1 var(--font-sans);
+  opacity: 0;
+  transition: opacity 200ms;
+}
+.cursor-ring[data-state="label"] > span {
+  opacity: 1;
+}

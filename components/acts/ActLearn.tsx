@@ -15,13 +15,14 @@ export async function ActLearn() {
   const others = nirf.ranks.filter((r) => !HEADLINE_RANKS.includes(r.id));
 
   return (
-    <section id={SECTION.learn} aria-labelledby="act-learn" data-surface="dark" data-act="learn" className="bg-bg text-fg">
+    <section id={SECTION.learn} aria-labelledby="act-learn" data-surface="dark" data-act="learn" className="relative bg-bg text-fg">
       <ActHeader id="act-learn" kicker={t("kicker")} word={t("word")} title="Learn" question={t("question")} locale={locale} />
 
       {/* College strip (VCU hover-reveal in step 7). Native horizontal scroll + snap: works with touch, trackpad, keyboard (Tab through links). */}
       <h3 className="sr-only">{t("strip")}</h3>
       <ul
         data-college-strip
+        data-cursor-label={t("drag")}
         className="flex snap-x snap-mandatory scroll-px-4 gap-4 overflow-x-auto px-4 pb-6 md:scroll-px-8 md:px-8 lg:scroll-px-12 lg:px-12"
       >
         {colleges.map((college) => {
@@ -30,15 +31,17 @@ export async function ActLearn() {
             <li key={college.slug} className="w-[78vw] max-w-[22rem] shrink-0 snap-start">
               <Link
                 href={`/programmes#${college.slug}`}
-                className="group flex h-full flex-col overflow-hidden rounded-3xl border border-line-subtle text-fg no-underline hover:border-line"
+                className="group flex h-full flex-col overflow-hidden rounded-3xl border border-line-subtle bg-bg text-fg no-underline hover:border-line"
               >
-                <MediaPlaceholder description={college.name} file={college.photo} className="aspect-[4/3] w-full" />
+                <div className="overflow-hidden">
+                  <MediaPlaceholder description={college.name} file={college.photo} className="college-media aspect-[4/3] w-full" />
+                </div>
                 <div className="flex flex-1 flex-col gap-4 p-5">
                   <div>
                     <p className="text-sm text-fg-muted">{t("programmes", { count })}</p>
                     <h4 className="mt-1 text-lg leading-snug font-semibold">{college.name}</h4>
                   </div>
-                  <p className="mt-auto flex flex-col">
+                  <p className="college-outcome mt-auto flex flex-col">
                     <span className="font-display text-4xl leading-none font-bold">
                       <Fact value={college.outcome.value} fallback={count} />
                     </span>
