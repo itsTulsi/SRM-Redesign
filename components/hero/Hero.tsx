@@ -19,10 +19,10 @@ export async function Hero() {
     campuses: campuses.filter((c) => c.kind === "campus").length,
   };
 
-  // TODO(step 11): "Parents" switches on Parent Mode instead of linking to admissions.
   const audiences = [
-    { label: t("students"), href: "/programmes" },
-    { label: t("parents"), href: "/admissions" },
+    { label: t("students"), href: "/programmes?parent=off" },
+    // Switches Parent Mode on: every programme page then leads with plain answers for families.
+    { label: t("parents"), href: "/programmes?parent=on" },
     { label: t("international"), href: site.admissions.internationalUrl },
     { label: t("research"), href: `/#${SECTION.research}` },
     { label: t("alumni"), href: `/#${SECTION.alumni}` },

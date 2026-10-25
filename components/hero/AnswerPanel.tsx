@@ -109,7 +109,7 @@ export function AnswerPanel({ state, phones, onBack }: { state: AnswerState; pho
                   );
                 })()}
                 <div className="mt-auto flex flex-wrap gap-x-4 gap-y-1 pt-1 text-sm font-semibold">
-                  <Link href={`/programmes#${c.slug}`} className="inline-flex min-h-11 items-center text-ink underline">
+                  <Link href={`/programmes/${c.slug}`} className="inline-flex min-h-11 items-center text-ink underline">
                     {t("details")}
                   </Link>
                   <Link href={`/admissions?programme=${c.slug}#enquiry`} className="inline-flex min-h-11 items-center text-ink underline">

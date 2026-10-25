@@ -1,5 +1,6 @@
 import { getTranslations } from "next-intl/server";
 import { LanguageSwitcher } from "@/components/nav/LanguageSwitcher";
+import { ParentModeToggle } from "@/components/programme/ParentModeToggle";
 import { LiteModeToggle } from "@/components/ui/LiteModeToggle";
 import { SmartLink } from "@/components/ui/SmartLink";
 import { Link } from "@/lib/i18n";
@@ -131,6 +132,7 @@ export async function SiteFooter() {
           </h3>
           <div className="flex flex-col gap-6 lg:flex-row lg:flex-wrap lg:items-center lg:gap-10">
             <LanguageSwitcher label={nav("language")} landmark={false} />
+            <ParentModeToggle />
             <LiteModeToggle />
           </div>
         </section>

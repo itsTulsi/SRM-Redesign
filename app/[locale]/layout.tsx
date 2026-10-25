@@ -10,12 +10,13 @@ import { SkipLink } from "@/components/ui/SkipLink";
 import { fontVariables } from "@/lib/fonts";
 import { routing } from "@/lib/i18n";
 import { applyLiteMode, LITE_STORAGE_KEY } from "@/lib/lite-mode";
+import { applyParentMode, PARENT_STORAGE_KEY } from "@/lib/parent-mode";
 import "../globals.css";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 
-// Runs before first paint so Lite Mode never flashes. Failure is harmless: defaults apply.
-const initScript = `try{(${applyLiteMode.toString()})(${JSON.stringify(LITE_STORAGE_KEY)})}catch(e){}`;
+// Runs before first paint so Lite Mode and Parent Mode never flash. Failure is harmless: defaults apply.
+const initScript = `try{(${applyLiteMode.toString()})(${JSON.stringify(LITE_STORAGE_KEY)})}catch(e){}try{(${applyParentMode.toString()})(${JSON.stringify(PARENT_STORAGE_KEY)})}catch(e){}`;
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));

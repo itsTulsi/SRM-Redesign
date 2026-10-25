@@ -513,3 +513,24 @@ html.lenis body {
 .street-map {
   filter: invert(1) hue-rotate(180deg) brightness(0.9) contrast(0.92) saturate(0.7);
 }
+
+/* ═══ Step 11: Parent Mode — <html data-parent> is set before first paint, so the right view shows at once.
+   No JS / off: student view. On: plain answers for parents. ═══ */
+.parent-view {
+  display: none;
+}
+[data-parent="on"] .parent-view {
+  display: block;
+}
+[data-parent="on"] .student-view {
+  display: none;
+}
+
+/* Tamil vowel signs and Devanagari matras sit above/below the line: display headings need looser leading
+   than Latin (1.0 makes lines collide). Act titles stay English (lang="en") and keep their tight setting. */
+:lang(ta) :is(.text-section, h1, h2, h3):not([lang="en"]) {
+  line-height: 1.3;
+}
+:lang(hi) :is(.text-section, h1, h2, h3):not([lang="en"]) {
+  line-height: 1.25;
+}

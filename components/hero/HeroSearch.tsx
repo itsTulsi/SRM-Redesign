@@ -177,7 +177,7 @@ export function HeroSearch({ docs, lexicon, counts, phones }: Props) {
               {results.map((r) => (
                 <li key={r.slug}>
                   <Link
-                    href={`/programmes#${r.slug}`}
+                    href={`/programmes/${r.slug}`}
                     className="flex h-full min-h-11 flex-col gap-1 rounded-2xl bg-paper/75 p-4 text-ink no-underline hover:bg-paper"
                   >
                     <span className="text-sm">

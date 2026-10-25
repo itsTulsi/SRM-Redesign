@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Fact } from "@/components/ui/Todo";
 import { colleges, getCampus, programmes, type Programme } from "@/lib/content";
+import { Link } from "@/lib/i18n";
 import type { Locale } from "@/lib/i18n";
 
 type Params = { params: Promise<{ locale: Locale }> };
@@ -69,7 +70,11 @@ function ProgrammeList({
           id={p.slug}
           className="flex flex-col gap-2 rounded-2xl border border-line-subtle p-5 target:border-link target:ring-2 target:ring-link"
         >
-          <Heading className="font-semibold leading-snug">{p.name}</Heading>
+          <Heading className="font-semibold leading-snug">
+            <Link href={`/programmes/${p.slug}`} className="text-fg underline-offset-4 hover:underline">
+              {p.name}
+            </Link>
+          </Heading>
           <p className="text-fg-muted">{p.summary}</p>
           <p className="mt-auto text-sm text-fg-muted">
             <Fact value={p.durationYears} format={yearsLabel} /> ·{" "}

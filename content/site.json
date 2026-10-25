@@ -97,6 +97,12 @@
   "_sources": [
     "CLAUDE.md §7 (verified facts)",
     "https://applications.srmist.edu.in/ — application portal, 'Admissions Open 2026'",
-    "https://www.srmist.edu.in/ and /iqac/ footer links, fetched 2026-10-25 — all returned HTTP 200"
-  ]
+    "https://www.srmist.edu.in/ and /iqac/ footer links, fetched 2026-10-25 — all returned HTTP 200",
+    "srmist.edu.in /srm-hostels/, /life-at-srm/anti-ragging/, /life-at-srm/getting-around-campus-safety/ — fetched 2026-10-25, HTTP 200"
+  ],
+  "parentLinks": {
+    "hostels": "https://www.srmist.edu.in/srm-hostels/",
+    "antiRagging": "https://www.srmist.edu.in/life-at-srm/anti-ragging/",
+    "campusSafety": "https://www.srmist.edu.in/life-at-srm/getting-around-campus-safety/"
+  }
 }

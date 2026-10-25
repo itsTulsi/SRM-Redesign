@@ -1,0 +1,87 @@
+{
+  "_note": "DEMO DATA for the Ask a Senior UI and its moderation states. These are illustrative sample threads, NOT real students or real answers, and the page labels them as demo content. Answers are general study advice and make no claims about SRM facilities, fees or policies. Replace with moderated submissions from verified students before launch.",
+  "byCollege": {
+    "engineering": [
+      {
+        "id": "eng-1",
+        "status": "answered",
+        "question": "I've never written code before. Will I struggle in first year?",
+        "answer": {
+          "text": "I hadn't coded before either. What helped most was practising a little every day and asking for help early instead of waiting until exams.",
+          "senior": "B.Tech, 3rd year"
+        }
+      },
+      {
+        "id": "eng-2",
+        "status": "answered",
+        "question": "How do I get involved in projects outside class?",
+        "answer": {
+          "text": "Join one student team or club in your first semester and stay with it for a year. You learn more from building something with people than from collecting certificates.",
+          "senior": "B.Tech, final year"
+        }
+      },
+      {
+        "id": "eng-3",
+        "status": "awaiting",
+        "question": "What does a normal week look like during exams?"
+      }
+    ],
+    "medicine": [
+      {
+        "id": "med-1",
+        "status": "answered",
+        "question": "How do you keep up with the amount of reading?",
+        "answer": {
+          "text": "Plan the week on Sunday and revise a little every day. Cramming doesn't work at this volume — small daily reviews do.",
+          "senior": "MBBS, 3rd year"
+        }
+      },
+      {
+        "id": "med-2",
+        "status": "awaiting",
+        "question": "When do you start seeing patients?"
+      }
+    ],
+    "dental": [
+      {
+        "id": "den-1",
+        "status": "answered",
+        "question": "Is the practical work hard to get used to?",
+        "answer": {
+          "text": "It felt slow at first. Practising the same steps again and again is normal — everyone in my batch improved a lot by the second year.",
+          "senior": "BDS, 3rd year"
+        }
+      },
+      {
+        "id": "den-2",
+        "status": "awaiting",
+        "question": "How much time do you get for yourself?"
+      }
+    ],
+    "default": [
+      {
+        "id": "gen-1",
+        "status": "answered",
+        "question": "What should I do in the summer before joining?",
+        "answer": {
+          "text": "Rest, and read about your subject for fun. You don't need to prepare everything in advance — the first weeks are for settling in.",
+          "senior": "3rd-year student"
+        }
+      },
+      {
+        "id": "gen-2",
+        "status": "answered",
+        "question": "Is it easy to make friends in the first week?",
+        "answer": {
+          "text": "Say yes to the first few events, even the awkward ones. Most people are as new as you are.",
+          "senior": "2nd-year student"
+        }
+      },
+      {
+        "id": "gen-3",
+        "status": "awaiting",
+        "question": "How do you balance classes with clubs?"
+      }
+    ]
+  }
+}
