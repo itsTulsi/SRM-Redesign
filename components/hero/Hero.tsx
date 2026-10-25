@@ -3,6 +3,7 @@ import { SmartLink } from "@/components/ui/SmartLink";
 import { campuses, colleges, programmes, site } from "@/lib/content";
 import { toSearchDocs } from "@/lib/search";
 import { SECTION } from "@/lib/sections";
+import { HeroSeed } from "@/components/tree/HeroSeed";
 import { HeroMedia } from "./HeroMedia";
 import { HeroSearch } from "./HeroSearch";
 
@@ -58,6 +59,7 @@ export async function Hero() {
           </ul>
         </nav>
       </div>
+      <HeroSeed />
     </section>
   );
 }

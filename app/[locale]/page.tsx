@@ -5,6 +5,7 @@ import { ActLearn } from "@/components/acts/ActLearn";
 import { ThisWeek } from "@/components/acts/ThisWeek";
 import { Hero } from "@/components/hero/Hero";
 import { Explore } from "@/components/map/Explore";
+import { LivingTree } from "@/components/tree/LivingTree";
 import type { Locale } from "@/lib/i18n";
 
 // Homepage = exactly the sections in CLAUDE.md §1, in order. Nothing else goes here.
@@ -20,6 +21,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
       <ActLead />
       <Explore />
       <ThisWeek />
+      <LivingTree />
     </main>
   );
 }

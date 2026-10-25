@@ -257,3 +257,84 @@ html:has(dialog[open]:modal) {
     white-space: nowrap;
   }
 }
+
+/* ── The Living Tree (CLAUDE.md §5). --p (0..1) is set by TreeScroll; each piece reads its own window. ── */
+.tree-seg {
+  fill: none;
+  stroke: var(--tree);
+  stroke-linecap: round;
+  stroke-dasharray: 1;
+  /* 1 = hidden … 0 = fully drawn, linear across [--s, --e] */
+  stroke-dashoffset: clamp(0, calc((var(--e) - var(--p)) / (var(--e) - var(--s))), 1);
+}
+.tree-roots .tree-seg {
+  stroke: var(--fg-muted);
+}
+.tree-leaf {
+  fill: var(--tree);
+  transform-box: fill-box;
+  transform-origin: center;
+  scale: clamp(0, calc((var(--p) - var(--s)) * 25), 1);
+}
+.tree-ground {
+  stroke: var(--line);
+  stroke-width: 1;
+  stroke-dasharray: 2 4;
+}
+.tree-seed {
+  fill: var(--tree);
+}
+.tree-bar {
+  background: var(--leaf-green-300);
+  transform-origin: left;
+  transform: scaleX(var(--p));
+}
+.living-tree {
+  opacity: 0;
+  transition: opacity 300ms var(--ease-leap);
+}
+[data-tree-visible="true"] .living-tree {
+  opacity: 1;
+}
+/* Hero seed (§1.1): the tree before it grows; a gentle pulse that stops under reduced motion. */
+.hero-seed {
+  animation: seed-pulse 2.4s var(--ease-leap) infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+@keyframes seed-pulse {
+  0%, 100% { scale: 1; opacity: 1; }
+  50% { scale: 1.35; opacity: 0.7; }
+}
+/* The tree floats over every surface; it follows the dark theme tokens so it reads on blue, ink and canopy. */
+.living-tree {
+  --bg: var(--srm-blue-900);
+  --line-subtle: #24346b;
+  --tree: var(--leaf-green-300);
+  --fg-muted: #9aa6c8;
+  --line: #6c7bb0;
+}
+:root[data-theme="light"] .living-tree {
+  --bg: var(--paper);
+  --line-subtle: #d9d6cd;
+  --tree: var(--leaf-green);
+  --fg-muted: #4a4d5c;
+  --line: #8a8c99;
+}
+
+/* Reduced motion / Lite Mode: no growth animation — the tree is shown fully grown (§5 rules). */
+@media (prefers-reduced-motion: reduce) {
+  .living-tree svg {
+    --p: 1 !important;
+  }
+}
+[data-motion="reduce"] .living-tree svg {
+  --p: 1 !important;
+}
+
+@media print {
+  .living-tree,
+  .tree-bar {
+    display: none;
+  }
+}
