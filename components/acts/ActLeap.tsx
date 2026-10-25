@@ -7,6 +7,7 @@ import { Link } from "@/lib/i18n";
 import { missionAnchor, SECTION } from "@/lib/sections";
 import { ActHeader } from "./ActHeader";
 import { CamberScene } from "./CamberScene";
+import { StartupEcosystem } from "./StartupEcosystem";
 import { StatFigure } from "./StatFigure";
 
 export async function ActLeap() {
@@ -29,6 +30,8 @@ export async function ActLeap() {
           ),
         )}
       </div>
+
+      <StartupEcosystem />
 
       <div id={SECTION.research} className="site-container py-20 lg:py-32">
         <h3 className="font-display text-section font-bold">{t("researchTitle")}</h3>

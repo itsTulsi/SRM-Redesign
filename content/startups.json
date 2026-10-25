@@ -1,0 +1,97 @@
+{
+  "_note": "Logos from the 'SRM Startup Ecosystem' strip on srmist.edu.in (read 2026-10-25). The count is from SRM's 2026–27 brochure: 'Over 50 startups with student, alumni and faculty founders have benefitted from the Innovation and Incubation Centre'.",
+  "source": "https://www.srmist.edu.in/srmist-startup-ecosystem/",
+  "count": "50+",
+  "startups": [
+    {
+      "slug": "aaikyam",
+      "name": "Aaikyam",
+      "logo": "media/startups/aaikyam.jpg"
+    },
+    {
+      "slug": "climec-labs",
+      "name": "Climec Labs",
+      "logo": "media/startups/climec-labs.jpg"
+    },
+    {
+      "slug": "electrum-interactive",
+      "name": "Electrum Interactive",
+      "logo": "media/startups/electrum-interactive.jpg"
+    },
+    {
+      "slug": "fitsurance",
+      "name": "Fitsurance",
+      "logo": "media/startups/fitsurance.jpg"
+    },
+    {
+      "slug": "zero-meat",
+      "name": "Zero Meat",
+      "logo": "media/startups/zero-meat.jpg"
+    },
+    {
+      "slug": "hearnatal",
+      "name": "HearNatal",
+      "logo": "media/startups/hearnatal.jpg"
+    },
+    {
+      "slug": "reflow",
+      "name": "ReFlow",
+      "logo": "media/startups/reflow.jpg"
+    },
+    {
+      "slug": "citium-motors",
+      "name": "Citium Motors",
+      "logo": "media/startups/citium-motors.jpg"
+    },
+    {
+      "slug": "mamakart",
+      "name": "mamakart",
+      "logo": "media/startups/mamakart.jpg"
+    },
+    {
+      "slug": "bversity",
+      "name": "Bversity",
+      "logo": "media/startups/bversity.jpg"
+    },
+    {
+      "slug": "kreator",
+      "name": "Kreator",
+      "logo": "media/startups/kreator.jpg"
+    },
+    {
+      "slug": "neur",
+      "name": "Neur",
+      "logo": "media/startups/neur.jpg"
+    },
+    {
+      "slug": "surelocal",
+      "name": "SureLocal",
+      "logo": "media/startups/surelocal.jpg"
+    },
+    {
+      "slug": "paperplane",
+      "name": "Paperplane",
+      "logo": "media/startups/paperplane.jpg"
+    },
+    {
+      "slug": "think-metal",
+      "name": "Think Metal",
+      "logo": "media/startups/think-metal.jpg"
+    },
+    {
+      "slug": "zed-digital",
+      "name": "ZED Digital",
+      "logo": "media/startups/zed-digital.jpg"
+    },
+    {
+      "slug": "yogya-ai",
+      "name": "yogya.ai",
+      "logo": "media/startups/yogya-ai.jpg"
+    },
+    {
+      "slug": "abhinava-rizel",
+      "name": "Abhinava Rizel",
+      "logo": "media/startups/abhinava-rizel.jpg"
+    }
+  ]
+}

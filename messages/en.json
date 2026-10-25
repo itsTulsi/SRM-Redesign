@@ -141,7 +141,10 @@
       "researchNumbers": "Research in numbers",
       "first": "1st",
       "award": "Award",
-      "scrollHint": "Scroll to run the lap"
+      "scrollHint": "Scroll to run the lap",
+      "startupsTitle": "Startups born here",
+      "startupsIntro": "{count} startups founded by SRM students, alumni and faculty have come through the Innovation and Incubation Centre. A few of them:",
+      "startupsLink": "Explore SRM's startup ecosystem"
     },
     "lead": {
       "kicker": "Act III",
@@ -151,7 +154,11 @@
       "pathLabel": "Career path of {name}",
       "portraitAlt": "Portrait of {name}",
       "placementsTitle": "Placements {season}",
-      "placementsIntro": "Recruiters who came to campus, and what they offered."
+      "placementsIntro": "Recruiters who came to campus, and what they offered.",
+      "voicesTitle": "Voices at SRM",
+      "voicesIntro": "India's science leaders, on campus for the Indian National Science Academy's 90th Anniversary General Meeting.",
+      "voicesNote": "Roles as at the time of each talk. Videos play from YouTube when you tap them.",
+      "play": "Play"
     },
     "explore": {
       "title": "Where will you study?",

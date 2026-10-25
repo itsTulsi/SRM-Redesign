@@ -5,6 +5,7 @@ import { getContent } from "@/lib/content";
 import { SECTION } from "@/lib/sections";
 import { ActHeader } from "./ActHeader";
 import { StatFigure } from "./StatFigure";
+import { Voices } from "./Voices";
 
 export async function ActLead() {
   const t = await getTranslations("Acts.lead");
@@ -50,6 +51,8 @@ export async function ActLead() {
           ))}
         </ul>
       </div>
+
+      <Voices />
 
       <div id={SECTION.placements} className="site-container pb-24 lg:pb-40">
         <h3 className="font-display text-section font-bold">{t("placementsTitle", { season: placements.season })}</h3>

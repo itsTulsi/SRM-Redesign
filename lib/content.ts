@@ -5,7 +5,9 @@ import programmesData from "@/content/programmes.json";
 import researchData from "@/content/research.json";
 import siteData from "@/content/site.json";
 import statsData from "@/content/stats.json";
+import startupsData from "@/content/startups.json";
 import storiesData from "@/content/stories.json";
+import voicesData from "@/content/voices.json";
 import seniorsData from "@/content/seniors.json";
 import hiData from "@/content/i18n/hi.json";
 import taData from "@/content/i18n/ta.json";
@@ -103,6 +105,10 @@ export type Alumnus = {
   path: OrTodo<string>[];
   photo: string;
 };
+
+/** A talk by a visiting leader (SRM's "Legacy Beyond Curriculum"): YouTube Short, played on demand. */
+export type Voice = { slug: string; name: string; role: string; title: string; youtubeId: string };
+export type Startup = { slug: string; name: string; logo: string };
 
 export type Story = {
   slug: string;
@@ -206,6 +212,7 @@ type Overrides = {
   phones?: Record<string, string>;
   site?: { status?: string; location?: string };
   seniors?: Record<string, { question?: string; answer?: string; senior?: string }>;
+  voices?: Record<string, { role?: string; title?: string }>;
 };
 
 export type SeniorThreadData = {
@@ -323,6 +330,11 @@ function build(o: Overrides | undefined) {
       };
     }),
     stories: ss,
+    voices: (voicesData.voices as Voice[]).map((v) => ({ ...v, role: pick(o?.voices?.[v.slug]?.role, v.role), title: pick(o?.voices?.[v.slug]?.title, v.title) })),
+    voicesSource: voicesData.source,
+    startups: startupsData.startups as Startup[],
+    startupsCount: startupsData.count,
+    startupsSource: startupsData.source,
     events,
     missions: ms,
     placements: { season: placements.season, items: stat(placements.items, o?.placements) },
