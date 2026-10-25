@@ -3,29 +3,99 @@
   "shortName": "SRMIST",
   "location": "Kattankulathur, Chennai",
   "tagline": "Learn. Leap. Lead.",
-  "accreditation": { "naac": "A++" },
+  "accreditation": {
+    "naac": "A++"
+  },
   "admissions": {
     "phones": [
-      { "id": "engineering", "label": "Engineering, Agriculture, Architecture", "display": "+91 70 2645 2645", "tel": "+917026452645" },
-      { "id": "other", "label": "All other colleges", "display": "+91 70 2647 2647", "tel": "+917026472647" },
-      { "id": "main", "label": "Main switchboard", "display": "+91-44-27417000", "tel": "+914427417000" }
+      {
+        "id": "engineering",
+        "label": "Engineering, Agriculture, Architecture",
+        "display": "+91 70 2645 2645",
+        "tel": "+917026452645"
+      },
+      {
+        "id": "other",
+        "label": "All other colleges",
+        "display": "+91 70 2647 2647",
+        "tel": "+917026472647"
+      },
+      {
+        "id": "main",
+        "label": "Main switchboard",
+        "display": "+91-44-27417000",
+        "tel": "+914427417000"
+      }
     ],
     "applyUrl": "https://applications.srmist.edu.in/",
     "status": "Admissions Open 2026"
   },
   "virtualTourUrl": "https://webstor.srmist.edu.in/web_assets/srmist-virtual-tour-vo/index.htm",
   "statutoryLinks": [
-    { "id": "naac", "label": "NAAC", "href": "TODO: NAAC page URL on srmist.edu.in" },
-    { "id": "ugc", "label": "UGC", "href": "TODO: UGC disclosure page URL" },
-    { "id": "aicte", "label": "AICTE", "href": "TODO: AICTE approval page URL" },
-    { "id": "rti", "label": "RTI", "href": "TODO: RTI page URL" },
-    { "id": "nirf", "label": "NIRF", "href": "TODO: NIRF data page URL" },
-    { "id": "iqac", "label": "IQAC", "href": "TODO: IQAC page URL" },
-    { "id": "anti-ragging", "label": "Anti-Ragging", "href": "TODO: Anti-ragging page URL" },
-    { "id": "grievance", "label": "Grievance Redressal", "href": "TODO: Grievance redressal page URL" }
+    {
+      "id": "naac",
+      "label": "NAAC A++ — Accreditations & Rankings",
+      "href": "https://www.srmist.edu.in/about-us/accreditations-and-rankings/"
+    },
+    {
+      "id": "naac-ssr",
+      "label": "NAAC SSR (4th cycle)",
+      "href": "https://webstor.srmist.edu.in/web_assets/downloads/2024/ssr-4th-cycle-accreditation/"
+    },
+    {
+      "id": "ugc",
+      "label": "UGC Public Self-Disclosure",
+      "href": "https://www.srmist.edu.in/ugc/"
+    },
+    {
+      "id": "aicte",
+      "label": "AICTE",
+      "href": "https://webstor.srmist.edu.in/web_assets/downloads/2025/flipbook/aict/"
+    },
+    {
+      "id": "mandatory-disclosure",
+      "label": "Mandatory Disclosure",
+      "href": "https://webstor.srmist.edu.in/web_assets/downloads/2025/flipbook/aicte-mandate-disclosure/"
+    },
+    {
+      "id": "regulatory-approvals",
+      "label": "Regulatory Approvals 2025–26",
+      "href": "https://webstor.srmist.edu.in/web_assets/downloads/2025/statutory-regulatory-authority-approval-2025-26.pdf"
+    },
+    {
+      "id": "rti",
+      "label": "RTI",
+      "href": "https://webstor.srmist.edu.in/web_assets/downloads/2023/rti.pdf"
+    },
+    {
+      "id": "nirf",
+      "label": "NIRF",
+      "href": "https://www.srmist.edu.in/nirf/"
+    },
+    {
+      "id": "iqac",
+      "label": "IQAC",
+      "href": "https://www.srmist.edu.in/iqac/"
+    },
+    {
+      "id": "iqac-disclosure",
+      "label": "IQAC Public Disclosure",
+      "href": "https://www.srmist.edu.in/iqac/public-disclosure/"
+    },
+    {
+      "id": "anti-ragging",
+      "label": "Anti-Ragging",
+      "href": "https://www.srmist.edu.in/life-at-srm/anti-ragging/"
+    },
+    {
+      "id": "grievance",
+      "label": "Grievance Redressal",
+      "href": "https://www.srmist.edu.in/life-at-srm/complaints-redressal/"
+    }
   ],
   "_sources": [
     "CLAUDE.md §7 (verified facts)",
-    "https://applications.srmist.edu.in/ — application portal, 'Admissions Open 2026'"
+    "https://applications.srmist.edu.in/ — application portal, 'Admissions Open 2026'",
+    "https://www.srmist.edu.in/ and /iqac/ footer links, fetched 2026-10-25 — all returned HTTP 200"
   ]
 }

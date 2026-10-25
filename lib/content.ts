@@ -7,23 +7,13 @@ import siteData from "@/content/site.json";
 import statsData from "@/content/stats.json";
 import storiesData from "@/content/stories.json";
 
+import type { OrTodo } from "./todo";
+
 /**
  * Typed access to content/*.json. Shapes are enforced at build time by scripts/check-content.mts (prebuild).
- *
- * Unverified values are strings starting with "TODO:" (CLAUDE.md §7: never invent facts).
- * Render them through <Todo> — loud in dev, safe fallback in production.
+ * Server components only — importing this from a client component ships every JSON file to the browser.
  */
-export type Todo = `TODO:${string}`;
-export type OrTodo<T> = T | Todo;
-
-export function isTodo(value: unknown): value is Todo {
-  return typeof value === "string" && value.startsWith("TODO:");
-}
-
-/** The verified value, or null when it's still a TODO. */
-export function verified<T>(value: OrTodo<T>): T | null {
-  return isTodo(value) ? null : (value as T);
-}
+export { isTodo, verified, type OrTodo, type Todo } from "./todo";
 
 export type CampusSlug =
   | "kattankulathur"

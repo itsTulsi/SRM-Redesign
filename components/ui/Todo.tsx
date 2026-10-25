@@ -1,3 +1,5 @@
+import { isTodo, type OrTodo } from "@/lib/todo";
+
 /**
  * Marks content we don't have a verified source for yet (CLAUDE.md §7: never invent facts).
  * Dev: loud highlighted "TODO: …" so gaps are impossible to miss.
@@ -15,4 +17,18 @@ export function Todo({ note, fallback = null }: Props) {
       TODO: {note}
     </mark>
   );
+}
+
+/** Renders a verified value (optionally formatted) or, for a "TODO: …" value, the <Todo> marker. */
+export function Fact<T>({
+  value,
+  format,
+  fallback,
+}: {
+  value: OrTodo<T>;
+  format?: (v: T) => React.ReactNode;
+  fallback?: React.ReactNode;
+}) {
+  if (isTodo(value)) return <Todo note={value.slice(5).trim()} fallback={fallback} />;
+  return <>{format ? format(value as T) : String(value)}</>;
 }

@@ -1,0 +1,49 @@
+import type { Metadata } from "next";
+import { getTranslations, setRequestLocale } from "next-intl/server";
+import { site } from "@/lib/content";
+import type { Locale } from "@/lib/i18n";
+
+type Params = { params: Promise<{ locale: Locale }> };
+
+export async function generateMetadata({ params }: Params): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "Pages" });
+  return { title: `${t("admissionsTitle")} — SRMIST` };
+}
+
+export default async function AdmissionsPage({ params }: Params) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations("Pages");
+  const nav = await getTranslations("Nav");
+
+  return (
+    <main id="main" tabIndex={-1} className="site-container py-12 lg:py-20">
+      <p className="text-sm font-semibold tracking-wide text-fg-muted uppercase">{site.admissions.status}</p>
+      <h1 className="mt-2 font-display text-hero font-bold">{t("admissionsTitle")}</h1>
+      <p className="mt-4 max-w-prose text-lg text-fg-muted">{t("admissionsIntro")}</p>
+
+      <ul className="mt-10 grid gap-4 md:grid-cols-3">
+        {site.admissions.phones.map((phone) => (
+          <li key={phone.id}>
+            <a
+              href={`tel:${phone.tel}`}
+              className="flex min-h-11 flex-col gap-1 rounded-2xl border border-line p-6 text-fg no-underline hover:border-fg"
+            >
+              <span className="text-fg-muted">{phone.label}</span>
+              <span className="font-display text-2xl font-bold">{phone.display}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+
+      <a
+        href={site.admissions.applyUrl}
+        className="mt-10 inline-flex min-h-12 items-center rounded-full border-2 border-[var(--action-edge)] bg-action px-8 text-lg font-semibold text-on-action no-underline"
+      >
+        {nav("applyLong")}
+        <span className="sr-only"> {nav("external")}</span>
+      </a>
+    </main>
+  );
+}

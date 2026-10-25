@@ -2,6 +2,9 @@ import type { Metadata, Viewport } from "next";
 import { notFound } from "next/navigation";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { SiteFooter } from "@/components/footer/SiteFooter";
+import { getNavData } from "@/components/nav/nav-data";
+import { SiteHeader } from "@/components/nav/SiteHeader";
 import { SkipLink } from "@/components/ui/SkipLink";
 import { fontVariables } from "@/lib/fonts";
 import { routing } from "@/lib/i18n";
@@ -52,6 +55,7 @@ export default async function LocaleLayout({
   if (!hasLocale(routing.locales, locale)) notFound();
   setRequestLocale(locale);
   const t = await getTranslations("A11y");
+  const nav = await getNavData();
 
   return (
     <html lang={locale} className={fontVariables(locale)} suppressHydrationWarning>
@@ -61,7 +65,9 @@ export default async function LocaleLayout({
       <body>
         <NextIntlClientProvider>
           <SkipLink label={t("skipToContent")} />
+          <SiteHeader nav={nav} />
           {children}
+          <SiteFooter />
         </NextIntlClientProvider>
       </body>
     </html>

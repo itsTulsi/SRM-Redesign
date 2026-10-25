@@ -112,6 +112,7 @@
   html {
     -webkit-text-size-adjust: 100%;
     text-size-adjust: 100%;
+    scroll-padding-top: 5rem; /* anchor jumps clear the sticky header */
   }
 
   body {
@@ -211,4 +212,14 @@
 }
 [data-lite-only] {
   display: none;
+}
+
+/* Mobile nav sheet is a modal <dialog>: lock page scroll behind it. */
+html:has(dialog[open]:modal) {
+  overflow: hidden;
+}
+
+/* Tamil nav labels run ~40% wider than English; keep the five items on one line. */
+:lang(ta) .nav-label {
+  font-size: 0.9375rem;
 }
