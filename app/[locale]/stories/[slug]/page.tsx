@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { setRequestLocale } from "next-intl/server";
-import { Photo } from "@/components/ui/Photo";
+import { StoryVisual } from "@/components/acts/StoryVisual";
 import { Fact } from "@/components/ui/Todo";
 import { getContent, isTodo, stories } from "@/lib/content";
 import type { Locale } from "@/lib/i18n";
@@ -39,13 +39,7 @@ export default async function StoryPage({ params }: Params) {
         <h1 className="mt-2 font-display text-section font-bold">{story.title}</h1>
         <p className="mt-4 text-xl text-fg-muted">{story.dek}</p>
 
-        <Photo
-          src={story.media.photo}
-          alt={story.title}
-          sizes="(min-width: 768px) 768px, 100vw"
-          priority
-          className="mt-10 aspect-[16/9] w-full rounded-2xl"
-        />
+        <StoryVisual story={story} sizes="(min-width: 768px) 768px, 100vw" priority className="mt-10 aspect-[16/9] w-full rounded-2xl" />
 
         <div className="mt-10 flex flex-col gap-5 text-lg">
           {story.body.map((para, i) => (

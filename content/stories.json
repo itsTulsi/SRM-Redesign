@@ -112,7 +112,7 @@
       "slug": "student-startup",
       "kind": "student-work",
       "title": "Paperplane: digital clinics on WhatsApp",
-      "dek": "Started by two School of Computing students, Paperplane helps doctors run their practice on WhatsApp.",
+      "dek": "Started by SRMIST School of Computing students, Paperplane helps doctors run their practice on WhatsApp.",
       "date": "From SRM's 2026–27 brochure",
       "people": [
         {
@@ -139,10 +139,14 @@
       "body": [
         "Paperplane sets up digital clinics on WhatsApp, so doctors and hospitals can launch and grow their practice on the messaging app patients already use.",
         "It automates clinical work such as appointment scheduling, prescriptions and follow-ups.",
-        "Devansh Swarup and Varun Goel founded it while they were students at SRMIST's School of Computing. It has raised ₹3 crore in a round led by Cornerstone Venture Partners Fund."
+        "Its co-founders include Devansh Swarup and Varun Goel, who started it while students at SRMIST's School of Computing. It has raised ₹3 crore in a round led by Cornerstone Venture Partners Fund."
       ],
       "media": {
-        "photo": "media/student-work/startup.jpg"
+        "photo": "media/student-work/startup.jpg",
+        "poster": {
+          "name": "Paperplane",
+          "tagline": "Digital clinics on WhatsApp"
+        }
       },
       "tags": [
         "entrepreneurship",
@@ -151,7 +155,8 @@
         "apps"
       ],
       "sources": [
-        "https://webstor.srmist.edu.in/web_assets/downloads/2026/srm-admission-brochure-2026-2027.pdf"
+        "https://webstor.srmist.edu.in/web_assets/downloads/2026/srm-admission-brochure-2026-2027.pdf",
+        "https://yourstory.com/2022/04/bengaluru-healthtech-startup-paperplane-digital-clinics-whatsapp"
       ]
     },
     {

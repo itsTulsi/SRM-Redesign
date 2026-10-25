@@ -113,7 +113,7 @@ export type Story = {
   people: { name: string; role: string }[];
   facts: { key: string; label: string; value: string }[];
   body: string[];
-  media: { photo?: string; video?: string; model?: string; sequence?: string };
+  media: { photo?: string; video?: string; model?: string; sequence?: string; poster?: { name: string; tagline: string } };
   /** "sequence" = pinned scroll-scrubbed scene (Camber); default = standard panel. */
   scene?: "sequence";
   tags: string[];
@@ -196,7 +196,7 @@ type Overrides = {
   campuses?: Record<string, { name?: string; city?: string; state?: string; distanceFromChennai?: string }>;
   stories?: Record<
     string,
-    { title?: string; dek?: string; date?: string; body?: (string | null)[]; facts?: Record<string, FactOverride>; peopleRoles?: string[] }
+    { title?: string; dek?: string; date?: string; posterTagline?: string; body?: (string | null)[]; facts?: Record<string, FactOverride>; peopleRoles?: string[] }
   >;
   missions?: Record<string, { name?: string; question?: string; highlights?: (string | null)[] }>;
   nirf?: Record<string, string>;
@@ -261,6 +261,7 @@ function build(o: Overrides | undefined) {
       title: isTodo(st.title) ? st.title : pick(x.title, st.title),
       dek: isTodo(st.dek) ? st.dek : pick(x.dek, st.dek),
       date: verifiedPick(st.date, x.date),
+      media: st.media.poster ? { ...st.media, poster: { ...st.media.poster, tagline: pick(x.posterTagline, st.media.poster.tagline) } } : st.media,
       body: st.body.map((para, i) => (isTodo(para) ? para : pick(x.body?.[i], para))),
       facts: st.facts.map((f) => ({ ...f, label: pick(x.facts?.[f.key]?.label, f.label), value: pick(x.facts?.[f.key]?.value, f.value) })),
       people: st.people.map((pp, i) => ({ ...pp, role: isTodo(pp.role) ? pp.role : pick(x.peopleRoles?.[i], pp.role) })),

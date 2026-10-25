@@ -1,5 +1,6 @@
 import { getLocale, getTranslations } from "next-intl/server";
 import { Photo } from "@/components/ui/Photo";
+import { StoryVisual } from "./StoryVisual";
 import { Fact, Todo } from "@/components/ui/Todo";
 import { getContent, isTodo, type Story } from "@/lib/content";
 import { Link } from "@/lib/i18n";
@@ -94,9 +95,8 @@ function StudentWorkPanel({ story, index, readLabel }: { story: Story; index: nu
       data-student-work={story.slug}
       className="site-grid min-h-[80svh] items-center gap-y-8 py-12 lg:py-20"
     >
-      <Photo
-        src={story.media.photo}
-        alt={story.title}
+      <StoryVisual
+        story={story}
         sizes="(min-width: 1024px) 58vw, 100vw"
         className={`col-span-full aspect-[4/3] rounded-3xl md:aspect-[16/10] lg:col-span-7 ${reversed ? "lg:order-2" : ""}`}
       />
