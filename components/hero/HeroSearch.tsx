@@ -2,21 +2,27 @@
 
 import { useLocale, useTranslations } from "next-intl";
 import { useEffect, useId, useMemo, useRef, useState } from "react";
+import { understand, type Answer, type Lexicon } from "@/lib/ask";
 import { getPathname, Link } from "@/lib/i18n";
 import { motionAllowed } from "@/lib/motion";
 import { loadSearcher, type SearchDoc, type Searcher } from "@/lib/search";
+import { AnswerPanel, type AnswerState } from "./AnswerPanel";
 
+type Phone = { display: string; tel: string; label: string };
 type Props = {
   docs: SearchDoc[];
+  lexicon: Lexicon;
   counts: { programmes: number; colleges: number; campuses: number };
-  phone: { display: string; tel: string };
+  phones: Phone[];
 };
 
 /**
  * Stanford "search is the front door" + Imperial lime peek block + York St John example prompts.
- * Without JS the form GETs /programmes (the full list). With JS, results appear as you type.
+ * Without JS the form GETs /programmes (the full list). With JS, results appear as you type (en/ta/hi via the
+ * lexicon), and "Find" asks /api/ask for answer cards with fees / eligibility / deadline from programmes.json.
  */
-export function HeroSearch({ docs, counts, phone }: Props) {
+export function HeroSearch({ docs, lexicon, counts, phones }: Props) {
+  const phone = phones[0]!;
   const t = useTranslations("Hero");
   const locale = useLocale();
   const examples = t.raw("examples") as string[];
@@ -25,8 +31,8 @@ export function HeroSearch({ docs, counts, phone }: Props) {
   const [exampleIndex, setExampleIndex] = useState(0);
   const [focused, setFocused] = useState(false);
   const [announced, setAnnounced] = useState("");
+  const [answer, setAnswer] = useState<AnswerState>({ status: "idle" });
   const inputRef = useRef<HTMLInputElement>(null);
-  const firstResultRef = useRef<HTMLAnchorElement>(null);
   const loading = useRef(false);
   const id = useId();
 
@@ -58,7 +64,11 @@ export function HeroSearch({ docs, counts, phone }: Props) {
   }, [focused, query, examples.length]);
 
   const trimmed = query.trim();
-  const results = useMemo(() => (searcher && trimmed ? searcher(trimmed) : []), [searcher, trimmed]);
+  // Tamil / Hindi words are mapped to English tags first, so instant results work in every language.
+  const results = useMemo(
+    () => (searcher && trimmed ? searcher(understand(trimmed, lexicon).searchText) : []),
+    [searcher, trimmed, lexicon],
+  );
   const searching = trimmed.length > 0;
 
   // Announce the result count once typing settles, not on every keystroke.
@@ -70,6 +80,7 @@ export function HeroSearch({ docs, counts, phone }: Props) {
 
   const fill = (example: string) => {
     setQuery(example);
+    setAnswer({ status: "idle" });
     ensureSearcher();
     inputRef.current?.focus();
   };
@@ -79,11 +90,17 @@ export function HeroSearch({ docs, counts, phone }: Props) {
       role="search"
       action={getPathname({ href: "/programmes", locale })}
       method="get"
-      onSubmit={(e) => {
+      onSubmit={async (e) => {
         e.preventDefault();
-        // Step 10 sends this to /api/ask. For now: Enter takes keyboard users straight to the results.
-        if (results.length) firstResultRef.current?.focus();
-        else inputRef.current?.focus();
+        if (!trimmed) return inputRef.current?.focus();
+        setAnswer({ status: "loading" });
+        try {
+          const res = await fetch(`/api/ask?q=${encodeURIComponent(trimmed)}`);
+          if (!res.ok) throw new Error(String(res.status));
+          setAnswer({ status: "done", data: (await res.json()) as Answer });
+        } catch {
+          setAnswer({ status: "error" });
+        }
       }}
       className="mt-8 max-w-4xl"
     >
@@ -102,6 +119,7 @@ export function HeroSearch({ docs, counts, phone }: Props) {
           value={query}
           onChange={(e) => {
             setQuery(e.target.value);
+            setAnswer({ status: "idle" }); // editing the question returns to instant results
             ensureSearcher();
           }}
           onFocus={() => {
@@ -128,7 +146,9 @@ export function HeroSearch({ docs, counts, phone }: Props) {
           {announced}
         </p>
 
-        {!searching ? (
+        {answer.status !== "idle" ? (
+          <AnswerPanel state={answer} phones={phones} onBack={() => setAnswer({ status: "idle" })} />
+        ) : !searching ? (
           <>
             <div className="flex flex-wrap items-end justify-between gap-x-6 gap-y-1">
               <div>
@@ -154,10 +174,9 @@ export function HeroSearch({ docs, counts, phone }: Props) {
         ) : results.length > 0 ? (
           <>
             <ul className="grid gap-2 md:grid-cols-3">
-              {results.map((r, i) => (
+              {results.map((r) => (
                 <li key={r.slug}>
                   <Link
-                    ref={i === 0 ? firstResultRef : undefined}
                     href={`/programmes#${r.slug}`}
                     className="flex h-full min-h-11 flex-col gap-1 rounded-2xl bg-paper/75 p-4 text-ink no-underline hover:bg-paper"
                   >

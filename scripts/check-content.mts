@@ -28,6 +28,7 @@ const files = {
   alumni: load("alumni.json"),
   stories: load("stories.json"),
   research: load("research.json"),
+  lexicon: load("lexicon.json"),
 };
 
 // ── Every "TODO" must be a leading "TODO:" so the UI can detect it; count them per file ──
@@ -118,6 +119,15 @@ for (const group of ["placements", "research"]) {
 }
 const nirf = statsObj.nirf as Obj;
 if (!(nirf.years as Obj)[nirf.current as string]) fail("stats.json", `nirf.current "${nirf.current}" has no data`);
+
+// ── Lexicon: every concept must point at a tag some programme actually has ──
+const allTags = new Set(programmes.flatMap((p) => arr(p.tags)));
+for (const c of arr(files.lexicon.concepts) as Obj[]) {
+  if (!allTags.has(c.tag)) fail("lexicon.json", `concept tag "${c.tag}" is on no programme`);
+  if (![...arr(c.en), ...arr(c.ta), ...arr(c.hi)].length) fail("lexicon.json", `concept "${c.tag}" has no words`);
+}
+for (const pl of arr(files.lexicon.places) as Obj[])
+  for (const c of arr(pl.campuses)) if (!campusSlugs.has(c)) fail("lexicon.json", `place maps to unknown campus "${c}"`);
 
 // ── Report ──
 if (errors.length) {

@@ -1,0 +1,648 @@
+{
+  "_note": "Free, offline query understanding for the programme matcher (no paid AI). Each concept maps words a visitor might type (English / Tamil / Hindi) to a programme tag in programmes.json. Tamil and Hindi terms are first drafts — TODO: native-speaker review (build step 12). Checked by scripts/check-content.mts: every tag must exist on at least one programme.",
+  "concepts": [
+    {
+      "tag": "robots",
+      "en": [
+        "robot",
+        "robots",
+        "robotics",
+        "automation",
+        "drones"
+      ],
+      "ta": [
+        "ரோபோ",
+        "ரோபோக்கள்",
+        "ரோபோட்டிக்ஸ்",
+        "தானியங்கி"
+      ],
+      "hi": [
+        "रोबोट",
+        "रोबोटिक्स",
+        "ऑटोमेशन",
+        "ड्रोन"
+      ]
+    },
+    {
+      "tag": "ai",
+      "en": [
+        "ai",
+        "artificial intelligence",
+        "machine learning",
+        "ml"
+      ],
+      "ta": [
+        "செயற்கை நுண்ணறிவு",
+        "ஏஐ"
+      ],
+      "hi": [
+        "कृत्रिम बुद्धिमत्ता",
+        "एआई",
+        "मशीन लर्निंग"
+      ]
+    },
+    {
+      "tag": "computers",
+      "en": [
+        "computer",
+        "computers",
+        "software",
+        "coding",
+        "programming",
+        "it",
+        "apps"
+      ],
+      "ta": [
+        "கணினி",
+        "கம்ப்யூட்டர்",
+        "மென்பொருள்",
+        "சாப்ட்வேர்",
+        "கோடிங்",
+        "நிரலாக்கம்"
+      ],
+      "hi": [
+        "कंप्यूटर",
+        "सॉफ्टवेयर",
+        "सॉफ़्टवेयर",
+        "कोडिंग",
+        "प्रोग्रामिंग"
+      ]
+    },
+    {
+      "tag": "cyber security",
+      "en": [
+        "cyber",
+        "cybersecurity",
+        "hacking",
+        "security"
+      ],
+      "ta": [
+        "இணையப் பாதுகாப்பு",
+        "சைபர்"
+      ],
+      "hi": [
+        "साइबर",
+        "साइबर सुरक्षा",
+        "हैकिंग"
+      ]
+    },
+    {
+      "tag": "data",
+      "en": [
+        "data",
+        "analytics",
+        "statistics"
+      ],
+      "ta": [
+        "தரவு",
+        "டேட்டா"
+      ],
+      "hi": [
+        "डेटा",
+        "आंकड़े"
+      ]
+    },
+    {
+      "tag": "electronics",
+      "en": [
+        "electronics",
+        "chips",
+        "vlsi",
+        "embedded"
+      ],
+      "ta": [
+        "மின்னணு",
+        "எலக்ட்ரானிக்ஸ்"
+      ],
+      "hi": [
+        "इलेक्ट्रॉनिक्स",
+        "चिप"
+      ]
+    },
+    {
+      "tag": "electrical",
+      "en": [
+        "electrical",
+        "power",
+        "energy"
+      ],
+      "ta": [
+        "மின்சாரம்",
+        "மின்",
+        "ஆற்றல்"
+      ],
+      "hi": [
+        "बिजली",
+        "विद्युत",
+        "इलेक्ट्रिकल",
+        "ऊर्जा"
+      ]
+    },
+    {
+      "tag": "electric vehicles",
+      "en": [
+        "ev",
+        "electric vehicle",
+        "electric vehicles",
+        "electric car",
+        "electric cars"
+      ],
+      "ta": [
+        "மின்சார வாகனம்",
+        "மின்சார கார்"
+      ],
+      "hi": [
+        "इलेक्ट्रिक कार",
+        "इलेक्ट्रिक वाहन"
+      ]
+    },
+    {
+      "tag": "cars",
+      "en": [
+        "car",
+        "cars",
+        "vehicle",
+        "vehicles",
+        "automobile",
+        "racing",
+        "motorsport"
+      ],
+      "ta": [
+        "கார்",
+        "வாகனம்",
+        "ஆட்டோமொபைல்",
+        "பந்தயம்"
+      ],
+      "hi": [
+        "कार",
+        "वाहन",
+        "गाड़ी",
+        "ऑटोमोबाइल",
+        "रेसिंग"
+      ]
+    },
+    {
+      "tag": "mechanical",
+      "en": [
+        "mechanical",
+        "machines",
+        "manufacturing"
+      ],
+      "ta": [
+        "இயந்திரம்",
+        "இயந்திரவியல்",
+        "மெக்கானிக்கல்"
+      ],
+      "hi": [
+        "मैकेनिकल",
+        "मशीन",
+        "मशीनें"
+      ]
+    },
+    {
+      "tag": "aerospace",
+      "en": [
+        "aerospace",
+        "aircraft",
+        "aeroplane",
+        "airplane",
+        "aviation",
+        "pilot"
+      ],
+      "ta": [
+        "விமானம்",
+        "வான்வெளி",
+        "விமானவியல்"
+      ],
+      "hi": [
+        "विमान",
+        "हवाई जहाज़",
+        "एयरोस्पेस"
+      ]
+    },
+    {
+      "tag": "space",
+      "en": [
+        "space",
+        "rockets",
+        "rocket",
+        "satellites",
+        "isro",
+        "nasa"
+      ],
+      "ta": [
+        "விண்வெளி",
+        "ராக்கெட்",
+        "செயற்கைக்கோள்"
+      ],
+      "hi": [
+        "अंतरिक्ष",
+        "रॉकेट",
+        "उपग्रह"
+      ]
+    },
+    {
+      "tag": "civil",
+      "en": [
+        "civil",
+        "construction",
+        "bridges",
+        "infrastructure"
+      ],
+      "ta": [
+        "கட்டுமானம்",
+        "பாலம்",
+        "உள்கட்டமைப்பு"
+      ],
+      "hi": [
+        "निर्माण",
+        "सिविल",
+        "पुल"
+      ]
+    },
+    {
+      "tag": "biotechnology",
+      "en": [
+        "biotech",
+        "biotechnology",
+        "genetics",
+        "biology"
+      ],
+      "ta": [
+        "உயிரி தொழில்நுட்பம்",
+        "பயோடெக்",
+        "மரபியல்",
+        "உயிரியல்"
+      ],
+      "hi": [
+        "जैव प्रौद्योगिकी",
+        "बायोटेक",
+        "जेनेटिक्स",
+        "जीव विज्ञान"
+      ]
+    },
+    {
+      "tag": "doctor",
+      "en": [
+        "doctor",
+        "doctors",
+        "physician",
+        "medicine",
+        "medical",
+        "mbbs"
+      ],
+      "ta": [
+        "மருத்துவர்",
+        "டாக்டர்",
+        "மருத்துவம்"
+      ],
+      "hi": [
+        "डॉक्टर",
+        "चिकित्सक",
+        "चिकित्सा",
+        "मेडिकल"
+      ]
+    },
+    {
+      "tag": "dentist",
+      "en": [
+        "dentist",
+        "dental",
+        "teeth",
+        "bds"
+      ],
+      "ta": [
+        "பல் மருத்துவர்",
+        "பல் மருத்துவம்",
+        "பல்"
+      ],
+      "hi": [
+        "दंत",
+        "डेंटिस्ट",
+        "दांत",
+        "दाँत"
+      ]
+    },
+    {
+      "tag": "nurse",
+      "en": [
+        "nurse",
+        "nursing"
+      ],
+      "ta": [
+        "செவிலியர்",
+        "நர்ஸ்",
+        "செவிலியம்"
+      ],
+      "hi": [
+        "नर्स",
+        "नर्सिंग"
+      ]
+    },
+    {
+      "tag": "pharmacy",
+      "en": [
+        "pharmacy",
+        "pharmacist",
+        "drugs",
+        "pharma"
+      ],
+      "ta": [
+        "மருந்தகம்",
+        "மருந்தியல்",
+        "பார்மசி",
+        "மருந்து"
+      ],
+      "hi": [
+        "फार्मेसी",
+        "फ़ार्मेसी",
+        "दवा",
+        "दवाइयाँ"
+      ]
+    },
+    {
+      "tag": "law",
+      "en": [
+        "law",
+        "lawyer",
+        "legal",
+        "advocate",
+        "judge"
+      ],
+      "ta": [
+        "சட்டம்",
+        "வழக்கறிஞர்",
+        "நீதிபதி"
+      ],
+      "hi": [
+        "कानून",
+        "क़ानून",
+        "वकील",
+        "विधि",
+        "न्यायाधीश"
+      ]
+    },
+    {
+      "tag": "business",
+      "en": [
+        "business",
+        "management",
+        "manager",
+        "startup",
+        "entrepreneur",
+        "commerce"
+      ],
+      "ta": [
+        "வணிகம்",
+        "மேலாண்மை",
+        "தொழில்முனைவோர்",
+        "வர்த்தகம்"
+      ],
+      "hi": [
+        "व्यापार",
+        "बिज़नेस",
+        "बिजनेस",
+        "प्रबंधन",
+        "मैनेजमेंट",
+        "उद्यमी"
+      ]
+    },
+    {
+      "tag": "architecture",
+      "en": [
+        "architecture",
+        "architect",
+        "buildings"
+      ],
+      "ta": [
+        "கட்டடக் கலை",
+        "கட்டிடக்கலை",
+        "கட்டிடம்"
+      ],
+      "hi": [
+        "वास्तुकला",
+        "आर्किटेक्चर",
+        "आर्किटेक्ट",
+        "इमारत"
+      ]
+    },
+    {
+      "tag": "design",
+      "en": [
+        "design",
+        "designer",
+        "ux",
+        "creative",
+        "art"
+      ],
+      "ta": [
+        "வடிவமைப்பு",
+        "டிசைன்",
+        "கலை"
+      ],
+      "hi": [
+        "डिज़ाइन",
+        "डिजाइन",
+        "कला"
+      ]
+    },
+    {
+      "tag": "journalism",
+      "en": [
+        "journalism",
+        "journalist",
+        "media",
+        "news",
+        "film"
+      ],
+      "ta": [
+        "இதழியல்",
+        "பத்திரிகை",
+        "ஊடகம்",
+        "செய்தி"
+      ],
+      "hi": [
+        "पत्रकारिता",
+        "पत्रकार",
+        "मीडिया",
+        "समाचार"
+      ]
+    },
+    {
+      "tag": "agriculture",
+      "en": [
+        "agriculture",
+        "farming",
+        "farm",
+        "crops",
+        "food"
+      ],
+      "ta": [
+        "வேளாண்மை",
+        "விவசாயம்",
+        "பண்ணை",
+        "பயிர்"
+      ],
+      "hi": [
+        "कृषि",
+        "खेती",
+        "किसान",
+        "फसल"
+      ]
+    },
+    {
+      "tag": "horticulture",
+      "en": [
+        "horticulture",
+        "gardening",
+        "plants",
+        "flowers"
+      ],
+      "ta": [
+        "தோட்டக்கலை",
+        "தாவரங்கள்"
+      ],
+      "hi": [
+        "बागवानी",
+        "पौधे"
+      ]
+    }
+  ],
+  "level": {
+    "PG": {
+      "en": [
+        "masters",
+        "master's",
+        "master",
+        "postgraduate",
+        "post graduate",
+        "pg",
+        "mtech",
+        "m.tech",
+        "mba",
+        "after degree",
+        "after btech"
+      ],
+      "ta": [
+        "முதுநிலை",
+        "முதுகலை"
+      ],
+      "hi": [
+        "स्नातकोत्तर",
+        "मास्टर्स",
+        "पीजी"
+      ]
+    },
+    "UG": {
+      "en": [
+        "bachelor",
+        "bachelors",
+        "bachelor's",
+        "undergraduate",
+        "ug",
+        "after 12th",
+        "after plus two",
+        "after school"
+      ],
+      "ta": [
+        "இளநிலை",
+        "இளங்கலை",
+        "பிளஸ் டூ",
+        "பன்னிரண்டாம்"
+      ],
+      "hi": [
+        "स्नातक",
+        "12वीं के बाद",
+        "बारहवीं"
+      ]
+    }
+  },
+  "places": [
+    {
+      "campuses": [
+        "kattankulathur"
+      ],
+      "words": [
+        "kattankulathur",
+        "ktr",
+        "potheri",
+        "காட்டாங்குளத்தூர்",
+        "कट्टनकुलथुर"
+      ]
+    },
+    {
+      "campuses": [
+        "ramapuram"
+      ],
+      "words": [
+        "ramapuram",
+        "ராமாபுரம்",
+        "रामापुरम"
+      ]
+    },
+    {
+      "campuses": [
+        "vadapalani"
+      ],
+      "words": [
+        "vadapalani",
+        "வடபழனி",
+        "वडापलानी"
+      ]
+    },
+    {
+      "campuses": [
+        "kattankulathur",
+        "ramapuram",
+        "vadapalani"
+      ],
+      "words": [
+        "chennai",
+        "madras",
+        "சென்னை",
+        "चेन्नई"
+      ]
+    },
+    {
+      "campuses": [
+        "tiruchirappalli"
+      ],
+      "words": [
+        "tiruchirappalli",
+        "trichy",
+        "tiruchi",
+        "திருச்சி",
+        "திருச்சிராப்பள்ளி",
+        "त्रिची",
+        "तिरुचिरापल्ली"
+      ]
+    },
+    {
+      "campuses": [
+        "delhi-ncr"
+      ],
+      "words": [
+        "delhi",
+        "ncr",
+        "ghaziabad",
+        "modinagar",
+        "டெல்லி",
+        "दिल्ली",
+        "गाजियाबाद",
+        "ग़ाज़ियाबाद"
+      ]
+    },
+    {
+      "campuses": [
+        "baburayanpettai"
+      ],
+      "words": [
+        "baburayanpettai",
+        "acharapakkam",
+        "chengalpattu",
+        "பாபுராயன்பேட்டை",
+        "அச்சரப்பாக்கம்"
+      ]
+    }
+  ]
+}

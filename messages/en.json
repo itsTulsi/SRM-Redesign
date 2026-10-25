@@ -222,5 +222,29 @@
     "ctaButton": "Send an enquiry",
     "consentLabel": "Consent",
     "demoTitle": "Demo mode — your enquiry wasn't sent"
+  },
+  "Ask": {
+    "finding": "Finding programmes…",
+    "bestFor": "Best matches for “{q}”",
+    "why": "Matches what you said: {terms}",
+    "fees": "Fees",
+    "eligibility": "Eligibility",
+    "entrance": "Entrance",
+    "deadline": "Deadline",
+    "feesValue": "₹{amount} per year",
+    "notPublished": "Not published yet — ask admissions",
+    "notListedAt": "Listed at {listed}. Ask admissions whether it runs at {asked}.",
+    "source": "Source",
+    "details": "Programme details",
+    "enquire": "Enquire about this",
+    "notSure": "I'm not sure which programme fits that.",
+    "notSureBody": "Rather than guess, talk to an admissions counsellor:",
+    "tryWords": "Or try words like “computers”, “doctor”, “law” or “design”.",
+    "error": "Couldn't load answers just now. Try again, or call:",
+    "back": "Back to quick results",
+    "levelUG": "Undergraduate",
+    "levelPG": "Postgraduate",
+    "enquireGeneral": "Send an enquiry",
+    "missingFacts": "Not published yet: {list}. Ask admissions."
   }
 }
