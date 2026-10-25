@@ -1,6 +1,6 @@
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import { Photo } from "@/components/ui/Photo";
-import { events, featuredStory } from "@/lib/content";
+import { formatEventDate, getContent } from "@/lib/content";
 import { Link } from "@/lib/i18n";
 import { SECTION } from "@/lib/sections";
 
@@ -8,6 +8,8 @@ import { SECTION } from "@/lib/sections";
 export async function ThisWeek() {
   const t = await getTranslations("Acts.thisWeek");
   const nav = await getTranslations("Nav");
+  const locale = await getLocale();
+  const { events, featuredStory } = getContent(locale);
 
   return (
     <section id={SECTION.thisWeek} aria-labelledby="this-week-title" className="bg-bg py-24 text-fg lg:py-32">
@@ -51,7 +53,7 @@ export async function ThisWeek() {
                     className="flex h-full min-h-11 flex-col gap-2 rounded-2xl border border-line-subtle p-5 text-fg no-underline hover:border-line"
                   >
                     <time dateTime={e.start} className="font-display text-lg font-bold">
-                      {e.date}
+                      {formatEventDate(e, locale)}
                     </time>
                     <span className="leading-snug">{e.title}</span>
                     <span className="sr-only"> {nav("external")}</span>

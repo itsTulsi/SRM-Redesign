@@ -129,6 +129,31 @@ for (const c of arr(files.lexicon.concepts) as Obj[]) {
 for (const pl of arr(files.lexicon.places) as Obj[])
   for (const c of arr(pl.campuses)) if (!campusSlugs.has(c)) fail("lexicon.json", `place maps to unknown campus "${c}"`);
 
+// ── Translations (content/i18n/{ta,hi}.json): ids must exist; arrays must line up; report coverage ──
+const coverage: string[] = [];
+for (const lang of ["ta", "hi"]) {
+  const tr = JSON.parse(readFileSync(join(dir, "i18n", `${lang}.json`), "utf8")) as Obj;
+  const at = `i18n/${lang}.json`;
+  const ids = (file: Obj, key: string) => new Set(arr(file[key]).map((x) => (x as Obj).slug));
+  const sections: [string, Set<Json | undefined>][] = [
+    ["programmes", ids(files.programmes, "programmes")],
+    ["colleges", ids(files.colleges, "colleges")],
+    ["campuses", ids(files.campuses, "campuses")],
+    ["stories", ids(files.stories, "stories")],
+    ["missions", ids(files.research, "missions")],
+    ["alumni", ids(files.alumni, "alumni")],
+  ];
+  for (const [section, valid] of sections) {
+    const entries = Object.keys((tr[section] as Obj) ?? {});
+    for (const id of entries) if (!valid.has(id)) fail(at, `${section}: unknown id "${id}"`);
+    coverage.push(`${lang} ${section} ${entries.length}/${valid.size}`);
+  }
+  for (const st of arr(files.stories.stories) as Obj[]) {
+    const t = ((tr.stories as Obj) ?? {})[st.slug as string] as Obj | undefined;
+    if (t?.body && arr(t.body).length !== arr(st.body).length) fail(at, `story ${st.slug}: body has ${arr(t.body).length} paragraphs, English has ${arr(st.body).length}`);
+  }
+}
+
 // ── Report ──
 if (errors.length) {
   console.error(`✖ content check failed (${errors.length}):\n  ` + errors.join("\n  "));
@@ -142,3 +167,4 @@ console.log(
       .map(([f, n]) => `${f} ${n}`)
       .join(", "),
 );
+console.log(`  translations: ${coverage.join(" · ")}`);

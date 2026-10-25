@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import seniorsData from "@/content/seniors.json";
 import { StatFigure } from "@/components/acts/StatFigure";
 import { AskSenior, type SeniorThread } from "@/components/programme/AskSenior";
 import { ParentModeToggle } from "@/components/programme/ParentModeToggle";
-import { getCampus, getCollege, getProgramme, isTodo, placements, programmes, site } from "@/lib/content";
+import { getContent, isTodo, programmes } from "@/lib/content";
 import { Link, type Locale } from "@/lib/i18n";
 import { directionsUrl } from "@/lib/map";
 
@@ -18,8 +17,8 @@ export function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
-  const { slug } = await params;
-  const p = getProgramme(slug);
+  const { locale, slug } = await params;
+  const p = getContent(locale).getProgramme(slug);
   return p ? { title: `${p.name} — SRMIST`, description: p.summary } : {};
 }
 
@@ -29,6 +28,7 @@ const isoYears = (y: number) => `P${Math.floor(y)}Y${y % 1 ? `${Math.round((y % 
 export default async function ProgrammePage({ params }: Params) {
   const { locale, slug } = await params;
   setRequestLocale(locale);
+  const { getProgramme, getCollege, getCampus, placements, programmes: all, site, seniorsByCollege } = getContent(locale);
   const p = getProgramme(slug);
   if (!p) notFound();
 
@@ -36,9 +36,8 @@ export default async function ProgrammePage({ params }: Params) {
   const pt = await getTranslations("Parent");
   const college = getCollege(p.college);
   const campusList = p.campuses.map((c) => getCampus(c)!).filter(Boolean);
-  const related = programmes.filter((x) => x.college === p.college && x.slug !== p.slug);
-  const byCollege = seniorsData.byCollege as Record<string, SeniorThread[]>;
-  const threads = byCollege[p.college] ?? byCollege.default ?? [];
+  const related = all.filter((x) => x.college === p.college && x.slug !== p.slug);
+  const threads: SeniorThread[] = seniorsByCollege[p.college] ?? seniorsByCollege.default ?? [];
   const phones = site.admissions.phones.slice(0, 2);
   const level = p.level === "UG" ? t("ug") : t("pg");
   const duration = typeof p.durationYears === "number" ? t("years", { count: p.durationYears }) : null;
@@ -52,7 +51,8 @@ export default async function ProgrammePage({ params }: Params) {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "EducationalOccupationalProgram",
-    name: p.name,
+    name: p.officialName ?? p.name,
+    ...(p.officialName && p.officialName !== p.name ? { alternateName: p.name } : {}),
     description: p.summary,
     url: `${siteUrl}${locale === "en" ? "" : `/${locale}`}/programmes/${p.slug}`,
     provider: { "@type": "CollegeOrUniversity", name: site.name, url: "https://www.srmist.edu.in/" },
@@ -116,6 +116,14 @@ export default async function ProgrammePage({ params }: Params) {
           {duration ? ` · ${duration}` : ""}
         </p>
         <h1 className="mt-2 font-display text-[clamp(2rem,5vw,4rem)] leading-[1.05] font-bold text-balance">{p.name}</h1>
+        {p.officialName && p.officialName !== p.name ? (
+          <p className="mt-2 text-fg-muted">
+            {t("officialName")}:{" "}
+            <span lang="en" className="font-semibold text-fg">
+              {p.officialName}
+            </span>
+          </p>
+        ) : null}
         <p className="mt-4 text-xl text-fg-muted">{p.summary}</p>
       </header>
 
@@ -178,7 +186,7 @@ export default async function ProgrammePage({ params }: Params) {
                   {campusList.map((c) => (
                     <li key={c.slug}>
                       <span className="font-semibold">{c.name}</span> —{" "}
-                      {isTodo(c.address) ? `${c.city}, ${c.state}` : c.address}{" "}
+                      {isTodo(c.address) ? `${c.city}, ${c.state}` : <span lang="en">{c.address}</span>}{" "}
                       <a href={directionsUrl(c)} className="font-semibold whitespace-nowrap">
                         {pt("directions")}
                       </a>

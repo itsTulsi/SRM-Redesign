@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Fact } from "@/components/ui/Todo";
-import { colleges, getCampus, programmes, type Programme } from "@/lib/content";
+import { getContent, type Campus, type Programme } from "@/lib/content";
 import { Link } from "@/lib/i18n";
 import type { Locale } from "@/lib/i18n";
 
@@ -19,6 +19,8 @@ export default async function ProgrammesPage({ params }: Params) {
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations("Pages");
+  const { colleges, programmes, getCampus } = getContent(locale);
+  const campusName = (slug: Campus["slug"]) => getCampus(slug)?.name ?? slug;
   const nav = await getTranslations("Nav");
 
   const ug = programmes.filter((p) => p.level === "UG");
@@ -39,7 +41,7 @@ export default async function ProgrammesPage({ params }: Params) {
               <h3 id={`h-${college.slug}`} className="text-xl font-semibold">
                 {college.name}
               </h3>
-              <ProgrammeList list={list} heading="h4" yearsLabel={(n) => t("years", { count: n })} />
+              <ProgrammeList list={list} heading="h4" campusName={campusName} yearsLabel={(n) => t("years", { count: n })} />
             </section>
           );
         })}
@@ -47,7 +49,7 @@ export default async function ProgrammesPage({ params }: Params) {
 
       <section id="level-pg" aria-labelledby="h-pg" className="mt-16 scroll-mt-20">
         <h2 id="h-pg" className="font-display text-section font-bold">{nav("postgraduate")}</h2>
-        <ProgrammeList list={pg} heading="h3" yearsLabel={(n) => t("years", { count: n })} />
+        <ProgrammeList list={pg} heading="h3" campusName={campusName} yearsLabel={(n) => t("years", { count: n })} />
       </section>
     </main>
   );
@@ -56,10 +58,12 @@ export default async function ProgrammesPage({ params }: Params) {
 function ProgrammeList({
   list,
   heading: Heading,
+  campusName,
   yearsLabel,
 }: {
   list: Programme[];
   heading: "h3" | "h4";
+  campusName: (slug: Campus["slug"]) => string;
   yearsLabel: (n: number) => string;
 }) {
   return (
@@ -78,7 +82,7 @@ function ProgrammeList({
           <p className="text-fg-muted">{p.summary}</p>
           <p className="mt-auto text-sm text-fg-muted">
             <Fact value={p.durationYears} format={yearsLabel} /> ·{" "}
-            {p.campuses.map((c) => getCampus(c)?.name ?? c).join(", ")}
+            {p.campuses.map(campusName).join(", ")}
           </p>
         </li>
       ))}

@@ -4,7 +4,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { StreetMap } from "@/components/map/StreetMap";
 import { Photo } from "@/components/ui/Photo";
 import { Fact } from "@/components/ui/Todo";
-import { campuses, colleges, getCampus, isTodo } from "@/lib/content";
+import { campuses, getContent, isTodo } from "@/lib/content";
 import { directionsUrl, streetMap } from "@/lib/map";
 import { Link, type Locale } from "@/lib/i18n";
 
@@ -16,7 +16,7 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const { locale, slug } = await params;
-  const campus = getCampus(slug);
+  const campus = getContent(locale).getCampus(slug);
   if (!campus) return {};
   const t = await getTranslations({ locale, namespace: "Pages" });
   return { title: `${campus.kind === "sister" ? campus.name : t("campusTitle", { name: campus.name })} — SRMIST` };
@@ -26,6 +26,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
 export default async function CampusPage({ params }: Params) {
   const { locale, slug } = await params;
   setRequestLocale(locale);
+  const { colleges, getCampus } = getContent(locale);
   const campus = getCampus(slug);
   if (!campus) notFound();
   const t = await getTranslations("Pages");
@@ -87,7 +88,7 @@ export default async function CampusPage({ params }: Params) {
                   {campus.city}, {campus.state} <Fact value={campus.address} />
                 </>
               ) : (
-                campus.address
+                <span lang="en">{campus.address}</span>
               )}
             </p>
           </div>

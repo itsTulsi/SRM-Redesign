@@ -1,5 +1,5 @@
 import projection from "@/content/map/projection.json";
-import { campusClusters, campuses, isTodo, type Campus } from "./content";
+import { getContent, isTodo, type Campus } from "./content";
 
 /**
  * Campus map data for the client (server-side; keeps content JSON out of the bundle).
@@ -54,7 +54,8 @@ export type MapCampus = {
 export type MapCluster = { id: "chennai" | "delhi"; members: Campus["slug"][]; zoom: number; x: number; y: number };
 export type MapGroup = { id: "chennai-city"; members: Campus["slug"][]; parent: MapCluster["id"]; x: number; y: number };
 
-export function getMapData(): { campuses: MapCampus[]; clusters: MapCluster[]; groups: MapGroup[] } {
+export function getMapData(locale = "en"): { campuses: MapCampus[]; clusters: MapCluster[]; groups: MapGroup[] } {
+  const { campuses, campusClusters } = getContent(locale);
   const list: MapCampus[] = campuses.map((c) => ({
     slug: c.slug,
     name: c.name,

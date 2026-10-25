@@ -1,7 +1,7 @@
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import { SmartLink } from "@/components/ui/SmartLink";
 import lexicon from "@/content/lexicon.json";
-import { campuses, colleges, programmes, site } from "@/lib/content";
+import { getContent } from "@/lib/content";
 import type { Lexicon } from "@/lib/ask";
 import { toSearchDocs } from "@/lib/search";
 import { SECTION } from "@/lib/sections";
@@ -11,6 +11,7 @@ import { HeroSearch } from "./HeroSearch";
 
 export async function Hero() {
   const t = await getTranslations("Hero");
+  const { campuses, colleges, programmes, site } = getContent(await getLocale());
   const nav = await getTranslations("Nav");
   const docs = toSearchDocs(programmes, colleges, campuses);
   const counts = {

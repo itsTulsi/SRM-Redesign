@@ -20,22 +20,27 @@
       ],
       "facts": [
         {
+          "key": "category",
           "label": "Category",
           "value": "Combustion"
         },
         {
+          "key": "result",
           "label": "Result",
           "value": "National Champions"
         },
         {
+          "key": "eventWins",
           "label": "Event wins",
           "value": "Endurance · Skidpad · Autocross · Acceleration · Engineering Design · Fuel Economy · Sustainability & Best Practices"
         },
         {
+          "key": "award",
           "label": "Award",
           "value": "Best Driver"
         },
         {
+          "key": "team",
           "label": "Team",
           "value": "Mechanical, electrical, electronics and computing students"
         }
@@ -73,6 +78,7 @@
       ],
       "facts": [
         {
+          "key": "recognition",
           "label": "Recognition",
           "value": "Distinguished Winner"
         }
@@ -118,6 +124,7 @@
       "people": [],
       "facts": [
         {
+          "key": "partner",
           "label": "Partner",
           "value": "Volvo Group"
         }

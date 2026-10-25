@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { setRequestLocale } from "next-intl/server";
 import { Photo } from "@/components/ui/Photo";
 import { Fact } from "@/components/ui/Todo";
-import { getStory, isTodo, stories } from "@/lib/content";
+import { getContent, isTodo, stories } from "@/lib/content";
 import type { Locale } from "@/lib/i18n";
 
 type Params = { params: Promise<{ locale: Locale; slug: string }> };
@@ -16,15 +16,15 @@ export function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
-  const { slug } = await params;
-  const story = getStory(slug);
+  const { locale, slug } = await params;
+  const story = getContent(locale).getStory(slug);
   return story ? { title: `${story.title} — SRMIST`, description: story.dek } : {};
 }
 
 export default async function StoryPage({ params }: Params) {
   const { locale, slug } = await params;
   setRequestLocale(locale);
-  const story = getStory(slug);
+  const story = getContent(locale).getStory(slug);
   if (!story || isTodo(story.title)) notFound();
 
   return (

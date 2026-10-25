@@ -1,4 +1,4 @@
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import { getMapData, mapAspect } from "@/lib/map";
 import { SECTION } from "@/lib/sections";
 import { CampusExplorer } from "./CampusExplorer";
@@ -6,7 +6,7 @@ import { CampusExplorer } from "./CampusExplorer";
 /** Explore (CLAUDE.md §1.5): campus constellation + detail panel + in-page 360° tour. */
 export async function Explore() {
   const t = await getTranslations("Acts.explore");
-  const { campuses, clusters, groups } = getMapData();
+  const { campuses, clusters, groups } = getMapData(await getLocale());
 
   return (
     <section id={SECTION.explore} aria-labelledby="explore-title" className="bg-bg py-24 text-fg lg:py-36">

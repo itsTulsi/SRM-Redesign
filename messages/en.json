@@ -270,7 +270,8 @@
     "related": "Other programmes in {college}",
     "sources": "Sources",
     "ug": "Undergraduate",
-    "pg": "Postgraduate"
+    "pg": "Postgraduate",
+    "officialName": "Official name"
   },
   "Parent": {
     "toggle": "Parent mode",

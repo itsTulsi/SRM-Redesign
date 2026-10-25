@@ -1,21 +1,12 @@
-import { getTranslations } from "next-intl/server";
-import {
-  campuses,
-  colleges,
-  featuredStory,
-  missions,
-  naacGrade,
-  nirf,
-  programmes,
-  site,
-  studentWork,
-} from "@/lib/content";
+import { getLocale, getTranslations } from "next-intl/server";
+import { getContent } from "@/lib/content";
 import { missionAnchor, SECTION } from "@/lib/sections";
 import type { NavData } from "./types";
 
 /** Server-only: builds the menu from content JSON so none of that JSON ships to the client. */
 export async function getNavData(): Promise<NavData> {
   const t = await getTranslations("Nav");
+  const { campuses, colleges, featuredStory, missions, naacGrade, nirf, programmes, site, studentWork } = getContent(await getLocale());
   const universityRank = nirf.ranks.find((r) => r.id === "university")?.rank;
   const camber = studentWork[0];
 
@@ -98,7 +89,7 @@ export async function getNavData(): Promise<NavData> {
               .map((c) => ({ label: c.name, href: `/campuses/${c.slug}` })),
           },
         ],
-        feature: { eyebrow: t("virtualTour"), title: "Kattankulathur", href: site.virtualTourUrl },
+        feature: { eyebrow: t("virtualTour"), title: campuses.find((c) => c.isMain)?.name ?? "", href: site.virtualTourUrl },
       },
       {
         id: "about",

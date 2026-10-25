@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { EnquiryForm } from "@/components/admissions/EnquiryForm";
-import { colleges, programmes, site } from "@/lib/content";
+import { getContent } from "@/lib/content";
 import type { Locale } from "@/lib/i18n";
 
 type Params = { params: Promise<{ locale: Locale }> };
@@ -18,6 +18,7 @@ export default async function AdmissionsPage({ params }: Params) {
   const t = await getTranslations("Pages");
   const nav = await getTranslations("Nav");
   const e = await getTranslations("Enquiry");
+  const { colleges, programmes, site } = getContent(locale);
   const programmeGroups = colleges
     .map((c) => ({ college: c.name, items: programmes.filter((p) => p.college === c.slug).map((p) => ({ slug: p.slug, name: p.name })) }))
     .filter((g) => g.items.length > 0);

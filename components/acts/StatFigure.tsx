@@ -10,7 +10,7 @@ export function StatFigure({ stat, size = "lg" }: { stat: Stat; size?: "lg" | "m
       <dt className="order-2 text-fg-muted">{stat.label}</dt>
       <dd
         className={`order-1 font-display leading-none font-bold tracking-tight whitespace-nowrap tabular-nums ${
-          size === "lg" ? "text-[clamp(2.25rem,7vw,5.5rem)]" : "text-[clamp(1.875rem,4vw,3rem)]"
+          size === "lg" ? "text-[clamp(2.25rem,7vw,5.5rem)]" : "text-[clamp(1.5rem,4vw,3rem)]"
         }`}
         data-count={stat.value}
         data-count-prefix={stat.prefix ?? ""}

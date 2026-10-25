@@ -95,7 +95,7 @@ export function HeroSearch({ docs, lexicon, counts, phones }: Props) {
         if (!trimmed) return inputRef.current?.focus();
         setAnswer({ status: "loading" });
         try {
-          const res = await fetch(`/api/ask?q=${encodeURIComponent(trimmed)}`);
+          const res = await fetch(`/api/ask?q=${encodeURIComponent(trimmed)}&locale=${locale}`);
           if (!res.ok) throw new Error(String(res.status));
           setAnswer({ status: "done", data: (await res.json()) as Answer });
         } catch {

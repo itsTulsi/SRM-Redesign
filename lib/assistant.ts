@@ -2,17 +2,11 @@ import assistantData from "@/content/assistant.json";
 import lexiconData from "@/content/lexicon.json";
 import { understand, type Lexicon } from "./ask";
 import {
-  campuses,
-  colleges,
-  events,
-  getCampus,
+  campuses as campusesEn,
+  formatEventDate,
+  getContent,
   isTodo,
-  naacGrade,
-  nirf,
-  placements,
-  programmes,
-  researchStats,
-  site,
+  programmes as programmesEn,
   type Campus,
   type Programme,
 } from "./content";
@@ -38,7 +32,8 @@ export type Translate = (key: string, values?: Record<string, string | number>) 
 
 type Intent = keyof typeof assistantData.intents;
 const lexicon = lexiconData as Lexicon;
-const docs = toSearchDocs(programmes, colleges, campuses);
+// Search ranks on English data (tags, official names); answers are rendered from the localised copy.
+const docs = toSearchDocs(programmesEn, getContent("en").colleges, campusesEn);
 let searcherPromise: Promise<Searcher> | null = null;
 
 const norm = (s: string) => s.normalize("NFC").toLowerCase();
@@ -52,7 +47,7 @@ function found(q: string, word: string) {
 
 // Multi-word programme tags ("cyber security", "machine learning") are subjects, not topics: remove them before
 // topic detection so "cyber security course" isn't read as a campus-safety question.
-const subjectPhrases = [...new Set(programmes.flatMap((p) => p.tags))].filter((tag) => tag.includes(" ")).map(norm);
+const subjectPhrases = [...new Set(programmesEn.flatMap((p) => p.tags))].filter((tag) => tag.includes(" ")).map(norm);
 
 function intentsIn(query: string): Intent[] {
   const q = subjectPhrases.reduce((text, phrase) => text.split(phrase).join(" "), norm(query));
@@ -66,7 +61,7 @@ function intentsIn(query: string): Intent[] {
   return hits.sort((a, b) => a.at - b.at).map((h) => h.intent).slice(0, 3);
 }
 
-async function programmeIn(query: string): Promise<Programme | null> {
+async function programmeIn(query: string, programmes: Programme[]): Promise<Programme | null> {
   searcherPromise ??= loadSearcher(docs);
   const search = await searcherPromise;
   const u = understand(query, lexicon);
@@ -84,22 +79,23 @@ async function programmeIn(query: string): Promise<Programme | null> {
 
 const MAIN_CAMPUS = ["main campus", "main", "முதன்மை வளாகம்", "மெயின் கேம்பஸ்", "मुख्य कैंपस", "मेन कैंपस"];
 
-function campusIn(query: string): Campus | null {
+function campusIn(query: string, campuses: Campus[]): Campus | null {
   const q = norm(query);
   if (MAIN_CAMPUS.some((w) => found(q, w))) return campuses.find((c) => c.isMain) ?? null;
   // Specific campus words only (not "Chennai", which covers three).
   const place = lexicon.places.find((p) => p.campuses.length === 1 && p.words.some((w) => found(q, w)));
-  if (place) return getCampus(place.campuses[0]!) ?? null;
-  const sister = campuses.find((c) => c.kind === "sister" && found(q, c.city));
+  if (place) return campuses.find((c) => c.slug === place.campuses[0]) ?? null;
+  const sister = campuses.find((c) => c.kind === "sister" && found(q, campusesEn.find((e) => e.slug === c.slug)!.city));
   return sister ?? null;
 }
 
 const inr = new Intl.NumberFormat("en-IN");
 
 export async function reply(query: string, t: Translate, locale: string): Promise<Reply> {
+  const { programmes, colleges, campuses, events, getCampus, naacGrade, nirf, placements, researchStats, site } = getContent(locale);
   const intents = intentsIn(query);
-  const programme = await programmeIn(query);
-  const campus = campusIn(query);
+  const programme = await programmeIn(query, programmes);
+  const campus = campusIn(query, campuses);
   const phones = site.admissions.phones.map((p) => ({ display: p.display, tel: p.tel, label: p.label }));
   const call = (n = 2): Block => ({ type: "call", phones: phones.slice(0, n) });
   const blocks: Block[] = [];
@@ -266,7 +262,7 @@ export async function reply(query: string, t: Translate, locale: string): Promis
 
       case "events":
         blocks.push({ type: "text", text: t("eventsText") });
-        blocks.push({ type: "links", links: events.map((e) => ({ label: `${e.date} — ${e.title}`, href: e.url, external: true })) });
+        blocks.push({ type: "links", links: events.map((e) => ({ label: `${formatEventDate(e, locale)} — ${e.title}`, href: e.url, external: true })) });
         break;
 
       case "international":

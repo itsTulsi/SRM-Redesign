@@ -1,10 +1,10 @@
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import { LanguageSwitcher } from "@/components/nav/LanguageSwitcher";
 import { ParentModeToggle } from "@/components/programme/ParentModeToggle";
 import { LiteModeToggle } from "@/components/ui/LiteModeToggle";
 import { SmartLink } from "@/components/ui/SmartLink";
 import { Link } from "@/lib/i18n";
-import { campuses, site } from "@/lib/content";
+import { getContent } from "@/lib/content";
 import { SECTION } from "@/lib/sections";
 import { FooterAccordion } from "./FooterAccordion";
 
@@ -12,6 +12,7 @@ type Group = { id: string; title: string; links: { label: string; href: string; 
 
 export async function SiteFooter() {
   const t = await getTranslations("Footer");
+  const { campuses, site } = getContent(await getLocale());
   const nav = await getTranslations("Nav");
   const external = nav("external");
   const e = await getTranslations("Enquiry");

@@ -265,7 +265,9 @@ function CampusDetail({ campus, onTour }: { campus: MapCampus; onTour: () => voi
         <h3 id={`campus-${campus.slug}`} className="mt-1 font-display text-3xl font-bold">
           {campus.name}
         </h3>
-        <p className="mt-2 text-fg-muted">{campus.address ?? `${campus.city}, ${campus.state}`}</p>
+        <p className="mt-2 text-fg-muted">
+          {campus.address ? <span lang="en">{campus.address}</span> : `${campus.city}, ${campus.state}`}
+        </p>
       </div>
 
       <div className="flex flex-wrap gap-3">
@@ -380,7 +382,7 @@ function Pin({
       </span>
       <span
         aria-hidden="true"
-        className={`pointer-events-none absolute top-1/2 -translate-y-1/2 rounded-md bg-bg/85 px-2 py-0.5 text-xs font-semibold whitespace-nowrap ${
+        className={`pointer-events-none absolute top-1/2 w-max max-w-[8rem] -translate-y-1/2 rounded-md bg-bg/85 px-2 py-0.5 text-xs leading-tight font-semibold sm:max-w-none sm:whitespace-nowrap ${
           left ? "right-full mr-0.5" : "left-full ml-0.5"
         } ${active ? "text-action" : ""}`}
       >

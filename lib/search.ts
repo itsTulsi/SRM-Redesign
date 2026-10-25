@@ -9,6 +9,8 @@ import type { Campus, College, Programme } from "./content";
 export type SearchDoc = {
   slug: string;
   name: string;
+  /** Official English name — so English queries still match on Tamil/Hindi pages. */
+  alt: string;
   college: string;
   level: "UG" | "PG";
   durationYears: number | null;
@@ -24,6 +26,7 @@ export function toSearchDocs(programmes: Programme[], colleges: College[], campu
   return programmes.map((p) => ({
     slug: p.slug,
     name: p.name,
+    alt: p.officialName ?? p.name,
     college: collegeName.get(p.college) ?? p.college,
     level: p.level,
     durationYears: typeof p.durationYears === "number" ? p.durationYears : null,
@@ -57,6 +60,7 @@ export async function loadSearcher(docs: SearchDoc[]): Promise<Searcher> {
   const fuse: Fuse<SearchDoc> = new FuseCtor(docs, {
     keys: [
       { name: "name", weight: 3 },
+      { name: "alt", weight: 2.5 },
       { name: "tags", weight: 2.5 },
       { name: "college", weight: 1 },
       { name: "summary", weight: 0.5 },

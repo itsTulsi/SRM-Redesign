@@ -18,15 +18,16 @@ export async function CamberScene({ story }: { story: Story }) {
   const t = await getTranslations("Acts.leap");
   const sequence = findSequence(story.media.sequence);
   const poster = findMedia(story.media.photo);
-  const fact = (label: string) => story.facts.find((f) => f.label === label)?.value;
+  // Facts are looked up by stable key, not by (translated) label.
+  const fact = (key: string) => story.facts.find((f) => f.key === key)?.value;
 
-  const wins = fact("Event wins")?.split(" · ") ?? [];
-  const award = fact("Award");
+  const wins = fact("eventWins")?.split(" · ") ?? [];
+  const award = fact("award");
   const callouts = [
     ...wins.map((w) => ({ kicker: t("first"), text: w })),
     ...(award ? [{ kicker: t("award"), text: award }] : []),
   ];
-  const eyebrow = [fact("Result"), fact("Category")].filter(Boolean).join(" · ");
+  const eyebrow = [fact("result"), fact("category")].filter(Boolean).join(" · ");
 
   return (
     <article aria-labelledby={`sw-${story.slug}`} data-student-work={story.slug}>

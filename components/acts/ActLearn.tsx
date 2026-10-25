@@ -1,7 +1,7 @@
 import { getLocale, getTranslations } from "next-intl/server";
 import { Photo } from "@/components/ui/Photo";
 import { Fact } from "@/components/ui/Todo";
-import { colleges, naacGrade, nirf, programmes } from "@/lib/content";
+import { getContent } from "@/lib/content";
 import { Link } from "@/lib/i18n";
 import { SECTION } from "@/lib/sections";
 import { ActHeader } from "./ActHeader";
@@ -11,6 +11,7 @@ const HEADLINE_RANKS = ["university", "engineering", "overall"];
 export async function ActLearn() {
   const t = await getTranslations("Acts.learn");
   const locale = await getLocale();
+  const { colleges, naacGrade, nirf, programmes } = getContent(locale);
   const headline = HEADLINE_RANKS.map((id) => nirf.ranks.find((r) => r.id === id)).filter((r) => r !== undefined);
   const others = nirf.ranks.filter((r) => !HEADLINE_RANKS.includes(r.id));
 
@@ -81,10 +82,10 @@ export async function ActLearn() {
         <h4 className="mt-14 text-sm font-semibold tracking-wide text-fg-muted uppercase">
           {t("moreRanks", { year: nirf.year })}
         </h4>
-        <dl className="mt-4 grid grid-cols-2 gap-x-6 gap-y-3 sm:grid-cols-3 lg:grid-cols-5">
+        <dl className="mt-4 grid grid-cols-1 gap-x-6 gap-y-3 min-[25rem]:grid-cols-2 sm:grid-cols-3 lg:grid-cols-5">
           {others.map((r) => (
-            <div key={r.id} className="flex items-baseline justify-between gap-3 border-b border-line-subtle pb-2">
-              <dt>{r.label}</dt>
+            <div key={r.id} className="flex min-w-0 items-baseline justify-between gap-3 border-b border-line-subtle pb-2">
+              <dt className="min-w-0">{r.label}</dt>
               <dd className="font-display text-xl font-bold tabular-nums">#{r.rank}</dd>
             </div>
           ))}

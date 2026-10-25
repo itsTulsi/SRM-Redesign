@@ -1,7 +1,7 @@
 import { getLocale, getTranslations } from "next-intl/server";
 import { Photo } from "@/components/ui/Photo";
 import { Fact, Todo } from "@/components/ui/Todo";
-import { isTodo, missions, researchStats, studentWork, type Story } from "@/lib/content";
+import { getContent, isTodo, type Story } from "@/lib/content";
 import { Link } from "@/lib/i18n";
 import { missionAnchor, SECTION } from "@/lib/sections";
 import { ActHeader } from "./ActHeader";
@@ -11,6 +11,7 @@ import { StatFigure } from "./StatFigure";
 export async function ActLeap() {
   const t = await getTranslations("Acts.leap");
   const locale = await getLocale();
+  const { missions, researchStats, studentWork } = getContent(locale);
 
   return (
     <section id={SECTION.leap} aria-labelledby="act-leap" data-act="leap" className="relative bg-bg text-fg">

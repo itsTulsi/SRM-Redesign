@@ -1,7 +1,8 @@
 import { NextResponse, type NextRequest } from "next/server";
 import lexiconData from "@/content/lexicon.json";
 import { understand, type Answer, type AnswerCard, type Lexicon } from "@/lib/ask";
-import { campuses, colleges, getCampus, isTodo, programmes } from "@/lib/content";
+import { campuses, colleges, getContent, isTodo, programmes } from "@/lib/content";
+import { routing } from "@/lib/i18n";
 import { loadSearcher, tokenize, toSearchDocs, type Searcher } from "@/lib/search";
 
 /**
@@ -20,6 +21,10 @@ const norm = (s: string) => s.normalize("NFC").toLowerCase();
 export async function GET(req: NextRequest) {
   const query = (req.nextUrl.searchParams.get("q") ?? "").trim().slice(0, MAX_QUERY);
   if (!query) return NextResponse.json({ error: "missing q" }, { status: 400 });
+  const requested = req.nextUrl.searchParams.get("locale");
+  const locale = routing.locales.find((l) => l === requested) ?? routing.defaultLocale;
+  const local = getContent(locale);
+  const getCampus = local.getCampus;
 
   searcher ??= loadSearcher(docs);
   const search = await searcher;
@@ -32,16 +37,18 @@ export async function GET(req: NextRequest) {
     if (atLevel.length) ranked = atLevel;
   }
 
-  const cards: AnswerCard[] = ranked.map((p) => {
-    const name = norm(p.name);
+  const cards: AnswerCard[] = ranked.map((english) => {
+    // Match on English (tags, official name); show the visitor's language.
+    const p = local.getProgramme(english.slug)!;
+    const name = norm(english.name);
     const matched = [
       ...u.terms.filter((t) => p.tags.includes(t.tag)).map((t) => t.said),
-      ...words.filter((w) => w.length >= 2 && (p.tags.includes(w) || (w.length >= 3 && name.includes(w)))),
+      ...words.filter((w) => w.length >= 2 && (p.tags.includes(w) || (w.length >= 3 && (name.includes(w) || norm(p.name).includes(w))))),
     ];
     return {
       slug: p.slug,
       name: p.name,
-      college: colleges.find((c) => c.slug === p.college)?.shortName ?? p.college,
+      college: local.getCollege(p.college)?.shortName ?? p.college,
       level: p.level,
       durationYears: typeof p.durationYears === "number" ? p.durationYears : null,
       campuses: p.campuses.map((c) => getCampus(c)?.name ?? c),
@@ -63,7 +70,7 @@ export async function GET(req: NextRequest) {
   // Confident only when a programme matched something the visitor actually said (not just fuzzy spelling).
   const confident = cards.filter((c) => c.matched.length > 0);
   // "Chennai" lists three campuses; a programme at any one of them is not "not listed".
-  const chennai = ["Kattankulathur", "Ramapuram", "Vadapalani"];
+  const chennai = ["kattankulathur", "ramapuram", "vadapalani"].map((slug) => getCampus(slug)!.name);
   for (const c of confident)
     if (c.placesNotListed.length && c.campuses.some((x) => chennai.includes(x)) && c.placesNotListed.every((x) => chennai.includes(x)))
       c.placesNotListed = [];
