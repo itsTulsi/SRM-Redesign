@@ -534,3 +534,13 @@ html.lenis body {
 :lang(hi) :is(.text-section, h1, h2, h3):not([lang="en"]) {
   line-height: 1.25;
 }
+
+/* Ask SRM launcher: never printed; hidden while its own panel is open. */
+@media print {
+  .assistant-launcher {
+    display: none;
+  }
+}
+.assistant-launcher[aria-expanded="true"] {
+  visibility: hidden;
+}

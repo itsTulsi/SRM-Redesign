@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { notFound } from "next/navigation";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { AssistantLauncher } from "@/components/assistant/AssistantLauncher";
 import { SiteFooter } from "@/components/footer/SiteFooter";
 import { MotionDirector } from "@/components/motion/MotionDirector";
 import { getNavData } from "@/components/nav/nav-data";
@@ -68,6 +69,7 @@ export default async function LocaleLayout({
           {children}
           <SiteFooter />
           <MotionDirector />
+          <AssistantLauncher />
         </NextIntlClientProvider>
       </body>
     </html>

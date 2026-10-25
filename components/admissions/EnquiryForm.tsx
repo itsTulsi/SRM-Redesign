@@ -27,13 +27,18 @@ export function EnquiryForm({ programmes, phone }: { programmes: ProgrammeGroup[
   const [status, setStatus] = useState<Status>({ kind: "idle" });
   const [programme, setProgramme] = useState("");
   const summaryRef = useRef<HTMLDivElement>(null);
+  const messageRef = useRef<HTMLTextAreaElement>(null);
   const resultRef = useRef<HTMLDivElement>(null);
   const slugs = programmes.flatMap((g) => g.items.map((i) => i.slug));
 
   // Deep link from a programme: /admissions?programme=btech-cse#enquiry
   useEffect(() => {
-    const wanted = new URLSearchParams(window.location.search).get("programme");
+    const params = new URLSearchParams(window.location.search);
+    const wanted = params.get("programme");
     if (wanted && programmes.some((g) => g.items.some((i) => i.slug === wanted))) setProgramme(wanted);
+    // Questions the Ask SRM assistant couldn't answer arrive pre-filled.
+    const message = params.get("message");
+    if (message && messageRef.current && !messageRef.current.value) messageRef.current.value = message.slice(0, 1000);
   }, [programmes]);
 
   useEffect(() => {
@@ -277,6 +282,7 @@ export function EnquiryForm({ programmes, phone }: { programmes: ProgrammeGroup[
             {t("message")} <span className="font-normal text-fg-muted">({t("optional")})</span>
           </label>
           <textarea
+            ref={messageRef}
             id={fieldId("message")}
             name="message"
             rows={4}

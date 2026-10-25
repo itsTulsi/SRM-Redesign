@@ -1,0 +1,23 @@
+{
+  "_note": "Intent keywords for the free Ask SRM assistant (no AI). Each intent is answered only from verified content (site, programmes, campuses, stats, stories). Tamil/Hindi words are first drafts — TODO: native review (step 12). A word should belong to one intent only.",
+  "intents": {
+    "greeting": { "en": ["hi", "hello", "hey", "good morning", "good evening"], "ta": ["வணக்கம்", "ஹலோ"], "hi": ["नमस्ते", "नमस्कार", "हैलो"] },
+    "fees": { "en": ["fee", "fees", "cost", "costs", "price", "tuition", "how much", "fee structure", "expensive"], "ta": ["கட்டணம்", "செலவு", "எவ்வளவு"], "hi": ["फ़ीस", "फीस", "शुल्क", "खर्च", "ख़र्च", "कितना", "कितनी"] },
+    "eligibility": { "en": ["eligibility", "eligible", "qualify", "requirements", "marks", "percentage", "criteria", "cutoff", "cut-off"], "ta": ["தகுதி", "மதிப்பெண்"], "hi": ["पात्रता", "योग्यता", "अंक", "प्रतिशत"] },
+    "entrance": { "en": ["entrance", "exam", "srmjeee", "neet", "jee", "nata"], "ta": ["நுழைவுத் தேர்வு", "தேர்வு"], "hi": ["प्रवेश परीक्षा", "परीक्षा"] },
+    "deadline": { "en": ["deadline", "last date", "closing date", "when to apply", "dates"], "ta": ["கடைசி தேதி", "தேதி"], "hi": ["अंतिम तिथि", "आख़िरी तारीख", "आखिरी तारीख", "तारीख"] },
+    "apply": { "en": ["apply", "application", "admission", "admissions", "how to join", "register", "join srm"], "ta": ["விண்ணப்பம்", "விண்ணப்பி", "சேர்க்கை"], "hi": ["आवेदन", "दाखिला", "एडमिशन"] },
+    "location": { "en": ["where", "location", "address", "directions", "how to reach", "map", "located"], "ta": ["எங்கே", "முகவரி", "வழி", "இருப்பிடம்"], "hi": ["कहाँ", "कहां", "पता", "रास्ता", "लोकेशन"] },
+    "ranking": { "en": ["rank", "ranking", "rankings", "nirf", "naac", "accreditation", "accredited"], "ta": ["தரவரிசை"], "hi": ["रैंक", "रैंकिंग", "मान्यता"] },
+    "placements": { "en": ["placement", "placements", "salary", "package", "ctc", "lpa", "recruiters", "companies"], "ta": ["வேலைவாய்ப்பு", "சம்பளம்"], "hi": ["प्लेसमेंट", "पैकेज", "वेतन"] },
+    "hostel": { "en": ["hostel", "hostels", "accommodation", "stay", "room", "mess"], "ta": ["விடுதி", "தங்குமிடம்"], "hi": ["हॉस्टल", "छात्रावास"] },
+    "safety": { "en": ["safe", "safety", "ragging", "security", "harassment", "grievance"], "ta": ["பாதுகாப்பு", "ராகிங்"], "hi": ["सुरक्षा", "सुरक्षित", "रैगिंग"] },
+    "scholarship": { "en": ["scholarship", "scholarships", "financial aid", "loan", "concession"], "ta": ["உதவித்தொகை", "கல்வி உதவி"], "hi": ["छात्रवृत्ति", "स्कॉलरशिप", "लोन"] },
+    "programmes": { "en": ["courses", "course", "programmes", "programs", "branches", "what can i study"], "ta": ["படிப்புகள்", "பாடப்பிரிவுகள்"], "hi": ["कोर्स", "पाठ्यक्रम"] },
+    "contact": { "en": ["contact", "phone", "call", "number", "talk to", "helpline", "counsellor", "counselor"], "ta": ["தொடர்பு", "தொலைபேசி", "அழை"], "hi": ["संपर्क", "फ़ोन", "फोन", "कॉल", "नंबर"] },
+    "events": { "en": ["event", "events", "happening", "conference", "fest"], "ta": ["நிகழ்வு", "நிகழ்வுகள்"], "hi": ["कार्यक्रम", "इवेंट"] },
+    "international": { "en": ["international", "nri", "foreign", "overseas"], "ta": ["சர்வதேச", "வெளிநாட்டு"], "hi": ["अंतरराष्ट्रीय", "विदेशी", "एनआरआई"] },
+    "tour": { "en": ["tour", "virtual tour", "360", "visit"], "ta": ["சுற்றுலா", "பார்வையிட"], "hi": ["टूर", "घूमना"] },
+    "research": { "en": ["research", "patents", "publications", "phd"], "ta": ["ஆராய்ச்சி"], "hi": ["शोध", "रिसर्च", "पेटेंट"] }
+  }
+}

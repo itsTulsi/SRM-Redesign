@@ -8,6 +8,7 @@ Kept up to date as the build progresses (CLAUDE.md §10). Items marked ⏳ are n
 4. ✅ "Take the 360° tour" → SRM's real Kattankulathur tour opens in-page (modal; Esc closes).
 5. ✅ Toggle Tamil: header switcher **EN · த · हि** (top right; inside "Menu" on phones) — same page, now in Tamil.
 6. ✅ Click the hero's **Parents** chip (or the Parent mode toggle on any programme page, e.g. /programmes/bds) → the page leads with plain answers: cost, admission, location + directions, safety/hostel links, jobs, big Call admissions buttons. Scroll the student view for **Ask a Senior** (demo threads + moderation states).
-7. ⏳ Lighthouse mobile screenshot.
+7. ✅ **Ask SRM** (chat button, bottom-right on every page): "fees for BDS" → honest "not published yet" + call buttons; "where is the main campus?" → address + directions; Tamil "விடுதி உள்ளதா?"; "can I bring my pet tiger" → "no verified answer" + question forwarded to the enquiry form. Free, no AI.
+8. ⏳ Lighthouse mobile screenshot.
 
 Bonus: turn on "Reduce motion" in OS settings → Lite Mode switches on automatically and says why.
