@@ -100,7 +100,7 @@ export async function SiteFooter() {
             {t("settings")}
           </h3>
           <div className="flex flex-col gap-6 lg:flex-row lg:flex-wrap lg:items-center lg:gap-10">
-            <LanguageSwitcher label={nav("language")} />
+            <LanguageSwitcher label={nav("language")} landmark={false} />
             <ThemeToggle
               labels={{ legend: t("theme"), system: t("themeSystem"), light: t("themeLight"), dark: t("themeDark") }}
             />

@@ -232,3 +232,28 @@ html:has(dialog[open]:modal) {
 :lang(hi) .text-hero {
   line-height: 1.1;
 }
+
+/* ── Act colours (each means something): Learn = institution blue, Leap = ink stage for student work,
+      Lead = canopy green (the tree in full leaf). Dark surfaces only; an explicit light theme keeps paper.
+      Contrast on each: paper ≥ 13.9:1, muted ≥ 8.3:1, links ≥ 7.8:1. ── */
+:root:not([data-theme="light"]) [data-act="leap"] {
+  --bg: #0a0a0d;
+  --line-subtle: #23232b;
+}
+:root:not([data-theme="light"]) [data-act="lead"] {
+  --bg: #0c2a1c;
+  --fg-muted: #b9c9bf;
+  --line: #6e8f7c;
+  --line-subtle: #1d4430;
+}
+
+@media (width < 25rem) {
+  :lang(ta) .menu-label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+}

@@ -109,5 +109,54 @@
     "alumni": "Alumni",
     "pauseVideo": "Pause background video",
     "playVideo": "Play background video"
+  },
+  "Acts": {
+    "learn": {
+      "kicker": "Act I",
+      "word": "Learn",
+      "question": "Ten colleges. Which one will shape you?",
+      "strip": "Colleges",
+      "programmes": "{count, plural, one {# programme} other {# programmes}}",
+      "explore": "Explore programmes",
+      "rankingsTitle": "Ranked among India's best",
+      "rankingsIntro": "NIRF {year} — the Government of India's national institutional ranking.",
+      "rank": "Rank",
+      "naac": "NAAC grade",
+      "moreRanks": "Other NIRF {year} categories",
+      "source": "Source: NIRF {year} table published by SRMIST"
+    },
+    "leap": {
+      "kicker": "Act II",
+      "word": "Leap",
+      "question": "What will you build before you graduate?",
+      "studentWork": "Student work",
+      "readStory": "Read the story",
+      "researchTitle": "Research by mission",
+      "researchIntro": "Not a list of departments — the problems we're working on.",
+      "researchNumbers": "Research in numbers"
+    },
+    "lead": {
+      "kicker": "Act III",
+      "word": "Lead",
+      "question": "Where will you lead?",
+      "alumniTitle": "They started here",
+      "placementsTitle": "Placements {season}",
+      "placementsIntro": "Recruiters who came to campus, and what they offered."
+    },
+    "explore": {
+      "title": "Where will you study?",
+      "intro": "Six campuses across Tamil Nadu and Delhi NCR — plus three sister universities.",
+      "main": "Main campus",
+      "sisters": "Sister universities",
+      "tour": "Take the 360° tour",
+      "visit": "Visit campus"
+    },
+    "thisWeek": {
+      "title": "This week at SRM",
+      "featured": "The story this week",
+      "upcoming": "Coming up",
+      "readStory": "Read the story",
+      "eventPage": "Event details"
+    }
   }
 }

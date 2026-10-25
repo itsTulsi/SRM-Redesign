@@ -8,18 +8,22 @@ const shortNames: Record<Locale, string> = { en: "EN", ta: "த", hi: "हि" }
 export function LanguageSwitcher({
   label,
   compact = false,
+  landmark = true,
   className = "",
 }: {
   label: string;
   /** Header variant: short script codes, full name kept for screen readers. */
   compact?: boolean;
+  /** false = a labelled group instead of a <nav>, for second copies (footer) so landmarks stay unique. */
+  landmark?: boolean;
   className?: string;
 }) {
   const locale = useLocale();
   const pathname = usePathname();
 
+  const Wrapper = landmark ? "nav" : "div";
   return (
-    <nav aria-label={label} className={className}>
+    <Wrapper aria-label={label} role={landmark ? undefined : "group"} className={className}>
       <ul className="flex items-center gap-1">
         {locales.map((l) => {
           const current = l === locale;
@@ -48,6 +52,6 @@ export function LanguageSwitcher({
           );
         })}
       </ul>
-    </nav>
+    </Wrapper>
   );
 }

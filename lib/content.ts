@@ -106,9 +106,13 @@ export type Story = {
 export type SrmEvent = {
   slug: string;
   title: string;
-  date: OrTodo<string>;
-  campus: CampusSlug;
-  url: OrTodo<string>;
+  /** Display label, e.g. "25–28 Oct 2026". */
+  date: string;
+  /** ISO dates for <time> and Event JSON-LD. */
+  start: string;
+  end: string;
+  campus?: CampusSlug;
+  url: string;
 };
 
 export type Stat = {

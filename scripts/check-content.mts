@@ -94,8 +94,12 @@ for (const c of arr(files.campuses.campuses) as Obj[]) {
 uniqueSlugs("stories.json", arr(files.stories.stories));
 if (!storySlugs.has(files.stories.featured)) fail("stories.json", `featured "${files.stories.featured}" not found`);
 for (const s of arr(files.stories.studentWork)) if (!storySlugs.has(s)) fail("stories.json", `studentWork "${s}" not found`);
-for (const e of arr(files.stories.events) as Obj[])
-  if (!campusSlugs.has(e.campus)) fail(`stories.json event ${e.slug}`, `unknown campus "${e.campus}"`);
+for (const e of arr(files.stories.events) as Obj[]) {
+  const at = `stories.json event ${e.slug}`;
+  if (e.campus !== undefined && !campusSlugs.has(e.campus)) fail(at, `unknown campus "${e.campus}"`);
+  for (const key of ["start", "end"])
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(String(e[key]))) fail(at, `${key} must be an ISO date (YYYY-MM-DD)`);
+}
 
 // ── Stats: numbers must be numbers and match their display string ──
 const statsObj = files.stats as Obj;

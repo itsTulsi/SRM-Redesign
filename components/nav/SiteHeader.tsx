@@ -114,8 +114,8 @@ export function SiteHeader({ nav }: { nav: NavData }) {
           className="inline-flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-full px-3 font-medium xl:hidden"
         >
           <MenuIcon />
-          {/* Icon-only below 400px (Tamil/Hindi labels would squeeze the icon out); name stays for AT. */}
-          <span className="max-[25rem]:sr-only">{nav.labels.menu}</span>
+          {/* Icon-only below 400px in Tamil (its label squeezes the icon out); name stays for AT. See globals.css. */}
+          <span className="menu-label">{nav.labels.menu}</span>
         </button>
       </div>
 
