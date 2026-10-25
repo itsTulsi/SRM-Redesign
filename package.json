@@ -9,7 +9,9 @@
     "lint": "eslint . --max-warnings=0",
     "typecheck": "tsc --noEmit",
     "check:content": "node scripts/check-content.mts",
-    "prebuild": "npm run check:content"
+    "prebuild": "npm run check:content",
+    "build:verify": "NEXT_DIST_DIR=.next-verify next build",
+    "start:verify": "NEXT_DIST_DIR=.next-verify next start"
   },
   "dependencies": {
     "fuse.js": "7.5.0",
