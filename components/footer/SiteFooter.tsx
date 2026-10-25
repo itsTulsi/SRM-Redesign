@@ -5,7 +5,6 @@ import { SmartLink } from "@/components/ui/SmartLink";
 import { campuses, site } from "@/lib/content";
 import { SECTION } from "@/lib/sections";
 import { FooterAccordion } from "./FooterAccordion";
-import { ThemeToggle } from "./ThemeToggle";
 
 type Group = { id: string; title: string; links: { label: string; href: string; detail?: string }[] };
 
@@ -101,9 +100,6 @@ export async function SiteFooter() {
           </h3>
           <div className="flex flex-col gap-6 lg:flex-row lg:flex-wrap lg:items-center lg:gap-10">
             <LanguageSwitcher label={nav("language")} landmark={false} />
-            <ThemeToggle
-              labels={{ legend: t("theme"), system: t("themeSystem"), light: t("themeLight"), dark: t("themeDark") }}
-            />
             <LiteModeToggle />
           </div>
         </section>

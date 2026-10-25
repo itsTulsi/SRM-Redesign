@@ -1,67 +1,33 @@
 @import "tailwindcss";
 
 /* ─────────────────────────────────────────────────────────────────────────────
-   Brand tokens (CLAUDE.md §4). Each colour has one meaning.
-   Contrast (WCAG 2.2) measured:
-     ink on paper 17.4 · paper on blue-900 14.8 · ink on lime 15.1 · lime on blue-900 12.8
-     blue-500 on paper 6.0 (links/focus, light) · blue-300 on blue-900 8.3 (links/focus, dark)
-     leaf on paper 3.8 / on blue-900 3.9 → graphics only (≥3:1), never body text
-     lime on paper 1.16 → FAILS: lime is a fill behind ink text, never text or a lone shape on paper
+   Brand tokens (CLAUDE.md §4). Each colour has one meaning. Dark only (light mode removed 2026-10-25).
+   Contrast (WCAG 2.2) measured on blue-900:
+     paper 14.8 · fg-muted 8.9 · blue-300 links/focus 8.3 · lime 12.8 · ink on lime 15.1 · line 4.0
+     leaf-green-300 8.5 (tree) · blue-500 2.5 → never used as text/focus on dark
    ───────────────────────────────────────────────────────────────────────────── */
 :root {
-  --srm-blue-900: #0b1b4d; /* the institution, trust */
-  --srm-blue-500: #1f4fd8; /* links, focus (light surfaces) */
-  --srm-blue-300: #9db7ff; /* links, focus (dark surfaces) — blue-500 is only 2.5:1 on blue-900 */
+  --srm-blue-900: #0b1b4d; /* the institution, trust — the page background */
+  --srm-blue-500: #1f4fd8; /* brand blue (decorative only on dark) */
+  --srm-blue-300: #9db7ff; /* links, focus */
   --leap-lime: #c6f432; /* ACTION ONLY: Apply, primary CTAs, programme peek block */
   --leaf-green: #2e8b57; /* the tree, growth, progress */
-  --leaf-green-300: #5fd08f; /* tree highlights on dark */
-  --paper: #f5f3ee; /* light canvas */
-  --ink: #0e0e10; /* text */
+  --leaf-green-300: #5fd08f; /* tree highlights */
+  --paper: #f5f3ee; /* text on dark; input fields */
+  --ink: #0e0e10; /* text on lime / paper */
 
-  /* Semantic tokens — light by default */
-  --bg: var(--paper);
-  --fg: var(--ink);
-  --fg-muted: #4a4d5c; /* 7.6:1 on paper */
-  --line: #8a8c99; /* 3.0:1 on paper — borders that carry meaning */
-  --line-subtle: #d9d6cd; /* decorative dividers only */
-  --link: var(--srm-blue-500);
-  --focus: var(--srm-blue-500);
-  --tree: var(--leaf-green);
-  --action: var(--leap-lime);
-  --on-action: var(--ink);
-  --action-edge: var(--ink); /* lime vanishes on paper, so actions get an ink edge in light theme */
-
-  color-scheme: light;
-}
-
-/* Dark tokens: system preference (unless visitor chose light), explicit choice, or a dark surface.
-   Plain CSS can't share a block between a media query and selectors, so the values repeat below. */
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg: var(--srm-blue-900);
-    --fg: var(--paper);
-    --fg-muted: #b4bedf;
-    --line: #6c7bb0;
-    --line-subtle: #24346b;
-    --link: var(--srm-blue-300);
-    --focus: var(--srm-blue-300);
-    --tree: var(--leaf-green-300);
-    --action-edge: transparent;
-    color-scheme: dark;
-  }
-}
-
-:root[data-theme="dark"],
-:root:not([data-theme="light"]) [data-surface="dark"] {
   --bg: var(--srm-blue-900);
   --fg: var(--paper);
   --fg-muted: #b4bedf; /* 8.9:1 on blue-900 */
-  --line: #6c7bb0;
-  --line-subtle: #24346b;
+  --line: #6c7bb0; /* 4.0:1 — borders that carry meaning */
+  --line-subtle: #24346b; /* decorative dividers only */
   --link: var(--srm-blue-300);
   --focus: var(--srm-blue-300);
   --tree: var(--leaf-green-300);
+  --action: var(--leap-lime);
+  --on-action: var(--ink);
   --action-edge: transparent;
+
   color-scheme: dark;
 }
 
@@ -234,13 +200,13 @@ html:has(dialog[open]:modal) {
 }
 
 /* ── Act colours (each means something): Learn = institution blue, Leap = ink stage for student work,
-      Lead = canopy green (the tree in full leaf). Dark surfaces only; an explicit light theme keeps paper.
+      Lead = canopy green (the tree in full leaf).
       Contrast on each: paper ≥ 13.9:1, muted ≥ 8.3:1, links ≥ 7.8:1. ── */
-:root:not([data-theme="light"]) [data-act="leap"] {
+[data-act="leap"] {
   --bg: #0a0a0d;
   --line-subtle: #23232b;
 }
-:root:not([data-theme="light"]) [data-act="lead"] {
+[data-act="lead"] {
   --bg: #0c2a1c;
   --fg-muted: #b9c9bf;
   --line: #6e8f7c;
@@ -306,20 +272,13 @@ html:has(dialog[open]:modal) {
   0%, 100% { scale: 1; opacity: 1; }
   50% { scale: 1.35; opacity: 0.7; }
 }
-/* The tree floats over every surface; it follows the dark theme tokens so it reads on blue, ink and canopy. */
+/* The tree card floats over every act colour, so it carries its own blue backing. */
 .living-tree {
   --bg: var(--srm-blue-900);
   --line-subtle: #24346b;
   --tree: var(--leaf-green-300);
   --fg-muted: #9aa6c8;
   --line: #6c7bb0;
-}
-:root[data-theme="light"] .living-tree {
-  --bg: var(--paper);
-  --line-subtle: #d9d6cd;
-  --tree: var(--leaf-green);
-  --fg-muted: #4a4d5c;
-  --line: #8a8c99;
 }
 
 /* Reduced motion / Lite Mode: no growth animation — the tree is shown fully grown (§5 rules). */
@@ -401,10 +360,10 @@ html.lenis body {
   pointer-events: none;
   background: var(--curtain, transparent);
 }
-:root:not([data-theme="light"]) [data-act="leap"] {
+[data-act="leap"] {
   --curtain: var(--srm-blue-900);
 }
-:root:not([data-theme="light"]) [data-act="lead"] {
+[data-act="lead"] {
   --curtain: #0a0a0d;
 }
 

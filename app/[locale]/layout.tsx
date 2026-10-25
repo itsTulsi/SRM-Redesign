@@ -10,13 +10,12 @@ import { SkipLink } from "@/components/ui/SkipLink";
 import { fontVariables } from "@/lib/fonts";
 import { routing } from "@/lib/i18n";
 import { applyLiteMode, LITE_STORAGE_KEY } from "@/lib/lite-mode";
-import { applyTheme, THEME_STORAGE_KEY } from "@/lib/theme";
 import "../globals.css";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 
-// Runs before first paint so theme and Lite Mode never flash. Failure is harmless: defaults apply.
-const initScript = `try{(${applyTheme.toString()})(${JSON.stringify(THEME_STORAGE_KEY)});(${applyLiteMode.toString()})(${JSON.stringify(LITE_STORAGE_KEY)})}catch(e){}`;
+// Runs before first paint so Lite Mode never flashes. Failure is harmless: defaults apply.
+const initScript = `try{(${applyLiteMode.toString()})(${JSON.stringify(LITE_STORAGE_KEY)})}catch(e){}`;
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -39,10 +38,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#f5f3ee" },
-    { media: "(prefers-color-scheme: dark)", color: "#0b1b4d" },
-  ],
+  themeColor: "#0b1b4d",
+  colorScheme: "dark",
 };
 
 export default async function LocaleLayout({

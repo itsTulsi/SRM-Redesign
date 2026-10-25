@@ -106,7 +106,7 @@ public/media/               # user-supplied photos/video go here
 
 **Layout:** 12-col grid desktop, 4-col mobile, 16px gutters on mobile, no horizontal scroll ever. Generous whitespace — one idea per screen.
 
-**Themes:** dark (default for homepage acts) and light (inner pages). Respect `prefers-color-scheme`; manual toggle in footer.
+**Themes:** dark only, site-wide. Light mode was removed at the team's request (2026-10-25) — no theme toggle, no `prefers-color-scheme` switching.
 
 ---
 

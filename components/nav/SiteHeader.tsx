@@ -13,7 +13,6 @@ import type { NavData, NavSection } from "./types";
  */
 export function SiteHeader({ nav }: { nav: NavData }) {
   const pathname = usePathname();
-  const isHome = pathname === "/";
   const [openId, setOpenId] = useState<NavSection["id"] | null>(null);
   const headerRef = useRef<HTMLElement>(null);
   const dialogRef = useRef<HTMLDialogElement>(null);
@@ -54,7 +53,6 @@ export function SiteHeader({ nav }: { nav: NavData }) {
   return (
     <header
       ref={headerRef}
-      data-surface={isHome ? "dark" : undefined}
       className="sticky top-0 z-50 border-b border-line-subtle bg-bg text-fg"
       onBlur={(e) => {
         if (openId && !e.currentTarget.contains(e.relatedTarget as Node | null)) setOpenId(null);

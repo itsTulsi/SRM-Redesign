@@ -29,7 +29,7 @@ export async function Hero() {
   return (
     <section
       aria-labelledby="hero-title"
-      data-surface="dark"
+     
       className="relative isolate flex min-h-[calc(100svh-4rem)] flex-col justify-end overflow-hidden bg-bg text-fg"
     >
       <HeroMedia />

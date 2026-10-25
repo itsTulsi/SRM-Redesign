@@ -15,7 +15,7 @@ export async function ActLearn() {
   const others = nirf.ranks.filter((r) => !HEADLINE_RANKS.includes(r.id));
 
   return (
-    <section id={SECTION.learn} aria-labelledby="act-learn" data-surface="dark" data-act="learn" className="relative bg-bg text-fg">
+    <section id={SECTION.learn} aria-labelledby="act-learn" data-act="learn" className="relative bg-bg text-fg">
       <ActHeader id="act-learn" kicker={t("kicker")} word={t("word")} title="Learn" question={t("question")} locale={locale} />
 
       {/* College strip (VCU hover-reveal in step 7). Native horizontal scroll + snap: works with touch, trackpad, keyboard (Tab through links). */}

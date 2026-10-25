@@ -31,7 +31,7 @@ export async function CamberScene({ story }: { story: Story }) {
   return (
     <article aria-labelledby={`sw-${story.slug}`} data-student-work={story.slug}>
       <CamberScroll frames={sequence} calloutCount={callouts.length}>
-        <div className="camber-sticky overflow-hidden" data-surface="dark">
+        <div className="camber-sticky overflow-hidden">
           {/* Media layer: poster (or first frame) → canvas drawn on top once frames load */}
           <div aria-hidden="true" className="absolute inset-0">
             {sequence ? (

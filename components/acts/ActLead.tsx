@@ -11,7 +11,7 @@ export async function ActLead() {
   const locale = await getLocale();
 
   return (
-    <section id={SECTION.lead} aria-labelledby="act-lead" data-surface="dark" data-act="lead" className="relative bg-bg text-fg">
+    <section id={SECTION.lead} aria-labelledby="act-lead" data-act="lead" className="relative bg-bg text-fg">
       <div data-curtain aria-hidden="true" className="act-curtain" />
       <ActHeader id="act-lead" kicker={t("kicker")} word={t("word")} title="Lead" question={t("question")} locale={locale} />
 

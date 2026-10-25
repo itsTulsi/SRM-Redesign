@@ -13,7 +13,7 @@ export async function ActLeap() {
   const locale = await getLocale();
 
   return (
-    <section id={SECTION.leap} aria-labelledby="act-leap" data-surface="dark" data-act="leap" className="relative bg-bg text-fg">
+    <section id={SECTION.leap} aria-labelledby="act-leap" data-act="leap" className="relative bg-bg text-fg">
       <div data-curtain aria-hidden="true" className="act-curtain" />
       <ActHeader id="act-leap" kicker={t("kicker")} word={t("word")} title="Leap" question={t("question")} locale={locale} />
 

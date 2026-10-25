@@ -17,7 +17,7 @@ export async function Explore() {
   const rest = own.filter((c) => !c.isMain);
 
   return (
-    <section id={SECTION.explore} aria-labelledby="explore-title" data-surface="dark" className="bg-bg py-24 text-fg lg:py-36">
+    <section id={SECTION.explore} aria-labelledby="explore-title" className="bg-bg py-24 text-fg lg:py-36">
       <div className="site-container">
         <h2 id="explore-title" className="font-display text-hero font-bold text-balance">
           {t("title")}
