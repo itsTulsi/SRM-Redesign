@@ -1,0 +1,31 @@
+/**
+ * Stand-in for real SRM photography / video until the team drops files into public/media/.
+ * Neutral gradient + visible "PHOTO TODO" label — never stock photos of other campuses (CLAUDE.md §7).
+ */
+type Props = {
+  /** What the real photo should show, e.g. "Kattankulathur campus aerial at dusk". Doubles as alt text. */
+  description: string;
+  /** Target file the team should supply, e.g. "media/hero/poster.jpg". */
+  file?: string;
+  kind?: "photo" | "video";
+  className?: string;
+};
+
+export function MediaPlaceholder({ description, file, kind = "photo", className = "" }: Props) {
+  return (
+    <div
+      role="img"
+      aria-label={description}
+      className={`relative overflow-hidden bg-gradient-to-br from-srm-blue-900 via-[#1a2f73] to-[#24467a] ${className}`}
+    >
+      <div className="absolute bottom-3 left-3 max-w-[calc(100%-1.5rem)] rounded bg-ink/80 px-2 py-1 font-mono text-xs leading-snug text-paper">
+        <span className="font-bold">{kind === "video" ? "VIDEO TODO" : "PHOTO TODO"}</span>
+        <span aria-hidden="true">
+          {" "}
+          · {description}
+          {file ? ` → public/${file}` : ""}
+        </span>
+      </div>
+    </div>
+  );
+}

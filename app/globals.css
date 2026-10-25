@@ -1,0 +1,214 @@
+@import "tailwindcss";
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   Brand tokens (CLAUDE.md §4). Each colour has one meaning.
+   Contrast (WCAG 2.2) measured:
+     ink on paper 17.4 · paper on blue-900 14.8 · ink on lime 15.1 · lime on blue-900 12.8
+     blue-500 on paper 6.0 (links/focus, light) · blue-300 on blue-900 8.3 (links/focus, dark)
+     leaf on paper 3.8 / on blue-900 3.9 → graphics only (≥3:1), never body text
+     lime on paper 1.16 → FAILS: lime is a fill behind ink text, never text or a lone shape on paper
+   ───────────────────────────────────────────────────────────────────────────── */
+:root {
+  --srm-blue-900: #0b1b4d; /* the institution, trust */
+  --srm-blue-500: #1f4fd8; /* links, focus (light surfaces) */
+  --srm-blue-300: #9db7ff; /* links, focus (dark surfaces) — blue-500 is only 2.5:1 on blue-900 */
+  --leap-lime: #c6f432; /* ACTION ONLY: Apply, primary CTAs, programme peek block */
+  --leaf-green: #2e8b57; /* the tree, growth, progress */
+  --leaf-green-300: #5fd08f; /* tree highlights on dark */
+  --paper: #f5f3ee; /* light canvas */
+  --ink: #0e0e10; /* text */
+
+  /* Semantic tokens — light by default */
+  --bg: var(--paper);
+  --fg: var(--ink);
+  --fg-muted: #4a4d5c; /* 7.6:1 on paper */
+  --line: #8a8c99; /* 3.0:1 on paper — borders that carry meaning */
+  --line-subtle: #d9d6cd; /* decorative dividers only */
+  --link: var(--srm-blue-500);
+  --focus: var(--srm-blue-500);
+  --tree: var(--leaf-green);
+  --action: var(--leap-lime);
+  --on-action: var(--ink);
+  --action-edge: var(--ink); /* lime vanishes on paper, so actions get an ink edge in light theme */
+
+  color-scheme: light;
+}
+
+/* Dark tokens: system preference (unless visitor chose light), explicit choice, or a dark surface.
+   Plain CSS can't share a block between a media query and selectors, so the values repeat below. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: var(--srm-blue-900);
+    --fg: var(--paper);
+    --fg-muted: #b4bedf;
+    --line: #6c7bb0;
+    --line-subtle: #24346b;
+    --link: var(--srm-blue-300);
+    --focus: var(--srm-blue-300);
+    --tree: var(--leaf-green-300);
+    --action-edge: transparent;
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme="dark"],
+:root:not([data-theme="light"]) [data-surface="dark"] {
+  --bg: var(--srm-blue-900);
+  --fg: var(--paper);
+  --fg-muted: #b4bedf; /* 8.9:1 on blue-900 */
+  --line: #6c7bb0;
+  --line-subtle: #24346b;
+  --link: var(--srm-blue-300);
+  --focus: var(--srm-blue-300);
+  --tree: var(--leaf-green-300);
+  --action-edge: transparent;
+  color-scheme: dark;
+}
+
+/* ── Tailwind theme: expose tokens as utilities (bg-bg, text-fg, bg-action, font-display …) ── */
+@theme inline {
+  --color-srm-blue-900: var(--srm-blue-900);
+  --color-srm-blue-500: var(--srm-blue-500);
+  --color-srm-blue-300: var(--srm-blue-300);
+  --color-lime: var(--leap-lime);
+  --color-leaf: var(--leaf-green);
+  --color-paper: var(--paper);
+  --color-ink: var(--ink);
+
+  --color-bg: var(--bg);
+  --color-fg: var(--fg);
+  --color-fg-muted: var(--fg-muted);
+  --color-line: var(--line);
+  --color-line-subtle: var(--line-subtle);
+  --color-link: var(--link);
+  --color-focus: var(--focus);
+  --color-tree: var(--tree);
+  --color-action: var(--action);
+  --color-on-action: var(--on-action);
+
+  --font-sans: var(--font-inter), var(--font-noto-tamil, ""), var(--font-noto-devanagari, ""), ui-sans-serif,
+    system-ui, sans-serif;
+  --font-display: var(--font-space-grotesk), var(--font-noto-tamil, ""), var(--font-noto-devanagari, ""),
+    ui-sans-serif, system-ui, sans-serif;
+}
+
+@theme {
+  /* Display scale: act titles reach ~14vw */
+  --text-act: clamp(4.5rem, 14vw, 15rem);
+  --text-act--line-height: 0.85;
+  --text-act--letter-spacing: -0.04em;
+  --text-hero: clamp(2.5rem, 7vw, 6.5rem);
+  --text-hero--line-height: 0.95;
+  --text-hero--letter-spacing: -0.03em;
+  --text-section: clamp(2rem, 4.5vw, 4rem);
+  --text-section--line-height: 1;
+  --text-section--letter-spacing: -0.02em;
+
+  --ease-leap: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ── Base ── */
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--font-sans);
+    font-size: 1.0625rem; /* 17px — mobile body (§4) */
+    line-height: 1.6;
+    overflow-x: clip; /* no horizontal scroll, ever */
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Tamil and Devanagari: real weights only, never synthesised bold. Looser leading for taller scripts. */
+  :lang(ta),
+  :lang(hi) {
+    font-synthesis: none;
+  }
+  :lang(ta) body,
+  :lang(hi) body {
+    line-height: 1.75;
+  }
+
+  a {
+    color: var(--link);
+    text-underline-offset: 0.2em;
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--focus);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  ::selection {
+    background: var(--leap-lime);
+    color: var(--ink);
+  }
+}
+
+/* ── Layout: 4-col mobile / 8-col tablet / 12-col desktop, 16px mobile gutters ── */
+@utility site-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  column-gap: 1rem;
+  padding-inline: 1rem;
+  margin-inline: auto;
+  max-width: 90rem;
+  @media (width >= 48rem) {
+    grid-template-columns: repeat(8, minmax(0, 1fr));
+    column-gap: 1.5rem;
+    padding-inline: 2rem;
+  }
+  @media (width >= 64rem) {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    padding-inline: 3rem;
+  }
+}
+
+@utility site-container {
+  margin-inline: auto;
+  max-width: 90rem;
+  padding-inline: 1rem;
+  @media (width >= 48rem) {
+    padding-inline: 2rem;
+  }
+  @media (width >= 64rem) {
+    padding-inline: 3rem;
+  }
+}
+
+/* ── Motion off: OS preference OR Lite Mode → instant states (§5 rules) ── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+[data-motion="reduce"] *,
+[data-motion="reduce"] *::before,
+[data-motion="reduce"] *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+  scroll-behavior: auto !important;
+}
+
+/* ── Lite Mode: heavy media never renders. Components mark video/3D with data-heavy. ── */
+[data-lite="on"] [data-heavy] {
+  display: none !important;
+}
+[data-lite="on"] [data-lite-only] {
+  display: revert !important;
+}
+[data-lite-only] {
+  display: none;
+}

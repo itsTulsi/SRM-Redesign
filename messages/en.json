@@ -1,0 +1,24 @@
+{
+  "Meta": {
+    "title": "SRM Institute of Science and Technology — Learn. Leap. Lead.",
+    "description": "SRMIST, Kattankulathur, Chennai. Find your programme, explore six campuses and see what SRM students build."
+  },
+  "A11y": {
+    "skipToContent": "Skip to main content"
+  },
+  "Lite": {
+    "label": "Lite mode",
+    "on": "Lite mode is on: video, 3D and smooth scrolling are off.",
+    "off": "Lite mode is off.",
+    "reason": {
+      "save-data": "Turned on because your browser asked to save data.",
+      "slow-network": "Turned on because your connection looks slow.",
+      "reduced-motion": "Turned on because your device asks for reduced motion.",
+      "user": "You turned this on."
+    }
+  },
+  "Home": {
+    "tagline": "Learn. Leap. Lead.",
+    "scaffoldNote": "Foundation in place. The homepage is built section by section from here."
+  }
+}
