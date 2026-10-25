@@ -1,0 +1,702 @@
+{
+  "_note": "Kattankulathur hostels, from SRM's own pages (srmist.edu.in/srm-hostels/ and its Men, Women, International and Dining pages), the 2026–27 first-year B.Tech/M.Tech (Integrated) fee circulars and the 2026 hostel rules PDF, all read 2026-10-26. Block facts (AC, washroom, sharing, floors) are as each block's entry states; where the 2026–27 fee circular lists more room types than a block's entry (N Block non-AC), the block is marked 'both'. Prose lives in messages/{en,ta,hi}.json under 'Hostels'.",
+  "sources": {
+    "hub": "https://www.srmist.edu.in/srm-hostels/",
+    "men": "https://www.srmist.edu.in/srm-hostels/hostel-for-men/",
+    "women": "https://www.srmist.edu.in/srm-hostels/hostel-for-women/",
+    "international": "https://www.srmist.edu.in/srm-hostels/international-hostel/",
+    "dining": "https://www.srmist.edu.in/srm-hostels/dining-eateries/",
+    "rules": "https://webstor.srmist.edu.in/web_assets/downloads/2026/srm-hostel-rules-2026.pdf",
+    "codeOfConduct": "https://www.srmist.edu.in/policies/code-of-conduct-for-students/",
+    "portal": "https://sp.srmist.edu.in/srmiststudentportal/students/loginManager/youLogin.jsp",
+    "staff": "https://www.srmist.edu.in/srm-hostels/meet-our-staff/"
+  },
+  "capacity": {
+    "men": "10,000",
+    "women": "4,000",
+    "international": "400"
+  },
+  "heroPhoto": "media/hostels/overview.jpg",
+  "men": [
+    {
+      "slug": "paari",
+      "name": "Paari",
+      "ac": "non-ac",
+      "washroom": "common",
+      "sharing": "4 & 5",
+      "floors": "G+9",
+      "email": "warden.paari.ktr@srmist.edu.in",
+      "phone": "8056016611",
+      "photo": "media/hostels/paari.jpg"
+    },
+    {
+      "slug": "kaari",
+      "name": "Kaari",
+      "ac": "non-ac",
+      "washroom": "common",
+      "sharing": "4 & 5",
+      "floors": "G+9",
+      "email": "warden.kaari.ktr@srmist.edu.in",
+      "phone": "8056016612",
+      "photo": "media/hostels/kaari.jpg"
+    },
+    {
+      "slug": "oori",
+      "name": "Oori",
+      "ac": "ac",
+      "washroom": "common",
+      "sharing": "4 & 5",
+      "floors": "G+9",
+      "email": "warden.oori.ktr@srmist.edu.in",
+      "phone": "8056016613",
+      "photo": "media/hostels/oori.jpg",
+      "extras": [
+        "studyHall",
+        "indoorGames"
+      ]
+    },
+    {
+      "slug": "adhiyaman",
+      "name": "Adhiyaman",
+      "ac": "both",
+      "washroom": "attached",
+      "sharing": "2, 3 & 4",
+      "floors": "G+9",
+      "email": "warden.adhiyaman.ktr@srmist.edu.in",
+      "phone": "8056016614",
+      "photo": "media/hostels/adhiyaman.jpg"
+    },
+    {
+      "slug": "nelson-mandela",
+      "name": "Nelson Mandela",
+      "ac": "ac",
+      "washroom": "attached",
+      "sharing": "3",
+      "floors": "G+9",
+      "email": "warden.nelsonmandela.ktr@srmist.edu.in",
+      "phone": "8056016615",
+      "photo": "media/hostels/nelson-mandela.jpg"
+    },
+    {
+      "slug": "manoranjitham",
+      "name": "Manoranjitham",
+      "ac": "non-ac",
+      "washroom": "common",
+      "sharing": "3",
+      "floors": "G+9",
+      "email": "warden.manoranjitham.ktr@srmist.edu.in",
+      "phone": "8056016634",
+      "photo": "media/hostels/manoranjitham.jpg"
+    },
+    {
+      "slug": "sannasi-a",
+      "name": "Sannasi A",
+      "ac": "both",
+      "washroom": "attached",
+      "sharing": "3",
+      "floors": "G+5",
+      "email": "warden.sannasia.ktr@srmist.edu.in",
+      "phone": "8056016605",
+      "photo": "media/hostels/sannasi-a.jpg"
+    },
+    {
+      "slug": "agasthiyar",
+      "name": "Agasthiyar",
+      "ac": "both",
+      "washroom": "attached",
+      "sharing": "4",
+      "floors": "G+9",
+      "email": "warden.agasithiyar.ktr@srmist.edu.in",
+      "phone": "8056016616"
+    },
+    {
+      "slug": "began",
+      "name": "Began",
+      "ac": "non-ac",
+      "washroom": "both",
+      "sharing": "2 & 3",
+      "floors": "G+4",
+      "email": "warden.began.ktr@srmist.edu.in",
+      "phone": "8056016609",
+      "photo": "media/hostels/began.jpg",
+      "extras": [
+        "nearJavaGreen"
+      ]
+    },
+    {
+      "slug": "n-block",
+      "name": "N Block",
+      "ac": "both",
+      "washroom": "attached",
+      "sharing": "2 & 3",
+      "floors": "G+19",
+      "email": "warden.nblock.ktr@srmist.edu.in",
+      "phone": "7824055768"
+    }
+  ],
+  "women": [
+    {
+      "slug": "kopperundevi",
+      "name": "Kopperundevi (M Block)",
+      "ac": "both",
+      "washroom": "attached",
+      "sharing": "2",
+      "floors": "G+15",
+      "email": "warden.kopperundevi.ktr@srmist.edu.in",
+      "phone": "8056016627",
+      "photo": "media/hostels/kopperundevi.jpg"
+    },
+    {
+      "slug": "senbagam",
+      "name": "Senbagam",
+      "ac": "non-ac",
+      "washroom": "common",
+      "sharing": "3 & 6",
+      "floors": "G+5",
+      "email": "warden.senbagam.ktr@srmist.edu.in",
+      "phone": "8056016638",
+      "photo": "media/hostels/senbagam.jpg"
+    },
+    {
+      "slug": "esq-a",
+      "name": "ESQ A Block",
+      "ac": "non-ac",
+      "washroom": "attached",
+      "sharing": "2, 3 & 4",
+      "floors": "G+9",
+      "email": "warden.esqa.ktr@srmist.edu.in",
+      "phone": "8056016636",
+      "photo": "media/hostels/esq-a.jpg",
+      "extras": [
+        "flats30"
+      ]
+    },
+    {
+      "slug": "esq-b",
+      "name": "ESQ B Block",
+      "ac": "non-ac",
+      "washroom": "attached",
+      "sharing": "2 & 3",
+      "floors": "G+9",
+      "email": "warden.esqb.ktr@srmist.edu.in",
+      "phone": "8056016637",
+      "photo": "media/hostels/esq-b.jpg",
+      "extras": [
+        "flats40"
+      ]
+    },
+    {
+      "slug": "kalpana-chawla",
+      "name": "Kalpana Chawla",
+      "ac": "ac",
+      "washroom": "attached",
+      "sharing": "2 & 4",
+      "floors": "G+5",
+      "email": "warden.kalpananchawla.ktr@srmist.edu.in",
+      "phone": "8056016618",
+      "photo": "media/hostels/kalpana-chawla.jpg"
+    },
+    {
+      "slug": "meenakshi",
+      "name": "Meenakshi",
+      "ac": "both",
+      "washroom": "attached",
+      "sharing": "3 & 4",
+      "floors": "G+4",
+      "email": "warden.meenakshi.ktr@srmist.edu.in",
+      "phone": "8056016617",
+      "photo": "media/hostels/meenakshi.jpg",
+      "extras": [
+        "bunkerAc4"
+      ]
+    },
+    {
+      "slug": "malligai",
+      "name": "Malligai",
+      "ac": "non-ac",
+      "washroom": "common",
+      "sharing": "2",
+      "floors": "G+6",
+      "email": "warden.malligai.ktr@srmist.edu.in",
+      "phone": "8056016634",
+      "photo": "media/hostels/malligai.jpg"
+    },
+    {
+      "slug": "thamarai",
+      "name": "Thamarai",
+      "ac": "non-ac",
+      "washroom": "common",
+      "sharing": "2",
+      "floors": "G+6",
+      "email": "warden.thamarai.ktr@srmist.edu.in",
+      "phone": "8056016633",
+      "photo": "media/hostels/thamarai.jpg"
+    },
+    {
+      "slug": "sannasi-c",
+      "name": "Sannasi C",
+      "ac": "both",
+      "washroom": "attached",
+      "sharing": "3",
+      "floors": "G+5",
+      "email": "warden.sannasic.ktr@srmist.edu.in",
+      "phone": "8056016631"
+    },
+    {
+      "slug": "mullai",
+      "name": "Mullai",
+      "ac": "non-ac",
+      "washroom": "common",
+      "sharing": "3",
+      "floors": "G+6",
+      "email": "warden.mullai.ktr@srmist.edu.in",
+      "phone": "8056016632",
+      "photo": "media/hostels/mullai.jpg"
+    }
+  ],
+  "international": [
+    {
+      "slug": "nri-premium",
+      "name": "NRI Premium International Hostel",
+      "ac": "ac",
+      "sharing": "3",
+      "email": "nripremium.hostel.ktr@srmist.edu.in",
+      "phone": "8056016622"
+    },
+    {
+      "slug": "green-pearl",
+      "name": "Green Pearl International Hostel",
+      "offCampus": true,
+      "email": "warden.gpb.ktr@srmist.edu.in",
+      "phone": "8056016639",
+      "phoneAlt": "9384051220",
+      "photo": "media/hostels/green-pearl.jpg",
+      "extras": [
+        "walk10",
+        "serviceApartment",
+        "shuttle",
+        "multiCuisine"
+      ]
+    }
+  ],
+  "fees": {
+    "year": "2026–27",
+    "bookingOpened": "2026-06-24T10:00",
+    "men": [
+      {
+        "ac": true,
+        "washroom": "attached",
+        "sharing": "2",
+        "block": "N Block",
+        "hostel": 200000,
+        "mess": 73000,
+        "total": 273000
+      },
+      {
+        "ac": true,
+        "washroom": "attached",
+        "sharing": "3",
+        "block": "Green Pearl",
+        "hostel": 145000,
+        "mess": 125000,
+        "total": 270000,
+        "offCampus": true
+      },
+      {
+        "ac": true,
+        "washroom": "attached",
+        "sharing": "3",
+        "block": "N Block",
+        "hostel": 180000,
+        "mess": 73000,
+        "total": 253000
+      },
+      {
+        "ac": true,
+        "washroom": "attached",
+        "sharing": "2",
+        "block": "Adhiyaman",
+        "hostel": 170000,
+        "mess": 73000,
+        "total": 243000
+      },
+      {
+        "ac": true,
+        "washroom": "attached",
+        "sharing": "3",
+        "block": "Adhiyaman",
+        "hostel": 160000,
+        "mess": 73000,
+        "total": 233000
+      },
+      {
+        "ac": true,
+        "washroom": "attached",
+        "sharing": "4",
+        "block": "Adhiyaman",
+        "hostel": 150000,
+        "mess": 73000,
+        "total": 223000
+      },
+      {
+        "ac": false,
+        "washroom": "attached",
+        "sharing": "3",
+        "block": "Green Pearl",
+        "hostel": 65000,
+        "mess": 125000,
+        "total": 190000,
+        "offCampus": true
+      },
+      {
+        "ac": true,
+        "washroom": "common",
+        "sharing": "4 & 5",
+        "block": "Oori",
+        "hostel": 115000,
+        "mess": 73000,
+        "total": 188000
+      },
+      {
+        "ac": false,
+        "washroom": "attached",
+        "sharing": "2",
+        "block": "N Block",
+        "hostel": 100000,
+        "mess": 73000,
+        "total": 173000
+      },
+      {
+        "ac": false,
+        "washroom": "attached",
+        "sharing": "3",
+        "block": "N Block",
+        "hostel": 90000,
+        "mess": 73000,
+        "total": 163000
+      },
+      {
+        "ac": false,
+        "washroom": "attached",
+        "sharing": "3",
+        "block": "Adhiyaman",
+        "hostel": 80000,
+        "mess": 73000,
+        "total": 153000
+      },
+      {
+        "ac": false,
+        "washroom": "common",
+        "sharing": "4 & 5",
+        "block": "Kaari",
+        "hostel": 45000,
+        "mess": 73000,
+        "total": 118000
+      },
+      {
+        "ac": false,
+        "washroom": "attached",
+        "sharing": "7",
+        "block": "JA Block 2",
+        "hostel": 37000,
+        "mess": 73000,
+        "total": 110000,
+        "offCampus": true
+      }
+    ],
+    "women": [
+      {
+        "ac": true,
+        "washroom": "attached",
+        "sharing": "2",
+        "block": "Kalpana Chawla",
+        "hostel": 197000,
+        "mess": 73000,
+        "total": 270000
+      },
+      {
+        "ac": true,
+        "washroom": "attached",
+        "sharing": "4",
+        "block": "Kalpana Chawla",
+        "hostel": 150000,
+        "mess": 73000,
+        "total": 223000
+      },
+      {
+        "ac": true,
+        "washroom": "attached",
+        "sharing": "4",
+        "block": "Meenakshi",
+        "hostel": 140000,
+        "mess": 73000,
+        "total": 213000,
+        "note": "bunker"
+      },
+      {
+        "ac": false,
+        "washroom": "attached",
+        "sharing": "3",
+        "block": "Meenakshi",
+        "hostel": 80000,
+        "mess": 73000,
+        "total": 153000
+      },
+      {
+        "ac": false,
+        "washroom": "common",
+        "sharing": "2",
+        "block": "Thamarai",
+        "hostel": 60000,
+        "mess": 73000,
+        "total": 133000
+      },
+      {
+        "ac": false,
+        "washroom": "common",
+        "sharing": "3",
+        "block": "Mullai",
+        "hostel": 50000,
+        "mess": 73000,
+        "total": 123000
+      },
+      {
+        "ac": false,
+        "washroom": "common",
+        "sharing": "6",
+        "block": "Senbagam",
+        "hostel": 45000,
+        "mess": 73000,
+        "total": 118000
+      }
+    ],
+    "laundry": {
+      "men": 7500,
+      "women": 8500
+    },
+    "sources": {
+      "men": "https://webstor.srmist.edu.in/web_assets/downloads/2026/circular-for-all-first-year-btech-and-mtech-2026-boys.pdf",
+      "women": "https://webstor.srmist.edu.in/web_assets/downloads/2026/circular-for-all-first-year-btech-and-mtech-2026-girls.pdf"
+    },
+    "otherCohorts": [
+      {
+        "key": "pgMtech",
+        "men": "https://webstor.srmist.edu.in/web_assets/downloads/2026/first-year-pg-mtech-hostel-boys-circular.pdf",
+        "women": "https://webstor.srmist.edu.in/web_assets/downloads/2026/first-year-pg-mtech-hostel-girls-circular.pdf"
+      },
+      {
+        "key": "archDes",
+        "men": "https://webstor.srmist.edu.in/web_assets/downloads/2026/circular-for-all-first-year-b-arch-bdes-2026-boys.pdf",
+        "women": "https://webstor.srmist.edu.in/web_assets/downloads/2026/circular-for-all-first-year-b-arch-bdes-2026-girls.pdf"
+      },
+      {
+        "key": "year2",
+        "men": "https://webstor.srmist.edu.in/web_assets/downloads/2026/srm-hostels-booking-schedule-boys-2nd-year-btech-mtech.pdf",
+        "women": "https://webstor.srmist.edu.in/web_assets/downloads/2026/srm-hostels-booking-schedule-girls-2nd-year-btech-mtech.pdf"
+      },
+      {
+        "key": "year3",
+        "men": "https://webstor.srmist.edu.in/web_assets/downloads/2026/srm-hostels-booking-schedule-boys-3rd-year-btech-mtech.pdf",
+        "women": "https://webstor.srmist.edu.in/web_assets/downloads/2026/srm-hostels-booking-schedule-girls-3rd-year-btech-mtech.pdf"
+      },
+      {
+        "key": "year45",
+        "men": "https://webstor.srmist.edu.in/web_assets/downloads/2026/srm-hostels-booking-schedule-boys-4th-5th-year-btech-mtech.pdf",
+        "women": "https://webstor.srmist.edu.in/web_assets/downloads/2026/srm-hostels-booking-schedule-girls-4th-5th-year-btech-mtech.pdf"
+      },
+      {
+        "key": "research",
+        "both": "https://webstor.srmist.edu.in/web_assets/downloads/2026/research-scholars-hostel-schedule.pdf"
+      }
+    ]
+  },
+  "dining": {
+    "mess": {
+      "working": [
+        [
+          "breakfast",
+          "07:00",
+          "09:00"
+        ],
+        [
+          "lunch",
+          "11:30",
+          "13:30"
+        ],
+        [
+          "snacks",
+          "16:30",
+          "17:30"
+        ],
+        [
+          "dinner",
+          "19:30",
+          "21:00"
+        ]
+      ],
+      "holidays": [
+        [
+          "breakfast",
+          "07:30",
+          "09:30"
+        ],
+        [
+          "lunch",
+          "12:00",
+          "13:30"
+        ],
+        [
+          "snacks",
+          "16:30",
+          "17:30"
+        ],
+        [
+          "dinner",
+          "19:30",
+          "21:00"
+        ]
+      ]
+    },
+    "guestRates": [
+      [
+        "breakfast",
+        80
+      ],
+      [
+        "lunch",
+        100
+      ],
+      [
+        "snacks",
+        40
+      ],
+      [
+        "dinner",
+        100
+      ],
+      [
+        "special",
+        150
+      ]
+    ],
+    "canteens": [
+      {
+        "slug": "old-campus",
+        "name": "SRMIST Food Joint, Fast Food & Super Market",
+        "hours": [
+          "07:00",
+          "17:00"
+        ]
+      },
+      {
+        "slug": "university-building",
+        "name": "SRMIST Canteen (University Building)",
+        "hours": [
+          "07:00",
+          "17:00"
+        ]
+      },
+      {
+        "slug": "tech-park",
+        "name": "SRMIST Canteen (Tech Park)",
+        "hours": [
+          "07:00",
+          "17:00"
+        ]
+      },
+      {
+        "slug": "java-green",
+        "name": "Java Green Food Court",
+        "hours": [
+          "07:30",
+          "20:00"
+        ]
+      },
+      {
+        "slug": "gh-cafe",
+        "name": "SRM GH Café",
+        "hours": [
+          "07:30",
+          "16:30"
+        ]
+      },
+      {
+        "slug": "crri",
+        "name": "CRRI Canteen",
+        "hours": [
+          "07:30",
+          "20:30"
+        ]
+      },
+      {
+        "slug": "foodexo",
+        "name": "FoodExo Dental College Canteen",
+        "hours": [
+          "07:30",
+          "16:30"
+        ]
+      },
+      {
+        "slug": "slice-of-life",
+        "name": "Slice of Life Café",
+        "hours": [
+          "07:30",
+          "20:00"
+        ]
+      },
+      {
+        "slug": "madras-cafe",
+        "name": "Madras Café",
+        "hours": "24h"
+      },
+      {
+        "slug": "royal-cafe",
+        "name": "The Royal Café Canteen (VEC campus)",
+        "hours": [
+          "07:30",
+          "16:30"
+        ]
+      }
+    ]
+  },
+  "contacts": {
+    "director": {
+      "name": "Dr. E. Poovammal",
+      "email": "director.hostels@srmist.edu.in",
+      "phone": "+91 99400 36021"
+    },
+    "men": {
+      "blocks": "Paari, Kaari, Oori, Adhiyaman, Nelson Mandela, Sannasi A, Manoranjitham, Began, N Block, Agasthiyar",
+      "email": "hostel.helpdesk.ktr@srmist.edu.in",
+      "accounts": "044-27434507",
+      "office": [
+        "044-27453159",
+        "044-27434500",
+        "044-27434506",
+        "044-27434504"
+      ],
+      "mobile": "8056016602"
+    },
+    "women": {
+      "blocks": "ESQ A & B, Senbagam, Kalpana Chawla, Malligai, Thamarai, Mullai, Sannasi C, Meenakshi",
+      "email": "hostel.helpdesk.ktr@srmist.edu.in",
+      "accounts": "044-27434507",
+      "office": [
+        "044-27453159",
+        "044-27456363",
+        "044-27434506",
+        "044-27434504"
+      ],
+      "mobile": "8056016602"
+    },
+    "kopperundevi": {
+      "email": "warden.kopperundevi.ktr@srmist.edu.in",
+      "mobile": "8056016627"
+    },
+    "pierreFauchard": {
+      "email": "warden.pierrefauchard.ktr@srmist.edu.in",
+      "mobile": "8056016621",
+      "accounts": "tamilars@srmist.edu.in"
+    }
+  }
+}

@@ -225,7 +225,7 @@ export async function reply(query: string, t: Translate, locale: string): Promis
 
       case "hostel":
         blocks.push({ type: "text", text: t("hostelText") });
-        blocks.push({ type: "links", links: [{ label: t("hostels"), href: site.parentLinks.hostels, external: true }] }, call());
+        blocks.push({ type: "links", links: [{ label: t("hostels"), href: `${prefix}${site.parentLinks.hostels}` }] }, call());
         break;
 
       case "safety": {

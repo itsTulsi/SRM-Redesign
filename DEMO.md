@@ -12,3 +12,5 @@ Kept up to date as the build progresses (CLAUDE.md §10). Full audit results: [d
 8. ✅ Lighthouse mobile: Performance 96 (English) / 95 (Tamil, Hindi), Accessibility 100, Best Practices 100, SEO 100, CLS 0. Take the screenshot from a production build (`npm run build:verify && npm run start:verify`), not `npm run dev`: dev mode always scores low.
 
 Bonus: turn on "Reduce motion" in OS settings → Lite Mode switches on automatically and says why.
+
+Also worth a look: **/hostels**. It covers every block with photos and warden contacts, the 2026–27 fee tables, how to apply, mess timings, canteens and safety rules. On a phone, the fee table turns into cards.

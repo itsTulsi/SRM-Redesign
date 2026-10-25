@@ -102,8 +102,13 @@
     "srmist.edu.in /srm-hostels/, /life-at-srm/anti-ragging/, /life-at-srm/getting-around-campus-safety/ — fetched 2026-10-25, HTTP 200"
   ],
   "parentLinks": {
-    "hostels": "https://www.srmist.edu.in/srm-hostels/",
+    "hostels": "/hostels",
     "antiRagging": "https://www.srmist.edu.in/life-at-srm/anti-ragging/",
     "campusSafety": "https://www.srmist.edu.in/life-at-srm/getting-around-campus-safety/"
+  },
+  "heroVideo": {
+    "youtubeId": "AhGg_I991Fw",
+    "title": "SRMJEEE — Your Gateway to Engineering Excellence (SRM Institute of Science and Technology)",
+    "source": "https://www.youtube.com/watch?v=AhGg_I991Fw"
   }
 }

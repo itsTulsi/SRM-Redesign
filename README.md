@@ -22,6 +22,7 @@ A redesign of [srmist.edu.in](https://www.srmist.edu.in/) built around SRM's own
 | **Lite Mode** | Switches on automatically for Save-Data, slow 3G or reduced motion. It strips video, 3D and smooth scrolling and keeps all the information. |
 | **Three languages** | English, தமிழ் and हिन्दी, including programme names, fees and the assistant. Tamil and Devanagari use the fonts already on the device, so most phones download no extra font. |
 | **Campus map and 360° tour** | A stylised India map with all six campuses and three sister universities, at their true coordinates. Tap a pin to fly in and get directions. For Kattankulathur, SRM's 360° tour opens without leaving the page. |
+| **Hostels, in full** | Every girls', boys' and international block with photos, room types and warden contacts. Also the 2026–27 fee tables, how to apply, mess timings and canteens, safety rules for parents, and the hostel office contacts. All of it comes from SRM's hostel pages and fee circulars. |
 | **Voices and startups** | Talks by India's science leaders (DRDO, ISRO, INSA, NITI Aayog) play only when tapped. A logo wall shows startups from SRM's incubation centre. |
 | **Ask a Senior** | Moderated Q&A with current students on each programme page. Sample data, with the real moderation states. |
 
@@ -51,7 +52,7 @@ Measured on a production build with Lighthouse (mobile, simulated slow 4G, media
 | Homepage (Tamil) | 94 | 100 | 100 | 100 | 0 |
 | B.Tech CSE programme page | 96 | 100 | 100 | 100 | 0 |
 
-- **Every page** (all 135 sitemap URLs across the three languages) passes axe-core (WCAG 2.2 AA) at 360 px wide. No page scrolls sideways, each has exactly one `h1`, and none logs a console error.
+- **Every page** (all 138 sitemap URLs across the three languages) passes axe-core (WCAG 2.2 AA) at 360 px wide. No page scrolls sideways, each has exactly one `h1`, and none logs a console error.
 - **Keyboard:** a skip link comes first, and every interactive element has a visible focus ring. Focus never lands behind the sticky header, and there are no keyboard traps.
 - **JavaScript:** 136 kB on first load (budget 180 kB). The motion library, smooth scrolling, search index and YouTube player all load later, or only when used.
 - **Reduced motion:** everything is static, nothing is pinned, and the tree appears fully grown.

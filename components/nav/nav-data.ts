@@ -6,6 +6,7 @@ import type { NavData } from "./types";
 /** Server-only: builds the menu from content JSON so none of that JSON ships to the client. */
 export async function getNavData(): Promise<NavData> {
   const t = await getTranslations("Nav");
+  const hostelT = await getTranslations("Hostels");
   const { campuses, colleges, featuredStory, missions, naacGrade, nirf, programmes, site, studentWork } = getContent(await getLocale());
   const universityRank = nirf.ranks.find((r) => r.id === "university")?.rank;
   const camber = studentWork[0];
@@ -82,6 +83,19 @@ export async function getNavData(): Promise<NavData> {
             links: campuses
               .filter((c) => c.kind === "campus")
               .map((c) => ({ label: c.name, href: `/campuses/${c.slug}` })),
+          },
+          {
+            title: t("housing"),
+            links: [
+              { label: hostelT("sections.accommodation"), href: "/hostels#accommodation" },
+              { label: hostelT("sections.women"), href: "/hostels#women" },
+              { label: hostelT("sections.men"), href: "/hostels#men" },
+              { label: hostelT("sections.international"), href: "/hostels#international" },
+              { label: hostelT("sections.apply"), href: "/hostels#apply" },
+              { label: hostelT("sections.dining"), href: "/hostels#dining" },
+              { label: hostelT("sections.safety"), href: "/hostels#safety" },
+              { label: hostelT("sections.contact"), href: "/hostels#contact" },
+            ],
           },
           {
             title: t("sisterUniversities"),

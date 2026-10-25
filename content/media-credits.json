@@ -119,9 +119,104 @@
       "image": "https://www.srmist.edu.in/wp-content/uploads/2024/11/boxImg_science_humanities.jpg"
     },
     "media/hero/poster.jpg": {
+      "owner": "SRMIST (YouTube)",
+      "source": "https://www.youtube.com/watch?v=AhGg_I991Fw",
+      "image": "https://i.ytimg.com/vi/AhGg_I991Fw/maxresdefault.jpg"
+    },
+    "media/hostels/adhiyaman.jpg": {
       "owner": "SRMIST",
-      "source": "https://www.srmist.edu.in/college/college-of-engineering-technology/",
-      "image": "https://www.srmist.edu.in/wp-content/uploads/2022/04/tech_park.jpg"
+      "source": "https://www.srmist.edu.in/srm-hostels/hostel-for-men/",
+      "image": "https://www.srmist.edu.in/wp-content/uploads/2022/04/image-002-e1649296856588.jpg"
+    },
+    "media/hostels/began.jpg": {
+      "owner": "SRMIST",
+      "source": "https://www.srmist.edu.in/srm-hostels/hostel-for-men/",
+      "image": "https://www.srmist.edu.in/wp-content/uploads/2022/04/Began.jpg"
+    },
+    "media/hostels/esq-a.jpg": {
+      "owner": "SRMIST",
+      "source": "https://www.srmist.edu.in/srm-hostels/hostel-for-women/",
+      "image": "https://www.srmist.edu.in/wp-content/uploads/2024/07/ESQ-A-Block-scaled.jpg"
+    },
+    "media/hostels/esq-b.jpg": {
+      "owner": "SRMIST",
+      "source": "https://www.srmist.edu.in/srm-hostels/hostel-for-women/",
+      "image": "https://www.srmist.edu.in/wp-content/uploads/2024/07/ESQ-B-Block-scaled.jpg"
+    },
+    "media/hostels/green-pearl.jpg": {
+      "owner": "SRMIST",
+      "source": "https://www.srmist.edu.in/srm-hostels/international-hostel/",
+      "image": "https://www.srmist.edu.in/wp-content/uploads/2022/04/image-008-e1649298556444.jpg"
+    },
+    "media/hostels/kaari.jpg": {
+      "owner": "SRMIST",
+      "source": "https://www.srmist.edu.in/srm-hostels/hostel-for-men/",
+      "image": "https://www.srmist.edu.in/wp-content/uploads/2022/04/image-001-e1649296912958.jpg"
+    },
+    "media/hostels/kalpana-chawla.jpg": {
+      "owner": "SRMIST",
+      "source": "https://www.srmist.edu.in/srm-hostels/hostel-for-women/",
+      "image": "https://www.srmist.edu.in/wp-content/uploads/2023/04/Kalpana-Chawla-Hostel-1-copy-scaled.jpg"
+    },
+    "media/hostels/kopperundevi.jpg": {
+      "owner": "SRMIST",
+      "source": "https://www.srmist.edu.in/srm-hostels/hostel-for-women/",
+      "image": "https://www.srmist.edu.in/wp-content/uploads/2024/07/Kopperundevi-M-Block-scaled.jpg"
+    },
+    "media/hostels/malligai.jpg": {
+      "owner": "SRMIST",
+      "source": "https://www.srmist.edu.in/srm-hostels/hostel-for-women/",
+      "image": "https://www.srmist.edu.in/wp-content/uploads/2023/04/Malligai-Hostel-1-scaled.jpg"
+    },
+    "media/hostels/manoranjitham.jpg": {
+      "owner": "SRMIST",
+      "source": "https://www.srmist.edu.in/srm-hostels/hostel-for-men/",
+      "image": "https://www.srmist.edu.in/wp-content/uploads/2022/04/Building_Hostel_ManoRanjitha-Custom-1.jpeg"
+    },
+    "media/hostels/meenakshi.jpg": {
+      "owner": "SRMIST",
+      "source": "https://www.srmist.edu.in/srm-hostels/hostel-for-women/",
+      "image": "https://www.srmist.edu.in/wp-content/uploads/2023/04/Meenakshi-Hostel-SRMIST.jpg"
+    },
+    "media/hostels/mullai.jpg": {
+      "owner": "SRMIST",
+      "source": "https://www.srmist.edu.in/srm-hostels/hostel-for-women/",
+      "image": "https://www.srmist.edu.in/wp-content/uploads/2023/04/Mullai-Hostel-1.jpg"
+    },
+    "media/hostels/nelson-mandela.jpg": {
+      "owner": "SRMIST",
+      "source": "https://www.srmist.edu.in/srm-hostels/hostel-for-men/",
+      "image": "https://www.srmist.edu.in/wp-content/uploads/2023/04/Nelson-Mandela-2-copy.jpg"
+    },
+    "media/hostels/oori.jpg": {
+      "owner": "SRMIST",
+      "source": "https://www.srmist.edu.in/srm-hostels/hostel-for-men/",
+      "image": "https://www.srmist.edu.in/wp-content/uploads/2022/04/image-003-e1649296954676.jpg"
+    },
+    "media/hostels/overview.jpg": {
+      "owner": "SRMIST",
+      "source": "https://www.srmist.edu.in/srm-hostels/hostel-for-men/",
+      "image": "https://www.srmist.edu.in/wp-content/uploads/2022/03/Boys_Hostel.png"
+    },
+    "media/hostels/paari.jpg": {
+      "owner": "SRMIST",
+      "source": "https://www.srmist.edu.in/srm-hostels/hostel-for-men/",
+      "image": "https://www.srmist.edu.in/wp-content/uploads/2022/04/image-000-1-e1649296983669.jpg"
+    },
+    "media/hostels/sannasi-a.jpg": {
+      "owner": "SRMIST",
+      "source": "https://www.srmist.edu.in/srm-hostels/hostel-for-men/",
+      "image": "https://www.srmist.edu.in/wp-content/uploads/2022/04/sannasi-A.jpg"
+    },
+    "media/hostels/senbagam.jpg": {
+      "owner": "SRMIST",
+      "source": "https://www.srmist.edu.in/srm-hostels/hostel-for-women/",
+      "image": "https://www.srmist.edu.in/wp-content/uploads/2024/07/Senbagam-Block-Girls-Hostel-scaled.jpg"
+    },
+    "media/hostels/thamarai.jpg": {
+      "owner": "SRMIST",
+      "source": "https://www.srmist.edu.in/srm-hostels/hostel-for-women/",
+      "image": "https://www.srmist.edu.in/wp-content/uploads/2023/04/Thamarai-Hostel-1-scaled.jpg"
     },
     "media/research/health.jpg": {
       "owner": "SRMIST",

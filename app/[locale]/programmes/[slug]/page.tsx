@@ -211,9 +211,9 @@ export default async function ProgrammePage({ params }: Params) {
                       </a>
                     </li>
                     <li>
-                      <a href={site.parentLinks.hostels} className="inline-flex min-h-11 items-center font-semibold">
+                      <Link href={site.parentLinks.hostels} className="inline-flex min-h-11 items-center font-semibold">
                         {pt("hostels")}
-                      </a>
+                      </Link>
                     </li>
                     <li>
                       <a href={site.parentLinks.campusSafety} className="inline-flex min-h-11 items-center font-semibold">

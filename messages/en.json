@@ -53,7 +53,9 @@
     "alumni": "Alumni",
     "thisWeek": "This week at SRM",
     "startHere": "Start here",
-    "enquiry": "Admission enquiry"
+    "enquiry": "Admission enquiry",
+    "housing": "Housing & residential",
+    "hostels": "Hostels"
   },
   "Footer": {
     "label": "Footer",
@@ -379,7 +381,7 @@
     "placementsTitle": "Placements {season}",
     "placementsNote": "These are university-wide figures for all programmes ({offers} offers), not for one programme.",
     "typicalRoles": "Typical roles for {name}: {roles}.",
-    "hostelText": "SRM publishes its hostel information on its official website. For room types, fees and availability, admissions can help.",
+    "hostelText": "Kattankulathur hostel fees for 2026–27 run from ₹1,10,000 to ₹2,73,000 a year, mess included (first-year B.Tech). The hostels page lists every block, room type, fee and rule.",
     "hostels": "SRM hostels",
     "safetyText": "SRMIST has an anti-ragging committee and publishes its campus safety and grievance information here:",
     "antiRagging": "Anti-ragging committee",
@@ -407,5 +409,219 @@
     "sApply": "How do I apply?",
     "sRanking": "NIRF ranking",
     "sHostel": "Is there a hostel?"
+  },
+  "Hostels": {
+    "metaTitle": "Hostels & housing",
+    "eyebrow": "Kattankulathur campus",
+    "title": "Housing & residential",
+    "intro": "Rooms for every budget, a mess in every hostel, and a warden on every block. Everything below is from SRM's hostel pages and its 2026–27 fee circulars.",
+    "onThisPage": "On this page",
+    "sections": {
+      "accommodation": "Accommodation",
+      "women": "Girls' hostels",
+      "men": "Boys' hostels",
+      "international": "International hostel",
+      "fees": "Fees 2026–27",
+      "apply": "How to apply",
+      "dining": "Dining & eateries",
+      "safety": "Safety & security",
+      "contact": "Contact us"
+    },
+    "accommodationIntro": "SRM offers a wide choice of rooms to suit every budget — from AC rooms with attached washrooms to economical shared rooms — on one of India's greenest campuses. Students come from every part of India and many countries.",
+    "capacity": {
+      "men": "places in boys' hostels (engineering)",
+      "women": "places in girls' hostels (engineering)",
+      "international": "places for international students"
+    },
+    "approx": "about {n}",
+    "facilitiesTitle": "In every hostel",
+    "facilities": [
+      "Cot, study table, chair and cupboard in every room",
+      "Solar hot water, mineral water and water coolers",
+      "TV hall and a common reading room",
+      "Gym and indoor games",
+      "Free Wi-Fi for academic use",
+      "Laundry service (optional, paid with hostel fees)",
+      "General stores, food stalls, ATM and bookshops nearby",
+      "Prayer halls for Hindus, Muslims and Christians next to the hostels",
+      "Dining halls close to every hostel"
+    ],
+    "directorTitle": "Director (Hostels)",
+    "directorRole": "Professor and Director (Hostels), Directorate of Hostels, SRMIST Kattankulathur",
+    "directorQuote": "Our mission is to provide a safe, supportive and comfortable living environment that fosters the academic success and personal growth of every SRMISTian.",
+    "menIntro": "SRM lists room for about {n} engineering students across these blocks. Every block has its own warden.",
+    "womenIntro": "SRM lists room for about {n} engineering students across these blocks. Every block has its own warden.",
+    "womenAmenities": "Every room has study tables, chairs, cots and storage lockers. Girls' blocks have purified water, 24×7 CCTV, security guards, round-the-clock Wi-Fi, indoor and outdoor games, a gym, power backup and biometric attendance, with a supermarket, eateries and a photocopy shop on the premises.",
+    "intlIntro": "Two fully air-conditioned hostels for international students, with room for about {n}.",
+    "block": {
+      "ac": "AC",
+      "non-ac": "Non-AC",
+      "both": "AC and non-AC",
+      "washroom": {
+        "attached": "attached washroom",
+        "common": "common washroom",
+        "both": "attached and common washrooms"
+      },
+      "sharing": "{n} sharing",
+      "floors": "{n} floors",
+      "warden": "Warden",
+      "offCampus": "Off campus",
+      "onCampus": "On campus",
+      "photoAlt": "{name} hostel block",
+      "extras": {
+        "studyHall": "Study hall",
+        "indoorGames": "Indoor games: carrom, chess, table tennis",
+        "nearJavaGreen": "Next to the Java Green food court",
+        "flats30": "30 flats",
+        "flats40": "40 flats",
+        "bunkerAc4": "AC rooms have bunker cots",
+        "walk10": "A 10-minute walk from campus",
+        "serviceApartment": "Service-apartment style",
+        "shuttle": "Shuttle buses to campus",
+        "multiCuisine": "Multi-cuisine dining: Thai, Chinese and Indian"
+      }
+    },
+    "feesIntro": "Per year, for first-year B.Tech and M.Tech (Integrated) students at Kattankulathur. Mess is included in the total. Booking for 2026–27 opened on 24 June 2026 at 10:00 AM.",
+    "feesMen": "Boys' hostels",
+    "feesWomen": "Girls' hostels",
+    "col": {
+      "room": "Room",
+      "hostel": "Hostel",
+      "hostelFee": "Hostel fee",
+      "messFee": "Mess fee",
+      "total": "Total a year"
+    },
+    "bunker": "bunker cots",
+    "laundry": "Laundry is optional: ₹{men} a year for boys, ₹{women} for girls.",
+    "otherCohortsTitle": "Fees and booking dates for other years",
+    "cohorts": {
+      "pgMtech": "First-year PG M.Tech",
+      "archDes": "First-year B.Arch and B.Des",
+      "year2": "Second year (B.Tech, M.Tech Integrated, B.Arch, B.Des)",
+      "year3": "Third year (B.Tech, M.Tech Integrated, B.Arch, B.Des)",
+      "year45": "Fourth and fifth year (B.Tech, M.Tech Integrated, B.Arch, B.Des)",
+      "research": "Research scholars"
+    },
+    "boys": "Boys (PDF)",
+    "girls": "Girls (PDF)",
+    "circular": "Circular (PDF)",
+    "feesSource": "From SRM's 2026–27 fee circulars",
+    "applySteps": [
+      "Finish your admission formalities and get your Student Net ID and password — only then can you book a hostel.",
+      "Book online on the student portal when your booking opens. First-year students are told their schedule directly; seniors see it on the portal.",
+      "Choose the block and room type you want. You can't pick a specific room number.",
+      "Before moving in, sign the undertaking to follow the hostel rules and the code of conduct."
+    ],
+    "applyPortal": "Book on the student portal",
+    "checklistTitle": "Booking checklist",
+    "before": "Before booking",
+    "beforeItems": [
+      "Check your bank account's single-transaction limit — net banking works best.",
+      "Read the hostel rules and the code of conduct.",
+      "Make sure your internet connection is stable."
+    ],
+    "during": "While booking",
+    "duringItems": [
+      "Log in to the student portal on one device only.",
+      "If a payment seems stuck, check the transaction log in your portal before trying again."
+    ],
+    "after": "When you move in, bring",
+    "afterItems": [
+      "Your hostel room allocation order",
+      "Two passport-size photos",
+      "The undertaking, personal-details and medical forms emailed to you a week before reopening"
+    ],
+    "whoTitle": "Who can stay",
+    "eligibleTitle": "Eligible",
+    "eligible": [
+      "Full-time undergraduate, postgraduate and research students of Engineering and Technology, Medicine and Health Sciences, Science and Humanities, Management and Law",
+      "Full-time diploma students of Polytechnic and Hotel Management"
+    ],
+    "notEligibleTitle": "Not eligible",
+    "notEligible": [
+      "Students who failed and were not re-admitted as regular students",
+      "Part-time, evening, correspondence or external students",
+      "Students penalised for indiscipline",
+      "Working men and women, and former students"
+    ],
+    "rulesLink": "Hostel rules 2026 (PDF)",
+    "codeLink": "Code of conduct",
+    "diningIntro": "Every hostel has its own mess for breakfast, lunch, snacks and dinner, with North Indian and South Indian menus. The international hostel adds Thai, Chinese and continental food.",
+    "messTimings": "Mess timings",
+    "workingDays": "Working days",
+    "holidays": "Holidays",
+    "meals": {
+      "breakfast": "Breakfast",
+      "lunch": "Lunch",
+      "snacks": "Tea & snacks",
+      "dinner": "Dinner",
+      "special": "Special lunch or dinner"
+    },
+    "guestTitle": "Parents can join for meals",
+    "guestIntro": "Tell the hostel office in advance. Guest rates per meal:",
+    "messRulesTitle": "Mess rules in short",
+    "messRules": [
+      "Self-service, with unlimited food except special items.",
+      "Show your ID card and mess card at every meal.",
+      "No food in rooms — if you're ill, the deputy warden arranges meals.",
+      "Wasting food costs ₹500 the first time; repeat offenders can lose their hostel place.",
+      "You stay a member of your hostel's mess until you officially leave; you can't switch messes."
+    ],
+    "canteensTitle": "Canteens and cafés on campus",
+    "hours": "{from}–{to}",
+    "open24": "Open 24 hours",
+    "canteens": {
+      "old-campus": "By the main entrance, near gate 4, opposite Potheri railway station",
+      "university-building": "Ground floor of the University Building, with small outlets on the 5th and 8th floors",
+      "tech-park": "Ground floor of Tech Park; seats over 650",
+      "java-green": "Near the clock tower — about 20 stalls, from shawarma and biryani to Subway",
+      "gh-cafe": "Opposite the labour ward, SRM Hospital",
+      "crri": "Fourth floor of the Medical College, for final-year MBBS students",
+      "foodexo": "Behind the Dental College",
+      "slice-of-life": "Next to SRM Medical College; seats up to 100",
+      "madras-cafe": "First floor, SRM General Hospital; seats about 150",
+      "royal-cafe": "Near the Valliammai Engineering College entrance, and opposite the SRM College of Pharmacy"
+    },
+    "safetyIntro": "What parents ask about most, from SRM's 2026 hostel rules and hostel pages.",
+    "safety": [
+      {
+        "t": "CCTV, guards and biometric entry",
+        "d": "Girls' hostels have 24×7 CCTV, security guards, power backup and biometric attendance. Every hostel has a biometric in-time set by its warden."
+      },
+      {
+        "t": "Staying out needs permission",
+        "d": "To stay out after 9 PM, a student must tell the warden in writing in advance, with consent from a parent in writing, by email or on a video call."
+      },
+      {
+        "t": "Visitors",
+        "d": "Parents may visit with the hostel's permission and sign the visitors' book; visitors stay in the lounge. Visitors of the opposite gender, other than parents, are not allowed, and no one stays overnight without approval."
+      },
+      {
+        "t": "Medical help, day and night",
+        "d": "Students use SRM Hospital in working hours and its casualty department after hours. At night the deputy warden arranges help, and an ambulance is on campus 24 hours."
+      },
+      {
+        "t": "Zero tolerance for ragging",
+        "d": "Ragging is a cognisable offence under the Tamil Nadu Prohibition of Ragging Act, punished with suspension or expulsion."
+      },
+      {
+        "t": "ID cards and quiet hours",
+        "d": "Only hostellers and authorised staff may enter, and students carry their ID cards at all times. Silence hours are 10 PM to 6 AM."
+      }
+    ],
+    "antiRagging": "Anti-ragging at SRM",
+    "directorate": "Directorate of Hostels",
+    "menOffice": "Boys' hostels",
+    "womenOffice": "Girls' hostels",
+    "blocksLabel": "Blocks",
+    "helpdesk": "Helpdesk",
+    "accounts": "Accounts office",
+    "office": "Hostel office",
+    "mobile": "Mobile",
+    "kopperundevi": "Kopperundevi (M Block) warden",
+    "pierre": "Pierre Fauchard hostel warden",
+    "staffLink": "Meet the hostel staff",
+    "officialPage": "SRM's official hostel pages",
+    "sourceNote": "From SRM's hostel pages, 2026–27 fee circulars and 2026 hostel rules, as of 26 October 2026. Fees and rules can change — confirm with the hostel office."
   }
 }
