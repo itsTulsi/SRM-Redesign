@@ -134,7 +134,10 @@
       "readStory": "Read the story",
       "researchTitle": "Research by mission",
       "researchIntro": "Not a list of departments — the problems we're working on.",
-      "researchNumbers": "Research in numbers"
+      "researchNumbers": "Research in numbers",
+      "first": "1st",
+      "award": "Award",
+      "scrollHint": "Scroll to run the lap"
     },
     "lead": {
       "kicker": "Act III",

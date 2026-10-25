@@ -1,5 +1,5 @@
 import { getLocale, getTranslations } from "next-intl/server";
-import { MediaPlaceholder } from "@/components/ui/MediaPlaceholder";
+import { Photo } from "@/components/ui/Photo";
 import { Fact } from "@/components/ui/Todo";
 import { alumni, isTodo, placements } from "@/lib/content";
 import { SECTION } from "@/lib/sections";
@@ -21,7 +21,7 @@ export async function ActLead() {
         <ul className="mt-10 grid gap-10 md:grid-cols-3 md:gap-6">
           {alumni.map((a) => (
             <li key={a.slug} className="flex flex-col gap-4">
-              <MediaPlaceholder description={`Portrait of ${a.name}`} file={a.photo} className="aspect-square w-full rounded-3xl" />
+              <Photo src={a.photo} alt={`Portrait of ${a.name}`} sizes="(min-width: 768px) 33vw, 100vw" className="aspect-square w-full rounded-3xl" />
               <div>
                 <h4 className="font-display text-2xl font-bold">{a.name}</h4>
                 <p className="mt-1 text-lg">{a.role}</p>

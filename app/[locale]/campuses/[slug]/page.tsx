@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { MediaPlaceholder } from "@/components/ui/MediaPlaceholder";
+import { Photo } from "@/components/ui/Photo";
 import { Fact } from "@/components/ui/Todo";
 import { campuses, colleges, getCampus } from "@/lib/content";
 import { Link, type Locale } from "@/lib/i18n";
@@ -48,9 +48,11 @@ export default async function CampusPage({ params }: Params) {
         ) : null}
       </p>
 
-      <MediaPlaceholder
-        description={`${campus.name} campus`}
-        file={campus.photo}
+      <Photo
+        src={campus.photo}
+        alt={`${campus.name} campus`}
+        sizes="(min-width: 1440px) 1344px, 100vw"
+        priority
         className="mt-10 aspect-[16/9] w-full rounded-2xl"
       />
 

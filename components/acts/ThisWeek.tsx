@@ -1,5 +1,5 @@
 import { getTranslations } from "next-intl/server";
-import { MediaPlaceholder } from "@/components/ui/MediaPlaceholder";
+import { Photo } from "@/components/ui/Photo";
 import { events, featuredStory } from "@/lib/content";
 import { Link } from "@/lib/i18n";
 import { SECTION } from "@/lib/sections";
@@ -18,9 +18,10 @@ export async function ThisWeek() {
 
         {featuredStory ? (
           <article aria-labelledby="featured-story" className="mt-10 grid gap-8 lg:grid-cols-12 lg:items-center">
-            <MediaPlaceholder
-              description={featuredStory.title}
-              file={featuredStory.media.photo}
+            <Photo
+              src={featuredStory.media.photo}
+              alt={featuredStory.title}
+              sizes="(min-width: 1024px) 58vw, 100vw"
               className="aspect-[16/10] rounded-3xl lg:col-span-7"
             />
             <div className="flex flex-col gap-4 lg:col-span-5">

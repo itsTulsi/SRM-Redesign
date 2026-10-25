@@ -11,7 +11,8 @@
     "check:content": "node scripts/check-content.mts",
     "prebuild": "npm run check:content",
     "build:verify": "NEXT_DIST_DIR=.next-verify next build",
-    "start:verify": "NEXT_DIST_DIR=.next-verify next start"
+    "start:verify": "NEXT_DIST_DIR=.next-verify next start",
+    "media:status": "node scripts/media-status.mts"
   },
   "dependencies": {
     "fuse.js": "7.5.0",

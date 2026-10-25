@@ -1,10 +1,11 @@
 import { getLocale, getTranslations } from "next-intl/server";
-import { MediaPlaceholder } from "@/components/ui/MediaPlaceholder";
+import { Photo } from "@/components/ui/Photo";
 import { Fact, Todo } from "@/components/ui/Todo";
 import { isTodo, missions, researchStats, studentWork, type Story } from "@/lib/content";
 import { Link } from "@/lib/i18n";
 import { missionAnchor, SECTION } from "@/lib/sections";
 import { ActHeader } from "./ActHeader";
+import { CamberScene } from "./CamberScene";
 import { StatFigure } from "./StatFigure";
 
 export async function ActLeap() {
@@ -18,9 +19,13 @@ export async function ActLeap() {
 
       <div id={SECTION.studentWork}>
         <h3 className="sr-only">{t("studentWork")}</h3>
-        {studentWork.map((story, i) => (
-          <StudentWorkPanel key={story.slug} story={story} index={i} readLabel={t("readStory")} />
-        ))}
+        {studentWork.map((story, i) =>
+          story.scene === "sequence" ? (
+            <CamberScene key={story.slug} story={story} />
+          ) : (
+            <StudentWorkPanel key={story.slug} story={story} index={i} readLabel={t("readStory")} />
+          ),
+        )}
       </div>
 
       <div id={SECTION.research} className="site-container py-20 lg:py-32">
@@ -37,7 +42,7 @@ export async function ActLeap() {
                 id={missionAnchor(m.slug)}
                 className="flex flex-col overflow-hidden rounded-3xl border border-line-subtle"
               >
-                <MediaPlaceholder description={`${m.name} research`} file={m.photo} className="aspect-[16/9] w-full" />
+                <Photo src={m.photo} alt={`${m.name} research`} sizes="(min-width: 768px) 50vw, 100vw" className="aspect-[16/9] w-full" />
                 <div className="flex flex-col gap-3 p-6 lg:p-8">
                   <h4 className="font-display text-3xl font-bold">{m.name}</h4>
                   <p className="text-lg text-fg-muted">{m.question}</p>
@@ -88,10 +93,10 @@ function StudentWorkPanel({ story, index, readLabel }: { story: Story; index: nu
       data-student-work={story.slug}
       className="site-grid min-h-[80svh] items-center gap-y-8 py-12 lg:py-20"
     >
-      <MediaPlaceholder
-        description={story.title}
-        file={story.media.video ?? story.media.photo}
-        kind={story.media.video ? "video" : "photo"}
+      <Photo
+        src={story.media.photo}
+        alt={story.title}
+        sizes="(min-width: 1024px) 58vw, 100vw"
         className={`col-span-full aspect-[4/3] rounded-3xl md:aspect-[16/10] lg:col-span-7 ${reversed ? "lg:order-2" : ""}`}
       />
       <div className={`col-span-full flex flex-col gap-5 lg:col-span-5 ${reversed ? "lg:order-1" : ""}`}>

@@ -1,21 +1,21 @@
 # Media drop folder
 
-Put real SRM photos and video here. Until a file exists, the site shows a neutral gradient with a visible
-"PHOTO TODO" / "VIDEO TODO" label naming the file it expects. **Never use stock photos of other campuses.**
+Run **`npm run media:status`** for the live checklist: every file the site expects, its exact path and spec, and
+✓/✗ for what's already here. Drop files at those paths and rebuild — placeholders switch to the real media
+automatically, no code changes.
 
-Planned layout (exact filenames are printed on each placeholder as sections are built):
+Until a file exists the site shows a neutral gradient labelled "PHOTO TODO" / "VIDEO TODO".
+**Never use stock photos or photos of other campuses.**
+
+## Formats
+- Photos: JPG (or WebP/PNG/AVIF with the same name) at the largest size you have — next/image makes the small versions.
+- Video: H.264 MP4, muted for background loops; anything with speech needs a `.vtt` caption file with the same name.
+- People: only with consent; alumni portraits need written permission.
+
+## Camber Racing scroll scene
+Supply one short video of the car (4–8 s turntable spin or slow drive-by, steady camera, car centred), then:
 
 ```
-media/
-  hero/        campus-loop.mp4 (muted, ≤ 8 MB, 1080p) · campus-loop.webm · poster.jpg (first frame)
-  colleges/    one landscape photo per college (e.g. engineering.jpg)
-  camber/      car photos / video, optional .glb model (< 2 MB)
-  student-work/ swift-challenge.jpg · startup.jpg
-  research/    one image per mission (health, mobility, space-materials, sustainability)
-  alumni/      portraits (square, ≥ 800 px) — only with permission
-  campuses/    one photo per campus
-  stories/     "This week at SRM" story images
+scripts/make-sequence.sh path/to/camber.mp4        # → public/media/camber/sequence/{lg,sm}/frame-0001.webp …
 ```
-
-Guidelines: JPG/PNG/WebP at the largest size you have (next/image resizes them); video with captions as
-`.vtt` next to it, same basename.
+Uses WebP if your ffmpeg has libwebp (`brew install ffmpeg`), otherwise JPEG.

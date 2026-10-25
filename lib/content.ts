@@ -99,7 +99,9 @@ export type Story = {
   people: { name: string; role: string }[];
   facts: { label: string; value: string }[];
   body: string[];
-  media: { photo?: string; video?: string; model?: string };
+  media: { photo?: string; video?: string; model?: string; sequence?: string };
+  /** "sequence" = pinned scroll-scrubbed scene (Camber); default = standard panel. */
+  scene?: "sequence";
   tags: string[];
 };
 

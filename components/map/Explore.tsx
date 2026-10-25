@@ -1,5 +1,5 @@
 import { getTranslations } from "next-intl/server";
-import { MediaPlaceholder } from "@/components/ui/MediaPlaceholder";
+import { Photo } from "@/components/ui/Photo";
 import { campuses } from "@/lib/content";
 import { Link } from "@/lib/i18n";
 import { SECTION } from "@/lib/sections";
@@ -27,7 +27,7 @@ export async function Explore() {
         <div className="mt-12 grid gap-6 lg:grid-cols-12">
           {main ? (
             <article aria-labelledby={`campus-${main.slug}`} className="overflow-hidden rounded-3xl border border-line-subtle lg:col-span-7">
-              <MediaPlaceholder description={`${main.name} campus`} file={main.photo} className="aspect-[16/10] w-full" />
+              <Photo src={main.photo} alt={`${main.name} campus`} sizes="(min-width: 1024px) 58vw, 100vw" className="aspect-[16/10] w-full" />
               <div className="flex flex-col gap-4 p-6 lg:p-8">
                 <p className="text-sm font-semibold tracking-wide text-fg-muted uppercase">{t("main")}</p>
                 <h3 id={`campus-${main.slug}`} className="font-display text-4xl font-bold">

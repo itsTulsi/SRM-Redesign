@@ -134,7 +134,10 @@
       "readStory": "पूरी कहानी पढ़ें",
       "researchTitle": "मिशन के अनुसार शोध",
       "researchIntro": "विभागों की सूची नहीं — वे समस्याएँ जिन पर हम काम कर रहे हैं।",
-      "researchNumbers": "आँकड़ों में शोध"
+      "researchNumbers": "आँकड़ों में शोध",
+      "first": "प्रथम",
+      "award": "पुरस्कार",
+      "scrollHint": "लैप चलाने के लिए स्क्रॉल करें"
     },
     "lead": {
       "kicker": "अंक III",

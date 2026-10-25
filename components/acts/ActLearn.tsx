@@ -1,5 +1,5 @@
 import { getLocale, getTranslations } from "next-intl/server";
-import { MediaPlaceholder } from "@/components/ui/MediaPlaceholder";
+import { Photo } from "@/components/ui/Photo";
 import { Fact } from "@/components/ui/Todo";
 import { colleges, naacGrade, nirf, programmes } from "@/lib/content";
 import { Link } from "@/lib/i18n";
@@ -34,7 +34,7 @@ export async function ActLearn() {
                 className="group flex h-full flex-col overflow-hidden rounded-3xl border border-line-subtle bg-bg text-fg no-underline hover:border-line"
               >
                 <div className="overflow-hidden">
-                  <MediaPlaceholder description={college.name} file={college.photo} className="college-media aspect-[4/3] w-full" />
+                  <Photo src={college.photo} alt={college.name} sizes="(min-width: 768px) 352px, 78vw" className="college-media aspect-[4/3] w-full" />
                 </div>
                 <div className="flex flex-1 flex-col gap-4 p-5">
                   <div>

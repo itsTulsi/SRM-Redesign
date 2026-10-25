@@ -46,7 +46,8 @@
         "The team is multidisciplinary, bringing together mechanical, electrical, electronics and computing students, led by captain Himanshu Kumar (ECE, final year)."
       ],
       "media": {
-        "photo": "media/camber/hero.jpg",
+        "photo": "media/camber/poster.jpg",
+        "sequence": "media/camber/sequence",
         "video": "media/camber/run.mp4",
         "model": "media/camber/car.glb"
       },
@@ -55,7 +56,8 @@
         "engineering",
         "motorsport",
         "students"
-      ]
+      ],
+      "scene": "sequence"
     },
     {
       "slug": "swift-student-challenge-2026",

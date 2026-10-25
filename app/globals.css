@@ -490,3 +490,35 @@ html.lenis body {
 .cursor-ring[data-state="label"] > span {
   opacity: 1;
 }
+
+/* ═══ Step 8: Camber Racing pinned scene ═══
+   data-motion is set before first paint, so the tall track never causes a layout shift.
+   Static (reduced motion / Lite / no JS): a normal full-height block, every callout visible. */
+.camber-sticky {
+  position: relative;
+  min-height: calc(100svh - 4rem);
+}
+[data-motion="full"] .camber-track {
+  height: 340svh;
+}
+[data-motion="full"] .camber-sticky {
+  position: sticky;
+  top: 4rem;
+  height: calc(100svh - 4rem);
+}
+.camber-callout {
+  transition:
+    opacity 450ms var(--ease-leap),
+    translate 450ms var(--ease-leap);
+}
+.camber-track[data-live] .camber-callout:not([data-on]) {
+  opacity: 0;
+  translate: 0 0.75rem;
+}
+.camber-progress {
+  transform-origin: left;
+  transform: scaleX(var(--camber-p, 1));
+}
+.camber-track[data-live]:not([data-started]) .camber-hint {
+  display: block;
+}
