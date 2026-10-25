@@ -1,0 +1,31 @@
+{
+  "name": "SRM Institute of Science and Technology",
+  "shortName": "SRMIST",
+  "location": "Kattankulathur, Chennai",
+  "tagline": "Learn. Leap. Lead.",
+  "accreditation": { "naac": "A++" },
+  "admissions": {
+    "phones": [
+      { "id": "engineering", "label": "Engineering, Agriculture, Architecture", "display": "+91 70 2645 2645", "tel": "+917026452645" },
+      { "id": "other", "label": "All other colleges", "display": "+91 70 2647 2647", "tel": "+917026472647" },
+      { "id": "main", "label": "Main switchboard", "display": "+91-44-27417000", "tel": "+914427417000" }
+    ],
+    "applyUrl": "https://applications.srmist.edu.in/",
+    "status": "Admissions Open 2026"
+  },
+  "virtualTourUrl": "https://webstor.srmist.edu.in/web_assets/srmist-virtual-tour-vo/index.htm",
+  "statutoryLinks": [
+    { "id": "naac", "label": "NAAC", "href": "TODO: NAAC page URL on srmist.edu.in" },
+    { "id": "ugc", "label": "UGC", "href": "TODO: UGC disclosure page URL" },
+    { "id": "aicte", "label": "AICTE", "href": "TODO: AICTE approval page URL" },
+    { "id": "rti", "label": "RTI", "href": "TODO: RTI page URL" },
+    { "id": "nirf", "label": "NIRF", "href": "TODO: NIRF data page URL" },
+    { "id": "iqac", "label": "IQAC", "href": "TODO: IQAC page URL" },
+    { "id": "anti-ragging", "label": "Anti-Ragging", "href": "TODO: Anti-ragging page URL" },
+    { "id": "grievance", "label": "Grievance Redressal", "href": "TODO: Grievance redressal page URL" }
+  ],
+  "_sources": [
+    "CLAUDE.md §7 (verified facts)",
+    "https://applications.srmist.edu.in/ — application portal, 'Admissions Open 2026'"
+  ]
+}

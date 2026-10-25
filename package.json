@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint . --max-warnings=0",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "check:content": "node scripts/check-content.mts",
+    "prebuild": "npm run check:content"
   },
   "dependencies": {
     "next": "15.5.28",

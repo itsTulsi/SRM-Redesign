@@ -1,0 +1,63 @@
+{
+  "_note": "Every number here is rendered as real text in SSR HTML; counters only animate as an enhancement. 'display' is the exact string shown; 'value' is the numeric end-state for count-up.",
+  "nirf": {
+    "current": "2025",
+    "years": {
+      "2025": {
+        "source": "https://medical.srmist.edu.in/?p=23130",
+        "sourceNote": "NIRF 2025 table published on SRM's own site; matches Careers360 reporting. nirfindia.org blocks automated reads — TODO: spot-check against nirfindia.org before submission.",
+        "ranks": [
+          { "id": "university", "label": "University", "rank": 11 },
+          { "id": "engineering", "label": "Engineering", "rank": 14 },
+          { "id": "overall", "label": "Overall", "rank": 22 },
+          { "id": "medical", "label": "Medical", "rank": 18 },
+          { "id": "pharmacy", "label": "Pharmacy", "rank": 10 },
+          { "id": "dental", "label": "Dental", "rank": 8 },
+          { "id": "architecture", "label": "Architecture", "rank": 18 },
+          { "id": "research", "label": "Research", "rank": 25 },
+          { "id": "law", "label": "Law", "rank": 25 },
+          { "id": "management", "label": "Management", "rank": 56 },
+          { "id": "agriculture", "label": "Agriculture & Allied Sectors", "rank": 33 },
+          { "id": "sustainability", "label": "Sustainability (SDG)", "rank": 4 }
+        ],
+        "bands": [{ "id": "innovation", "label": "Innovation", "band": "11–50" }],
+        "otherInstitutions": [
+          { "id": "dental-ktr", "label": "Dental — SRM Kattankulathur Dental College and Hospital", "rank": 39 }
+        ]
+      },
+      "2024": {
+        "source": "srmist.edu.in homepage (CLAUDE.md §7)",
+        "ranks": [
+          { "id": "university", "label": "University", "rank": 12 },
+          { "id": "engineering", "label": "Engineering", "rank": 13 },
+          { "id": "overall", "label": "Overall", "rank": 21 },
+          { "id": "dental", "label": "Dental", "rank": 7 },
+          { "id": "architecture", "label": "Architecture", "rank": 11 },
+          { "id": "pharmacy", "label": "Pharmacy", "rank": 11 },
+          { "id": "medical", "label": "Medical", "rank": 18 },
+          { "id": "research", "label": "Research", "rank": 24 }
+        ]
+      }
+    }
+  },
+  "naac": { "grade": "A++" },
+  "placements": {
+    "season": "2023–24",
+    "seasonNote": "TODO: replace with 2024–25 or 2025–26 placement figures once verified",
+    "items": [
+      { "id": "companies", "label": "companies recruited", "value": 980, "display": "980+", "suffix": "+" },
+      { "id": "offers", "label": "offers", "value": 5546, "display": "5,546+", "suffix": "+" },
+      { "id": "high-paying", "label": "high-paying offers", "value": 2232, "display": "2,232+", "suffix": "+" },
+      { "id": "highest-ctc", "label": "highest CTC", "value": 52, "display": "52 LPA", "suffix": " LPA" },
+      { "id": "average-ctc", "label": "average CTC", "value": 7.19, "display": "7.19 LPA", "suffix": " LPA", "decimals": 2 }
+    ]
+  },
+  "research": {
+    "items": [
+      { "id": "patents", "label": "patents", "value": 920, "display": "920+", "suffix": "+" },
+      { "id": "publications", "label": "publications", "value": 47000, "display": "47,000+", "suffix": "+" },
+      { "id": "scopus", "label": "Scopus-indexed publications", "value": 33000, "display": "33,000+", "suffix": "+" },
+      { "id": "funding", "label": "in externally funded projects", "value": 250, "display": "₹250+ crore", "prefix": "₹", "suffix": "+ crore" }
+    ]
+  }
+}

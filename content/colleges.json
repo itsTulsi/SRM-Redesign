@@ -1,0 +1,91 @@
+{
+  "_note": "Colleges/faculties shown in Act I and used as programme.college. Names from srmist.edu.in sub-sites and the application portal. TODO: verify each name against the 2026–27 prospectus. outcome = the one number shown on hover; only verified figures, otherwise TODO.",
+  "colleges": [
+    {
+      "slug": "engineering",
+      "name": "Faculty of Engineering and Technology",
+      "shortName": "Engineering",
+      "campus": "kattankulathur",
+      "outcome": { "value": "TODO: one verified engineering-specific outcome", "label": "TODO: label for the outcome number" },
+      "photo": "media/colleges/engineering.jpg"
+    },
+    {
+      "slug": "medicine",
+      "name": "SRM Medical College Hospital and Research Centre",
+      "shortName": "Medicine",
+      "campus": "kattankulathur",
+      "outcome": { "value": "18", "label": "NIRF 2025 Medical rank" },
+      "photo": "media/colleges/medicine.jpg"
+    },
+    {
+      "slug": "dental",
+      "name": "SRM Kattankulathur Dental College and Hospital",
+      "shortName": "Dental",
+      "campus": "kattankulathur",
+      "outcome": { "value": "100", "label": "BDS seats a year (DCI norms)" },
+      "photo": "media/colleges/dental.jpg"
+    },
+    {
+      "slug": "law",
+      "name": "SRM School of Law",
+      "shortName": "Law",
+      "campus": "kattankulathur",
+      "outcome": { "value": "25", "label": "NIRF 2025 Law rank" },
+      "photo": "media/colleges/law.jpg"
+    },
+    {
+      "slug": "management",
+      "name": "Faculty of Management",
+      "shortName": "Management",
+      "campus": "kattankulathur",
+      "outcome": { "value": "56", "label": "NIRF 2025 Management rank" },
+      "photo": "media/colleges/management.jpg"
+    },
+    {
+      "slug": "architecture",
+      "name": "School of Architecture and Interior Design",
+      "shortName": "Architecture",
+      "campus": "kattankulathur",
+      "outcome": { "value": "18", "label": "NIRF 2025 Architecture rank" },
+      "photo": "media/colleges/architecture.jpg"
+    },
+    {
+      "slug": "science-humanities",
+      "name": "Faculty of Science and Humanities",
+      "shortName": "Science & Humanities",
+      "campus": "kattankulathur",
+      "outcome": { "value": "TODO: one verified outcome", "label": "TODO: label for the outcome number" },
+      "photo": "media/colleges/science-humanities.jpg"
+    },
+    {
+      "slug": "agriculture",
+      "name": "SRM College of Agricultural Sciences",
+      "shortName": "Agriculture",
+      "campus": "baburayanpettai",
+      "outcome": { "value": "400+", "label": "acre campus at Baburayanpettai" },
+      "photo": "media/colleges/agriculture.jpg"
+    },
+    {
+      "slug": "pharmacy",
+      "name": "SRM College of Pharmacy",
+      "shortName": "Pharmacy",
+      "campus": "kattankulathur",
+      "outcome": { "value": "10", "label": "NIRF 2025 Pharmacy rank" },
+      "photo": "media/colleges/pharmacy.jpg"
+    },
+    {
+      "slug": "nursing",
+      "name": "SRM College of Nursing",
+      "shortName": "Nursing",
+      "campus": "kattankulathur",
+      "outcome": { "value": "TODO: one verified outcome", "label": "TODO: label for the outcome number" },
+      "photo": "media/colleges/nursing.jpg"
+    }
+  ],
+  "_sources": [
+    "https://applications.srmist.edu.in/ — faculty and programme names",
+    "https://dental.srmist.edu.in/ug/ — dental college name, 100 seats per DCI norms",
+    "https://applications.srmist.edu.in/agricultural-sciences-form — 400+ acres at Baburayanpettai",
+    "https://medical.srmist.edu.in/?p=23130 — NIRF 2025 table published by SRM"
+  ]
+}

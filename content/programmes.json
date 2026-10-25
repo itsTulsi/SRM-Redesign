@@ -1,0 +1,921 @@
+{
+  "_note": "Names from SRM's application portal and college sites. Durations: from SRM pages where cited, otherwise the statutory/standard length for the degree (B.Tech 4, M.Tech 2, MBA 2, B.Arch 5, integrated LL.B. 5, B.Pharm 4, Pharm.D 6, B.Sc. Nursing 4). outcomes = typical career paths for the discipline, NOT SRM placement claims. Engineering also runs at Ramapuram, Vadapalani, Delhi NCR and Tiruchirappalli — TODO: map per-programme campus availability.",
+  "programmes": [
+    {
+      "slug": "btech-cse",
+      "name": "B.Tech Computer Science and Engineering",
+      "college": "engineering",
+      "campuses": [
+        "kattankulathur"
+      ],
+      "level": "UG",
+      "durationYears": 4,
+      "eligibility": "TODO: eligibility from 2026–27 prospectus",
+      "entrance": "TODO: confirm SRMJEEE (B.Tech) details for 2026",
+      "feesPerYearINR": "TODO: confirm 2026–27 annual tuition with admissions",
+      "deadline": "TODO: 2026 application deadline",
+      "summary": "Algorithms, systems and software — the core computing degree.",
+      "tags": [
+        "computers",
+        "software",
+        "coding",
+        "programming",
+        "apps",
+        "it",
+        "tech"
+      ],
+      "outcomes": [
+        "Software engineer",
+        "Systems engineer",
+        "Product engineer",
+        "Higher studies in CS"
+      ],
+      "sources": [
+        "https://applications.srmist.edu.in/"
+      ]
+    },
+    {
+      "slug": "btech-cse-aiml",
+      "name": "B.Tech Computer Science and Engineering with specialisation in Artificial Intelligence and Machine Learning",
+      "college": "engineering",
+      "campuses": [
+        "kattankulathur"
+      ],
+      "level": "UG",
+      "durationYears": 4,
+      "eligibility": "TODO: eligibility from 2026–27 prospectus",
+      "entrance": "TODO: confirm SRMJEEE (B.Tech) details for 2026",
+      "feesPerYearINR": "TODO: confirm 2026–27 annual tuition with admissions",
+      "deadline": "TODO: 2026 application deadline",
+      "summary": "Computer science with a focus on machine learning, data and intelligent systems.",
+      "tags": [
+        "ai",
+        "artificial intelligence",
+        "machine learning",
+        "ml",
+        "data",
+        "deep learning",
+        "computers",
+        "robots"
+      ],
+      "outcomes": [
+        "Machine learning engineer",
+        "Data scientist",
+        "AI research"
+      ],
+      "sources": [
+        "https://applications.srmist.edu.in/"
+      ]
+    },
+    {
+      "slug": "btech-cse-cyber-security",
+      "name": "B.Tech Computer Science and Engineering with specialisation in Cyber Security",
+      "college": "engineering",
+      "campuses": [
+        "kattankulathur"
+      ],
+      "level": "UG",
+      "durationYears": 4,
+      "eligibility": "TODO: eligibility from 2026–27 prospectus",
+      "entrance": "TODO: confirm SRMJEEE (B.Tech) details for 2026",
+      "feesPerYearINR": "TODO: confirm 2026–27 annual tuition with admissions",
+      "deadline": "TODO: 2026 application deadline",
+      "summary": "Computing with a focus on securing networks, systems and data.",
+      "tags": [
+        "cyber security",
+        "security",
+        "hacking",
+        "networks",
+        "computers",
+        "privacy"
+      ],
+      "outcomes": [
+        "Security analyst",
+        "Penetration tester",
+        "Security engineer"
+      ],
+      "sources": [
+        "https://applications.srmist.edu.in/"
+      ]
+    },
+    {
+      "slug": "btech-ece",
+      "name": "B.Tech Electronics and Communication Engineering",
+      "college": "engineering",
+      "campuses": [
+        "kattankulathur"
+      ],
+      "level": "UG",
+      "durationYears": 4,
+      "eligibility": "TODO: eligibility from 2026–27 prospectus",
+      "entrance": "TODO: confirm SRMJEEE (B.Tech) details for 2026",
+      "feesPerYearINR": "TODO: confirm 2026–27 annual tuition with admissions",
+      "deadline": "TODO: 2026 application deadline",
+      "summary": "Circuits, chips, signals and wireless communication.",
+      "tags": [
+        "electronics",
+        "chips",
+        "vlsi",
+        "embedded",
+        "communication",
+        "wireless",
+        "iot",
+        "hardware"
+      ],
+      "outcomes": [
+        "Embedded engineer",
+        "VLSI design engineer",
+        "Telecom engineer"
+      ],
+      "sources": [
+        "https://applications.srmist.edu.in/"
+      ]
+    },
+    {
+      "slug": "btech-eee",
+      "name": "B.Tech Electrical and Electronics Engineering",
+      "college": "engineering",
+      "campuses": [
+        "kattankulathur"
+      ],
+      "level": "UG",
+      "durationYears": 4,
+      "eligibility": "TODO: eligibility from 2026–27 prospectus",
+      "entrance": "TODO: confirm SRMJEEE (B.Tech) details for 2026",
+      "feesPerYearINR": "TODO: confirm 2026–27 annual tuition with admissions",
+      "deadline": "TODO: 2026 application deadline",
+      "summary": "Power systems, machines, drives and renewable energy.",
+      "tags": [
+        "electrical",
+        "power",
+        "energy",
+        "renewable",
+        "ev",
+        "electric vehicles",
+        "solar"
+      ],
+      "outcomes": [
+        "Power systems engineer",
+        "EV powertrain engineer",
+        "Energy consultant"
+      ],
+      "sources": [
+        "https://applications.srmist.edu.in/"
+      ]
+    },
+    {
+      "slug": "btech-mechanical",
+      "name": "B.Tech Mechanical Engineering",
+      "college": "engineering",
+      "campuses": [
+        "kattankulathur"
+      ],
+      "level": "UG",
+      "durationYears": 4,
+      "eligibility": "TODO: eligibility from 2026–27 prospectus",
+      "entrance": "TODO: confirm SRMJEEE (B.Tech) details for 2026",
+      "feesPerYearINR": "TODO: confirm 2026–27 annual tuition with admissions",
+      "deadline": "TODO: 2026 application deadline",
+      "summary": "Design, manufacturing, thermal systems and machines.",
+      "tags": [
+        "mechanical",
+        "machines",
+        "design",
+        "manufacturing",
+        "cars",
+        "engines",
+        "robots"
+      ],
+      "outcomes": [
+        "Design engineer",
+        "Manufacturing engineer",
+        "R&D engineer"
+      ],
+      "sources": [
+        "https://applications.srmist.edu.in/"
+      ]
+    },
+    {
+      "slug": "btech-robotics-automation",
+      "name": "B.Tech Robotics and Automation",
+      "college": "engineering",
+      "campuses": [
+        "kattankulathur"
+      ],
+      "level": "UG",
+      "durationYears": 4,
+      "eligibility": "TODO: eligibility from 2026–27 prospectus",
+      "entrance": "TODO: confirm SRMJEEE (B.Tech) details for 2026",
+      "feesPerYearINR": "TODO: confirm 2026–27 annual tuition with admissions",
+      "deadline": "TODO: 2026 application deadline",
+      "summary": "Robots, sensors, control systems and industrial automation.",
+      "tags": [
+        "robotics",
+        "robots",
+        "automation",
+        "drones",
+        "control",
+        "mechatronics",
+        "ai"
+      ],
+      "outcomes": [
+        "Robotics engineer",
+        "Automation engineer",
+        "Controls engineer"
+      ],
+      "sources": [
+        "https://applications.srmist.edu.in/"
+      ]
+    },
+    {
+      "slug": "btech-automobile",
+      "name": "B.Tech Automobile Engineering",
+      "college": "engineering",
+      "campuses": [
+        "kattankulathur"
+      ],
+      "level": "UG",
+      "durationYears": 4,
+      "eligibility": "TODO: eligibility from 2026–27 prospectus",
+      "entrance": "TODO: confirm SRMJEEE (B.Tech) details for 2026",
+      "feesPerYearINR": "TODO: confirm 2026–27 annual tuition with admissions",
+      "deadline": "TODO: 2026 application deadline",
+      "summary": "Vehicle design, powertrains and automotive electronics.",
+      "tags": [
+        "automobile",
+        "cars",
+        "vehicles",
+        "racing",
+        "formula",
+        "ev",
+        "electric vehicles",
+        "motorsport"
+      ],
+      "outcomes": [
+        "Automotive design engineer",
+        "Vehicle testing engineer",
+        "EV engineer"
+      ],
+      "sources": [
+        "https://applications.srmist.edu.in/"
+      ]
+    },
+    {
+      "slug": "btech-aerospace",
+      "name": "B.Tech Aerospace Engineering",
+      "college": "engineering",
+      "campuses": [
+        "kattankulathur"
+      ],
+      "level": "UG",
+      "durationYears": 4,
+      "eligibility": "TODO: eligibility from 2026–27 prospectus",
+      "entrance": "TODO: confirm SRMJEEE (B.Tech) details for 2026",
+      "feesPerYearINR": "TODO: confirm 2026–27 annual tuition with admissions",
+      "deadline": "TODO: 2026 application deadline",
+      "summary": "Aircraft, spacecraft, aerodynamics and propulsion.",
+      "tags": [
+        "aerospace",
+        "aircraft",
+        "space",
+        "rockets",
+        "drones",
+        "aviation",
+        "satellites"
+      ],
+      "outcomes": [
+        "Aerospace design engineer",
+        "Propulsion engineer",
+        "Space-tech engineer"
+      ],
+      "sources": [
+        "https://applications.srmist.edu.in/"
+      ]
+    },
+    {
+      "slug": "btech-biotechnology",
+      "name": "B.Tech Biotechnology",
+      "college": "engineering",
+      "campuses": [
+        "kattankulathur"
+      ],
+      "level": "UG",
+      "durationYears": 4,
+      "eligibility": "TODO: eligibility from 2026–27 prospectus",
+      "entrance": "TODO: confirm SRMJEEE (B.Tech) details for 2026",
+      "feesPerYearINR": "TODO: confirm 2026–27 annual tuition with admissions",
+      "deadline": "TODO: 2026 application deadline",
+      "summary": "Engineering applied to living systems — genetics, bioprocess and bioinformatics.",
+      "tags": [
+        "biotechnology",
+        "biology",
+        "genetics",
+        "medicine",
+        "bioinformatics",
+        "lab"
+      ],
+      "outcomes": [
+        "Bioprocess engineer",
+        "Research scientist",
+        "Bioinformatics analyst"
+      ],
+      "sources": [
+        "https://applications.srmist.edu.in/"
+      ]
+    },
+    {
+      "slug": "btech-civil",
+      "name": "B.Tech Civil Engineering",
+      "college": "engineering",
+      "campuses": [
+        "kattankulathur"
+      ],
+      "level": "UG",
+      "durationYears": 4,
+      "eligibility": "TODO: eligibility from 2026–27 prospectus",
+      "entrance": "TODO: confirm SRMJEEE (B.Tech) details for 2026",
+      "feesPerYearINR": "TODO: confirm 2026–27 annual tuition with admissions",
+      "deadline": "TODO: 2026 application deadline",
+      "summary": "Structures, infrastructure, water and sustainable cities.",
+      "tags": [
+        "civil",
+        "construction",
+        "buildings",
+        "infrastructure",
+        "bridges",
+        "sustainability",
+        "cities"
+      ],
+      "outcomes": [
+        "Structural engineer",
+        "Infrastructure planner",
+        "Construction manager"
+      ],
+      "sources": [
+        "https://applications.srmist.edu.in/"
+      ]
+    },
+    {
+      "slug": "mtech-robotics",
+      "name": "M.Tech Robotics",
+      "college": "engineering",
+      "campuses": [
+        "kattankulathur"
+      ],
+      "level": "PG",
+      "durationYears": 2,
+      "eligibility": "TODO: eligibility from 2026–27 prospectus",
+      "entrance": "TODO: entrance exam / admission basis",
+      "feesPerYearINR": "TODO: confirm 2026–27 annual tuition with admissions",
+      "deadline": "TODO: 2026 application deadline",
+      "summary": "Advanced robotics: manipulation, perception and autonomous systems.",
+      "tags": [
+        "robotics",
+        "robots",
+        "automation",
+        "ai",
+        "masters",
+        "postgraduate"
+      ],
+      "outcomes": [
+        "Robotics R&D engineer",
+        "Autonomous systems engineer",
+        "PhD"
+      ],
+      "sources": [
+        "https://applications.srmist.edu.in/"
+      ]
+    },
+    {
+      "slug": "mtech-data-science",
+      "name": "M.Tech Data Science",
+      "college": "engineering",
+      "campuses": [
+        "kattankulathur"
+      ],
+      "level": "PG",
+      "durationYears": 2,
+      "eligibility": "TODO: eligibility from 2026–27 prospectus",
+      "entrance": "TODO: entrance exam / admission basis",
+      "feesPerYearINR": "TODO: confirm 2026–27 annual tuition with admissions",
+      "deadline": "TODO: 2026 application deadline",
+      "summary": "Statistics, machine learning and large-scale data systems.",
+      "tags": [
+        "data science",
+        "data",
+        "ai",
+        "machine learning",
+        "analytics",
+        "masters",
+        "postgraduate"
+      ],
+      "outcomes": [
+        "Data scientist",
+        "ML engineer",
+        "Analytics lead"
+      ],
+      "sources": [
+        "https://applications.srmist.edu.in/"
+      ]
+    },
+    {
+      "slug": "mbbs",
+      "name": "MBBS — Bachelor of Medicine and Bachelor of Surgery",
+      "college": "medicine",
+      "campuses": [
+        "kattankulathur"
+      ],
+      "level": "UG",
+      "durationYears": 5.5,
+      "eligibility": "TODO: eligibility from 2026–27 prospectus",
+      "entrance": "NEET (UG)",
+      "feesPerYearINR": "TODO: confirm 2026–27 annual tuition with admissions",
+      "deadline": "TODO: 2026 application deadline",
+      "summary": "The medical degree: four and a half years of study plus a one-year compulsory internship.",
+      "tags": [
+        "medicine",
+        "doctor",
+        "mbbs",
+        "health",
+        "hospital",
+        "neet",
+        "surgery"
+      ],
+      "outcomes": [
+        "Doctor (after internship and registration)",
+        "MD / MS specialisation"
+      ],
+      "sources": [
+        "https://www.srmist.edu.in/program/mbbs-bachelor-of-medicine-and-bachelor-of-surgery/",
+        "https://www.srmist.edu.in/admission-india/medicine-health-sciences/"
+      ]
+    },
+    {
+      "slug": "bds",
+      "name": "BDS — Bachelor of Dental Surgery",
+      "college": "dental",
+      "campuses": [
+        "kattankulathur"
+      ],
+      "level": "UG",
+      "durationYears": 5,
+      "eligibility": "Plus Two (science stream) pass with NEET eligibility.",
+      "entrance": "NEET (UG); seats allotted through common counselling by DGHS (MCC)",
+      "feesPerYearINR": "TODO: dental.srmist.edu.in/ug lists ₹3,90,000 tuition + ₹10,000 one-time registration, but the table has no year — confirm for 2026–27",
+      "deadline": "TODO: 2026 application deadline",
+      "summary": "Five years: four of study and one of compulsory internship. 100 seats a year.",
+      "tags": [
+        "dental",
+        "dentist",
+        "teeth",
+        "bds",
+        "health",
+        "neet"
+      ],
+      "outcomes": [
+        "Dental surgeon",
+        "MDS specialisation",
+        "Own practice"
+      ],
+      "sources": [
+        "https://dental.srmist.edu.in/ug/"
+      ]
+    },
+    {
+      "slug": "b-pharm",
+      "name": "B.Pharm — Bachelor of Pharmacy",
+      "college": "pharmacy",
+      "campuses": [
+        "kattankulathur"
+      ],
+      "level": "UG",
+      "durationYears": 4,
+      "eligibility": "TODO: eligibility from 2026–27 prospectus",
+      "entrance": "TODO: entrance exam / admission basis",
+      "feesPerYearINR": "TODO: confirm 2026–27 annual tuition with admissions",
+      "deadline": "TODO: 2026 application deadline",
+      "summary": "Drugs from molecule to medicine: chemistry, formulation and regulation.",
+      "tags": [
+        "pharmacy",
+        "medicine",
+        "drugs",
+        "chemistry",
+        "health",
+        "pharma"
+      ],
+      "outcomes": [
+        "Pharmacist",
+        "Formulation scientist",
+        "Regulatory affairs"
+      ],
+      "sources": [
+        "https://applications.srmist.edu.in/"
+      ]
+    },
+    {
+      "slug": "pharm-d",
+      "name": "Pharm.D — Doctor of Pharmacy",
+      "college": "pharmacy",
+      "campuses": [
+        "kattankulathur"
+      ],
+      "level": "UG",
+      "durationYears": 6,
+      "eligibility": "TODO: eligibility from 2026–27 prospectus",
+      "entrance": "TODO: entrance exam / admission basis",
+      "feesPerYearINR": "TODO: confirm 2026–27 annual tuition with admissions",
+      "deadline": "TODO: 2026 application deadline",
+      "summary": "Clinical pharmacy practice working alongside doctors in hospitals.",
+      "tags": [
+        "pharmacy",
+        "clinical",
+        "hospital",
+        "health",
+        "pharma"
+      ],
+      "outcomes": [
+        "Clinical pharmacist",
+        "Clinical research",
+        "Pharmacovigilance"
+      ],
+      "sources": [
+        "https://applications.srmist.edu.in/"
+      ]
+    },
+    {
+      "slug": "bsc-nursing",
+      "name": "B.Sc. Nursing",
+      "college": "nursing",
+      "campuses": [
+        "kattankulathur"
+      ],
+      "level": "UG",
+      "durationYears": 4,
+      "eligibility": "TODO: eligibility from 2026–27 prospectus",
+      "entrance": "TODO: entrance exam / admission basis",
+      "feesPerYearINR": "TODO: confirm 2026–27 annual tuition with admissions",
+      "deadline": "TODO: 2026 application deadline",
+      "summary": "Professional nursing education with hospital-based clinical training.",
+      "tags": [
+        "nursing",
+        "nurse",
+        "health",
+        "hospital",
+        "care"
+      ],
+      "outcomes": [
+        "Registered nurse",
+        "Nurse educator",
+        "M.Sc. Nursing"
+      ],
+      "sources": [
+        "https://applications.srmist.edu.in/"
+      ]
+    },
+    {
+      "slug": "ba-llb-hons",
+      "name": "B.A. LL.B. (Honours)",
+      "college": "law",
+      "campuses": [
+        "kattankulathur"
+      ],
+      "level": "UG",
+      "durationYears": 5,
+      "eligibility": "TODO: eligibility from 2026–27 prospectus",
+      "entrance": "TODO: entrance exam / admission basis",
+      "feesPerYearINR": "TODO: confirm 2026–27 annual tuition with admissions",
+      "deadline": "TODO: 2026 application deadline",
+      "summary": "Integrated arts and law degree.",
+      "tags": [
+        "law",
+        "lawyer",
+        "legal",
+        "justice",
+        "court",
+        "politics"
+      ],
+      "outcomes": [
+        "Advocate",
+        "Corporate lawyer",
+        "Judicial services",
+        "Policy"
+      ],
+      "sources": [
+        "https://applications.srmist.edu.in/"
+      ]
+    },
+    {
+      "slug": "bcom-llb-hons",
+      "name": "B.Com. LL.B. (Honours)",
+      "college": "law",
+      "campuses": [
+        "kattankulathur"
+      ],
+      "level": "UG",
+      "durationYears": 5,
+      "eligibility": "TODO: eligibility from 2026–27 prospectus",
+      "entrance": "TODO: entrance exam / admission basis",
+      "feesPerYearINR": "TODO: confirm 2026–27 annual tuition with admissions",
+      "deadline": "TODO: 2026 application deadline",
+      "summary": "Integrated commerce and law degree for corporate and financial law.",
+      "tags": [
+        "law",
+        "lawyer",
+        "commerce",
+        "business",
+        "corporate law",
+        "finance"
+      ],
+      "outcomes": [
+        "Corporate lawyer",
+        "Tax and compliance",
+        "In-house counsel"
+      ],
+      "sources": [
+        "https://applications.srmist.edu.in/"
+      ]
+    },
+    {
+      "slug": "bba",
+      "name": "B.B.A. — Bachelor of Business Administration",
+      "college": "management",
+      "campuses": [
+        "kattankulathur"
+      ],
+      "level": "UG",
+      "durationYears": "TODO: 3 or 4 years (NEP) — confirm",
+      "eligibility": "TODO: eligibility from 2026–27 prospectus",
+      "entrance": "TODO: entrance exam / admission basis",
+      "feesPerYearINR": "TODO: confirm 2026–27 annual tuition with admissions",
+      "deadline": "TODO: 2026 application deadline",
+      "summary": "Foundations of business: marketing, finance, operations and people.",
+      "tags": [
+        "business",
+        "management",
+        "marketing",
+        "finance",
+        "startup",
+        "entrepreneur"
+      ],
+      "outcomes": [
+        "Business analyst",
+        "Marketing executive",
+        "MBA"
+      ],
+      "sources": [
+        "https://applications.srmist.edu.in/"
+      ]
+    },
+    {
+      "slug": "mba",
+      "name": "M.B.A. — Master of Business Administration",
+      "college": "management",
+      "campuses": [
+        "kattankulathur"
+      ],
+      "level": "PG",
+      "durationYears": 2,
+      "eligibility": "TODO: eligibility from 2026–27 prospectus",
+      "entrance": "TODO: entrance exam / admission basis",
+      "feesPerYearINR": "TODO: confirm 2026–27 annual tuition with admissions",
+      "deadline": "TODO: 2026 application deadline",
+      "summary": "Postgraduate management degree for leadership roles.",
+      "tags": [
+        "mba",
+        "business",
+        "management",
+        "leadership",
+        "finance",
+        "marketing",
+        "postgraduate"
+      ],
+      "outcomes": [
+        "Manager",
+        "Consultant",
+        "Entrepreneur"
+      ],
+      "sources": [
+        "https://applications.srmist.edu.in/"
+      ]
+    },
+    {
+      "slug": "barch",
+      "name": "B.Arch — Bachelor of Architecture",
+      "college": "architecture",
+      "campuses": [
+        "kattankulathur"
+      ],
+      "level": "UG",
+      "durationYears": 5,
+      "eligibility": "TODO: eligibility from 2026–27 prospectus",
+      "entrance": "TODO: NATA / JEE Paper 2 requirement — confirm",
+      "feesPerYearINR": "TODO: confirm 2026–27 annual tuition with admissions",
+      "deadline": "TODO: 2026 application deadline",
+      "summary": "Designing buildings and places: studio-led architecture education.",
+      "tags": [
+        "architecture",
+        "architect",
+        "design",
+        "buildings",
+        "cities",
+        "drawing"
+      ],
+      "outcomes": [
+        "Architect (after CoA registration)",
+        "Urban designer",
+        "M.Arch"
+      ],
+      "sources": [
+        "https://applications.srmist.edu.in/"
+      ]
+    },
+    {
+      "slug": "bdes",
+      "name": "B.Des — Bachelor of Design",
+      "college": "architecture",
+      "campuses": [
+        "kattankulathur"
+      ],
+      "level": "UG",
+      "durationYears": 4,
+      "eligibility": "TODO: eligibility from 2026–27 prospectus",
+      "entrance": "TODO: entrance exam / admission basis",
+      "feesPerYearINR": "TODO: confirm 2026–27 annual tuition with admissions",
+      "deadline": "TODO: 2026 application deadline",
+      "summary": "Design thinking and making across products, spaces and media.",
+      "tags": [
+        "design",
+        "creative",
+        "product design",
+        "ux",
+        "art",
+        "interior"
+      ],
+      "outcomes": [
+        "Designer",
+        "UX designer",
+        "Design researcher"
+      ],
+      "sources": [
+        "https://applications.srmist.edu.in/"
+      ]
+    },
+    {
+      "slug": "bsc-computer-science",
+      "name": "B.Sc. Computer Science",
+      "college": "science-humanities",
+      "campuses": [
+        "kattankulathur"
+      ],
+      "level": "UG",
+      "durationYears": "TODO: 3 or 4 years (NEP) — confirm",
+      "eligibility": "TODO: eligibility from 2026–27 prospectus",
+      "entrance": "TODO: entrance exam / admission basis",
+      "feesPerYearINR": "TODO: confirm 2026–27 annual tuition with admissions",
+      "deadline": "TODO: 2026 application deadline",
+      "summary": "Computer science fundamentals in a science degree.",
+      "tags": [
+        "computers",
+        "computer science",
+        "coding",
+        "software",
+        "science"
+      ],
+      "outcomes": [
+        "Software developer",
+        "MCA / M.Sc.",
+        "Data analyst"
+      ],
+      "sources": [
+        "https://applications.srmist.edu.in/"
+      ]
+    },
+    {
+      "slug": "bca",
+      "name": "B.C.A. — Bachelor of Computer Applications",
+      "college": "science-humanities",
+      "campuses": [
+        "kattankulathur"
+      ],
+      "level": "UG",
+      "durationYears": "TODO: 3 or 4 years (NEP) — confirm",
+      "eligibility": "TODO: eligibility from 2026–27 prospectus",
+      "entrance": "TODO: entrance exam / admission basis",
+      "feesPerYearINR": "TODO: confirm 2026–27 annual tuition with admissions",
+      "deadline": "TODO: 2026 application deadline",
+      "summary": "Applied computing: programming, databases and web applications.",
+      "tags": [
+        "computers",
+        "coding",
+        "apps",
+        "web",
+        "software",
+        "it"
+      ],
+      "outcomes": [
+        "Application developer",
+        "Web developer",
+        "MCA"
+      ],
+      "sources": [
+        "https://applications.srmist.edu.in/"
+      ]
+    },
+    {
+      "slug": "ba-journalism",
+      "name": "B.A. Journalism and Mass Communication",
+      "college": "science-humanities",
+      "campuses": [
+        "kattankulathur"
+      ],
+      "level": "UG",
+      "durationYears": "TODO: 3 or 4 years (NEP) — confirm",
+      "eligibility": "TODO: eligibility from 2026–27 prospectus",
+      "entrance": "TODO: entrance exam / admission basis",
+      "feesPerYearINR": "TODO: confirm 2026–27 annual tuition with admissions",
+      "deadline": "TODO: 2026 application deadline",
+      "summary": "Reporting, media production and communication.",
+      "tags": [
+        "journalism",
+        "media",
+        "film",
+        "writing",
+        "news",
+        "communication",
+        "creative"
+      ],
+      "outcomes": [
+        "Journalist",
+        "Content producer",
+        "PR and communications"
+      ],
+      "sources": [
+        "https://applications.srmist.edu.in/"
+      ]
+    },
+    {
+      "slug": "bsc-hons-agriculture",
+      "name": "B.Sc. (Hons.) Agriculture",
+      "college": "agriculture",
+      "campuses": [
+        "baburayanpettai"
+      ],
+      "level": "UG",
+      "durationYears": 4,
+      "eligibility": "Higher Secondary (10+2) from a recognised board in an eligible subject group (e.g. Physics, Chemistry, Biology, Mathematics), minimum 50% aggregate. Vocational stream with Biology and Agricultural Practices also accepted.",
+      "entrance": "No entrance exam listed — admission on qualifying-exam marks",
+      "feesPerYearINR": "TODO: confirm 2026–27 annual tuition with admissions",
+      "deadline": "TODO: 2026 application deadline",
+      "summary": "Crop science, soils, agri-economics and farm technology on a 400+ acre campus.",
+      "tags": [
+        "agriculture",
+        "farming",
+        "food",
+        "plants",
+        "sustainability",
+        "environment",
+        "rural"
+      ],
+      "outcomes": [
+        "Agronomist",
+        "Agri-business",
+        "M.Sc. (Agri.)",
+        "Government agriculture services"
+      ],
+      "sources": [
+        "https://applications.srmist.edu.in/agricultural-sciences-form"
+      ]
+    },
+    {
+      "slug": "bsc-hons-horticulture",
+      "name": "B.Sc. (Hons.) Horticulture",
+      "college": "agriculture",
+      "campuses": [
+        "baburayanpettai"
+      ],
+      "level": "UG",
+      "durationYears": 4,
+      "eligibility": "Higher Secondary (10+2) from a recognised board in an eligible subject group (e.g. Physics, Chemistry, Biology, Mathematics), minimum 50% aggregate. Vocational stream with Biology and Agricultural Practices also accepted.",
+      "entrance": "No entrance exam listed — admission on qualifying-exam marks",
+      "feesPerYearINR": "TODO: confirm 2026–27 annual tuition with admissions",
+      "deadline": "TODO: 2026 application deadline",
+      "summary": "Fruits, vegetables, flowers and landscape — the science of growing.",
+      "tags": [
+        "horticulture",
+        "plants",
+        "gardening",
+        "agriculture",
+        "food",
+        "landscape"
+      ],
+      "outcomes": [
+        "Horticulturist",
+        "Landscape and floriculture",
+        "M.Sc. (Hort.)"
+      ],
+      "sources": [
+        "https://applications.srmist.edu.in/agricultural-sciences-form"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "_note": "featured = the one curated 'This week at SRM' story. studentWork drives Act II in order. Dates, student names and quotes not in CLAUDE.md §7 are TODO.",
+  "featured": "camber-racing-formula-bharat-2026",
+  "stories": [
+    {
+      "slug": "camber-racing-formula-bharat-2026",
+      "kind": "student-work",
+      "title": "National Champions: Team Camber Racing wins Formula Bharat 2026",
+      "dek": "SRMIST's Formula Student team took the combustion-category title — and first place in seven events.",
+      "date": "TODO: event/publication date",
+      "people": [
+        { "name": "Himanshu Kumar", "role": "Captain · ECE, final year" },
+        { "name": "M. Sakthiprasad", "role": "Chief race driver · Automobile Engineering" }
+      ],
+      "facts": [
+        { "label": "Category", "value": "Combustion" },
+        { "label": "Result", "value": "National Champions" },
+        { "label": "Event wins", "value": "Endurance · Skidpad · Autocross · Acceleration · Engineering Design · Fuel Economy · Sustainability & Best Practices" },
+        { "label": "Award", "value": "Best Driver" },
+        { "label": "Team", "value": "Mechanical, electrical, electronics and computing students" }
+      ],
+      "body": [
+        "Team Camber Racing were crowned National Champions at Formula Bharat 2026 in the combustion category.",
+        "They finished first in Endurance, Skidpad, Autocross, Acceleration, Engineering Design, Fuel Economy, and Sustainability & Best Practices, and chief race driver M. Sakthiprasad took the Best Driver Award.",
+        "The team is multidisciplinary, bringing together mechanical, electrical, electronics and computing students, led by captain Himanshu Kumar (ECE, final year)."
+      ],
+      "media": { "photo": "media/camber/hero.jpg", "video": "media/camber/run.mp4", "model": "media/camber/car.glb" },
+      "tags": ["mobility", "engineering", "motorsport", "students"]
+    },
+    {
+      "slug": "swift-student-challenge-2026",
+      "kind": "student-work",
+      "title": "Distinguished Winner, Apple Swift Student Challenge 2026",
+      "dek": "An SRMIST student was named a Distinguished Winner of Apple's Swift Student Challenge 2026.",
+      "date": "TODO: announcement date",
+      "people": [{ "name": "TODO: student name (with consent)", "role": "TODO: programme and year" }],
+      "facts": [{ "label": "Recognition", "value": "Distinguished Winner" }],
+      "body": [
+        "An SRMIST student was named a Distinguished Winner in Apple's Swift Student Challenge 2026.",
+        "TODO: what the app does, in the student's words."
+      ],
+      "media": { "photo": "media/student-work/swift-challenge.jpg" },
+      "tags": ["computing", "apps", "students"]
+    },
+    {
+      "slug": "student-startup",
+      "kind": "student-work",
+      "title": "TODO: student startup story",
+      "dek": "TODO: one verified SRMIST student startup — name, founders, what it does.",
+      "date": "TODO: publication date",
+      "people": [],
+      "facts": [],
+      "body": ["TODO: startup story from the SRM incubation/innovation team."],
+      "media": { "photo": "media/student-work/startup.jpg" },
+      "tags": ["entrepreneurship", "students"]
+    },
+    {
+      "slug": "volvo-vehicle-technology-centre",
+      "kind": "news",
+      "title": "SRMIST × Volvo Group: Volvo's first university-based Vehicle Technology Centre",
+      "dek": "Volvo Group's first Vehicle Technology Centre at a university is at SRMIST.",
+      "date": "TODO: opening date",
+      "people": [],
+      "facts": [{ "label": "Partner", "value": "Volvo Group" }],
+      "body": [
+        "SRMIST and Volvo Group have set up Volvo's first university-based Vehicle Technology Centre.",
+        "TODO: what students and researchers do there."
+      ],
+      "media": { "photo": "media/stories/volvo-vtc.jpg" },
+      "tags": ["mobility", "research", "industry"]
+    }
+  ],
+  "studentWork": ["camber-racing-formula-bharat-2026", "swift-student-challenge-2026", "student-startup"],
+  "events": [
+    { "slug": "todo-event-1", "title": "TODO: upcoming event", "date": "TODO: event date", "campus": "kattankulathur", "url": "TODO: event page URL" },
+    { "slug": "todo-event-2", "title": "TODO: upcoming event", "date": "TODO: event date", "campus": "kattankulathur", "url": "TODO: event page URL" },
+    { "slug": "todo-event-3", "title": "TODO: upcoming event", "date": "TODO: event date", "campus": "kattankulathur", "url": "TODO: event page URL" }
+  ]
+}

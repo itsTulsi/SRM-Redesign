@@ -1,0 +1,39 @@
+{
+  "_note": "Act II research by mission (Melbourne model), not by faculty. Only verified items; everything else TODO.",
+  "missions": [
+    {
+      "slug": "health",
+      "name": "Health",
+      "question": "How do we keep people healthier, longer?",
+      "highlights": ["TODO: 2–3 verified health research projects (medical college, biotech, pharmacy)"],
+      "photo": "media/research/health.jpg"
+    },
+    {
+      "slug": "mobility",
+      "name": "Mobility",
+      "question": "How will the next billion people move?",
+      "highlights": [
+        "Volvo Group's first university-based Vehicle Technology Centre is at SRMIST.",
+        "Team Camber Racing — National Champions, Formula Bharat 2026 (combustion category)."
+      ],
+      "photo": "media/research/mobility.jpg"
+    },
+    {
+      "slug": "space-materials",
+      "name": "Space & Materials",
+      "question": "What will we build with, and where will we go?",
+      "highlights": ["TODO: verified space / materials research (e.g. aerospace, nanotechnology)"],
+      "photo": "media/research/space-materials.jpg"
+    },
+    {
+      "slug": "sustainability",
+      "name": "Sustainability",
+      "question": "How do we grow without using up the planet?",
+      "highlights": [
+        "Ranked 4 in NIRF 2025 Sustainability (SDG), as published by SRM.",
+        "TODO: one verified sustainability project"
+      ],
+      "photo": "media/research/sustainability.jpg"
+    }
+  ]
+}

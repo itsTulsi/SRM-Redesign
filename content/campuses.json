@@ -1,0 +1,127 @@
+{
+  "_note": "lat/lng are approximate city-level positions for the stylised constellation map only — never shown as text. tour360Url only where a real tour exists.",
+  "campuses": [
+    {
+      "slug": "kattankulathur",
+      "name": "Kattankulathur",
+      "city": "Chennai",
+      "state": "Tamil Nadu",
+      "kind": "campus",
+      "isMain": true,
+      "lat": 12.823,
+      "lng": 80.044,
+      "tour360Url": "https://webstor.srmist.edu.in/web_assets/srmist-virtual-tour-vo/index.htm",
+      "distanceFromChennai": "TODO: road distance from Chennai Central",
+      "photo": "media/campuses/kattankulathur.jpg"
+    },
+    {
+      "slug": "ramapuram",
+      "name": "Ramapuram",
+      "city": "Chennai",
+      "state": "Tamil Nadu",
+      "kind": "campus",
+      "isMain": false,
+      "lat": 13.032,
+      "lng": 80.182,
+      "tour360Url": null,
+      "distanceFromChennai": "Within Chennai",
+      "photo": "media/campuses/ramapuram.jpg"
+    },
+    {
+      "slug": "vadapalani",
+      "name": "Vadapalani",
+      "city": "Chennai",
+      "state": "Tamil Nadu",
+      "kind": "campus",
+      "isMain": false,
+      "lat": 13.052,
+      "lng": 80.212,
+      "tour360Url": null,
+      "distanceFromChennai": "Within Chennai",
+      "photo": "media/campuses/vadapalani.jpg"
+    },
+    {
+      "slug": "tiruchirappalli",
+      "name": "Tiruchirappalli",
+      "city": "Tiruchirappalli",
+      "state": "Tamil Nadu",
+      "kind": "campus",
+      "isMain": false,
+      "lat": 10.95,
+      "lng": 78.76,
+      "tour360Url": null,
+      "distanceFromChennai": "TODO: road distance from Chennai",
+      "photo": "media/campuses/tiruchirappalli.jpg"
+    },
+    {
+      "slug": "delhi-ncr",
+      "name": "Delhi NCR",
+      "city": "Ghaziabad",
+      "state": "Uttar Pradesh",
+      "kind": "campus",
+      "isMain": false,
+      "lat": 28.8,
+      "lng": 77.54,
+      "tour360Url": null,
+      "distanceFromChennai": "TODO: travel time from Chennai",
+      "photo": "media/campuses/delhi-ncr.jpg"
+    },
+    {
+      "slug": "baburayanpettai",
+      "name": "Baburayanpettai",
+      "city": "Chengalpattu",
+      "state": "Tamil Nadu",
+      "kind": "campus",
+      "isMain": false,
+      "lat": 12.4,
+      "lng": 79.82,
+      "tour360Url": null,
+      "distanceFromChennai": "TODO: road distance from Chennai",
+      "photo": "media/campuses/baburayanpettai.jpg"
+    },
+    {
+      "slug": "srm-ap",
+      "name": "SRM University, AP",
+      "city": "Amaravati",
+      "state": "Andhra Pradesh",
+      "kind": "sister",
+      "isMain": false,
+      "lat": 16.46,
+      "lng": 80.51,
+      "tour360Url": null,
+      "website": "TODO: official URL",
+      "photo": "media/campuses/srm-ap.jpg"
+    },
+    {
+      "slug": "srm-haryana",
+      "name": "SRM University, Haryana",
+      "city": "Sonepat",
+      "state": "Haryana",
+      "kind": "sister",
+      "isMain": false,
+      "lat": 28.99,
+      "lng": 77.02,
+      "tour360Url": null,
+      "website": "TODO: official URL",
+      "photo": "media/campuses/srm-haryana.jpg"
+    },
+    {
+      "slug": "srm-sikkim",
+      "name": "SRM University, Sikkim",
+      "city": "Gangtok",
+      "state": "Sikkim",
+      "kind": "sister",
+      "isMain": false,
+      "lat": 27.33,
+      "lng": 88.61,
+      "tour360Url": null,
+      "website": "TODO: official URL",
+      "photo": "media/campuses/srm-sikkim.jpg"
+    }
+  ],
+  "_sources": [
+    "CLAUDE.md §7 — campus and sister-university list, 360° tour URL",
+    "https://applications.srmist.edu.in/ — 'Delhi NCR, Ghaziabad'; 'SRM AP Amaravati'; 'SRM NCR Sonepat'",
+    "https://applications.srmist.edu.in/agricultural-sciences-form — Baburayanpettai near Acharapakkam"
+  ]
+}
