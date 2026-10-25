@@ -1,6 +1,8 @@
 # Audit: CLAUDE.md §13 (2026-10-25)
 
-Production build (`npm run build:verify` then `npm run start:verify -- -p 3123`), headless Chrome. Placeholder media only: re-run Lighthouse once real photos and video are in `public/media/`.
+Production build (`npm run build:verify` then `npm run start:verify -- -p 3123`), headless Chrome.
+
+**Re-run on 2026-10-25 with 27 real photos and the filled-in content:** home 96 / 100 / 100 / 100 (LCP 2.8 s simulated, CLS 0), B.Tech CSE programme page 98 / 100 / 100 / 100 (LCP 2.5 s); all 135 sitemap URLs pass the 360 px axe + overflow crawl. The hero video and Camber car video are still missing, so re-run once they arrive.
 
 ## Lighthouse (mobile)
 
@@ -42,6 +44,8 @@ Median of 3 runs per page.
   - The decorative pulse ring caught taps meant for the neighbouring Trichy pin.
   - Pins stay at their true coordinates throughout.
 - **Apply landed on a dead end.** SRM's application portal sometimes answers "403 Forbidden" to ordinary browsers; it's a bot filter on SRM's servers. Every Apply button now goes to `/admissions#apply`. That section links to the portal and, right beside it, gives the fallbacks: SRM's Admissions 2026 page, phone numbers and the enquiry form.
+
+- **A ₹ cost the homepage ~5 points.** Inter's Latin subset has no ₹, so the first fee on a page pulled Inter's 84 kB Latin-Extended file. A local-first "SRM Rupee" face (₹ only, from the device's fonts) fixed it: back to 96, 2 font files.
 
 ## How to re-run
 

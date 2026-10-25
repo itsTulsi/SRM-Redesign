@@ -61,7 +61,8 @@ export default async function ProgrammePage({ params }: Params) {
     provider: { "@type": "CollegeOrUniversity", name: site.name, url: "https://www.srmist.edu.in/" },
     ...(typeof p.durationYears === "number" ? { timeToComplete: isoYears(p.durationYears) } : {}),
     ...(eligibility ? { programPrerequisites: eligibility } : {}),
-    ...(deadline ? { applicationDeadline: deadline } : {}),
+    // schema.org wants a date here; prose like "Last date for 2026 entry was …" is shown on the page only.
+    ...(deadline && /^\d{4}-\d{2}-\d{2}$/.test(deadline) ? { applicationDeadline: deadline } : {}),
     ...(typeof p.feesPerYearINR === "number"
       ? { offers: { "@type": "Offer", price: p.feesPerYearINR, priceCurrency: "INR", category: "Tuition per year" } }
       : {}),
@@ -230,7 +231,7 @@ export default async function ProgrammePage({ params }: Params) {
                   {pt("jobsA", {
                     roles: p.outcomes.join(", "),
                     season: placements.season,
-                    companies: stat("companies")?.display ?? "—",
+                    offers: stat("offers")?.display ?? "—",
                     avg: stat("average-ctc")?.display ?? "—",
                   })}
                 </p>

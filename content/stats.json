@@ -42,14 +42,14 @@
   },
   "naac": { "grade": "A++" },
   "placements": {
-    "season": "2023–24",
-    "seasonNote": "TODO: replace with 2024–25 or 2025–26 placement figures once verified",
+    "season": "2025",
+    "seasonNote": "2025 batch, as on 12 June 2026 — srmist.edu.in/placements/ (read 2026-10-25). Replaces the 2023–24 figures in CLAUDE.md §7.",
     "items": [
-      { "id": "companies", "label": "companies recruited", "value": 980, "display": "980+", "suffix": "+" },
-      { "id": "offers", "label": "offers", "value": 5546, "display": "5,546+", "suffix": "+" },
-      { "id": "high-paying", "label": "high-paying offers", "value": 2232, "display": "2,232+", "suffix": "+" },
-      { "id": "highest-ctc", "label": "highest CTC", "value": 52, "display": "52 LPA", "suffix": " LPA" },
-      { "id": "average-ctc", "label": "average CTC", "value": 7.19, "display": "7.19 LPA", "suffix": " LPA", "decimals": 2 }
+      { "id": "roles", "label": "roles offered", "value": 1448, "display": "1,448+", "suffix": "+" },
+      { "id": "offers", "label": "offers", "value": 10190, "display": "10,190+", "suffix": "+" },
+      { "id": "high-paying", "label": "high-paying offers", "value": 4346, "display": "4,346+", "suffix": "+" },
+      { "id": "highest-ctc", "label": "highest CTC", "value": 61, "display": "61 LPA", "suffix": " LPA" },
+      { "id": "average-ctc", "label": "average CTC", "value": 6.5, "display": "6.5 LPA", "suffix": " LPA", "decimals": 1 }
     ]
   },
   "research": {

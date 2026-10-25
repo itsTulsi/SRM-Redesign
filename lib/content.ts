@@ -192,16 +192,16 @@ type StatOverride = { label?: string; display?: string; suffix?: string };
 type Overrides = {
   programmes?: Record<string, { name?: string; summary?: string; outcomes?: string[]; eligibility?: string; entrance?: string }>;
   colleges?: Record<string, { name?: string; shortName?: string; outcomeLabel?: string }>;
-  campuses?: Record<string, { name?: string; city?: string; state?: string }>;
+  campuses?: Record<string, { name?: string; city?: string; state?: string; distanceFromChennai?: string }>;
   stories?: Record<
     string,
-    { title?: string; dek?: string; body?: (string | null)[]; facts?: Record<string, FactOverride>; peopleRoles?: string[] }
+    { title?: string; dek?: string; date?: string; body?: (string | null)[]; facts?: Record<string, FactOverride>; peopleRoles?: string[] }
   >;
   missions?: Record<string, { name?: string; question?: string; highlights?: (string | null)[] }>;
   nirf?: Record<string, string>;
   placements?: Record<string, StatOverride>;
   research?: Record<string, StatOverride>;
-  alumni?: Record<string, { role?: string }>;
+  alumni?: Record<string, { role?: string; degree?: string; path?: string[] }>;
   phones?: Record<string, string>;
   site?: { status?: string; location?: string };
   seniors?: Record<string, { question?: string; answer?: string; senior?: string }>;
@@ -244,7 +244,13 @@ function build(o: Overrides | undefined) {
   });
   const ks: Campus[] = campuses.map((c) => {
     const x = o?.campuses?.[c.slug];
-    return { ...c, name: pick(x?.name, c.name), city: pick(x?.city, c.city), state: pick(x?.state, c.state) };
+    return {
+      ...c,
+      name: pick(x?.name, c.name),
+      city: pick(x?.city, c.city),
+      state: pick(x?.state, c.state),
+      ...(c.distanceFromChennai !== undefined ? { distanceFromChennai: verifiedPick(c.distanceFromChennai, x?.distanceFromChennai) } : {}),
+    };
   });
   const ss: Story[] = stories.map((st) => {
     const x = o?.stories?.[st.slug];
@@ -253,6 +259,7 @@ function build(o: Overrides | undefined) {
       ...st,
       title: isTodo(st.title) ? st.title : pick(x.title, st.title),
       dek: isTodo(st.dek) ? st.dek : pick(x.dek, st.dek),
+      date: verifiedPick(st.date, x.date),
       body: st.body.map((para, i) => (isTodo(para) ? para : pick(x.body?.[i], para))),
       facts: st.facts.map((f) => ({ ...f, label: pick(x.facts?.[f.key]?.label, f.label), value: pick(x.facts?.[f.key]?.value, f.value) })),
       people: st.people.map((pp, i) => ({ ...pp, role: isTodo(pp.role) ? pp.role : pick(x.peopleRoles?.[i], pp.role) })),
@@ -303,7 +310,16 @@ function build(o: Overrides | undefined) {
     colleges: cs,
     campuses: ks,
     campusClusters,
-    alumni: alumni.map((a) => ({ ...a, role: pick(o?.alumni?.[a.slug]?.role, a.role) })),
+    alumni: alumni.map((a) => {
+      const x = o?.alumni?.[a.slug];
+      return {
+        ...a,
+        role: pick(x?.role, a.role),
+        degree: verifiedPick(a.degree, x?.degree),
+        // A translated path only replaces the English one when it lines up item for item.
+        path: x?.path && x.path.length === a.path.length && !a.path.some(isTodo) ? x.path : a.path,
+      };
+    }),
     stories: ss,
     events,
     missions: ms,

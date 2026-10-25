@@ -1,12 +1,12 @@
 {
-  "_note": "Colleges/faculties shown in Act I and used as programme.college. Names from srmist.edu.in sub-sites and the application portal. TODO: verify each name against the 2026–27 prospectus. outcome = the one number shown on hover; only verified figures, otherwise TODO.",
+  "_note": "Colleges/faculties shown in Act I and used as programme.college. Names from srmist.edu.in sub-sites and the application portal. TODO: verify each name against the 2026–27 prospectus. outcome = the one number shown on hover; only verified figures, otherwise TODO. Engineering = NIRF 2025 (stats.json); Science & Humanities = distinct programmes listed for KTR in SRM's Admissions 2026 table; Nursing = B.Sc. Nursing intake in the Medicine & Health Sciences table (read 2026-10-25).",
   "colleges": [
     {
       "slug": "engineering",
       "name": "Faculty of Engineering and Technology",
       "shortName": "Engineering",
       "campus": "kattankulathur",
-      "outcome": { "value": "TODO: one verified engineering-specific outcome", "label": "TODO: label for the outcome number" },
+      "outcome": { "value": "14", "label": "NIRF 2025 Engineering rank" },
       "photo": "media/colleges/engineering.jpg"
     },
     {
@@ -54,7 +54,7 @@
       "name": "Faculty of Science and Humanities",
       "shortName": "Science & Humanities",
       "campus": "kattankulathur",
-      "outcome": { "value": "TODO: one verified outcome", "label": "TODO: label for the outcome number" },
+      "outcome": { "value": "72", "label": "programmes at Kattankulathur (2026)" },
       "photo": "media/colleges/science-humanities.jpg"
     },
     {
@@ -78,7 +78,7 @@
       "name": "SRM College of Nursing",
       "shortName": "Nursing",
       "campus": "kattankulathur",
-      "outcome": { "value": "TODO: one verified outcome", "label": "TODO: label for the outcome number" },
+      "outcome": { "value": "100", "label": "B.Sc. Nursing seats a year" },
       "photo": "media/colleges/nursing.jpg"
     }
   ],

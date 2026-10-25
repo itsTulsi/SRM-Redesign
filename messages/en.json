@@ -148,6 +148,7 @@
       "word": "Lead",
       "question": "Where will you lead?",
       "alumniTitle": "They started here",
+      "pathLabel": "Career path of {name}",
       "placementsTitle": "Placements {season}",
       "placementsIntro": "Recruiters who came to campus, and what they offered."
     },
@@ -296,7 +297,7 @@
     "hostels": "SRM hostels",
     "safety": "Getting around & campus safety",
     "jobsQ": "What jobs do graduates get?",
-    "jobsA": "Typical roles for this subject: {roles}. University-wide in {season}: {companies} companies recruited and the average CTC was {avg} (all programmes, not this one alone).",
+    "jobsA": "Typical roles for this subject: {roles}. University-wide for the {season} batch: {offers} job offers, with an average CTC of {avg} (all programmes, not this one alone).",
     "callTitle": "Talk to admissions",
     "callBody": "A counsellor can answer fees, hostel and transport questions directly."
   },
@@ -368,7 +369,7 @@
     "rankingTitle": "NIRF {year}",
     "naac": "NAAC grade",
     "placementsTitle": "Placements {season}",
-    "placementsNote": "These are university-wide figures for all programmes ({companies} companies), not for one programme.",
+    "placementsNote": "These are university-wide figures for all programmes ({offers} offers), not for one programme.",
     "typicalRoles": "Typical roles for {name}: {roles}.",
     "hostelText": "SRM publishes its hostel information on its official website. For room types, fees and availability, admissions can help.",
     "hostels": "SRM hostels",

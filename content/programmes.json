@@ -1,5 +1,5 @@
 {
-  "_note": "Names from SRM's application portal and college sites. Durations: from SRM pages where cited, otherwise the statutory/standard length for the degree (B.Tech 4, M.Tech 2, MBA 2, B.Arch 5, integrated LL.B. 5, B.Pharm 4, Pharm.D 6, B.Sc. Nursing 4). outcomes = typical career paths for the discipline, NOT SRM placement claims. Engineering also runs at Ramapuram, Vadapalani, Delhi NCR and Tiruchirappalli — TODO: map per-programme campus availability.",
+  "_note": "Names from SRM's application portal and college sites. Fees = annual tuition in ₹ for the Kattankulathur campus, from SRM's \"Admissions 2026\" programme tables (srmist.edu.in/admission-india/…, read 2026-10-25); a one-time registration fee and exam fees are extra. B.B.A., B.Sc., B.C.A. and B.A. are 3 years, with an optional 4th (Honours) year under NEP. Durations: from SRM pages where cited, otherwise the statutory/standard length for the degree (B.Tech 4, M.Tech 2, MBA 2, B.Arch 5, integrated LL.B. 5, B.Pharm 4, Pharm.D 6, B.Sc. Nursing 4). outcomes = typical career paths for the discipline, NOT SRM placement claims. Engineering also runs at Ramapuram, Vadapalani, Delhi NCR and Tiruchirappalli — TODO: map per-programme campus availability.",
   "programmes": [
     {
       "slug": "btech-cse",
@@ -10,10 +10,10 @@
       ],
       "level": "UG",
       "durationYears": 4,
-      "eligibility": "TODO: eligibility from 2026–27 prospectus",
-      "entrance": "TODO: confirm SRMJEEE (B.Tech) details for 2026",
-      "feesPerYearINR": "TODO: confirm 2026–27 annual tuition with admissions",
-      "deadline": "TODO: 2026 application deadline",
+      "eligibility": "10+2 with at least 60% aggregate in Physics and Mathematics plus one of Chemistry, Biotechnology, Biology, Computer Science, IT, Informatics Practices, Engineering Graphics, or Botany and Zoology. Minimum age 16½ years on 31 July of the year of the Class 12 exam.",
+      "entrance": "SRMJEEE (UG) — online, remote-proctored, held in three phases",
+      "feesPerYearINR": 475000,
+      "deadline": "Last date for 2026 entry was 30 June 2026 (SRMJEEE Phase 3). 2027 dates not yet published.",
       "summary": "Algorithms, systems and software — the core computing degree.",
       "tags": [
         "computers",
@@ -33,6 +33,9 @@
         "Higher studies in CS"
       ],
       "sources": [
+        "https://www.srmist.edu.in/admission-india/engineering/",
+        "https://applications.srmist.edu.in/btech",
+        "https://webstor.srmist.edu.in/web_assets/downloads/2026/srm-admission-brochure-2026-2027.pdf",
         "https://applications.srmist.edu.in/"
       ]
     },
@@ -45,10 +48,10 @@
       ],
       "level": "UG",
       "durationYears": 4,
-      "eligibility": "TODO: eligibility from 2026–27 prospectus",
-      "entrance": "TODO: confirm SRMJEEE (B.Tech) details for 2026",
-      "feesPerYearINR": "TODO: confirm 2026–27 annual tuition with admissions",
-      "deadline": "TODO: 2026 application deadline",
+      "eligibility": "10+2 with at least 60% aggregate in Physics and Mathematics plus one of Chemistry, Biotechnology, Biology, Computer Science, IT, Informatics Practices, Engineering Graphics, or Botany and Zoology. Minimum age 16½ years on 31 July of the year of the Class 12 exam.",
+      "entrance": "SRMJEEE (UG) — online, remote-proctored, held in three phases",
+      "feesPerYearINR": 475000,
+      "deadline": "Last date for 2026 entry was 30 June 2026 (SRMJEEE Phase 3). 2027 dates not yet published.",
       "summary": "Computer science with a focus on machine learning, data and intelligent systems.",
       "tags": [
         "ai",
@@ -68,6 +71,9 @@
         "AI research"
       ],
       "sources": [
+        "https://www.srmist.edu.in/admission-india/engineering/",
+        "https://applications.srmist.edu.in/btech",
+        "https://webstor.srmist.edu.in/web_assets/downloads/2026/srm-admission-brochure-2026-2027.pdf",
         "https://applications.srmist.edu.in/"
       ]
     },
@@ -80,10 +86,10 @@
       ],
       "level": "UG",
       "durationYears": 4,
-      "eligibility": "TODO: eligibility from 2026–27 prospectus",
-      "entrance": "TODO: confirm SRMJEEE (B.Tech) details for 2026",
-      "feesPerYearINR": "TODO: confirm 2026–27 annual tuition with admissions",
-      "deadline": "TODO: 2026 application deadline",
+      "eligibility": "10+2 with at least 60% aggregate in Physics and Mathematics plus one of Chemistry, Biotechnology, Biology, Computer Science, IT, Informatics Practices, Engineering Graphics, or Botany and Zoology. Minimum age 16½ years on 31 July of the year of the Class 12 exam.",
+      "entrance": "SRMJEEE (UG) — online, remote-proctored, held in three phases",
+      "feesPerYearINR": 425000,
+      "deadline": "Last date for 2026 entry was 30 June 2026 (SRMJEEE Phase 3). 2027 dates not yet published.",
       "summary": "Computing with a focus on securing networks, systems and data.",
       "tags": [
         "cyber security",
@@ -100,6 +106,9 @@
         "Security engineer"
       ],
       "sources": [
+        "https://www.srmist.edu.in/admission-india/engineering/",
+        "https://applications.srmist.edu.in/btech",
+        "https://webstor.srmist.edu.in/web_assets/downloads/2026/srm-admission-brochure-2026-2027.pdf",
         "https://applications.srmist.edu.in/"
       ]
     },
@@ -112,10 +121,10 @@
       ],
       "level": "UG",
       "durationYears": 4,
-      "eligibility": "TODO: eligibility from 2026–27 prospectus",
-      "entrance": "TODO: confirm SRMJEEE (B.Tech) details for 2026",
-      "feesPerYearINR": "TODO: confirm 2026–27 annual tuition with admissions",
-      "deadline": "TODO: 2026 application deadline",
+      "eligibility": "10+2 with at least 60% aggregate in Physics and Mathematics plus one of Chemistry, Biotechnology, Biology, Computer Science, IT, Informatics Practices, Engineering Graphics, or Botany and Zoology. Minimum age 16½ years on 31 July of the year of the Class 12 exam.",
+      "entrance": "SRMJEEE (UG) — online, remote-proctored, held in three phases",
+      "feesPerYearINR": 275000,
+      "deadline": "Last date for 2026 entry was 30 June 2026 (SRMJEEE Phase 3). 2027 dates not yet published.",
       "summary": "Circuits, chips, signals and wireless communication.",
       "tags": [
         "electronics",
@@ -134,6 +143,9 @@
         "Telecom engineer"
       ],
       "sources": [
+        "https://www.srmist.edu.in/admission-india/engineering/",
+        "https://applications.srmist.edu.in/btech",
+        "https://webstor.srmist.edu.in/web_assets/downloads/2026/srm-admission-brochure-2026-2027.pdf",
         "https://applications.srmist.edu.in/"
       ]
     },
@@ -146,10 +158,10 @@
       ],
       "level": "UG",
       "durationYears": 4,
-      "eligibility": "TODO: eligibility from 2026–27 prospectus",
-      "entrance": "TODO: confirm SRMJEEE (B.Tech) details for 2026",
-      "feesPerYearINR": "TODO: confirm 2026–27 annual tuition with admissions",
-      "deadline": "TODO: 2026 application deadline",
+      "eligibility": "10+2 with at least 60% aggregate in Physics and Mathematics plus one of Chemistry, Biotechnology, Biology, Computer Science, IT, Informatics Practices, Engineering Graphics, or Botany and Zoology. Minimum age 16½ years on 31 July of the year of the Class 12 exam.",
+      "entrance": "SRMJEEE (UG) — online, remote-proctored, held in three phases",
+      "feesPerYearINR": 275000,
+      "deadline": "Last date for 2026 entry was 30 June 2026 (SRMJEEE Phase 3). 2027 dates not yet published.",
       "summary": "Power systems, machines, drives and renewable energy.",
       "tags": [
         "electrical",
@@ -167,6 +179,9 @@
         "Energy consultant"
       ],
       "sources": [
+        "https://www.srmist.edu.in/admission-india/engineering/",
+        "https://applications.srmist.edu.in/btech",
+        "https://webstor.srmist.edu.in/web_assets/downloads/2026/srm-admission-brochure-2026-2027.pdf",
         "https://applications.srmist.edu.in/"
       ]
     },
@@ -179,10 +194,10 @@
       ],
       "level": "UG",
       "durationYears": 4,
-      "eligibility": "TODO: eligibility from 2026–27 prospectus",
-      "entrance": "TODO: confirm SRMJEEE (B.Tech) details for 2026",
-      "feesPerYearINR": "TODO: confirm 2026–27 annual tuition with admissions",
-      "deadline": "TODO: 2026 application deadline",
+      "eligibility": "10+2 with at least 60% aggregate in Physics and Mathematics plus one of Chemistry, Biotechnology, Biology, Computer Science, IT, Informatics Practices, Engineering Graphics, or Botany and Zoology. Minimum age 16½ years on 31 July of the year of the Class 12 exam.",
+      "entrance": "SRMJEEE (UG) — online, remote-proctored, held in three phases",
+      "feesPerYearINR": 275000,
+      "deadline": "Last date for 2026 entry was 30 June 2026 (SRMJEEE Phase 3). 2027 dates not yet published.",
       "summary": "Design, manufacturing, thermal systems and machines.",
       "tags": [
         "mechanical",
@@ -200,6 +215,9 @@
         "R&D engineer"
       ],
       "sources": [
+        "https://www.srmist.edu.in/admission-india/engineering/",
+        "https://applications.srmist.edu.in/btech",
+        "https://webstor.srmist.edu.in/web_assets/downloads/2026/srm-admission-brochure-2026-2027.pdf",
         "https://applications.srmist.edu.in/"
       ]
     },
@@ -212,10 +230,10 @@
       ],
       "level": "UG",
       "durationYears": 4,
-      "eligibility": "TODO: eligibility from 2026–27 prospectus",
-      "entrance": "TODO: confirm SRMJEEE (B.Tech) details for 2026",
-      "feesPerYearINR": "TODO: confirm 2026–27 annual tuition with admissions",
-      "deadline": "TODO: 2026 application deadline",
+      "eligibility": "10+2 with at least 60% aggregate in Physics and Mathematics plus one of Chemistry, Biotechnology, Biology, Computer Science, IT, Informatics Practices, Engineering Graphics, or Botany and Zoology. Minimum age 16½ years on 31 July of the year of the Class 12 exam.",
+      "entrance": "SRMJEEE (UG) — online, remote-proctored, held in three phases",
+      "feesPerYearINR": 275000,
+      "deadline": "Last date for 2026 entry was 30 June 2026 (SRMJEEE Phase 3). 2027 dates not yet published.",
       "summary": "Robots, sensors, control systems and industrial automation.",
       "tags": [
         "robotics",
@@ -232,6 +250,9 @@
         "Controls engineer"
       ],
       "sources": [
+        "https://www.srmist.edu.in/admission-india/engineering/",
+        "https://applications.srmist.edu.in/btech",
+        "https://webstor.srmist.edu.in/web_assets/downloads/2026/srm-admission-brochure-2026-2027.pdf",
         "https://applications.srmist.edu.in/"
       ]
     },
@@ -244,10 +265,10 @@
       ],
       "level": "UG",
       "durationYears": 4,
-      "eligibility": "TODO: eligibility from 2026–27 prospectus",
-      "entrance": "TODO: confirm SRMJEEE (B.Tech) details for 2026",
-      "feesPerYearINR": "TODO: confirm 2026–27 annual tuition with admissions",
-      "deadline": "TODO: 2026 application deadline",
+      "eligibility": "10+2 with at least 60% aggregate in Physics and Mathematics plus one of Chemistry, Biotechnology, Biology, Computer Science, IT, Informatics Practices, Engineering Graphics, or Botany and Zoology. Minimum age 16½ years on 31 July of the year of the Class 12 exam.",
+      "entrance": "SRMJEEE (UG) — online, remote-proctored, held in three phases",
+      "feesPerYearINR": 275000,
+      "deadline": "Last date for 2026 entry was 30 June 2026 (SRMJEEE Phase 3). 2027 dates not yet published.",
       "summary": "Vehicle design, powertrains and automotive electronics.",
       "tags": [
         "automobile",
@@ -265,6 +286,9 @@
         "EV engineer"
       ],
       "sources": [
+        "https://www.srmist.edu.in/admission-india/engineering/",
+        "https://applications.srmist.edu.in/btech",
+        "https://webstor.srmist.edu.in/web_assets/downloads/2026/srm-admission-brochure-2026-2027.pdf",
         "https://applications.srmist.edu.in/"
       ]
     },
@@ -277,10 +301,10 @@
       ],
       "level": "UG",
       "durationYears": 4,
-      "eligibility": "TODO: eligibility from 2026–27 prospectus",
-      "entrance": "TODO: confirm SRMJEEE (B.Tech) details for 2026",
-      "feesPerYearINR": "TODO: confirm 2026–27 annual tuition with admissions",
-      "deadline": "TODO: 2026 application deadline",
+      "eligibility": "10+2 with at least 60% aggregate in Physics and Mathematics plus one of Chemistry, Biotechnology, Biology, Computer Science, IT, Informatics Practices, Engineering Graphics, or Botany and Zoology. Minimum age 16½ years on 31 July of the year of the Class 12 exam.",
+      "entrance": "SRMJEEE (UG) — online, remote-proctored, held in three phases",
+      "feesPerYearINR": 400000,
+      "deadline": "Last date for 2026 entry was 30 June 2026 (SRMJEEE Phase 3). 2027 dates not yet published.",
       "summary": "Aircraft, spacecraft, aerodynamics and propulsion.",
       "tags": [
         "aerospace",
@@ -297,6 +321,9 @@
         "Space-tech engineer"
       ],
       "sources": [
+        "https://www.srmist.edu.in/admission-india/engineering/",
+        "https://applications.srmist.edu.in/btech",
+        "https://webstor.srmist.edu.in/web_assets/downloads/2026/srm-admission-brochure-2026-2027.pdf",
         "https://applications.srmist.edu.in/"
       ]
     },
@@ -309,10 +336,10 @@
       ],
       "level": "UG",
       "durationYears": 4,
-      "eligibility": "TODO: eligibility from 2026–27 prospectus",
-      "entrance": "TODO: confirm SRMJEEE (B.Tech) details for 2026",
-      "feesPerYearINR": "TODO: confirm 2026–27 annual tuition with admissions",
-      "deadline": "TODO: 2026 application deadline",
+      "eligibility": "10+2 with at least 60% aggregate in Physics, Chemistry and Mathematics, or Physics, Mathematics and Biology, or Physics, Chemistry and Biology (or Botany/Zoology). Students without Mathematics take an extra 4-credit maths course in the first year.",
+      "entrance": "SRMJEEE (UG) — online, remote-proctored, held in three phases",
+      "feesPerYearINR": 275000,
+      "deadline": "Last date for 2026 entry was 30 June 2026 (SRMJEEE Phase 3). 2027 dates not yet published.",
       "summary": "Engineering applied to living systems — genetics, bioprocess and bioinformatics.",
       "tags": [
         "biotechnology",
@@ -328,6 +355,9 @@
         "Bioinformatics analyst"
       ],
       "sources": [
+        "https://www.srmist.edu.in/admission-india/engineering/",
+        "https://applications.srmist.edu.in/btech",
+        "https://webstor.srmist.edu.in/web_assets/downloads/2026/srm-admission-brochure-2026-2027.pdf",
         "https://applications.srmist.edu.in/"
       ]
     },
@@ -340,10 +370,10 @@
       ],
       "level": "UG",
       "durationYears": 4,
-      "eligibility": "TODO: eligibility from 2026–27 prospectus",
-      "entrance": "TODO: confirm SRMJEEE (B.Tech) details for 2026",
-      "feesPerYearINR": "TODO: confirm 2026–27 annual tuition with admissions",
-      "deadline": "TODO: 2026 application deadline",
+      "eligibility": "10+2 with at least 60% aggregate in Physics and Mathematics plus one of Chemistry, Biotechnology, Biology, Computer Science, IT, Informatics Practices, Engineering Graphics, or Botany and Zoology. Minimum age 16½ years on 31 July of the year of the Class 12 exam.",
+      "entrance": "SRMJEEE (UG) — online, remote-proctored, held in three phases",
+      "feesPerYearINR": 275000,
+      "deadline": "Last date for 2026 entry was 30 June 2026 (SRMJEEE Phase 3). 2027 dates not yet published.",
       "summary": "Structures, infrastructure, water and sustainable cities.",
       "tags": [
         "civil",
@@ -360,6 +390,9 @@
         "Construction manager"
       ],
       "sources": [
+        "https://www.srmist.edu.in/admission-india/engineering/",
+        "https://applications.srmist.edu.in/btech",
+        "https://webstor.srmist.edu.in/web_assets/downloads/2026/srm-admission-brochure-2026-2027.pdf",
         "https://applications.srmist.edu.in/"
       ]
     },
@@ -372,10 +405,10 @@
       ],
       "level": "PG",
       "durationYears": 2,
-      "eligibility": "TODO: eligibility from 2026–27 prospectus",
-      "entrance": "TODO: entrance exam / admission basis",
-      "feesPerYearINR": "TODO: confirm 2026–27 annual tuition with admissions",
-      "deadline": "TODO: 2026 application deadline",
+      "eligibility": "B.E./B.Tech in Mechanical, Production, Industrial, Aerospace, Automobile, Aeronautical, Mechatronics, ECE, EEE, EIE, CSE, AI or Data Science (or equivalent), with at least 50% aggregate.",
+      "entrance": "SRMJEEE (PG)",
+      "feesPerYearINR": 160000,
+      "deadline": "Last date for 2026 entry was 10 July 2026 (SRMJEEE PG Phase 3). 2027 dates not yet published.",
       "summary": "Advanced robotics: manipulation, perception and autonomous systems.",
       "tags": [
         "robotics",
@@ -392,6 +425,8 @@
         "PhD"
       ],
       "sources": [
+        "https://www.srmist.edu.in/admission-india/engineering/",
+        "https://webstor.srmist.edu.in/web_assets/downloads/2026/srm-admission-brochure-2026-2027.pdf",
         "https://applications.srmist.edu.in/"
       ]
     },
@@ -404,10 +439,10 @@
       ],
       "level": "PG",
       "durationYears": 2,
-      "eligibility": "TODO: eligibility from 2026–27 prospectus",
-      "entrance": "TODO: entrance exam / admission basis",
-      "feesPerYearINR": "TODO: confirm 2026–27 annual tuition with admissions",
-      "deadline": "TODO: 2026 application deadline",
+      "eligibility": "B.E./B.Tech in any stream (except Biotechnology, Food Technology and their specialisations), or MCA / M.Sc in Maths, Statistics, IT, Computer Science, Physics or Chemistry, with at least 50% aggregate.",
+      "entrance": "SRMJEEE (PG)",
+      "feesPerYearINR": 160000,
+      "deadline": "Last date for 2026 entry was 10 July 2026 (SRMJEEE PG Phase 3). 2027 dates not yet published.",
       "summary": "Statistics, machine learning and large-scale data systems.",
       "tags": [
         "data science",
@@ -425,6 +460,8 @@
         "Analytics lead"
       ],
       "sources": [
+        "https://www.srmist.edu.in/admission-india/engineering/",
+        "https://webstor.srmist.edu.in/web_assets/downloads/2026/srm-admission-brochure-2026-2027.pdf",
         "https://applications.srmist.edu.in/"
       ]
     },
@@ -437,10 +474,10 @@
       ],
       "level": "UG",
       "durationYears": 5.5,
-      "eligibility": "TODO: eligibility from 2026–27 prospectus",
+      "eligibility": "At least 17 years old by 31 December of the admission year; 10+2 with English, Physics, Chemistry and Biology (Botany and Zoology) with marks as per NMC norms; a qualifying NEET (UG) score.",
       "entrance": "NEET (UG)",
-      "feesPerYearINR": "TODO: confirm 2026–27 annual tuition with admissions",
-      "deadline": "TODO: 2026 application deadline",
+      "feesPerYearINR": "TODO: SRM publishes MBBS fees only in its NEET MBBS 2026–27 information bulletin — get it from admissions",
+      "deadline": "Set by the NEET (UG) counselling schedule of the Medical Counselling Committee (MCC).",
       "summary": "The medical degree: four and a half years of study plus a one-year compulsory internship.",
       "tags": [
         "medicine",
@@ -457,8 +494,9 @@
         "MD / MS specialisation"
       ],
       "sources": [
-        "https://www.srmist.edu.in/program/mbbs-bachelor-of-medicine-and-bachelor-of-surgery/",
-        "https://www.srmist.edu.in/admission-india/medicine-health-sciences/"
+        "https://www.srmist.edu.in/admission-india/medicine-health-sciences/",
+        "https://webstor.srmist.edu.in/web_assets/downloads/2026/srm-admission-brochure-2026-2027.pdf",
+        "https://www.srmist.edu.in/program/mbbs-bachelor-of-medicine-and-bachelor-of-surgery/"
       ]
     },
     {
@@ -472,8 +510,8 @@
       "durationYears": 5,
       "eligibility": "Plus Two (science stream) pass with NEET eligibility.",
       "entrance": "NEET (UG); seats allotted through common counselling by DGHS (MCC)",
-      "feesPerYearINR": "TODO: dental.srmist.edu.in/ug lists ₹3,90,000 tuition + ₹10,000 one-time registration, but the table has no year — confirm for 2026–27",
-      "deadline": "TODO: 2026 application deadline",
+      "feesPerYearINR": 390000,
+      "deadline": "Set by the NEET (UG) counselling schedule of the Medical Counselling Committee (MCC).",
       "summary": "Five years: four of study and one of compulsory internship. 100 seats a year.",
       "tags": [
         "dental",
@@ -489,6 +527,8 @@
         "Own practice"
       ],
       "sources": [
+        "https://www.srmist.edu.in/admission-india/medicine-health-sciences/",
+        "https://webstor.srmist.edu.in/web_assets/downloads/2026/srm-admission-brochure-2026-2027.pdf",
         "https://dental.srmist.edu.in/ug/"
       ]
     },
@@ -501,10 +541,10 @@
       ],
       "level": "UG",
       "durationYears": 4,
-      "eligibility": "TODO: eligibility from 2026–27 prospectus",
-      "entrance": "TODO: entrance exam / admission basis",
-      "feesPerYearINR": "TODO: confirm 2026–27 annual tuition with admissions",
-      "deadline": "TODO: 2026 application deadline",
+      "eligibility": "10+2 with English and Physics, Chemistry plus Mathematics or Biology, with at least 50% aggregate in PCM or PCB (or a D.Pharm with 60%). At least 17 years old by 31 December of the admission year.",
+      "entrance": "SRMJEEH (Health Science UG)",
+      "feesPerYearINR": 225000,
+      "deadline": "Last date for 2026 entry was 30 May 2026 (Phase 2). 2027 dates not yet published.",
       "summary": "Drugs from molecule to medicine: chemistry, formulation and regulation.",
       "tags": [
         "pharmacy",
@@ -520,6 +560,8 @@
         "Regulatory affairs"
       ],
       "sources": [
+        "https://www.srmist.edu.in/admission-india/medicine-health-sciences/",
+        "https://webstor.srmist.edu.in/web_assets/downloads/2026/srm-admission-brochure-2026-2027.pdf",
         "https://applications.srmist.edu.in/"
       ]
     },
@@ -532,10 +574,10 @@
       ],
       "level": "UG",
       "durationYears": 6,
-      "eligibility": "TODO: eligibility from 2026–27 prospectus",
-      "entrance": "TODO: entrance exam / admission basis",
-      "feesPerYearINR": "TODO: confirm 2026–27 annual tuition with admissions",
-      "deadline": "TODO: 2026 application deadline",
+      "eligibility": "10+2 with English and Physics, Chemistry plus Mathematics or Biology, with at least 50% aggregate in PCM or PCB (or a D.Pharm with 60%). At least 17 years old by 31 December of the admission year.",
+      "entrance": "SRMJEEH (Health Science UG)",
+      "feesPerYearINR": 500000,
+      "deadline": "Last date for 2026 entry was 30 May 2026 (Phase 2). 2027 dates not yet published.",
       "summary": "Clinical pharmacy practice working alongside doctors in hospitals.",
       "tags": [
         "pharmacy",
@@ -550,6 +592,8 @@
         "Pharmacovigilance"
       ],
       "sources": [
+        "https://www.srmist.edu.in/admission-india/medicine-health-sciences/",
+        "https://webstor.srmist.edu.in/web_assets/downloads/2026/srm-admission-brochure-2026-2027.pdf",
         "https://applications.srmist.edu.in/"
       ]
     },
@@ -562,10 +606,10 @@
       ],
       "level": "UG",
       "durationYears": 4,
-      "eligibility": "TODO: eligibility from 2026–27 prospectus",
-      "entrance": "TODO: entrance exam / admission basis",
-      "feesPerYearINR": "TODO: confirm 2026–27 annual tuition with admissions",
-      "deadline": "TODO: 2026 application deadline",
+      "eligibility": "10+2 science with at least 60% aggregate in Physics, Chemistry and Biology, and a pass in English. Age 17 to 35 on 31 December of the admission year.",
+      "entrance": "SRMJEEH (Health Science UG)",
+      "feesPerYearINR": 240000,
+      "deadline": "Last date for 2026 entry was 30 May 2026 (Phase 2). 2027 dates not yet published.",
       "summary": "Professional nursing education with hospital-based clinical training.",
       "tags": [
         "nursing",
@@ -580,6 +624,8 @@
         "M.Sc. Nursing"
       ],
       "sources": [
+        "https://www.srmist.edu.in/admission-india/medicine-health-sciences/",
+        "https://webstor.srmist.edu.in/web_assets/downloads/2026/srm-admission-brochure-2026-2027.pdf",
         "https://applications.srmist.edu.in/"
       ]
     },
@@ -592,10 +638,10 @@
       ],
       "level": "UG",
       "durationYears": 5,
-      "eligibility": "TODO: eligibility from 2026–27 prospectus",
-      "entrance": "TODO: entrance exam / admission basis",
-      "feesPerYearINR": "TODO: confirm 2026–27 annual tuition with admissions",
-      "deadline": "TODO: 2026 application deadline",
+      "eligibility": "10+2 in regular mode with at least 60% aggregate (or equivalent grade), and a 2026 CLAT or SRMJEEL attempt.",
+      "entrance": "SRMJEEL, then a personal interview. CLAT scorers go straight to the interview.",
+      "feesPerYearINR": 300000,
+      "deadline": "Last date for 2026 entry was 30 May 2026 (SRMJEEL Phase 2). 2027 dates not yet published.",
       "summary": "Integrated arts and law degree.",
       "tags": [
         "law",
@@ -612,6 +658,8 @@
         "Policy"
       ],
       "sources": [
+        "https://www.srmist.edu.in/admission-india/law/",
+        "https://webstor.srmist.edu.in/web_assets/downloads/2026/srm-admission-brochure-2026-2027.pdf",
         "https://applications.srmist.edu.in/"
       ]
     },
@@ -624,10 +672,10 @@
       ],
       "level": "UG",
       "durationYears": 5,
-      "eligibility": "TODO: eligibility from 2026–27 prospectus",
-      "entrance": "TODO: entrance exam / admission basis",
-      "feesPerYearINR": "TODO: confirm 2026–27 annual tuition with admissions",
-      "deadline": "TODO: 2026 application deadline",
+      "eligibility": "10+2 in regular mode with at least 60% aggregate (or equivalent grade), and a 2026 CLAT or SRMJEEL attempt.",
+      "entrance": "SRMJEEL, then a personal interview. CLAT scorers go straight to the interview.",
+      "feesPerYearINR": 300000,
+      "deadline": "Last date for 2026 entry was 30 May 2026 (SRMJEEL Phase 2). 2027 dates not yet published.",
       "summary": "Integrated commerce and law degree for corporate and financial law.",
       "tags": [
         "law",
@@ -643,6 +691,8 @@
         "In-house counsel"
       ],
       "sources": [
+        "https://www.srmist.edu.in/admission-india/law/",
+        "https://webstor.srmist.edu.in/web_assets/downloads/2026/srm-admission-brochure-2026-2027.pdf",
         "https://applications.srmist.edu.in/"
       ]
     },
@@ -654,11 +704,11 @@
         "kattankulathur"
       ],
       "level": "UG",
-      "durationYears": "TODO: 3 or 4 years (NEP) — confirm",
-      "eligibility": "TODO: eligibility from 2026–27 prospectus",
-      "entrance": "TODO: entrance exam / admission basis",
-      "feesPerYearINR": "TODO: confirm 2026–27 annual tuition with admissions",
-      "deadline": "TODO: 2026 application deadline",
+      "durationYears": 3,
+      "eligibility": "10+2 pass with at least 50% aggregate. Preference to students without a break in study.",
+      "entrance": "No entrance exam — admission on 10+2 marks",
+      "feesPerYearINR": 200000,
+      "deadline": "TODO: SRM publishes no last date for this merit-based programme — confirm with admissions",
       "summary": "Foundations of business: marketing, finance, operations and people.",
       "tags": [
         "business",
@@ -674,6 +724,8 @@
         "MBA"
       ],
       "sources": [
+        "https://www.srmist.edu.in/admission-india/management/",
+        "https://webstor.srmist.edu.in/web_assets/downloads/2026/srm-admission-brochure-2026-2027.pdf",
         "https://applications.srmist.edu.in/"
       ]
     },
@@ -686,10 +738,10 @@
       ],
       "level": "PG",
       "durationYears": 2,
-      "eligibility": "TODO: eligibility from 2026–27 prospectus",
-      "entrance": "TODO: entrance exam / admission basis",
-      "feesPerYearINR": "TODO: confirm 2026–27 annual tuition with admissions",
-      "deadline": "TODO: 2026 application deadline",
+      "eligibility": "A bachelor's degree with at least 50% aggregate.",
+      "entrance": "SRMJEEM, then a personal interview. CAT, XAT, MAT, GMAT, NMAT, CMAT or TANCET scorers go straight to the interview.",
+      "feesPerYearINR": 450000,
+      "deadline": "Last date for 2026 entry was 30 May 2026 (SRMJEEM Phase 3). 2027 dates not yet published.",
       "summary": "Postgraduate management degree for leadership roles.",
       "tags": [
         "mba",
@@ -706,6 +758,8 @@
         "Entrepreneur"
       ],
       "sources": [
+        "https://www.srmist.edu.in/admission-india/management/",
+        "https://webstor.srmist.edu.in/web_assets/downloads/2026/srm-admission-brochure-2026-2027.pdf",
         "https://applications.srmist.edu.in/"
       ]
     },
@@ -718,10 +772,10 @@
       ],
       "level": "UG",
       "durationYears": 5,
-      "eligibility": "TODO: eligibility from 2026–27 prospectus",
-      "entrance": "TODO: NATA / JEE Paper 2 requirement — confirm",
-      "feesPerYearINR": "TODO: confirm 2026–27 annual tuition with admissions",
-      "deadline": "TODO: 2026 application deadline",
+      "eligibility": "10+2 with at least 50% in Physics, Chemistry and Mathematics and 50% overall (or a 10+3 diploma with Mathematics and 50%), plus a qualifying NATA score.",
+      "entrance": "NATA (National Aptitude Test in Architecture)",
+      "feesPerYearINR": 275000,
+      "deadline": "TODO: SRM publishes no last date for this programme (admission on NATA) — confirm with admissions",
       "summary": "Designing buildings and places: studio-led architecture education.",
       "tags": [
         "architecture",
@@ -737,6 +791,8 @@
         "M.Arch"
       ],
       "sources": [
+        "https://www.srmist.edu.in/admission-india/engineering/",
+        "https://webstor.srmist.edu.in/web_assets/downloads/2026/srm-admission-brochure-2026-2027.pdf",
         "https://applications.srmist.edu.in/"
       ]
     },
@@ -749,10 +805,10 @@
       ],
       "level": "UG",
       "durationYears": 4,
-      "eligibility": "TODO: eligibility from 2026–27 prospectus",
-      "entrance": "TODO: entrance exam / admission basis",
-      "feesPerYearINR": "TODO: confirm 2026–27 annual tuition with admissions",
-      "deadline": "TODO: 2026 application deadline",
+      "eligibility": "10+2 in any stream (science, commerce, fine arts or other) with at least 50% aggregate. A UCEED score gives preference.",
+      "entrance": "No entrance exam — admission on 10+2 marks; a UCEED score gives preference",
+      "feesPerYearINR": 150000,
+      "deadline": "TODO: SRM publishes no last date for this merit-based programme — confirm with admissions",
       "summary": "Design thinking and making across products, spaces and media.",
       "tags": [
         "design",
@@ -768,6 +824,8 @@
         "Design researcher"
       ],
       "sources": [
+        "https://www.srmist.edu.in/admission-india/engineering/",
+        "https://webstor.srmist.edu.in/web_assets/downloads/2026/srm-admission-brochure-2026-2027.pdf",
         "https://applications.srmist.edu.in/"
       ]
     },
@@ -779,11 +837,11 @@
         "kattankulathur"
       ],
       "level": "UG",
-      "durationYears": "TODO: 3 or 4 years (NEP) — confirm",
-      "eligibility": "TODO: eligibility from 2026–27 prospectus",
-      "entrance": "TODO: entrance exam / admission basis",
-      "feesPerYearINR": "TODO: confirm 2026–27 annual tuition with admissions",
-      "deadline": "TODO: 2026 application deadline",
+      "durationYears": 3,
+      "eligibility": "10+2 with at least 50% aggregate, including one of Mathematics, Business Mathematics, Statistics or Allied Mathematics (or an engineering diploma with 50%).",
+      "entrance": "No entrance exam — admission on 10+2 marks",
+      "feesPerYearINR": 130000,
+      "deadline": "TODO: SRM publishes no last date for this merit-based programme — confirm with admissions",
       "summary": "Computer science fundamentals in a science degree.",
       "tags": [
         "computers",
@@ -798,6 +856,8 @@
         "Data analyst"
       ],
       "sources": [
+        "https://www.srmist.edu.in/admission-india/science-and-humanities/",
+        "https://webstor.srmist.edu.in/web_assets/downloads/2026/srm-admission-brochure-2026-2027.pdf",
         "https://applications.srmist.edu.in/"
       ]
     },
@@ -809,11 +869,11 @@
         "kattankulathur"
       ],
       "level": "UG",
-      "durationYears": "TODO: 3 or 4 years (NEP) — confirm",
-      "eligibility": "TODO: eligibility from 2026–27 prospectus",
-      "entrance": "TODO: entrance exam / admission basis",
-      "feesPerYearINR": "TODO: confirm 2026–27 annual tuition with admissions",
-      "deadline": "TODO: 2026 application deadline",
+      "durationYears": 3,
+      "eligibility": "10+2 with at least 50% aggregate, including one of Mathematics, Business Mathematics, Statistics or Allied Mathematics (or an engineering diploma with 50%).",
+      "entrance": "No entrance exam — admission on 10+2 marks",
+      "feesPerYearINR": 150000,
+      "deadline": "TODO: SRM publishes no last date for this merit-based programme — confirm with admissions",
       "summary": "Applied computing: programming, databases and web applications.",
       "tags": [
         "computers",
@@ -829,6 +889,8 @@
         "MCA"
       ],
       "sources": [
+        "https://www.srmist.edu.in/admission-india/science-and-humanities/",
+        "https://webstor.srmist.edu.in/web_assets/downloads/2026/srm-admission-brochure-2026-2027.pdf",
         "https://applications.srmist.edu.in/"
       ]
     },
@@ -840,11 +902,11 @@
         "kattankulathur"
       ],
       "level": "UG",
-      "durationYears": "TODO: 3 or 4 years (NEP) — confirm",
-      "eligibility": "TODO: eligibility from 2026–27 prospectus",
-      "entrance": "TODO: entrance exam / admission basis",
-      "feesPerYearINR": "TODO: confirm 2026–27 annual tuition with admissions",
-      "deadline": "TODO: 2026 application deadline",
+      "durationYears": 3,
+      "eligibility": "10+2 in any group with at least 50% aggregate.",
+      "entrance": "No entrance exam — admission on 10+2 marks",
+      "feesPerYearINR": 100000,
+      "deadline": "TODO: SRM publishes no last date for this merit-based programme — confirm with admissions",
       "summary": "Reporting, media production and communication.",
       "tags": [
         "journalism",
@@ -861,6 +923,8 @@
         "PR and communications"
       ],
       "sources": [
+        "https://www.srmist.edu.in/admission-india/science-and-humanities/",
+        "https://webstor.srmist.edu.in/web_assets/downloads/2026/srm-admission-brochure-2026-2027.pdf",
         "https://applications.srmist.edu.in/"
       ]
     },
@@ -875,8 +939,8 @@
       "durationYears": 4,
       "eligibility": "Higher Secondary (10+2) from a recognised board in an eligible subject group (e.g. Physics, Chemistry, Biology, Mathematics), minimum 50% aggregate. Vocational stream with Biology and Agricultural Practices also accepted.",
       "entrance": "No entrance exam listed — admission on qualifying-exam marks",
-      "feesPerYearINR": "TODO: confirm 2026–27 annual tuition with admissions",
-      "deadline": "TODO: 2026 application deadline",
+      "feesPerYearINR": 180000,
+      "deadline": "TODO: SRM publishes no last date for this merit-based programme — confirm with admissions",
       "summary": "Crop science, soils, agri-economics and farm technology on a 400+ acre campus.",
       "tags": [
         "agriculture",
@@ -894,6 +958,8 @@
         "Government agriculture services"
       ],
       "sources": [
+        "https://www.srmist.edu.in/admission-india/agricultural-science/",
+        "https://webstor.srmist.edu.in/web_assets/downloads/2026/srm-admission-brochure-2026-2027.pdf",
         "https://applications.srmist.edu.in/agricultural-sciences-form"
       ]
     },
@@ -908,8 +974,8 @@
       "durationYears": 4,
       "eligibility": "Higher Secondary (10+2) from a recognised board in an eligible subject group (e.g. Physics, Chemistry, Biology, Mathematics), minimum 50% aggregate. Vocational stream with Biology and Agricultural Practices also accepted.",
       "entrance": "No entrance exam listed — admission on qualifying-exam marks",
-      "feesPerYearINR": "TODO: confirm 2026–27 annual tuition with admissions",
-      "deadline": "TODO: 2026 application deadline",
+      "feesPerYearINR": 120000,
+      "deadline": "TODO: SRM publishes no last date for this merit-based programme — confirm with admissions",
       "summary": "Fruits, vegetables, flowers and landscape — the science of growing.",
       "tags": [
         "horticulture",
@@ -925,6 +991,8 @@
         "M.Sc. (Hort.)"
       ],
       "sources": [
+        "https://www.srmist.edu.in/admission-india/agricultural-science/",
+        "https://webstor.srmist.edu.in/web_assets/downloads/2026/srm-admission-brochure-2026-2027.pdf",
         "https://applications.srmist.edu.in/agricultural-sciences-form"
       ]
     }

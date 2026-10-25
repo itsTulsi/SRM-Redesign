@@ -1,5 +1,5 @@
 {
-  "_note": "featured = the one curated 'This week at SRM' story. studentWork drives Act II in order. Dates, student names and quotes not in CLAUDE.md §7 are TODO. Events transcribed from the srmist.edu.in homepage events block on 2026-10-25 (year inferred from 'BMR 2026' and the fetch date). TODO: refresh weekly; campus per event not stated on the homepage.",
+  "_note": "featured = the one curated 'This week at SRM' story. studentWork drives Act II in order. Dates, names and details are from each story's SRM source (sources[]), read 2026-10-25; Paperplane is from the startups page of SRM's 2026–27 brochure. Events transcribed from the srmist.edu.in homepage events block on 2026-10-25 (year inferred from 'BMR 2026' and the fetch date). TODO: refresh weekly; campus per event not stated on the homepage.",
   "featured": "volvo-vehicle-technology-centre",
   "stories": [
     {
@@ -7,7 +7,7 @@
       "kind": "student-work",
       "title": "National Champions: Team Camber Racing wins Formula Bharat 2026",
       "dek": "SRMIST's Formula Student team took the combustion-category title — and first place in seven events.",
-      "date": "TODO: event/publication date",
+      "date": "28 Jan 2026",
       "people": [
         {
           "name": "Himanshu Kumar",
@@ -62,18 +62,21 @@
         "motorsport",
         "students"
       ],
-      "scene": "sequence"
+      "scene": "sequence",
+      "sources": [
+        "https://www.srmist.edu.in/srmists-team-camber-racing-claims-national-title-at-formula-bharat-2026/"
+      ]
     },
     {
       "slug": "swift-student-challenge-2026",
       "kind": "student-work",
       "title": "Distinguished Winner, Apple Swift Student Challenge 2026",
-      "dek": "An SRMIST student was named a Distinguished Winner of Apple's Swift Student Challenge 2026.",
-      "date": "TODO: announcement date",
+      "dek": "Shourya Thakur, a pre-final-year B.Tech Computer Science student, was named a Distinguished Winner of Apple's Swift Student Challenge 2026 — the first from SRMIST.",
+      "date": "1 Jul 2026",
       "people": [
         {
-          "name": "TODO: student name (with consent)",
-          "role": "TODO: programme and year"
+          "name": "Shourya Thakur",
+          "role": "B.Tech Computer Science, pre-final year"
         }
       ],
       "facts": [
@@ -81,11 +84,17 @@
           "key": "recognition",
           "label": "Recognition",
           "value": "Distinguished Winner"
+        },
+        {
+          "key": "app",
+          "label": "App",
+          "value": "PurlStead (iPad)"
         }
       ],
       "body": [
-        "An SRMIST student was named a Distinguished Winner in Apple's Swift Student Challenge 2026.",
-        "TODO: what the app does, in the student's words."
+        "Shourya Thakur was named a Distinguished Winner in Apple's Swift Student Challenge 2026 — one of 50 worldwide, and the first SRMIST student to receive the honour.",
+        "His winning app, PurlStead, is an iPad playground app that helps with early screening for Parkinson's disease. It uses AI to study a user's hand movements, and all the analysis happens on the device, so no data leaves the iPad.",
+        "Apple flew him to Apple Park for WWDC 2026. He was mentored at SRMIST's iOS Development Centre."
       ],
       "media": {
         "photo": "media/student-work/swift-challenge.jpg"
@@ -94,25 +103,55 @@
         "computing",
         "apps",
         "students"
+      ],
+      "sources": [
+        "https://www.srmist.edu.in/srmist-student-named-distinguished-winner-at-apples-swift-student-challenge-2026/"
       ]
     },
     {
       "slug": "student-startup",
       "kind": "student-work",
-      "title": "TODO: student startup story",
-      "dek": "TODO: one verified SRMIST student startup — name, founders, what it does.",
-      "date": "TODO: publication date",
-      "people": [],
-      "facts": [],
+      "title": "Paperplane: digital clinics on WhatsApp",
+      "dek": "Started by two School of Computing students, Paperplane helps doctors run their practice on WhatsApp.",
+      "date": "From SRM's 2026–27 brochure",
+      "people": [
+        {
+          "name": "Devansh Swarup",
+          "role": "Co-founder"
+        },
+        {
+          "name": "Varun Goel",
+          "role": "Co-founder"
+        }
+      ],
+      "facts": [
+        {
+          "key": "funding",
+          "label": "Funding raised",
+          "value": "₹3 crore"
+        },
+        {
+          "key": "lead",
+          "label": "Round led by",
+          "value": "Cornerstone Venture Partners Fund"
+        }
+      ],
       "body": [
-        "TODO: startup story from the SRM incubation/innovation team."
+        "Paperplane sets up digital clinics on WhatsApp, so doctors and hospitals can launch and grow their practice on the messaging app patients already use.",
+        "It automates clinical work such as appointment scheduling, prescriptions and follow-ups.",
+        "Devansh Swarup and Varun Goel founded it while they were students at SRMIST's School of Computing. It has raised ₹3 crore in a round led by Cornerstone Venture Partners Fund."
       ],
       "media": {
         "photo": "media/student-work/startup.jpg"
       },
       "tags": [
         "entrepreneurship",
-        "students"
+        "students",
+        "health",
+        "apps"
+      ],
+      "sources": [
+        "https://webstor.srmist.edu.in/web_assets/downloads/2026/srm-admission-brochure-2026-2027.pdf"
       ]
     },
     {
@@ -120,7 +159,7 @@
       "kind": "news",
       "title": "SRMIST × Volvo Group: Volvo's first university-based Vehicle Technology Centre",
       "dek": "Volvo Group's first Vehicle Technology Centre at a university is at SRMIST.",
-      "date": "TODO: opening date",
+      "date": "20 Oct 2026",
       "people": [],
       "facts": [
         {
@@ -131,7 +170,7 @@
       ],
       "body": [
         "SRMIST and Volvo Group have set up Volvo's first university-based Vehicle Technology Centre.",
-        "TODO: what students and researchers do there."
+        "Set up with Volvo Group CSR Trust India, it includes a Centre of Excellence in Virtual Vehicle Technologies. The aim is to bridge classroom learning and industry practice through hands-on training, collaborative research and exposure to advanced automotive technology."
       ],
       "media": {
         "photo": "media/stories/volvo-vtc.jpg"
@@ -140,6 +179,9 @@
         "mobility",
         "research",
         "industry"
+      ],
+      "sources": [
+        "https://www.srmist.edu.in/srmist-and-volvo-group-partner-to-set-up-volvo-first-university-based-vehicle-technology-centre/"
       ]
     }
   ],

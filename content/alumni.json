@@ -1,32 +1,35 @@
 {
-  "_note": "Names and roles are public on srmist.edu.in (CLAUDE.md §7). Quotes, degrees, graduation years and career paths are NOT verified — TODO until sourced. Portraits only with permission.",
+  "_note": "Names and roles are public on srmist.edu.in (CLAUDE.md §7). Degrees, years and career paths for Sriram Krishnan and Ojas Mahapatra are from SRM's notable-alumni page; Varun Chakravarthy's from his Wikipedia biography (read 2026-10-25; SRM's page doesn't list him). Quotes stay TODO until a sourced public quote is found. Portraits only with permission.",
   "alumni": [
     {
       "slug": "sriram-krishnan",
       "name": "Sriram Krishnan",
       "role": "Senior Policy Advisor for AI, The White House",
       "line": "TODO: one-line quote — use only a sourced public quote",
-      "degree": "TODO: SRM degree and year",
-      "path": ["TODO: verified career milestones"],
-      "photo": "media/alumni/sriram-krishnan.jpg"
+      "degree": "B.Tech (Information Technology), 2005",
+      "path": ["Leadership roles in the tech industry", "Senior Policy Advisor for AI, The White House"],
+      "photo": "media/alumni/sriram-krishnan.jpg",
+      "sources": ["https://www.srmist.edu.in/alumni-affairs/notable-alumni/"]
     },
     {
       "slug": "varun-chakravarthy",
       "name": "Varun Chakravarthy",
       "role": "Indian cricketer",
       "line": "TODO: one-line quote — use only a sourced public quote",
-      "degree": "TODO: SRM degree and year",
-      "path": ["TODO: verified career milestones"],
-      "photo": "media/alumni/varun-chakravarthy.jpg"
+      "degree": "B.Arch (Architecture)",
+      "path": ["Worked as an architect", "Left architecture at 25 to play cricket", "Leg-spinner for Tamil Nadu, Kolkata Knight Riders and India"],
+      "photo": "media/alumni/varun-chakravarthy.jpg",
+      "sources": ["https://en.wikipedia.org/wiki/Varun_Chakravarthy", "https://www.srmist.edu.in/"]
     },
     {
       "slug": "ojas-mahapatra",
       "name": "Ojas Mahapatra",
       "role": "Group CEO, MARS Bioimaging",
       "line": "TODO: one-line quote — use only a sourced public quote",
-      "degree": "TODO: SRM degree and year",
-      "path": ["TODO: verified career milestones"],
-      "photo": "media/alumni/ojas-mahapatra.jpg"
+      "degree": "B.Tech (Biotechnology), 2003",
+      "path": ["PhD in Nanotechnology, University of Canterbury", "Led InsituGen, an athlete drug-testing company", "Group CEO, MARS Bioimaging, New Zealand"],
+      "photo": "media/alumni/ojas-mahapatra.jpg",
+      "sources": ["https://www.srmist.edu.in/alumni-affairs/notable-alumni/"]
     }
   ]
 }

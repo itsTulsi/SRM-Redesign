@@ -1,5 +1,5 @@
 {
-  "_note": "lat/lng from OpenStreetMap (Nominatim, 2026-10-25) at the campus itself; coordsApprox = town-level (campus not mapped in OSM). Addresses are transcribed from each campus's official website; TODO where it couldn't be read. Directions use directionsQuery (official name) so Google resolves the actual gate.",
+  "_note": "lat/lng from OpenStreetMap (Nominatim, 2026-10-25) at the campus itself; coordsApprox = town-level (campus not mapped in OSM). Addresses are transcribed from each campus's official website; TODO where it couldn't be read. Directions use directionsQuery (official name) so Google resolves the actual gate. Trichy's address is from srmtrichy.edu.in (contact block), SRM AP's from srmap.edu.in/contact-us/. distanceFromChennai = road distance from Chennai Central on the OSRM (OpenStreetMap) driving route, rounded (2026-10-25).",
   "campuses": [
     {
       "slug": "kattankulathur",
@@ -11,7 +11,7 @@
       "lat": 12.82344,
       "lng": 80.04504,
       "tour360Url": "https://webstor.srmist.edu.in/web_assets/srmist-virtual-tour-vo/index.htm",
-      "distanceFromChennai": "TODO: road distance from Chennai Central",
+      "distanceFromChennai": "About 45 km by road from Chennai Central",
       "photo": "media/campuses/kattankulathur.jpg",
       "address": "SRM Nagar, Kattankulathur – 603 203, Chengalpattu District, Tamil Nadu",
       "website": "https://www.srmist.edu.in/",
@@ -62,9 +62,9 @@
       "lat": 10.95632,
       "lng": 78.75387,
       "tour360Url": null,
-      "distanceFromChennai": "TODO: road distance from Chennai",
+      "distanceFromChennai": "About 310 km by road from Chennai Central",
       "photo": "media/campuses/tiruchirappalli.jpg",
-      "address": "TODO: official postal address (srmtrichy.edu.in renders client-side only)",
+      "address": "SRM Nagar, Trichy–Chennai Highway, near Samayapuram, Tiruchirappalli – 621 105, Tamil Nadu",
       "website": "https://srmtrichy.edu.in/",
       "directionsQuery": "SRM Institute of Science and Technology, Irungalur, Tiruchirappalli"
     },
@@ -78,7 +78,7 @@
       "lat": 28.79619,
       "lng": 77.53824,
       "tour360Url": null,
-      "distanceFromChennai": "TODO: travel time from Chennai",
+      "distanceFromChennai": "About 2,150 km by road from Chennai Central",
       "photo": "media/campuses/delhi-ncr.jpg",
       "address": "Delhi-NCR Campus, Delhi-Meerut Road, Modinagar, Ghaziabad, Uttar Pradesh – 201 204",
       "website": "https://www.srmup.in/",
@@ -95,7 +95,7 @@
       "lat": 12.4077,
       "lng": 79.8172,
       "tour360Url": null,
-      "distanceFromChennai": "TODO: road distance from Chennai",
+      "distanceFromChennai": "About 100 km by road from Chennai Central",
       "photo": "media/campuses/baburayanpettai.jpg",
       "coordsApprox": true,
       "address": "Vendhar Nagar, Baburayanpettai, Acharapakkam, Chengalpattu District, Tamil Nadu",
@@ -115,7 +115,7 @@
       "tour360Url": null,
       "website": "https://srmap.edu.in/",
       "photo": "media/campuses/srm-ap.jpg",
-      "address": "TODO: official postal address",
+      "address": "Neerukonda, Mangalagiri Mandal, Guntur District, Andhra Pradesh – 522 240",
       "directionsQuery": "SRM University AP, Neerukonda, Amaravati"
     },
     {

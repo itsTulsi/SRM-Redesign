@@ -218,7 +218,7 @@ export async function reply(query: string, t: Translate, locale: string): Promis
           title: t("placementsTitle", { season: placements.season }),
           rows: placements.items.map((x) => ({ label: x.label, value: x.display })),
         });
-        blocks.push({ type: "text", text: t("placementsNote", { companies: s("companies") }) });
+        blocks.push({ type: "text", text: t("placementsNote", { offers: s("offers") }) });
         if (programme) blocks.push({ type: "text", text: t("typicalRoles", { name: programme.name, roles: programme.outcomes.join(", ") }) });
         break;
       }

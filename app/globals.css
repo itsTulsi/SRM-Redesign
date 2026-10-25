@@ -56,9 +56,9 @@
   /* Tamil / Devanagari: installed fonts first ("SRM Script", local() faces below) — Android ships Noto Sans Tamil
      + Noto Sans Devanagari (the faces §4 specifies), Apple and Windows have their own — so phones download 0 kB
      instead of 50–120 kB. The self-hosted Noto (next/font) is the last resort, on its own locale only. */
-  --font-sans: var(--font-inter), var(--script-fonts), var(--font-noto-tamil, ""), var(--font-noto-devanagari, ""),
+  --font-sans: "SRM Rupee", var(--font-inter), var(--script-fonts), var(--font-noto-tamil, ""), var(--font-noto-devanagari, ""),
     ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-space-grotesk), var(--script-fonts), var(--font-noto-tamil, ""),
+  --font-display: "SRM Rupee", var(--font-space-grotesk), var(--script-fonts), var(--font-noto-tamil, ""),
     var(--font-noto-devanagari, ""), ui-sans-serif, system-ui, sans-serif;
 }
 
@@ -109,6 +109,26 @@
   src: local("Noto Sans Devanagari Bold"), local("NotoSansDevanagari-Bold"), local("Noto Sans Devanagari UI Bold"),
     local("Kohinoor Devanagari Bold"), local("KohinoorDevanagari-Bold"), local("Devanagari Sangam MN Bold"),
     local("DevanagariSangamMN-Bold"), local("Nirmala UI Bold"), local("NirmalaUI-Bold"), local("Mangal Bold");
+}
+
+/* "SRM Rupee": ₹ only, from the device's own fonts. Inter's Latin subset has no ₹, so one fee on a page would
+   otherwise download Inter's 84 kB Latin-Extended file (it cost the homepage ~5 Lighthouse points). Every phone and
+   desktop OS ships a ₹ in one of these; if none is found the browser falls through to Inter as before. */
+@font-face {
+  font-family: "SRM Rupee";
+  font-weight: 100 500;
+  unicode-range: U+20B9;
+  src: local("Roboto"), local("Roboto-Regular"), local("Noto Sans"), local("NotoSans-Regular"), local("Segoe UI"),
+    local("SegoeUI"), local("Nirmala UI"), local("NirmalaUI"), local("Kohinoor Devanagari Regular"),
+    local("KohinoorDevanagari-Regular"), local("Arial"), local("ArialMT");
+}
+@font-face {
+  font-family: "SRM Rupee";
+  font-weight: 600 900;
+  unicode-range: U+20B9;
+  src: local("Roboto Bold"), local("Roboto-Bold"), local("Noto Sans Bold"), local("NotoSans-Bold"), local("Segoe UI Bold"),
+    local("SegoeUI-Bold"), local("Nirmala UI Bold"), local("NirmalaUI-Bold"), local("Kohinoor Devanagari Bold"),
+    local("KohinoorDevanagari-Bold"), local("Arial Bold"), local("Arial-BoldMT");
 }
 
 /* ── Base ── */

@@ -32,9 +32,16 @@ export async function ActLead() {
               ) : (
                 <blockquote className="border-l-2 border-tree pl-4 text-lg text-fg-muted">“{a.line}”</blockquote>
               )}
-              <p className="text-sm text-fg-muted">
-                <Fact value={a.degree} />
-              </p>
+              <ol aria-label={t("pathLabel", { name: a.name })} className="flex flex-col gap-1.5 border-l border-line pl-4 text-sm text-fg-muted">
+                <li>
+                  SRM · <Fact value={a.degree} />
+                </li>
+                {a.path.map((step) => (
+                  <li key={step}>
+                    <Fact value={step} />
+                  </li>
+                ))}
+              </ol>
             </li>
           ))}
         </ul>

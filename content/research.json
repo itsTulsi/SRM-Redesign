@@ -1,11 +1,14 @@
 {
-  "_note": "Act II research by mission (Melbourne model), not by faculty. Only verified items; everything else TODO.",
+  "_note": "Act II research by mission (Melbourne model), not by faculty. Only verified items; everything else TODO. Health = the Swift and Paperplane stories (stories.json sources); Space & Materials = srmist.edu.in/research/research-wings/nrc/; Sustainability = srmist.edu.in/research/research-wings/cacr/ (read 2026-10-25).",
   "missions": [
     {
       "slug": "health",
       "name": "Health",
       "question": "How do we keep people healthier, longer?",
-      "highlights": ["TODO: 2–3 verified health research projects (medical college, biotech, pharmacy)"],
+      "highlights": [
+        "PurlStead, a student-built iPad app, screens for early signs of Parkinson's disease with on-device AI — a Distinguished Winner of Apple's Swift Student Challenge 2026.",
+        "Paperplane, founded by School of Computing students, runs digital clinics for doctors on WhatsApp."
+      ],
       "photo": "media/research/health.jpg"
     },
     {
@@ -22,7 +25,9 @@
       "slug": "space-materials",
       "name": "Space & Materials",
       "question": "What will we build with, and where will we go?",
-      "highlights": ["TODO: verified space / materials research (e.g. aerospace, nanotechnology)"],
+      "highlights": [
+        "The Nanotechnology Research Centre, set up in 2006 at Kattankulathur, makes and studies new materials for energy, environment and healthcare."
+      ],
       "photo": "media/research/space-materials.jpg"
     },
     {
@@ -31,7 +36,7 @@
       "question": "How do we grow without using up the planet?",
       "highlights": [
         "Ranked 4 in NIRF 2025 Sustainability (SDG), as published by SRM.",
-        "TODO: one verified sustainability project"
+        "Zero-cement geopolymer concrete — made from industrial by-products such as fly ash — is already on campus as a building, a precast toilet block, paver blocks and an internal road."
       ],
       "photo": "media/research/sustainability.jpg"
     }
