@@ -2,6 +2,7 @@ import { getTranslations } from "next-intl/server";
 import { LanguageSwitcher } from "@/components/nav/LanguageSwitcher";
 import { LiteModeToggle } from "@/components/ui/LiteModeToggle";
 import { SmartLink } from "@/components/ui/SmartLink";
+import { Link } from "@/lib/i18n";
 import { campuses, site } from "@/lib/content";
 import { SECTION } from "@/lib/sections";
 import { FooterAccordion } from "./FooterAccordion";
@@ -12,6 +13,8 @@ export async function SiteFooter() {
   const t = await getTranslations("Footer");
   const nav = await getTranslations("Nav");
   const external = nav("external");
+  const e = await getTranslations("Enquiry");
+  const phone = site.admissions.phones[0]!;
 
   const groups: Group[] = [
     {
@@ -22,6 +25,7 @@ export async function SiteFooter() {
         { label: nav("undergraduate"), href: "/programmes#level-ug" },
         { label: nav("postgraduate"), href: "/programmes#level-pg" },
         { label: nav("admissions"), href: "/admissions" },
+        { label: nav("enquiry"), href: "/admissions#enquiry" },
         { label: nav("applyLong"), href: site.admissions.applyUrl },
       ],
     },
@@ -60,6 +64,33 @@ export async function SiteFooter() {
     <footer className="border-t border-line-subtle bg-bg text-fg">
       <h2 className="sr-only">{t("label")}</h2>
       <div className="site-container py-12 lg:py-16">
+        <section
+          aria-labelledby="footer-enquiry"
+          className="mb-14 flex flex-col gap-5 rounded-3xl border border-line p-6 lg:flex-row lg:items-center lg:justify-between lg:p-8"
+        >
+          <div>
+            <h3 id="footer-enquiry" className="font-display text-2xl font-bold lg:text-3xl">
+              {e("cta")}
+            </h3>
+            <p className="mt-2 max-w-prose text-fg-muted">{e("ctaBody")}</p>
+          </div>
+          <div className="flex flex-wrap items-center gap-3">
+            <Link
+              href="/admissions#enquiry"
+              data-magnetic
+              className="relative inline-flex min-h-12 items-center overflow-hidden rounded-full bg-action px-6 font-semibold text-on-action no-underline"
+            >
+              {e("ctaButton")}
+            </Link>
+            <a
+              href={`tel:${phone.tel}`}
+              className="inline-flex min-h-12 items-center rounded-full border border-line px-6 font-semibold text-fg no-underline hover:border-fg"
+            >
+              {phone.display}
+            </a>
+          </div>
+        </section>
+
         <div className="mb-10 flex flex-col gap-2">
           <p className="font-display text-3xl font-bold tracking-tight">{site.tagline}</p>
           <p className="text-fg-muted">

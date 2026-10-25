@@ -13,5 +13,6 @@ export type NavSection = {
 export type NavData = {
   sections: NavSection[];
   apply: NavLink;
+  enquiry: NavLink;
   labels: { primary: string; home: string; menu: string; close: string; language: string; external: string; apply: string };
 };

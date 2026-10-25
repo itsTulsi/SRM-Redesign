@@ -52,7 +52,8 @@
     "rankings": "Rankings & accreditation",
     "alumni": "Alumni",
     "thisWeek": "This week at SRM",
-    "startHere": "Start here"
+    "startHere": "Start here",
+    "enquiry": "Admission enquiry"
   },
   "Footer": {
     "label": "Footer",
@@ -158,5 +159,45 @@
       "readStory": "Read the story",
       "eventPage": "Event details"
     }
+  },
+  "Enquiry": {
+    "title": "Admission enquiry",
+    "intro": "Ask us anything about programmes, fees, eligibility or hostels. An admissions counsellor will call you back.",
+    "name": "Full name",
+    "phone": "Mobile number",
+    "phoneHint": "Indian mobile (10 digits) or international number starting with +",
+    "email": "Email",
+    "state": "State",
+    "outsideIndia": "Outside India",
+    "choose": "Choose…",
+    "programme": "Programme you're interested in",
+    "undecided": "Not sure yet",
+    "message": "Your question",
+    "optional": "optional",
+    "consent": "I agree to be contacted by SRMIST admissions about this enquiry. My details are used only to answer it.",
+    "submit": "Send enquiry",
+    "sending": "Sending…",
+    "errorSummary": "{count, plural, one {Please fix 1 field} other {Please fix # fields}}",
+    "errors": {
+      "required": "This is required.",
+      "tooShort": "Please enter at least 2 characters.",
+      "tooLong": "This is too long.",
+      "invalidPhone": "Enter a 10-digit Indian mobile number, or an international number starting with +.",
+      "invalidEmail": "Enter a valid email address, like name@example.com.",
+      "invalidChoice": "Please choose an option from the list."
+    },
+    "failed": "We couldn't send that just now. Please try again, or call us:",
+    "rateLimited": "Too many enquiries from this connection. Please wait a minute, or call us:",
+    "successTitle": "Thank you — we've received your enquiry",
+    "successBody": "Your reference is {ref}. An admissions counsellor will call you on the number you gave.",
+    "demoNote": "Demo mode: this concept site isn't connected to SRM's admissions system yet, so your enquiry was not sent. For a real answer, call:",
+    "thanksTitle": "Thank you for your enquiry",
+    "thanksBody": "If this site is connected to SRM admissions, a counsellor will call you back. You can also call us directly:",
+    "another": "Send another enquiry",
+    "cta": "Have a question about admission?",
+    "ctaBody": "Send us an enquiry and a counsellor will call you back — or call now.",
+    "ctaButton": "Send an enquiry",
+    "consentLabel": "Consent",
+    "demoTitle": "Demo mode — your enquiry wasn't sent"
   }
 }

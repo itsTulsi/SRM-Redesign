@@ -30,6 +30,7 @@ export async function getNavData(): Promise<NavData> {
       apply: t("apply"),
     },
     apply: { label: t("applyLong"), href: site.admissions.applyUrl },
+    enquiry: { label: t("enquiry"), href: "/admissions#enquiry" },
     sections: [
       {
         id: "study",
@@ -43,6 +44,7 @@ export async function getNavData(): Promise<NavData> {
               { label: t("undergraduate"), href: "/programmes#level-ug" },
               { label: t("postgraduate"), href: "/programmes#level-pg" },
               { label: t("admissions"), href: "/admissions" },
+              { label: t("enquiry"), href: "/admissions#enquiry" },
             ],
           },
           {

@@ -151,6 +151,12 @@ export function SiteHeader({ nav }: { nav: NavData }) {
           >
             {nav.apply.label}
           </SmartLink>
+          <SmartLink
+            href={nav.enquiry.href}
+            className="inline-flex min-h-12 items-center justify-center rounded-full border border-line px-6 text-lg font-semibold text-fg no-underline"
+          >
+            {nav.enquiry.label}
+          </SmartLink>
         </div>
       </dialog>
     </header>

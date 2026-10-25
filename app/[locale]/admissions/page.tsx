@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { site } from "@/lib/content";
+import { EnquiryForm } from "@/components/admissions/EnquiryForm";
+import { colleges, programmes, site } from "@/lib/content";
 import type { Locale } from "@/lib/i18n";
 
 type Params = { params: Promise<{ locale: Locale }> };
@@ -16,6 +17,10 @@ export default async function AdmissionsPage({ params }: Params) {
   setRequestLocale(locale);
   const t = await getTranslations("Pages");
   const nav = await getTranslations("Nav");
+  const e = await getTranslations("Enquiry");
+  const programmeGroups = colleges
+    .map((c) => ({ college: c.name, items: programmes.filter((p) => p.college === c.slug).map((p) => ({ slug: p.slug, name: p.name })) }))
+    .filter((g) => g.items.length > 0);
 
   return (
     <main id="main" tabIndex={-1} className="site-container py-12 lg:py-20">
@@ -45,6 +50,14 @@ export default async function AdmissionsPage({ params }: Params) {
         {nav("applyLong")}
         <span className="sr-only"> {nav("external")}</span>
       </a>
+
+      <section id="enquiry" aria-labelledby="enquiry-title" className="mt-20 max-w-3xl scroll-mt-20">
+        <h2 id="enquiry-title" className="font-display text-section font-bold">
+          {e("title")}
+        </h2>
+        <p className="mt-3 mb-8 text-lg text-fg-muted">{e("intro")}</p>
+        <EnquiryForm programmes={programmeGroups} phone={site.admissions.phones[0]!} />
+      </section>
     </main>
   );
 }
