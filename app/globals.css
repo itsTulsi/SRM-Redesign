@@ -207,6 +207,22 @@
   }
 }
 
+/* Chip rows (hero examples, audiences): wrap on wider screens, one swipeable row on phones. */
+@media (width < 40rem) {
+  .chip-row {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+    /* Room for focus rings, which the scroll box would otherwise clip. */
+    padding-block: 0.375rem;
+    scroll-padding-inline: 1rem;
+  }
+  .chip-row::-webkit-scrollbar {
+    display: none;
+  }
+}
+
 /* ── Motion off: OS preference OR Lite Mode → instant states (§5 rules) ── */
 @media (prefers-reduced-motion: reduce) {
   *,

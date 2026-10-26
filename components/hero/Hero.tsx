@@ -1,4 +1,5 @@
 import { getLocale, getTranslations } from "next-intl/server";
+import { ChipRow } from "@/components/ui/ChipRow";
 import { SmartLink } from "@/components/ui/SmartLink";
 import { getContent } from "@/lib/content";
 import { SECTION } from "@/lib/sections";
@@ -32,7 +33,8 @@ export async function Hero() {
       className="relative isolate flex min-h-[calc(100svh-4rem)] flex-col justify-end overflow-hidden bg-bg text-fg"
     >
       <HeroMedia />
-      <div className="site-container w-full pt-16 pb-8 lg:pb-12">
+      {/* Phones: bottom padding keeps the last chips clear of the Ask SRM button and the seed. */}
+      <div className="site-container w-full pt-16 pb-20 sm:pb-8 lg:pb-12">
         <h1 id="hero-title" className="max-w-[16ch] font-display text-hero font-bold text-balance">
           {t("title")}
         </h1>
@@ -40,22 +42,22 @@ export async function Hero() {
         <HeroSearch counts={counts} phones={site.admissions.phones.slice(0, 2)} />
 
         <nav aria-label={t("audienceLabel")} className="mt-6">
-          <ul className="flex flex-wrap items-center gap-2">
-            <li aria-hidden="true" className="mr-1 text-sm text-fg-muted">
+          <ChipRow as="ul" className="flex flex-wrap items-center gap-2 max-sm:-mx-4 max-sm:px-4">
+            <li aria-hidden="true" className="mr-1 shrink-0 text-sm text-fg-muted">
               {t("audienceLabel")}
             </li>
             {audiences.map((a) => (
-              <li key={a.label}>
+              <li key={a.label} className="shrink-0">
                 <SmartLink
                   href={a.href}
                   externalHint={nav("external")}
-                  className="inline-flex min-h-11 items-center rounded-full border border-line px-4 text-fg no-underline hover:border-fg hover:bg-fg hover:text-bg"
+                  className="inline-flex min-h-11 items-center rounded-full border border-line px-4 whitespace-nowrap text-fg no-underline hover:border-fg hover:bg-fg hover:text-bg"
                 >
                   {a.label}
                 </SmartLink>
               </li>
             ))}
-          </ul>
+          </ChipRow>
         </nav>
       </div>
       <HeroSeed />

@@ -2,6 +2,7 @@
 
 import { useLocale, useTranslations } from "next-intl";
 import { useEffect, useId, useMemo, useRef, useState } from "react";
+import { ChipRow } from "@/components/ui/ChipRow";
 import { afterLoadIdle } from "@/lib/after-load";
 import { understand, type Answer, type Lexicon } from "@/lib/ask";
 import { getPathname, Link } from "@/lib/i18n";
@@ -133,7 +134,7 @@ export function HeroSearch({ counts, phones }: Props) {
           onBlur={() => setFocused(false)}
           placeholder={`${t("tryLabel")}: ${examples[exampleIndex]}…`}
           aria-describedby={`${id}-status`}
-          className="h-16 min-w-0 flex-1 bg-transparent pl-5 text-xl text-ink outline-none placeholder:text-ink/65 lg:h-20 lg:pl-7 lg:text-3xl"
+          className="h-14 min-w-0 flex-1 bg-transparent pl-5 text-lg text-ellipsis text-ink outline-none [color-scheme:light] placeholder:text-ink/65 sm:h-16 sm:text-xl lg:h-20 lg:pl-7 lg:text-3xl"
         />
         <button
           type="submit"
@@ -161,19 +162,20 @@ export function HeroSearch({ counts, phones }: Props) {
               </div>
               <SeeAll label={t("seeAll")} />
             </div>
-            <div className="mt-3 flex flex-wrap items-center gap-2">
-              <span className="text-sm font-semibold">{t("tryLabel")}:</span>
+            {/* Phones: one swipeable row bleeding to the card edge, so the hero video isn't buried under chips. */}
+            <ChipRow className="mt-3 flex flex-wrap items-center gap-2 max-sm:-mx-4 max-sm:px-4">
+              <span className="shrink-0 text-sm font-semibold">{t("tryLabel")}:</span>
               {examples.slice(0, 4).map((ex) => (
                 <button
                   key={ex}
                   type="button"
                   onClick={() => fill(ex)}
-                  className="inline-flex min-h-11 items-center rounded-full border border-ink/50 px-4 text-sm hover:bg-ink hover:text-action"
+                  className="inline-flex min-h-11 shrink-0 items-center rounded-full border border-ink/50 px-4 text-sm whitespace-nowrap hover:bg-ink hover:text-action"
                 >
                   {ex}
                 </button>
               ))}
-            </div>
+            </ChipRow>
           </>
         ) : results.length > 0 ? (
           <>
