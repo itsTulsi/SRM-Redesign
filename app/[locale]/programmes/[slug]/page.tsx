@@ -206,9 +206,9 @@ export default async function ProgrammePage({ params }: Params) {
                   <p>{pt("safeA")}</p>
                   <ul className="mt-2 flex flex-wrap gap-x-5 gap-y-1">
                     <li>
-                      <a href={site.parentLinks.antiRagging} className="inline-flex min-h-11 items-center font-semibold">
+                      <Link href={site.parentLinks.antiRagging} className="inline-flex min-h-11 items-center font-semibold">
                         {pt("antiRagging")}
-                      </a>
+                      </Link>
                     </li>
                     <li>
                       <Link href={site.parentLinks.hostels} className="inline-flex min-h-11 items-center font-semibold">
@@ -216,9 +216,9 @@ export default async function ProgrammePage({ params }: Params) {
                       </Link>
                     </li>
                     <li>
-                      <a href={site.parentLinks.campusSafety} className="inline-flex min-h-11 items-center font-semibold">
+                      <Link href={site.parentLinks.campusSafety} className="inline-flex min-h-11 items-center font-semibold">
                         {pt("safety")}
-                      </a>
+                      </Link>
                     </li>
                   </ul>
                 </>

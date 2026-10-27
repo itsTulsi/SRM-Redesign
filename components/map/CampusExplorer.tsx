@@ -368,7 +368,6 @@ function Pin({
     <Link
       href={href}
       onClick={onClick}
-      aria-label={label}
       aria-current={active ? "true" : undefined}
       data-cursor-label={cursorLabel}
       // True positions can sit closer than a 44 px box (Chennai and Trichy are 26 px apart on a 360 px map).
@@ -390,8 +389,8 @@ function Pin({
       >
         {count || null}
       </span>
+      {/* The visible label is the link's name (WCAG 2.5.3); the count dot is decoration. */}
       <span
-        aria-hidden="true"
         className={`absolute w-max max-w-32 rounded-md bg-bg/85 px-2 py-0.5 text-xs leading-tight font-semibold sm:max-w-none sm:whitespace-nowrap ${
           LABEL_PLACEMENT[side]
         } ${active ? "text-action" : ""}`}

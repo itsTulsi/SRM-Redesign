@@ -40,6 +40,7 @@ export async function SiteFooter() {
         ...campuses.filter((c) => c.kind === "campus").map((c) => ({ label: c.name, href: `/campuses/${c.slug}` })),
         { label: nav("virtualTour"), href: site.virtualTourUrl },
         { label: nav("hostels"), href: "/hostels" },
+        { label: nav("studentLife"), href: "/student-life" },
       ],
     },
     {

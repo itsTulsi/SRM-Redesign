@@ -5,7 +5,7 @@ import { FeeTable } from "@/components/hostels/FeeTable";
 import { Photo } from "@/components/ui/Photo";
 import { getContent } from "@/lib/content";
 import { HOSTEL_SECTIONS, hostels, telHref, type HostelSection, type Meal } from "@/lib/hostels";
-import type { Locale } from "@/lib/i18n";
+import { Link, type Locale } from "@/lib/i18n";
 import { alternatesFor } from "@/lib/page-metadata";
 
 type Params = { params: Promise<{ locale: Locale }> };
@@ -311,7 +311,7 @@ export default async function HostelsPage({ params }: Params) {
                 ))}
               </ul>
               <p className="flex flex-wrap gap-x-6">
-                <a href={site.parentLinks.antiRagging} className={linkClass}>{t("antiRagging")}{ext}</a>
+                <Link href={site.parentLinks.antiRagging} className={linkClass}>{t("antiRagging")}</Link>
                 <a href={hostels.sources.rules} className={linkClass}>{t("rulesLink")}{ext}</a>
               </p>
             </>,

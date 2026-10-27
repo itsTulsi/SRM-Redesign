@@ -55,7 +55,8 @@
     "startHere": "Start here",
     "enquiry": "Admission enquiry",
     "housing": "Housing & residential",
-    "hostels": "Hostels"
+    "hostels": "Hostels",
+    "studentLife": "Student life"
   },
   "Footer": {
     "label": "Footer",
@@ -623,5 +624,288 @@
     "staffLink": "Meet the hostel staff",
     "officialPage": "SRM's official hostel pages",
     "sourceNote": "From SRM's hostel pages, 2026–27 fee circulars and 2026 hostel rules, as of 26 October 2026. Fees and rules can change — confirm with the hostel office."
+  },
+  "Life": {
+    "metaTitle": "Student life",
+    "eyebrow": "Kattankulathur campus",
+    "title": "Student life",
+    "intro": "Life at SRM is what you make of it: clubs, fests, sport, service and support, on a green 250-acre campus. Everything here is from SRM's student-life pages.",
+    "onThisPage": "On this page",
+    "sections": {
+      "holistic": "Holistic development",
+      "green": "Green campus",
+      "affairs": "Student affairs",
+      "diversity": "Diversity",
+      "counselling": "Student counselling",
+      "community": "Community centres",
+      "clubs": "Clubs",
+      "antiRagging": "Anti-ragging",
+      "antiDiscrimination": "Anti-discrimination",
+      "religious": "Religious life",
+      "eoc": "Equal Opportunity Cell"
+    },
+    "holistic": {
+      "lead": "SRM's aim is simple: by the time students leave, they should have the self-belief to be whoever they want to be. Student life can be what each student wants it to be.",
+      "points": [
+        {
+          "t": "Getting around",
+          "d": "Walking and cycling are the most popular ways to move around campus, with security and 24-hour emergency services."
+        },
+        {
+          "t": "Never a dull moment",
+          "d": "From entertainment to extracurriculars and religious life, the activities are as varied as the students."
+        },
+        {
+          "t": "Festivals",
+          "d": "All major Indian festivals are celebrated on campus, with special lunches in the hostels."
+        }
+      ],
+      "housing": "Housing & dining"
+    },
+    "green": {
+      "lead": "Over 250 acres at Kattankulathur: lakes, gardens, lawns, tree-lined walkways and real biodiversity, kept green and safe by campus policy.",
+      "points": [
+        {
+          "t": "Cycling across campus",
+          "d": "Roads named after inspiring people, and statues of Raja Raja Chola, Swami Vivekananda, Mahatma Gandhi, Thiruvalluvar and Socrates along the way."
+        },
+        {
+          "t": "Transport",
+          "d": "Hundreds of AC and non-AC SRM buses move people around campus and, for those who opt in, to and from Chennai and nearby areas."
+        },
+        {
+          "t": "Barrier-free",
+          "d": "Ramps, low-floor buses, lifts to classrooms and labs, battery cars and wheelchair-friendly paths."
+        },
+        {
+          "t": "Round-the-clock security",
+          "d": "A professional security force under a chief security officer, with a surveillance control room, cameras, access control and campus fire safety."
+        }
+      ],
+      "policies": "Green policies: bicycles first, a ban on plastic, landscaping, pedestrian walkways and restricted car entry.",
+      "acres": "acres of green campus",
+      "security": "Security control officer",
+      "parking": "Parking permits and employee cards",
+      "campusLife": "Associate Director, Campus Life – Infrastructure & Facilities"
+    },
+    "affairs": {
+      "lead": "The Directorate of Student Affairs (DSA) runs everything beyond the classroom — clubs, houses, fests, discipline, counselling and student welfare. Of the students, by the students, for the students.",
+      "stats": {
+        "clubs": "clubs under DSA",
+        "houses": "houses across SRMIST",
+        "events": "events a year",
+        "counselling": "counselling support"
+      },
+      "eventsTitle": "Fests and events",
+      "events": {
+        "ace": "SRM's sports club",
+        "khel": "National-level sports festival",
+        "jhalak": "Inter-house cultural competition",
+        "rendezvous": "A fest of dance, music and fashion",
+        "josh": "Cultural and sports event for faculty",
+        "butterflies": "Cultural and sports day for government-school students"
+      },
+      "moreFests": "Also on the calendar: Shuru, Tarana and Milan.",
+      "teamTitle": "Who to contact",
+      "roles": {
+        "director": "Director, Student Affairs",
+        "deputy": "Deputy Director",
+        "assistant": "Assistant Director"
+      }
+    },
+    "diversity": {
+      "lead": "It's a “mini India” at SRM: students from every part of India and from around the world, with regional festivals celebrated on campus.",
+      "body": "Living and learning together builds confidence, camaraderie and the ability to work in diverse teams. Culture, sport, fine arts and entrepreneurship are all encouraged beyond academics."
+    },
+    "counselling": {
+      "lead": "Free, confidential counselling for anything that gets in the way: stress, anxiety, exam pressure, family issues, loneliness, low self-esteem, poor concentration, sleeplessness or thoughts of suicide.",
+      "services": [
+        {
+          "t": "Directorate of Student Affairs",
+          "d": "Counselling for personal problems that affect studies and campus life, offered for over 13 years."
+        },
+        {
+          "t": "Department of Psychiatry, SRM Hospital",
+          "d": "Psychiatrists available 24/7, with individual counselling and therapy for students and staff."
+        },
+        {
+          "t": "Department of Clinical Psychology",
+          "d": "Psychological assessment and therapy (CBT, mindfulness and more) for anxiety, sleep, procrastination, relationships and addictions, including smartphone addiction. SRM Hospital, D-Block extension, 5th floor."
+        },
+        {
+          "t": "“Here For You” app",
+          "d": "SRM's mental-health app, with anonymous, round-the-clock online counselling through YourDOST."
+        },
+        {
+          "t": "Wellness Centre and University Wellness Programme",
+          "d": "Fitness and diet routines with doctors and dieticians, and campus-wide wellbeing campaigns by the School of Public Health."
+        }
+      ],
+      "counsellorsTitle": "Counsellors, Department of Clinical Psychology",
+      "roles": {
+        "hod": "Professor & Head",
+        "asst": "Assistant Professor"
+      },
+      "wellnessContacts": "University Wellness Programme: <uwpMail>{uwp}</uwpMail> · Wellness Centre: <centreMail>{centre}</centreMail>",
+      "urgent": "In crisis right now? Call Tele-MANAS, the Government of India's free 24×7 mental-health line, on <tel>{n}</tel>."
+    },
+    "community": {
+      "lead": "Students are drawn into community service from their first year.",
+      "items": [
+        {
+          "t": "ANNSH School",
+          "d": "A school on campus for drop-outs and the children of construction workers — 32 children, taught by SRM students in the evenings."
+        },
+        {
+          "t": "Butterflies Project",
+          "d": "Sports, literary and cultural days for children from 25 government and private schools around Kattankulathur."
+        },
+        {
+          "t": "NGO canteen",
+          "d": "A canteen in the women's hostel run by a women's self-help group, guided by the NGO Hand in Hand."
+        }
+      ],
+      "impact": "What students take away: leadership, a sense of responsibility, self-esteem, and the discovery that they can make a difference."
+    },
+    "clubs": {
+      "lead": "Fifteen student-run clubs, open to everyone, with workshops, sessions and competitions all year.",
+      "items": {
+        "rotaract": {
+          "t": "Rotaract Club",
+          "d": "Community service with the Rotary Club of Meenambakkam, towards the sustainable development goals."
+        },
+        "astrophilia": {
+          "t": "Astrophilia",
+          "d": "Stars, planets and galaxies: astronomy talks and discussions."
+        },
+        "fashion": {
+          "t": "Fashion",
+          "d": "Styling, grooming and the runway."
+        },
+        "music": {
+          "t": "Music",
+          "d": "Perform, jam and learn with fellow musicians."
+        },
+        "literature": {
+          "t": "Literature Club",
+          "d": "Readers and writers: poetry, stories and essays."
+        },
+        "festival": {
+          "t": "Festival",
+          "d": "Celebrating the festivals of every culture on campus."
+        },
+        "dance": {
+          "t": "Dance Club",
+          "d": "Every style, for beginners and trained dancers alike."
+        },
+        "dramatics": {
+          "t": "Movies and Dramatics",
+          "d": "Acting, stagecraft and the performing arts."
+        },
+        "sports": {
+          "t": "Sports",
+          "d": "Training and competitions across sports, all year."
+        },
+        "creative": {
+          "t": "Creative Arts & Media",
+          "d": "Painting, design and visual art."
+        },
+        "women": {
+          "t": "Women Empowerment",
+          "d": "Awareness, symposiums and camps on gender equality."
+        },
+        "selfDefense": {
+          "t": "Self Defense Club",
+          "d": "Martial-arts basics for staying safe."
+        },
+        "social": {
+          "t": "Social Club",
+          "d": "Volunteering, social service and awareness camps."
+        },
+        "gaming": {
+          "t": "Gaming",
+          "d": "Esports training and tournaments."
+        },
+        "quiz": {
+          "t": "Quiz",
+          "d": "Quizzing for the curious."
+        }
+      }
+    },
+    "antiRagging": {
+      "lead": "Ragging is a criminal offence. SRM condemns it in every form: seniors welcome freshers with flowers and advice, and every incident is acted on.",
+      "helpTitle": "If you see or face ragging",
+      "srm": "SRMIST anti-ragging helpline",
+      "national": "National anti-ragging helpline (24×7, toll free)",
+      "ugc": "UGC monitoring agency (Centre for Youth)",
+      "whatTitle": "What counts as ragging",
+      "what": [
+        "Teasing or rudeness towards a fresher, in words, writing or action",
+        "Making a student do something that causes shame, torment or embarrassment",
+        "Disrupting a fresher's studies, or making them do others' academic work",
+        "Demanding money, or forcing someone to spend",
+        "Physical or sexual abuse, or anything that endangers health",
+        "Insults by email, post or in public, or anything that harms mental health or self-confidence"
+      ],
+      "punishTitle": "Punishments (UGC and AICTE)",
+      "punish": [
+        "An FIR with the police for every incident",
+        "Cancellation of admission, or expulsion and a bar on admission elsewhere",
+        "Suspension from classes, exams or the hostel; results withheld",
+        "Scholarships and other benefits withdrawn",
+        "Rustication for 1 to 4 semesters",
+        "A fine of ₹25,000",
+        "Collective punishment when the culprits aren't identified"
+      ],
+      "officersTitle": "Nodal officers",
+      "squad": "Anti-Ragging Squad (co-convener)",
+      "committee": "Anti-Ragging Committee"
+    },
+    "antiDiscrimination": {
+      "lead": "SRMIST works to give every student and staff member an environment of freedom and dignity.",
+      "body": "Anyone who feels humiliated or targeted because of caste can lodge a complaint in the prescribed form. It goes to a senior official and is followed by an enquiry."
+    },
+    "religious": {
+      "lead": "Places of worship on campus, and the festivals celebrated at each.",
+      "items": {
+        "temple": {
+          "t": "Vinayagar Temple",
+          "d": "Vinayagar Chathurthi, Pongal, Sankatahara Chathurthi, Deepavali, Navarathri (10 days), Pournami, Karthigai, New Year's Day, Tamil New Year"
+        },
+        "mosque": {
+          "t": "Muslim Prayer Hall",
+          "d": "Ramzan, Bakrid, Muharram, Milad-un-Nabi"
+        },
+        "church": {
+          "t": "Christian Prayer Hall",
+          "d": "New Year's Day, Good Friday, Easter, Christmas"
+        }
+      },
+      "festivals": "Festivals"
+    },
+    "eoc": {
+      "lead": "The Equal Opportunity Cell makes sure everyone — whatever their caste, gender, disability, background or identity — has equal access to opportunities, resources and support.",
+      "items": [
+        {
+          "t": "Advocacy and support",
+          "d": "Confidential guidance for anyone facing a difficult situation, and help reaching the right resources."
+        },
+        {
+          "t": "Education and training",
+          "d": "Workshops and seminars on diversity, equity and inclusion."
+        },
+        {
+          "t": "Policy",
+          "d": "Works with administrators and faculty on policies that remove barriers."
+        },
+        {
+          "t": "Outreach",
+          "d": "Engages students, staff and families to build a culture of belonging."
+        }
+      ],
+      "chair": "Chairperson"
+    },
+    "officialPage": "On SRM's site",
+    "sourceNote": "From SRM's student-life pages, as of 27 October 2026. Contacts can change — check SRM's site before you call."
   }
 }

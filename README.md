@@ -23,6 +23,7 @@ A redesign of [srmist.edu.in](https://www.srmist.edu.in/) built around SRM's own
 | **Three languages** | English, தமிழ் and हिन्दी, including programme names, fees and the assistant. Tamil and Devanagari use the fonts already on the device, so most phones download no extra font. |
 | **Campus map and 360° tour** | A stylised India map with all six campuses and three sister universities, at their true coordinates. Tap a pin to fly in and get directions. For Kattankulathur, SRM's 360° tour opens without leaving the page. |
 | **Hostels, in full** | Every girls', boys' and international block with photos, room types and warden contacts. Also the 2026–27 fee tables, how to apply, mess timings and canteens, safety rules for parents, and the hostel office contacts. All of it comes from SRM's hostel pages and fee circulars. |
+| **Student life** | All eleven of SRM's student-life pages in one place: the green campus, student affairs and fests, 15 clubs, counselling with the counsellors' numbers, community centres, places of worship and the Equal Opportunity Cell. Anti-ragging helplines and penalties are one tap away for parents. |
 | **Voices and startups** | Talks by India's science leaders (DRDO, ISRO, INSA, NITI Aayog) play only when tapped. A logo wall shows startups from SRM's incubation centre. |
 | **Ask a Senior** | Moderated Q&A with current students on each programme page. Sample data, with the real moderation states. |
 

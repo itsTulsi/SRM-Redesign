@@ -103,8 +103,8 @@
   ],
   "parentLinks": {
     "hostels": "/hostels",
-    "antiRagging": "https://www.srmist.edu.in/life-at-srm/anti-ragging/",
-    "campusSafety": "https://www.srmist.edu.in/life-at-srm/getting-around-campus-safety/"
+    "antiRagging": "/student-life#anti-ragging",
+    "campusSafety": "/student-life#green-campus"
   },
   "heroVideo": {
     "youtubeId": "AhGg_I991Fw",

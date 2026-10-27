@@ -1,12 +1,14 @@
 import { getLocale, getTranslations } from "next-intl/server";
 import { getContent } from "@/lib/content";
 import { missionAnchor, SECTION } from "@/lib/sections";
+import { LIFE_SECTIONS, lifeSections } from "@/lib/student-life";
 import type { NavData } from "./types";
 
 /** Server-only: builds the menu from content JSON so none of that JSON ships to the client. */
 export async function getNavData(): Promise<NavData> {
   const t = await getTranslations("Nav");
   const hostelT = await getTranslations("Hostels");
+  const lifeT = await getTranslations("Life");
   const { campuses, colleges, featuredStory, missions, naacGrade, nirf, programmes, site, studentWork } = getContent(await getLocale());
   const universityRank = nirf.ranks.find((r) => r.id === "university")?.rank;
   const camber = studentWork[0];
@@ -119,6 +121,10 @@ export async function getNavData(): Promise<NavData> {
               { label: t("thisWeek"), href: `/#${SECTION.thisWeek}` },
               { label: t("admissions"), href: "/admissions" },
             ],
+          },
+          {
+            title: t("studentLife"),
+            links: lifeSections.map((k) => ({ label: lifeT(`sections.${k}`), href: `/student-life#${LIFE_SECTIONS[k]}` })),
           },
         ],
         feature: featuredStory
