@@ -163,12 +163,13 @@ export function HeroSearch({ counts, phones }: Props) {
             </div>
             <div className="mt-3 flex flex-wrap items-center gap-2">
               <span className="text-sm font-semibold">{t("tryLabel")}:</span>
-              {examples.slice(0, 4).map((ex) => (
+              {examples.slice(0, 4).map((ex, i) => (
                 <button
                   key={ex}
                   type="button"
                   onClick={() => fill(ex)}
-                  className="inline-flex min-h-11 items-center rounded-full border border-ink/50 px-4 text-sm hover:bg-ink hover:text-action"
+                  // Phones show two prompts (the input already cycles through more), keeping the gold block short.
+                  className={`min-h-11 items-center rounded-full border border-ink/50 px-4 text-sm hover:bg-ink hover:text-action ${i < 2 ? "inline-flex" : "hidden sm:inline-flex"}`}
                 >
                   {ex}
                 </button>

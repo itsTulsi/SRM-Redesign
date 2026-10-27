@@ -61,7 +61,7 @@ export function HeroVideo({ sources, poster }: { sources: Source[]; poster: stri
         type="button"
         onClick={toggle}
         aria-pressed={!playing}
-        className="absolute bottom-4 left-4 z-10 inline-flex size-11 items-center justify-center rounded-full border border-line bg-bg/70 text-fg"
+        className="absolute top-4 right-4 z-10 inline-flex size-11 items-center justify-center rounded-full border border-line bg-bg/70 text-fg sm:top-auto sm:right-auto sm:bottom-4 sm:left-4"
       >
         <span className="sr-only">{playing ? t("pauseVideo") : t("playVideo")}</span>
         <svg aria-hidden="true" viewBox="0 0 16 16" className="size-4">
