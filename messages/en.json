@@ -56,7 +56,9 @@
     "enquiry": "Admission enquiry",
     "housing": "Housing & residential",
     "hostels": "Hostels",
-    "studentLife": "Student life"
+    "studentLife": "Student life",
+    "researchCentres": "Research centres",
+    "patents": "Patents"
   },
   "Footer": {
     "label": "Footer",
@@ -907,5 +909,204 @@
     },
     "officialPage": "On SRM's site",
     "sourceNote": "From SRM's student-life pages, as of 27 October 2026. Contacts can change — check SRM's site before you call."
+  },
+  "Centres": {
+    "metaTitle": "Research centres and patents",
+    "eyebrow": "Directorate of Research · Kattankulathur",
+    "title": "Research centres",
+    "intro": "Ten central laboratories and facilities, open across colleges, where SRM's research is done: from Siddha medicine to supercomputing, from zero-cement concrete to earthquake prediction. Each one below in brief, with who to contact.",
+    "onThisPage": "On this page",
+    "centresTitle": "Central research laboratories and facilities",
+    "patentsTitle": "Patents",
+    "deanTitle": "Directorate of Research",
+    "deanRole": "Dean (Research)",
+    "established": "Since {year}",
+    "focus": "Research focus",
+    "facilities": "Facilities",
+    "highlights": "Highlights",
+    "contact": "Contact",
+    "booking": {
+      "nrc": "Book an instrument",
+      "dbt": "Instrument usage charges",
+      "hpcc": "HPCC registration form (Word)"
+    },
+    "roles": {
+      "coordinator": "Coordinator",
+      "head": "Head",
+      "deanMedical": "Dean of Research (Medical & Health Sciences)",
+      "support": "HPC support desk"
+    },
+    "photoAlt": "Inside {name}",
+    "centres": {
+      "iiism": {
+        "name": "Interdisciplinary Institute of Indian System of Medicine",
+        "brief": "Research that validates and standardises herbal medicines from Siddha, Ayurveda and Unani. IIISM works with Banaras Hindu University, has MoUs with AYUSH and the Central Council for Research in Ayurveda and Siddha, and has 200 acres set aside to propagate medicinal plants.",
+        "facilities": [
+          "NMR lab",
+          "Phytochemistry lab",
+          "Molecular biology and immunobiology lab",
+          "Metabolic ward",
+          "Drug testing laboratory for Indian medicine"
+        ]
+      },
+      "reach": {
+        "name": "Centre for Research in Environment, Sustainability Advocacy and Climate Change",
+        "brief": "Environment, sustainable development, advocacy and climate change, guided by the UN Sustainable Development Goals, with partners in academia, industry, start-ups and funding agencies who rely on it for technical, policy and regulatory support.",
+        "focus": [
+          "How pesticides, industrial chemicals and plasticisers move through India's urban hotspots",
+          "Long-range air transport of persistent organic pollutants",
+          "Plasticisers in India's rivers and seas",
+          "Low-cost clean-up of emerging contaminants in soil, water and wastewater",
+          "New products from recycled plastic",
+          "Wastewater-based epidemiology (used during COVID-19)"
+        ],
+        "facilities": [
+          "Environmental radiation monitoring lab",
+          "Environmental science and technology lab: water, wastewater and air testing",
+          "Environmental microbiology lab",
+          "Sustainable Development Cell"
+        ]
+      },
+      "nrc": {
+        "name": "Nanotechnology Research Centre",
+        "brief": "Nanoscience for energy, the environment and healthcare, with labs for synthesis, characterisation, fabrication and computational modelling. Collaborators include Shizuoka University, Université Paris Cité, KTH Sweden, NIMS Japan, BARC, IIT Madras and NPL, and industry partners Ashok Leyland and the Rane Group.",
+        "focus": [
+          "Thermoelectric materials and devices",
+          "2D materials (TMDs) for optoelectronics",
+          "Solar-cell materials and devices",
+          "Flexible, transparent conductors",
+          "Gas sensors",
+          "Supercapacitors",
+          "Thin-film heterostructures",
+          "Photocatalysis and electrocatalysis for clean-up"
+        ]
+      },
+      "cacr": {
+        "name": "Centre for Advanced Concrete Research",
+        "brief": "Portland cement carries a lot of embodied carbon dioxide. CACR develops lower-carbon concretes from industrial wastes such as fly ash and slag, with nano-materials — including geopolymer concretes that need no Portland cement at all.",
+        "focus": [
+          "Geopolymer and zero-cement concretes",
+          "Ultra-high-performance concretes",
+          "Bio-concretes to repair old monuments",
+          "Special concretes for nuclear-waste disposal",
+          "Self-curing and acid-resistant concretes",
+          "Railway sleepers and pavers with new binders"
+        ],
+        "highlights": [
+          "A zero-cement concrete building on campus",
+          "Geopolymer paver blocks, pavements and roads",
+          "Precast toilets"
+        ]
+      },
+      "dbt": {
+        "name": "SRM-DBT Platform for Advanced Life Science Technologies",
+        "brief": "A national core facility set up with the Department of Biotechnology, Government of India, offering research services and skills training in modern life sciences to SRM and outside researchers.",
+        "facilities": [
+          "Genomics",
+          "Proteomics",
+          "Molecular platforms",
+          "Bio-imaging",
+          "Specific-pathogen-free animal facility (CPCSEA guidelines)"
+        ],
+        "highlights": [
+          "Advanced molecular diagnostic services",
+          "One-year Postgraduate Diploma in Genetic Counselling, built on the competencies of the US Accreditation Council for Genetic Counseling"
+        ]
+      },
+      "mrc": {
+        "name": "Division of Medical Research",
+        "brief": "Basic and clinical research in medical and allied sciences, PhD research and research-methodology courses for faculty and students, with a central laboratory, an animal house and an Institutional Ethics Committee.",
+        "highlights": [
+          "BIRAC BioNEST grant of about ₹10 crore (2024, five years) for a biotech innovation ecosystem",
+          "DBT project on Cryptosporidium infection, ₹41.5 lakh (2023)",
+          "ICMR multisite study on spotting early-childhood developmental disorders, ₹1.02 crore (2023)"
+        ]
+      },
+      "statistics": {
+        "name": "Centre for Statistics",
+        "brief": "SRM's hub for statistical training, research and consultancy: helping students, scholars and faculty turn research questions into sound analysis.",
+        "facilities": [
+          "Statistical Training Unit: short courses for internal and external participants",
+          "Data Analytic Unit: research questions into statistical problems",
+          "Statistical Consultancy Unit (fee-based): grant writing, questionnaires, survey design, analysis and reports"
+        ],
+        "focus": [
+          "Basic statistics and biostatistics with SPSS",
+          "Advanced statistics for research",
+          "Systematic review and meta-analysis with R",
+          "Survey design methodology"
+        ]
+      },
+      "eqrc": {
+        "name": "Earthquake Research Cell",
+        "brief": "Set up in July 2012 to study the causes, occurrence and prediction of earthquakes, and to build simulation models for prediction, prevention and damage reduction. Field work covers the Sikkim–Darjeeling Himalaya and the North East, the Andaman region, the Ponnaiyar basin in South India and Gujarat.",
+        "focus": [
+          "Seismic hazard assessment",
+          "Mapping active fault zones",
+          "Crustal deformation models in 3D",
+          "Earthquake prediction with neural networks",
+          "GIS seismic databases",
+          "Earthquake-resistant structures and disaster planning"
+        ]
+      },
+      "hpcc": {
+        "name": "High Performance Computing Centre",
+        "brief": "SRM's supercomputing facility, open to any SRMIST faculty member or student who registers. It runs three clusters — STAR, COMET and GALAXY — plus GENOME and MOON servers and workstations.",
+        "focus": [
+          "Computational materials science",
+          "Computational chemistry",
+          "Big data and data science",
+          "Genetic engineering",
+          "Atmospheric science",
+          "Computational mechanics and fluid dynamics"
+        ]
+      },
+      "scif": {
+        "name": "SRM Central Instrumentation Facility",
+        "brief": "One place to find and book the Directorate of Research's state-of-the-art instruments. Open to SRMIST researchers and to industry and academic users outside SRM, with published service charges."
+      }
+    },
+    "patents": {
+      "lead": "Inventions from SRM's labs, protected in India and abroad, and some already licensed to industry.",
+      "headline": "patents",
+      "registerNote": "SRM's own patent register, last updated with 2022 entries:",
+      "granted": "granted patents, {years}",
+      "published": "published patent and copyright filings, {years}",
+      "transfers": "technologies transferred to industry",
+      "offices": {
+        "australia": "Australia",
+        "india": "India",
+        "us": "United States",
+        "wipo": "WIPO"
+      },
+      "byOffice": "Granted patents by patent office",
+      "usTitle": "Granted in the United States",
+      "us": {
+        "polycystic": "Polyherbal composition for preventing and easing polycystic ovary syndrome",
+        "aquasome": "Aquasome nanocarrier gel carrying a cephalosporin antibiotic",
+        "formononetin": "Formononetin solid lipid nanoparticles and how to make them",
+        "wheelchair": "System for supervising a wheelchair user",
+        "enantiomers": "Electrochemical separation of amino-acid enantiomers",
+        "fuelCells": "Microbial fuel cells",
+        "dementia": "Herbal formulation against age-related neurodegeneration and senile dementia",
+        "metabolic": "Plant-based formulation for metabolic syndrome"
+      },
+      "transfersTitle": "Technology transfers",
+      "transferList": {
+        "earBiometric": "Ear-based biometric authentication",
+        "iotPower": "Efficient, secure power distribution for the Internet of Things",
+        "fogEnergy": "Smart energy management and demand reduction with IoT and fog computing",
+        "fogDistribution": "IoT- and fog-based power distribution for smart energy management",
+        "limeMortar": "Lime mortar composition"
+      },
+      "links": {
+        "granted": "All granted patents",
+        "published": "All published patents",
+        "transfers": "Technology transfers"
+      }
+    },
+    "missionsLink": "Research by mission",
+    "officialPage": "On SRM's website",
+    "sourceNote": "From SRM's research pages, as of 27 October 2026."
   }
 }

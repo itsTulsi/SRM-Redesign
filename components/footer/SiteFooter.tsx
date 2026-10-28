@@ -49,6 +49,7 @@ export async function SiteFooter() {
       links: [
         { label: nav("rankings"), href: `/#${SECTION.rankings}` },
         { label: nav("research"), href: `/#${SECTION.research}` },
+        { label: nav("researchCentres"), href: "/research" },
         { label: nav("studentWork"), href: `/#${SECTION.studentWork}` },
         { label: nav("alumni"), href: `/#${SECTION.alumni}` },
         { label: nav("thisWeek"), href: `/#${SECTION.thisWeek}` },

@@ -427,6 +427,36 @@
       "owner": "SRMIST (YouTube)",
       "source": "https://www.youtube.com/shorts/zkEWrJG6yTM",
       "image": "https://i.ytimg.com/vi/zkEWrJG6yTM/oar2.jpg"
+    },
+    "media/research/nrc.jpg": {
+      "owner": "SRMIST",
+      "source": "https://www.srmist.edu.in/research/research-wings/nrc/",
+      "image": "https://www.srmist.edu.in/wp-content/uploads/2023/11/Nanotechnology-Research-Center-srmist-1.jpg"
+    },
+    "media/research/nrc-lab.jpg": {
+      "owner": "SRMIST",
+      "source": "https://www.srmist.edu.in/research/research-wings/nrc/",
+      "image": "https://www.srmist.edu.in/wp-content/uploads/2023/11/Nanotechnology-Research-Center-srmist-3.jpg"
+    },
+    "media/research/iiism.jpg": {
+      "owner": "SRMIST",
+      "source": "https://www.srmist.edu.in/research/research-wings/iiism/",
+      "image": "https://www.srmist.edu.in/wp-content/uploads/2022/05/srmist-lab-9.jpg"
+    },
+    "media/research/cacr.jpg": {
+      "owner": "SRMIST",
+      "source": "https://www.srmist.edu.in/research/research-wings/cacr/",
+      "image": "https://www.srmist.edu.in/wp-content/uploads/2025/06/Geopolymer-Concrete-Building.jpeg"
+    },
+    "media/research/dbt.jpg": {
+      "owner": "SRMIST",
+      "source": "https://www.srmist.edu.in/department/srm-dbt-platform/",
+      "image": "https://www.srmist.edu.in/wp-content/uploads/2024/06/DSC_0230.jpg"
+    },
+    "media/research/hpcc.jpg": {
+      "owner": "SRMIST",
+      "source": "https://www.srmist.edu.in/research/hpcc/",
+      "image": "https://www.srmist.edu.in/wp-content/uploads/2026/08/HPC-Server-Room-1.jpeg"
     }
   }
 }

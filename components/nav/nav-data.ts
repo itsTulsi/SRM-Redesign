@@ -1,6 +1,7 @@
 import { getLocale, getTranslations } from "next-intl/server";
 import { getContent } from "@/lib/content";
 import { missionAnchor, SECTION } from "@/lib/sections";
+import { researchCentres } from "@/lib/research-centres";
 import { LIFE_SECTIONS, lifeSections } from "@/lib/student-life";
 import type { NavData } from "./types";
 
@@ -57,6 +58,13 @@ export async function getNavData(): Promise<NavData> {
           {
             title: t("missions"),
             links: missions.map((m) => ({ label: m.name, href: `/#${missionAnchor(m.slug)}` })),
+          },
+          {
+            title: t("researchCentres"),
+            links: [
+              ...researchCentres.centres.map((c) => ({ label: c.acronym, href: `/research#${c.slug}` })),
+              { label: t("patents"), href: "/research#patents" },
+            ],
           },
           { title: t("researchNumbers"), links: [{ label: t("researchNumbers"), href: `/#${SECTION.research}` }] },
         ],
