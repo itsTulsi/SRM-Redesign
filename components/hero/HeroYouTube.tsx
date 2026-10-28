@@ -127,6 +127,7 @@ export function HeroYouTube({ id, title }: { id: string; title: string }) {
           title={title}
           tabIndex={-1}
           allow="autoplay; encrypted-media"
+          referrerPolicy="strict-origin-when-cross-origin"
           onLoad={() => frameRef.current?.contentWindow?.postMessage(JSON.stringify({ event: "listening", id: 1 }), ORIGIN)}
           // Cover the hero at any aspect ratio, overscanned and nudged down so YouTube's edge chrome and the band where
           // captions would sit stay out of frame.

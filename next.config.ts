@@ -11,6 +11,11 @@ const nextConfig: NextConfig = {
   images: {
     formats: ["image/avif", "image/webp"],
   },
+  // srmist.edu.in's firewall answers visits referred from another site with a "confirm you are human" check (405), then
+  // 403 Forbidden, so links out send no referrer. The YouTube embeds opt back in: YouTube won't play without one.
+  async headers() {
+    return [{ source: "/:path*", headers: [{ key: "Referrer-Policy", value: "same-origin" }] }];
+  },
 };
 
 export default withNextIntl(nextConfig);
