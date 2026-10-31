@@ -5,8 +5,11 @@ import { getMessages, getTranslations, setRequestLocale } from "next-intl/server
 import { AssistantLauncher } from "@/components/assistant/AssistantLauncher";
 import { SiteFooter } from "@/components/footer/SiteFooter";
 import { MotionDirector } from "@/components/motion/MotionDirector";
+import { ViewTransitions } from "@/components/motion/ViewTransitions";
 import { getNavData } from "@/components/nav/nav-data";
 import { SiteHeader } from "@/components/nav/SiteHeader";
+import { CompareTray } from "@/components/programme/CompareTray";
+import { HtmlState } from "@/components/ui/HtmlState";
 import { SkipLink } from "@/components/ui/SkipLink";
 import { fontVariables } from "@/lib/fonts";
 import { routing } from "@/lib/i18n";
@@ -16,7 +19,7 @@ import "../globals.css";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 // Keep in sync with useTranslations() calls in "use client" components (check: grep -rl useTranslations).
-const CLIENT_NAMESPACES = ["Lite", "Hero", "Ask", "Enquiry", "Senior", "Parent", "Assistant"] as const;
+const CLIENT_NAMESPACES = ["Lite", "Hero", "Ask", "Enquiry", "Senior", "Parent", "Assistant", "Palette"] as const;
 
 // Runs before first paint so Lite Mode and Parent Mode never flash. Failure is harmless: defaults apply.
 const initScript = `try{(${applyLiteMode.toString()})(${JSON.stringify(LITE_STORAGE_KEY)})}catch(e){}try{(${applyParentMode.toString()})(${JSON.stringify(PARENT_STORAGE_KEY)})}catch(e){}`;
@@ -60,6 +63,7 @@ export default async function LocaleLayout({
   const clientMessages = {
     ...Object.fromEntries(CLIENT_NAMESPACES.map((ns) => [ns, all[ns]])),
     Acts: { explore: all.Acts.explore },
+    Compare: { ui: all.Compare.ui },
   };
 
   return (
@@ -69,11 +73,14 @@ export default async function LocaleLayout({
       </head>
       <body>
         <NextIntlClientProvider messages={clientMessages}>
+          <HtmlState />
           <SkipLink label={t("skipToContent")} />
           <SiteHeader nav={nav} />
           {children}
           <SiteFooter />
           <MotionDirector />
+          <ViewTransitions />
+          <CompareTray />
           <AssistantLauncher />
         </NextIntlClientProvider>
       </body>

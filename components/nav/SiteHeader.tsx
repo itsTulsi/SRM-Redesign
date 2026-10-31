@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useEffect, useId, useRef, useState } from "react";
 import { SmartLink } from "@/components/ui/SmartLink";
 import { Link, usePathname } from "@/lib/i18n";
+import { CommandPalette } from "./CommandPalette";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import type { NavData, NavSection } from "./types";
 import srmLogo from "@/public/brand/srm-logo-white.png";
@@ -55,7 +56,7 @@ export function SiteHeader({ nav }: { nav: NavData }) {
   return (
     <header
       ref={headerRef}
-      className="sticky top-0 z-50 border-b border-line-subtle bg-bg text-fg"
+      className="site-header sticky top-0 z-50 border-b border-line-subtle bg-bg text-fg"
       onBlur={(e) => {
         if (openId && !e.currentTarget.contains(e.relatedTarget as Node | null)) setOpenId(null);
       }}
@@ -98,6 +99,8 @@ export function SiteHeader({ nav }: { nav: NavData }) {
         </nav>
 
         <LanguageSwitcher label={nav.labels.language} compact className="hidden xl:block" />
+
+        <CommandPalette nav={nav} />
 
         <SmartLink
           href={nav.apply.href}

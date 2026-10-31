@@ -10,6 +10,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const paths = [
     "",
     "/programmes",
+    "/compare",
     "/admissions",
     "/hostels",
     "/student-life",

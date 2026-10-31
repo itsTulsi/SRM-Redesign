@@ -14,9 +14,11 @@ A redesign of [srmist.edu.in](https://www.srmist.edu.in/) built around SRM's own
 
 | | |
 |---|---|
-| **Search is the front door** | Type "robots", "becoming a doctor" or "எனக்கு ரோபோக்கள் பிடிக்கும்", and matching programmes appear instantly. Press **Find** for answer cards with fees, eligibility and entrance details taken straight from SRM's data. |
+| **Search is the front door** | Type "robots", "becoming a doctor" or "எனக்கு ரோபோக்கள் பிடிக்கும்", and matching programmes appear instantly with their fees and the words they matched. Press **Find** for answer cards with fees, eligibility and entrance details taken straight from SRM's data. |
 | **Three acts, one story** | *Learn* (colleges and rankings), *Leap* (student work, startups, research by mission), *Lead* (alumni, leaders on campus, placements). Act titles assemble from fragments, and curtain wipes move between acts. |
 | **Real 2026–27 facts** | Eligibility, entrance exams and 2026 last dates for 29 programmes, and annual fees for every one except MBBS (SRM hasn't published it), from SRM's 2026 admission pages and 2026–27 brochure, each with its source link. |
+| **Command palette** | Press ⌘K or Ctrl+K, or tap the search icon, for one box covering every programme, page and action: call admissions, switch language, Parent Mode, Lite Mode. It works in all three languages and from the keyboard alone. |
+| **Compare programmes** | Pin up to three programmes and see fees, eligibility, entrance and deadlines side by side, with what differs picked out. Each comparison is a link you can share, and it works without JavaScript. |
 | **Ask SRM** | A free, rule-based assistant on every page. It answers from verified content only: fees, campuses, hostels, deadlines. When it doesn't know, it says so and offers the admissions phone numbers. No paid AI, and nothing is invented. |
 | **Parent Mode** | One toggle rewrites any programme page into plain answers about cost, safety, hostel, distance from Chennai and jobs, with large *Call admissions* buttons. |
 | **Lite Mode** | Switches on automatically for Save-Data, slow 3G or reduced motion. It strips video, 3D and smooth scrolling and keeps all the information. |
@@ -54,7 +56,7 @@ Measured on a production build with Lighthouse (mobile, simulated slow 4G, media
 | Homepage (Tamil) | 94 | 100 | 100 | 100 | 0 |
 | B.Tech CSE programme page | 96 | 100 | 100 | 100 | 0 |
 
-- **Every page** (all 138 sitemap URLs across the three languages) passes axe-core (WCAG 2.2 AA) at 360 px wide. No page scrolls sideways, each has exactly one `h1`, and none logs a console error.
+- **Every page** (all 147 sitemap URLs across the three languages) passes axe-core (WCAG 2.2 AA) at 360 px wide. No page scrolls sideways, each has exactly one `h1`, and none logs a console error.
 - **Keyboard:** a skip link comes first, and every interactive element has a visible focus ring. Focus never lands behind the sticky header, and there are no keyboard traps.
 - **JavaScript:** 136 kB on first load (budget 180 kB). The motion library, smooth scrolling, search index and YouTube player all load later, or only when used.
 - **Reduced motion:** everything is static, nothing is pinned, and the tree appears fully grown.

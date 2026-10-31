@@ -8,6 +8,8 @@ const nextConfig: NextConfig = {
   distDir: process.env.NEXT_DIST_DIR ?? ".next",
   reactStrictMode: true,
   poweredByHeader: false,
+  // Keep metadata in <head> for everyone, including on /compare, the one dynamic page, where Next would otherwise stream it into <body>.
+  htmlLimitedBots: /.*/,
   images: {
     formats: ["image/avif", "image/webp"],
   },

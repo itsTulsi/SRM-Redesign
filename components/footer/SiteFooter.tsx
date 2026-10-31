@@ -26,6 +26,7 @@ export async function SiteFooter() {
       title: t("study"),
       links: [
         { label: nav("findProgramme"), href: "/programmes" },
+        { label: nav("compare"), href: "/compare" },
         { label: nav("undergraduate"), href: "/programmes#level-ug" },
         { label: nav("postgraduate"), href: "/programmes#level-pg" },
         { label: nav("admissions"), href: "/admissions" },

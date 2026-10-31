@@ -58,7 +58,8 @@
     "hostels": "Hostels",
     "studentLife": "Student life",
     "researchCentres": "Research centres",
-    "patents": "Patents"
+    "patents": "Patents",
+    "compare": "Compare programmes"
   },
   "Footer": {
     "label": "Footer",
@@ -73,7 +74,7 @@
   },
   "Pages": {
     "programmesTitle": "Programmes",
-    "programmesIntro": "Every programme, grouped by college. Filters and search arrive next.",
+    "programmesIntro": "Every programme, grouped by college. Pin up to three to compare them side by side.",
     "admissionsTitle": "Admissions",
     "admissionsIntro": "Talk to a person. Admissions teams answer these numbers.",
     "applyIntro": "Applications are made on SRM's official application portal.",
@@ -117,7 +118,8 @@
     "research": "Research",
     "alumni": "Alumni",
     "pauseVideo": "Pause background video",
-    "playVideo": "Play background video"
+    "playVideo": "Play background video",
+    "understood": "Understood"
   },
   "Acts": {
     "learn": {
@@ -1108,5 +1110,52 @@
     "missionsLink": "Research by mission",
     "officialPage": "On SRM's website",
     "sourceNote": "From SRM's research pages, as of 27 October 2026."
+  },
+  "Compare": {
+    "metaTitle": "Compare programmes",
+    "title": "Compare programmes",
+    "intro": "Choose up to three programmes and see their fees, eligibility, entrance and deadlines side by side. Every fact comes from SRM's published pages.",
+    "slot": "Programme {n}",
+    "choose": "Choose a programme",
+    "submit": "Compare",
+    "empty": "Choose at least two programmes to compare them.",
+    "example": "Try: {a} and {b}",
+    "onlyDiff": "Show only what differs",
+    "showAll": "Show all rows",
+    "same": "Same",
+    "lowestFees": "Lowest fees",
+    "college": "College",
+    "source": "Source",
+    "caption": "Comparison of the programmes you chose",
+    "feesNote": "Fees are SRM's published amounts per year. Confirm with admissions before you apply.",
+    "ui": {
+      "add": "Compare",
+      "full": "You can compare up to three programmes. Remove one first.",
+      "trayLabel": "Programmes to compare",
+      "count": "{count} of {max} chosen",
+      "clear": "Clear",
+      "go": "Compare",
+      "copy": "Copy link to this comparison",
+      "copied": "Link copied"
+    }
+  },
+  "Palette": {
+    "open": "Search",
+    "title": "Search the site",
+    "inputLabel": "Search programmes, pages and actions",
+    "placeholder": "Search programmes, pages, actions…",
+    "actions": "Actions",
+    "programmes": "Programmes",
+    "pages": "Pages",
+    "none": "Nothing found for that. Admissions can help:",
+    "switchTo": "Switch to {language}",
+    "parentOn": "Turn on Parent Mode",
+    "parentOff": "Turn off Parent Mode",
+    "liteOn": "Turn on Lite Mode",
+    "liteOff": "Turn off Lite Mode",
+    "hint": "↑↓ to move · Enter to open · Esc to close",
+    "close": "Close",
+    "results": "{count, plural, =0 {No results.} one {# result.} other {# results.}}",
+    "feesValue": "₹{amount} per year"
   }
 }

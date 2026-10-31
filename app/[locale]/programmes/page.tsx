@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { CompareToggle } from "@/components/programme/CompareToggle";
 import { Fact } from "@/components/ui/Todo";
 import { getContent, type Campus, type Programme } from "@/lib/content";
 import { Link } from "@/lib/i18n";
 import type { Locale } from "@/lib/i18n";
 import { alternatesFor } from "@/lib/page-metadata";
+import { programmeTitleName } from "@/lib/view-transition";
 
 type Params = { params: Promise<{ locale: Locale }> };
 
@@ -31,6 +33,9 @@ export default async function ProgrammesPage({ params }: Params) {
     <main id="main" tabIndex={-1} className="site-container py-12 lg:py-20">
       <h1 className="font-display text-hero font-bold">{t("programmesTitle")}</h1>
       <p className="mt-4 max-w-prose text-lg text-fg-muted">{t("programmesIntro")}</p>
+      <Link href="/compare" className="mt-2 inline-flex min-h-11 items-center font-semibold underline underline-offset-4">
+        {nav("compare")}
+      </Link>
 
       <section id="level-ug" aria-labelledby="h-ug" className="mt-14 scroll-mt-20">
         <h2 id="h-ug" className="font-display text-section font-bold">{nav("undergraduate")}</h2>
@@ -75,7 +80,7 @@ function ProgrammeList({
           id={p.slug}
           className="flex flex-col gap-2 rounded-2xl border border-line-subtle p-5 target:border-link target:ring-2 target:ring-link"
         >
-          <Heading className="font-semibold leading-snug">
+          <Heading style={programmeTitleName(p.slug)} className="font-semibold leading-snug">
             <Link href={`/programmes/${p.slug}`} className="text-fg underline-offset-4 hover:underline">
               {p.name}
             </Link>
@@ -85,6 +90,7 @@ function ProgrammeList({
             <Fact value={p.durationYears} format={yearsLabel} /> ·{" "}
             {p.campuses.map(campusName).join(", ")}
           </p>
+          <CompareToggle slug={p.slug} name={p.name} className="self-start text-fg" />
         </li>
       ))}
     </ul>

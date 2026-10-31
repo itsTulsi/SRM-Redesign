@@ -604,3 +604,58 @@ html.lenis body {
 .assistant-launcher[aria-expanded="true"] {
   visibility: hidden;
 }
+
+/* ═══ Product layer: command palette, live search, compare, page transitions ═══ */
+
+/* Toggles that do nothing without JavaScript. The head script sets data-lite on every page view. */
+html:not([data-lite]) .needs-js {
+  display: none;
+}
+
+/* The browser draws the search box's clear button white under the dark colour scheme; the hero input is pale. */
+form[role="search"] input::-webkit-search-cancel-button {
+  filter: invert(1);
+}
+
+/* Hero results settle in as they're found (new cards only: they're keyed by programme). */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+.live-card {
+  animation: rise 0.32s cubic-bezier(0.2, 0, 0, 1) calc(var(--i, 0) * 50ms) both;
+}
+.live-chip {
+  animation: rise 0.2s ease-out both;
+}
+
+.compare-tray {
+  animation: rise 0.25s cubic-bezier(0.2, 0, 0, 1) both;
+}
+@media (min-width: 40rem) {
+  .compare-tray {
+    translate: -50% 0;
+  }
+}
+
+/* Page transitions (lib/view-transition.ts): a quick crossfade, the header stays put, programme titles travel. */
+.site-header {
+  view-transition-name: site-header;
+}
+::view-transition-group(*) {
+  animation-duration: 0.34s;
+  animation-timing-function: cubic-bezier(0.2, 0, 0, 1);
+}
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.2s;
+}
+/* Keep a title's proportions as it changes size, instead of stretching the picture of it. */
+::view-transition-old(*):not(::view-transition-old(root)),
+::view-transition-new(*):not(::view-transition-new(root)) {
+  height: 100%;
+  object-fit: contain;
+  object-position: left top;
+}
