@@ -133,9 +133,10 @@
       "rankingsIntro": "NIRF {year} — भारत सरकार की राष्ट्रीय संस्थागत रैंकिंग।",
       "rank": "रैंक",
       "naac": "NAAC ग्रेड",
-      "moreRanks": "NIRF {year} की अन्य श्रेणियाँ",
+      "moreRanks": "NIRF {year} की सभी श्रेणियाँ",
       "source": "स्रोत: SRMIST द्वारा प्रकाशित NIRF {year} तालिका",
-      "drag": "खींचें"
+      "drag": "खींचें",
+      "ladderNote": "हर बिंदु उस राष्ट्रीय सूची में SRM का स्थान है। जितना बाईं ओर, उतना बेहतर।"
     },
     "leap": {
       "kicker": "अंक II",

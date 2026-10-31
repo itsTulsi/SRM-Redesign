@@ -6,7 +6,7 @@ import type { Stat } from "@/lib/content";
  */
 export function StatFigure({ stat, size = "lg" }: { stat: Stat; size?: "lg" | "md" }) {
   return (
-    <div className="flex flex-col gap-1">
+    <div className="flex flex-col gap-1 border-t border-line pt-4">
       <dt className="order-2 text-fg-muted">{stat.label}</dt>
       <dd
         className={`order-1 font-display leading-none font-bold tracking-tight whitespace-nowrap tabular-nums ${

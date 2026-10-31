@@ -330,10 +330,8 @@ html:has(dialog[open]:modal) {
   0%, 100% { scale: 1; opacity: 1; }
   50% { scale: 1.35; opacity: 0.7; }
 }
-/* The tree card floats over every act colour, so it carries its own blue backing. */
+/* The tree floats over every act colour, so it keeps its own colours whichever act is behind it. */
 .living-tree {
-  --bg: var(--srm-blue-900);
-  --line-subtle: #24346b;
   --tree: var(--leaf-green-300);
   --fg-muted: #9aa6c8;
   --line: #6c7bb0;
@@ -658,4 +656,113 @@ form[role="search"] input::-webkit-search-cancel-button {
   height: 100%;
   object-fit: contain;
   object-position: left top;
+}
+
+/* ═══ Visual layer ═══ */
+
+/* Rank chart: each dot grows in as its row scrolls into view. Browsers without scroll timelines just show the dots. */
+@supports (animation-timeline: view()) {
+  [data-motion="full"] .rank-node {
+    animation: rank-node-in linear both;
+    animation-timeline: view();
+    animation-range: entry 20% entry 80%;
+  }
+}
+@keyframes rank-node-in {
+  from {
+    scale: 0;
+  }
+}
+
+@keyframes campus-map-flat {
+  to {
+    perspective: none;
+  }
+}
+@keyframes campus-layer-flat {
+  to {
+    transform-style: flat;
+  }
+}
+
+/* Campus map in 3D, desktop only: phones need the flat map for 44 px targets; Lite Mode and reduced motion stay flat.
+   The whole map tilts back. Each pin turns to face the viewer and floats on a stem whose foot lands exactly on the
+   campus's true coordinates. For a stem of length L at tilt t: lift the pin by L·sin t, move it back by L·cos t.
+   Here L = 45px and t = 42deg, so 30px and 33px. A further 5px of lift keeps the foot's ring above the map instead of
+   half inside it, and 4.5px forward cancels what that lift shifts on screen. Links and focus work as normal: 3D
+   transforms keep hit-testing.
+   Flying in levels the map out to top-down, with pins back on their coordinates. Once there, perspective and 3D come
+   off entirely, because Chrome draws anything under a perspective at low resolution and the zoomed map turned blocky. */
+@media (min-width: 64rem) {
+  [data-motion="full"] .campus-map {
+    --tilt: 42deg;
+    --pin-back: -28.5px;
+    --pin-lift: 35px;
+    perspective: 1500px;
+    perspective-origin: 50% 20%;
+    background-image: radial-gradient(70% 60% at 50% 62%, color-mix(in srgb, var(--srm-blue-500) 42%, transparent), transparent);
+  }
+  [data-motion="full"] .campus-tilt {
+    transform: rotateX(var(--tilt)) translateY(-4%) scale(1.04);
+    transform-style: preserve-3d;
+    transition: transform 900ms var(--ease-leap);
+  }
+  [data-motion="full"] .campus-map[data-zoomed] {
+    --tilt: 0deg;
+    --pin-back: 0px;
+    --pin-lift: 0px;
+    animation: campus-map-flat 0s 950ms forwards;
+  }
+  [data-motion="full"] [data-zoomed] .campus-tilt {
+    transform: rotateX(0deg) translateY(0) scale(1);
+    animation: campus-layer-flat 0s 950ms forwards;
+  }
+  [data-motion="full"] [data-zoomed] .campus-stage,
+  [data-motion="full"] [data-zoomed] .campus-pin {
+    animation: campus-layer-flat 0s 950ms forwards;
+  }
+  [data-motion="full"] [data-zoomed] .campus-pin::before,
+  [data-motion="full"] [data-zoomed] .campus-pin::after {
+    opacity: 0;
+  }
+  [data-motion="full"] .campus-stage {
+    transform-style: preserve-3d;
+  }
+  /* The map's edge: two darker copies underneath, like contour layers, painted as shadows of the one image. */
+  /* Overview only: a filter fixes the map's raster at 1x, so it would turn blocky once the camera zooms in. */
+  [data-motion="full"] .campus-map:not([data-zoomed]) .campus-plane {
+    filter: drop-shadow(0 7px 0 #16296f) drop-shadow(0 7px 0 #0f1d55);
+  }
+  [data-motion="full"] .campus-pin {
+    transform-style: preserve-3d;
+    transform: scale(calc(1 / var(--z, 1))) translate3d(0, var(--pin-back), var(--pin-lift)) rotateX(calc(-1 * var(--tilt))) translate(-50%, -50%);
+  }
+  [data-motion="full"] .campus-pin::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: calc(50% - 1px);
+    width: 2px;
+    height: 45px;
+    background: linear-gradient(var(--leaf-green-300), color-mix(in srgb, var(--leaf-green-300) 45%, transparent));
+    pointer-events: none;
+  }
+  [data-motion="full"] .campus-pin::after {
+    content: "";
+    position: absolute;
+    top: calc(50% + 45px);
+    left: 50%;
+    width: 14px;
+    height: 14px;
+    border-radius: 9999px;
+    border: 2px solid var(--leaf-green-300);
+    transform: translate(-50%, -50%) scaleY(0.72);
+    pointer-events: none;
+  }
+  [data-motion="full"] .campus-pin[aria-current]::before {
+    background: linear-gradient(var(--srm-gold), color-mix(in srgb, var(--srm-gold) 45%, transparent));
+  }
+  [data-motion="full"] .campus-pin[aria-current]::after {
+    border-color: var(--srm-gold);
+  }
 }

@@ -116,7 +116,8 @@ function actTitles(mm: gsap.MatchMedia): (() => void)[] {
         pinSpacing: false,
       });
       gsap.to(title, {
-        opacity: 0.16,
+        // Faint enough that the word never competes with the text scrolling over it.
+        opacity: 0.06,
         ease: "none",
         scrollTrigger: { trigger: title, start: "top 14%", end: "+=35%", scrub: true },
       });

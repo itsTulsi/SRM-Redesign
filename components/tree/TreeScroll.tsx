@@ -30,7 +30,7 @@ export function TreeScroll({ children }: { children: React.ReactNode }) {
     let visible = false;
     const update = () => {
       frame = 0;
-      // Show the tree card only while the acts are on screen: never over the hero search or the footer links.
+      // Show the tree only while the acts are on screen: never over the hero search or the footer links.
       const first = spans[0];
       const last = spans[spans.length - 1];
       const nowVisible =

@@ -7,7 +7,7 @@ import { ThisWeek } from "@/components/acts/ThisWeek";
 import { Hero } from "@/components/hero/Hero";
 import { Explore } from "@/components/map/Explore";
 import { LivingTree } from "@/components/tree/LivingTree";
-import { getContent } from "@/lib/content";
+import { getContent, upcomingEvents } from "@/lib/content";
 import type { Locale } from "@/lib/i18n";
 import { alternatesFor } from "@/lib/page-metadata";
 
@@ -16,12 +16,16 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: L
   return { alternates: alternatesFor(locale, "") };
 }
 
+// Rebuilt daily so "Coming up" drops events once they've passed.
+export const revalidate = 86400;
+
 // Homepage = exactly the sections in CLAUDE.md §1, in order. Nothing else goes here.
 export default async function HomePage({ params }: { params: Promise<{ locale: Locale }> }) {
   const { locale } = await params;
   setRequestLocale(locale);
 
-  const { site, events } = getContent(locale);
+  const { site, events: allEvents } = getContent(locale);
+  const events = upcomingEvents(allEvents);
   // Structured data (CLAUDE.md §8): the university, and the real upcoming events from "This week".
   const jsonLd = {
     "@context": "https://schema.org",

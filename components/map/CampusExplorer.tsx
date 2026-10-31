@@ -119,9 +119,11 @@ export function CampusExplorer({
         ref={mapRef}
         role="group"
         aria-label={t("mapLabel")}
-        className="relative overflow-hidden rounded-3xl border border-line-subtle bg-[#0a1640] lg:col-span-7"
+        data-zoomed={zoomed ? "" : undefined}
+        className="campus-map relative overflow-hidden rounded-3xl border border-line-subtle bg-[#0a1640] lg:col-span-7"
         style={{ aspectRatio: aspect }}
       >
+        <div className="campus-tilt absolute inset-0">
         <div
           className="campus-stage absolute inset-0 origin-top-left"
           style={
@@ -132,7 +134,7 @@ export function CampusExplorer({
           }
         >
           {/* eslint-disable-next-line @next/next/no-img-element -- static SVG art; next/image adds nothing for SVG */}
-          <img src={mapSrc} alt="" aria-hidden="true" loading="lazy" decoding="async" className="size-full select-none" draggable={false} />
+          <img src={mapSrc} alt="" aria-hidden="true" loading="lazy" decoding="async" className="campus-plane relative size-full select-none" draggable={false} />
 
           {(zoomed ? [] : overviewMarkers).map((m) => (
             <Pin key={m.key} x={m.x} y={m.y} label={m.label} href={m.href} onClick={m.onClick} count={m.count} side={m.side} cursorLabel={t("exploreCursor")} />
@@ -176,6 +178,7 @@ export function CampusExplorer({
                   />
                 ))
             : null}
+        </div>
         </div>
         {zoomed ? (
           <button
@@ -312,21 +315,19 @@ function CampusDetail({ campus, onTour }: { campus: MapCampus; onTour: () => voi
 
 function CampusList({ items, onSelect }: { items: MapCampus[]; onSelect: (c: MapCampus) => (e?: React.MouseEvent) => void }) {
   return (
-    <ul className="grid gap-2 sm:grid-cols-2 lg:grid-cols-1">
+    <ul className="grid border-t border-line-subtle sm:grid-cols-2 sm:gap-x-6 lg:grid-cols-1">
       {items.map((c) => (
         <li key={c.slug}>
           <Link
             href={`/campuses/${c.slug}`}
             onClick={onSelect(c)}
-            className="flex min-h-11 items-center justify-between gap-3 rounded-2xl border border-line-subtle px-4 py-3 text-fg no-underline hover:border-line"
+            data-no-transition
+            className="group flex min-h-11 flex-wrap items-baseline justify-between gap-x-4 border-b border-line-subtle py-2.5 text-fg no-underline hover:border-line"
           >
-            <span>
-              <span className="block font-semibold">{c.name}</span>
-              <span className="block text-sm text-fg-muted">
-                {c.city}, {c.state}
-              </span>
+            <span className="font-semibold underline-offset-4 group-hover:underline">{c.name}</span>
+            <span className="text-sm text-fg-muted">
+              {c.city}, {c.state}
             </span>
-            <span aria-hidden="true">→</span>
           </Link>
         </li>
       ))}
@@ -368,6 +369,7 @@ function Pin({
     <Link
       href={href}
       onClick={onClick}
+      data-no-transition
       aria-current={active ? "true" : undefined}
       data-cursor-label={cursorLabel}
       // True positions can sit closer than a 44 px box (Chennai and Trichy are 26 px apart on a 360 px map).

@@ -133,9 +133,10 @@
       "rankingsIntro": "NIRF {year} — the Government of India's national institutional ranking.",
       "rank": "Rank",
       "naac": "NAAC grade",
-      "moreRanks": "Other NIRF {year} categories",
+      "moreRanks": "All NIRF {year} categories",
       "source": "Source: NIRF {year} table published by SRMIST",
-      "drag": "Drag"
+      "drag": "Drag",
+      "ladderNote": "Each dot is SRM's place on that national list. Further left is better."
     },
     "leap": {
       "kicker": "Act II",

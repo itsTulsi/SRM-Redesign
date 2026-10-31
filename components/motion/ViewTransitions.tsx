@@ -7,6 +7,8 @@ import { routeCommitted, withViewTransition } from "@/lib/view-transition";
 /**
  * Runs every internal page change through a view transition. One listener on the document instead of a wrapper around
  * each link: it only calls preventDefault, which makes Next's <Link> stand aside, so links' own click handlers still run.
+ * It runs before those handlers, so a link that handles the click itself instead of navigating (the map's pins) must
+ * opt out with data-no-transition.
  */
 export function ViewTransitions() {
   const router = useRouter();
@@ -18,7 +20,7 @@ export function ViewTransitions() {
     const onClick = (e: MouseEvent) => {
       if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.defaultPrevented) return;
       const link = (e.target as Element).closest?.("a[href]") as HTMLAnchorElement | null;
-      if (!link || link.target || link.hasAttribute("download")) return;
+      if (!link || link.target || link.hasAttribute("download") || link.hasAttribute("data-no-transition")) return;
       const url = new URL(link.href);
       // Same page (anchors, ?p= changes), other sites, and files keep their normal behaviour.
       if (url.origin !== location.origin || url.pathname === location.pathname || /\.\w+$/.test(url.pathname)) return;
