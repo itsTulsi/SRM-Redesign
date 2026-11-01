@@ -10,7 +10,7 @@ import { findMedia } from "@/lib/media";
 export function StoryVisual({ story, sizes, className, priority = false }: { story: Story; sizes: string; className: string; priority?: boolean }) {
   const poster = story.media.poster;
   if (findMedia(story.media.photo) || !poster) {
-    return <Photo src={story.media.photo} alt={story.title} sizes={sizes} priority={priority} className={className} />;
+    return <Photo reveal src={story.media.photo} alt={story.title} sizes={sizes} priority={priority} className={className} />;
   }
   // Decorative: the story's heading sits right beside it and says the same thing.
   return (

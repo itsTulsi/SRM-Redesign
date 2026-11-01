@@ -416,6 +416,10 @@ html.lenis body {
   pointer-events: none;
   background: var(--curtain, transparent);
 }
+/* The root shader draws the colour itself, with gaps for the roots. */
+.act-curtain.is-roots {
+  background: none;
+}
 [data-act="leap"] {
   --curtain: var(--srm-blue-900);
 }
@@ -765,4 +769,10 @@ form[role="search"] input::-webkit-search-cancel-button {
   [data-motion="full"] .campus-pin[aria-current]::after {
     border-color: var(--srm-gold);
   }
+}
+
+/* Masked heading lines (lib/motion-scenes): room for tails and Tamil and Hindi marks that leading would clip. */
+.reveal-line-mask {
+  padding-block: 0.16em;
+  margin-block: -0.16em;
 }

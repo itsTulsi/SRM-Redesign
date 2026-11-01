@@ -47,7 +47,7 @@ export async function ActLeap() {
                 id={missionAnchor(m.slug)}
                 className="flex flex-col overflow-hidden rounded-3xl border border-line-subtle"
               >
-                <Photo src={m.photo} alt={`${m.name} research`} sizes="(min-width: 768px) 50vw, 100vw" className="aspect-[16/9] w-full" />
+                <Photo reveal src={m.photo} alt={`${m.name} research`} sizes="(min-width: 768px) 50vw, 100vw" className="aspect-[16/9] w-full" />
                 <div className="flex flex-col gap-3 p-6 lg:p-8">
                   <h4 className="font-display text-3xl font-bold">{m.name}</h4>
                   <p className="text-lg text-fg-muted">{m.question}</p>
