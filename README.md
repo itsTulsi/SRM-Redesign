@@ -67,9 +67,7 @@ The full audit and the fixes it led to are in [docs/AUDIT.md](docs/AUDIT.md).
 
 - **Next.js 15** (App Router) with **TypeScript** (strict mode) and **React 19**
 - **Tailwind CSS v4**, with design tokens as CSS variables
-- **GSAP** (ScrollTrigger, SplitText) for scroll choreography and **Lenis** for smooth scroll, both loaded after page load and switched off in Lite Mode
-- **WebGL** with a hand-written shader for the root curtain between acts: no 3D library, nothing extra to download, and a plain wipe where WebGL is unavailable
-- **View Transitions API** for page changes, and CSS scroll-driven animation on the rankings chart
+- **GSAP + ScrollTrigger** for scroll choreography and **Lenis** for smooth scroll, both loaded after page load and switched off in Lite Mode
 - **next-intl** for English, Tamil and Hindi
 - **Fuse.js** for instant client-side search
 - **next/image** for every image, served as AVIF or WebP; **next/font** for self-hosted fonts

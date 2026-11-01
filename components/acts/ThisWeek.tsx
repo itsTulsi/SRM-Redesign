@@ -22,7 +22,6 @@ export async function ThisWeek() {
         {featuredStory ? (
           <article aria-labelledby="featured-story" className="mt-10 grid gap-8 lg:grid-cols-12 lg:items-center">
             <Photo
-              reveal
               src={featuredStory.media.photo}
               alt={featuredStory.title}
               sizes="(min-width: 1024px) 58vw, 100vw"

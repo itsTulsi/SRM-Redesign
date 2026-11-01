@@ -1,8 +1,6 @@
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { SplitText } from "gsap/SplitText";
 import Lenis from "lenis";
-import { createRootsCurtain, type RootsCurtain } from "./roots-curtain";
 
 /**
  * All scroll choreography (CLAUDE.md §5). Loaded lazily by MotionDirector, only when motion is allowed
@@ -13,7 +11,7 @@ import { createRootsCurtain, type RootsCurtain } from "./roots-curtain";
  * everything is reverted by the returned cleanup (Lite Mode can switch on mid-session).
  */
 export function startMotion(): () => void {
-  gsap.registerPlugin(ScrollTrigger, SplitText);
+  gsap.registerPlugin(ScrollTrigger);
   const cleanups: (() => void)[] = [];
 
   // ── Lenis smooth scroll, driven by GSAP's ticker so ScrollTrigger stays in sync ──
@@ -34,10 +32,8 @@ export function startMotion(): () => void {
   const mm = gsap.matchMedia();
   const ctx = gsap.context(() => {
     cleanups.push(...actTitles(mm));
-    cleanups.push(curtains());
+    curtains();
     cleanups.push(...counters());
-    cleanups.push(lineReveals());
-    cleanups.push(photoReveals());
   });
   cleanups.push(() => {
     mm.revert();
@@ -131,124 +127,20 @@ function actTitles(mm: gsap.MatchMedia): (() => void)[] {
 }
 
 /**
- * Act transitions (Guildhall): the previous act's colour hangs over the top of the new act and lifts away as you
- * scroll in, retreating as a root system (lib/roots-curtain). Without WebGL it's a plain wipe. One canvas, moved to
- * whichever curtain is on screen. The curtain element is display:none until this runs.
+ * Act transitions (Guildhall): the previous act's colour hangs over the top of the new act like a curtain
+ * and lifts away (scaleY → 0) as you scroll in. The curtain element is display:none until this runs.
  */
-function curtains(): () => void {
-  // Compiling the shader blocks the page briefly, so it waits until the first curtain is two screens away.
-  let roots: RootsCurtain | null | undefined;
-  const getRoots = () => (roots === undefined ? (roots = createRootsCurtain()) : roots);
-  const triggers = [...document.querySelectorAll<HTMLElement>("[data-curtain]")].map((curtain, i) => {
+function curtains() {
+  document.querySelectorAll<HTMLElement>("[data-curtain]").forEach((curtain) => {
     const section = curtain.parentElement;
-    if (!section) return null;
-    gsap.set(curtain, { display: "block" });
-    const render = (progress: number) => {
-      const gl = getRoots();
-      if (gl && !gl.lost()) {
-        curtain.classList.add("is-roots");
-        gl.draw(curtain, progress, i * 3.7 + 1.3);
-      } else {
-        curtain.classList.remove("is-roots");
-        gsap.set(curtain, { scaleY: 1 - progress, transformOrigin: "50% 0%" });
-      }
-    };
-    // Past its end the curtain is gone; before its start it stays solid, below the fold.
-    const settle = (self: ScrollTrigger) => {
-      curtain.style.visibility = !self.isActive && self.progress === 1 ? "hidden" : "";
-      if (self.isActive) render(self.progress);
-    };
-    ScrollTrigger.create({ trigger: section, start: "top 300%", once: true, onEnter: getRoots });
-    return ScrollTrigger.create({
-      trigger: section,
-      start: "top bottom",
-      end: "top 25%",
-      onUpdate: (self) => render(self.progress),
-      onToggle: settle,
-      // Also on load and resize, for anyone arriving partway down the page.
-      onRefresh: settle,
+    if (!section) return;
+    gsap.set(curtain, { display: "block", scaleY: 1, transformOrigin: "50% 0%" });
+    gsap.to(curtain, {
+      scaleY: 0,
+      ease: "none",
+      scrollTrigger: { trigger: section, start: "top bottom", end: "top 25%", scrub: true },
     });
   });
-  return () => {
-    triggers.forEach((t) => t?.kill());
-    document.querySelectorAll<HTMLElement>("[data-curtain]").forEach((c) => {
-      c.classList.remove("is-roots");
-      c.style.visibility = "";
-    });
-    roots?.destroy();
-  };
-}
-
-/**
- * Big headings rise line by line from behind a mask, then go back to plain text. Whole lines only, because splitting
- * into letters breaks Tamil and Hindi. The text stays real, so screen readers are unaffected; anything already on
- * screen when this runs is left alone, so nothing visible ever blinks out. Each heading is split only when it's nearly
- * two screens away: splitting forces layout, and doing them all at once blocked the page after load.
- */
-function lineReveals(): () => void {
-  const splits = new Set<SplitText>();
-  const headings = [...document.querySelectorAll<HTMLElement>("main :is(h2, h3, p):is(.text-hero, .text-section):not([data-act-title])")];
-  headings
-    .filter((el) => el.offsetParent && el.getBoundingClientRect().top >= window.innerHeight)
-    .forEach((el) => {
-      ScrollTrigger.create({
-        trigger: el,
-        start: "top 280%",
-        once: true,
-        onEnter: () => {
-          const split = SplitText.create(el, {
-            type: "lines",
-            mask: "lines",
-            linesClass: "reveal-line",
-            aria: "none",
-            autoSplit: true,
-            onSplit: (self) =>
-              gsap.from(self.lines, {
-                yPercent: 112,
-                duration: 1.1,
-                ease: "expo.out",
-                stagger: 0.09,
-                scrollTrigger: { trigger: el, start: "top 88%", once: true },
-                onComplete: () => {
-                  split.revert();
-                  splits.delete(split);
-                },
-              }),
-          });
-          splits.add(split);
-        },
-      });
-    });
-  return () => splits.forEach((split) => split.revert());
-}
-
-/** Marked photos: a panel in the act's colour lifts off as the photo settles from slightly enlarged. Transform only. */
-function photoReveals(): () => void {
-  const covers: HTMLElement[] = [];
-  [...document.querySelectorAll<HTMLElement>("[data-reveal]")]
-    .filter((frame) => frame.getBoundingClientRect().top >= window.innerHeight)
-    .forEach((frame) => {
-      const image = frame.querySelector("img");
-      if (!image) return;
-      // Set up only when nearly two screens away, like the headings, so none of this competes with page load.
-      ScrollTrigger.create({
-        trigger: frame,
-        start: "top 280%",
-        once: true,
-        onEnter: () => {
-          const cover = document.createElement("div");
-          cover.setAttribute("aria-hidden", "true");
-          cover.style.cssText = "position:absolute;inset:0;z-index:1;background:var(--bg);pointer-events:none";
-          frame.append(cover);
-          covers.push(cover);
-          gsap
-            .timeline({ scrollTrigger: { trigger: frame, start: "top 85%", once: true }, onComplete: () => cover.remove() })
-            .fromTo(cover, { scaleY: 1, transformOrigin: "50% 0%" }, { scaleY: 0, duration: 1.05, ease: "expo.inOut" }, 0)
-            .fromTo(image, { scale: 1.18 }, { scale: 1, duration: 1.5, ease: "expo.out", clearProps: "scale" }, 0.1);
-        },
-      });
-    });
-  return () => covers.forEach((c) => c.remove());
 }
 
 /**

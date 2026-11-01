@@ -19,19 +19,17 @@ type Props = {
   priority?: boolean;
   /** Background image: empty alt, placeholder hidden from assistive tech. */
   decorative?: boolean;
-  /** Reveal as it scrolls into view (lib/motion-scenes). For large photos that lead a section, not every image. */
-  reveal?: boolean;
 };
 
 /** The real photo if the team has supplied it, otherwise the labelled "PHOTO TODO" placeholder. */
-export function Photo({ src, alt, sizes, className = "", imgClassName = "", priority = false, decorative = false, reveal = false }: Props) {
+export function Photo({ src, alt, sizes, className = "", imgClassName = "", priority = false, decorative = false }: Props) {
   const url = findMedia(src);
   if (!url)
     return <MediaPlaceholder description={alt || "Decorative photo"} file={src} decorative={decorative} className={className} />;
   // Openly licensed photos (CC BY / BY-SA) must show their author and licence wherever they appear.
   const credit = src ? CREDITS[src] : undefined;
   return (
-    <div data-reveal={reveal ? "" : undefined} className={`relative overflow-hidden ${className}`}>
+    <div className={`relative overflow-hidden ${className}`}>
       <Image src={url} alt={decorative ? "" : alt} fill sizes={sizes} priority={priority} className={`object-cover ${imgClassName}`} />
       {credit?.license ? (
         <a
