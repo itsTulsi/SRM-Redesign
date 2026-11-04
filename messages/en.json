@@ -166,7 +166,13 @@
       "voicesTitle": "Voices at SRM",
       "voicesIntro": "India's science leaders, on campus for the Indian National Science Academy's 90th Anniversary General Meeting.",
       "voicesNote": "Roles as at the time of each talk. Videos play from YouTube when you tap them.",
-      "play": "Play"
+      "play": "Play",
+      "finaleTitle": "Every leaf started here.",
+      "finaleIntro": "Alumni, champions and founders: people who learned, leapt and now lead.",
+      "finaleList": "People and projects that started at SRM",
+      "yourLeaf": "Your leaf is waiting",
+      "apply": "Apply",
+      "startupLine": "Came through SRM's Innovation and Incubation Centre"
     },
     "explore": {
       "title": "Where will you study?",

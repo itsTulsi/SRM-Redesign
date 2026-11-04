@@ -3,6 +3,7 @@ import { Photo } from "@/components/ui/Photo";
 import { Fact } from "@/components/ui/Todo";
 import { getContent } from "@/lib/content";
 import { SECTION } from "@/lib/sections";
+import { TreeFinale } from "@/components/tree/TreeFinale";
 import { ActHeader } from "./ActHeader";
 import { StatFigure } from "./StatFigure";
 import { Voices } from "./Voices";
@@ -23,7 +24,7 @@ export async function ActLead() {
         <h3 className="font-display text-section font-bold">{t("alumniTitle")}</h3>
         <ul className="mt-10 grid gap-8 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-12 lg:grid-cols-3">
           {alumni.map((a) => (
-            <li key={a.slug} className="grid grid-cols-[6rem_1fr] items-start gap-4 sm:flex sm:flex-col">
+            <li key={a.slug} id={a.slug} className="grid scroll-mt-24 grid-cols-[6rem_1fr] items-start gap-4 sm:flex sm:flex-col">
               <Photo
                 src={a.photo}
                 alt={t("portraitAlt", { name: a.name })}
@@ -54,7 +55,7 @@ export async function ActLead() {
 
       <Voices />
 
-      <div id={SECTION.placements} className="site-container pb-24 lg:pb-40">
+      <div id={SECTION.placements} className="site-container pb-24 lg:pb-32">
         <h3 className="font-display text-section font-bold">{t("placementsTitle", { season: placements.season })}</h3>
         <p className="mt-3 max-w-prose text-fg-muted">{t("placementsIntro")}</p>
         <dl className="mt-12 grid grid-cols-2 gap-x-6 gap-y-12 lg:grid-cols-3">
@@ -63,6 +64,8 @@ export async function ActLead() {
           ))}
         </dl>
       </div>
+
+      <TreeFinale />
     </section>
   );
 }
