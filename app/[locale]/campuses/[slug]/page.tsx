@@ -7,7 +7,7 @@ import { Fact } from "@/components/ui/Todo";
 import { campuses, getContent, isTodo } from "@/lib/content";
 import { directionsUrl, streetMap } from "@/lib/map";
 import { Link, type Locale } from "@/lib/i18n";
-import { alternatesFor } from "@/lib/page-metadata";
+import { alternatesFor, socialFor } from "@/lib/page-metadata";
 
 type Params = { params: Promise<{ locale: Locale; slug: string }> };
 
@@ -20,9 +20,12 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const campus = getContent(locale).getCampus(slug);
   if (!campus) return {};
   const t = await getTranslations({ locale, namespace: "Pages" });
+  const name = campus.kind === "sister" ? campus.name : t("campusTitle", { name: campus.name });
+  const description = `${campus.city}, ${campus.state}`;
   return {
-    title: `${campus.kind === "sister" ? campus.name : t("campusTitle", { name: campus.name })} — SRMIST`,
+    title: `${name} — SRMIST`,
     alternates: alternatesFor(locale, `/campuses/${slug}`),
+    ...socialFor(locale, { title: name, description, path: `/campuses/${slug}`, ownImage: true }),
   };
 }
 

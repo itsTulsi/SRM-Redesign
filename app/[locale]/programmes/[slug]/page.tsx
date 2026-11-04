@@ -7,7 +7,7 @@ import { CompareToggle } from "@/components/programme/CompareToggle";
 import { ParentModeToggle } from "@/components/programme/ParentModeToggle";
 import { getContent, isTodo, programmes } from "@/lib/content";
 import { Link, type Locale } from "@/lib/i18n";
-import { alternatesFor } from "@/lib/page-metadata";
+import { alternatesFor, socialFor } from "@/lib/page-metadata";
 import { directionsUrl } from "@/lib/map";
 import { programmeTitleName } from "@/lib/view-transition";
 
@@ -23,7 +23,12 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const { locale, slug } = await params;
   const p = getContent(locale).getProgramme(slug);
   return p
-    ? { title: `${p.name} — SRMIST`, description: p.summary, alternates: alternatesFor(locale, `/programmes/${slug}`) }
+    ? {
+        title: `${p.name} — SRMIST`,
+        description: p.summary,
+        alternates: alternatesFor(locale, `/programmes/${slug}`),
+        ...socialFor(locale, { title: p.name, description: p.summary, path: `/programmes/${slug}`, ownImage: true }),
+      }
     : {};
 }
 

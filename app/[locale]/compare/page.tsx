@@ -4,7 +4,7 @@ import { CompareCopyLink } from "@/components/programme/CompareCopyLink";
 import { compareHref, MAX_COMPARE } from "@/lib/compare";
 import { getContent, isTodo } from "@/lib/content";
 import { getPathname, Link, type Locale } from "@/lib/i18n";
-import { alternatesFor } from "@/lib/page-metadata";
+import { alternatesFor, socialFor } from "@/lib/page-metadata";
 
 type Props = {
   params: Promise<{ locale: Locale }>;
@@ -16,7 +16,12 @@ const inr = new Intl.NumberFormat("en-IN");
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "Compare" });
-  return { title: `${t("metaTitle")} — SRMIST`, description: t("intro"), alternates: alternatesFor(locale, "/compare") };
+  return {
+    title: `${t("metaTitle")} — SRMIST`,
+    description: t("intro"),
+    alternates: alternatesFor(locale, "/compare"),
+    ...socialFor(locale, { title: t("metaTitle"), description: t("intro"), path: "/compare" }),
+  };
 }
 
 /**

@@ -4,7 +4,7 @@ import { Photo } from "@/components/ui/Photo";
 import { researchStats } from "@/lib/content";
 import { telHref } from "@/lib/hostels";
 import { Link, type Locale } from "@/lib/i18n";
-import { alternatesFor } from "@/lib/page-metadata";
+import { alternatesFor, socialFor } from "@/lib/page-metadata";
 import { researchCentres, type CentreCopy, type CentreSlug } from "@/lib/research-centres";
 import { SECTION } from "@/lib/sections";
 
@@ -15,7 +15,12 @@ const num = new Intl.NumberFormat("en-IN");
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "Centres" });
-  return { title: `${t("metaTitle")} — SRMIST`, description: t("intro"), alternates: alternatesFor(locale, "/research") };
+  return {
+    title: `${t("metaTitle")} — SRMIST`,
+    description: t("intro"),
+    alternates: alternatesFor(locale, "/research"),
+    ...socialFor(locale, { title: t("metaTitle"), description: t("intro"), path: "/research" }),
+  };
 }
 
 export default async function ResearchCentresPage({ params }: Params) {

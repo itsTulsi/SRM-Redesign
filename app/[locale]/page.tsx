@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { setRequestLocale } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { ActLead } from "@/components/acts/ActLead";
 import { ActLeap } from "@/components/acts/ActLeap";
 import { ActLearn } from "@/components/acts/ActLearn";
@@ -9,11 +9,12 @@ import { Explore } from "@/components/map/Explore";
 import { LivingTree } from "@/components/tree/LivingTree";
 import { getContent, upcomingEvents } from "@/lib/content";
 import type { Locale } from "@/lib/i18n";
-import { alternatesFor } from "@/lib/page-metadata";
+import { alternatesFor, socialFor } from "@/lib/page-metadata";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: Locale }> }): Promise<Metadata> {
   const { locale } = await params;
-  return { alternates: alternatesFor(locale, "") };
+  const t = await getTranslations({ locale, namespace: "Meta" });
+  return { alternates: alternatesFor(locale, ""), ...socialFor(locale, { title: t("title"), description: t("description"), path: "", ownImage: true }) };
 }
 
 // Rebuilt daily so "Coming up" drops events once they've passed.

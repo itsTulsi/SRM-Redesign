@@ -91,7 +91,7 @@ npm run dev          # http://localhost:3000
 
 No API keys are needed. The site, the search, the programme matcher and the assistant all work offline. Two optional settings:
 
-- `NEXT_PUBLIC_SITE_URL`: the canonical site address, for the sitemap and SEO tags.
+- `NEXT_PUBLIC_SITE_URL`: the canonical site address, for the sitemap, SEO tags and link previews. **Set it to the real https address in Vercel.** Without it, every preview image points at `localhost:3000`, and links shared on WhatsApp, X or LinkedIn show no image.
 - `ENQUIRY_WEBHOOK_URL`: where the admission enquiry form sends submissions. Without it, the form tells the visitor plainly that nothing was sent.
 
 ## Project structure

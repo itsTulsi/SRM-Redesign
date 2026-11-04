@@ -3,7 +3,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Photo } from "@/components/ui/Photo";
 import { telHref } from "@/lib/hostels";
 import { Link, type Locale } from "@/lib/i18n";
-import { alternatesFor } from "@/lib/page-metadata";
+import { alternatesFor, socialFor } from "@/lib/page-metadata";
 import { LIFE_SECTIONS, lifeSections, studentLife, type LifeSection } from "@/lib/student-life";
 
 type Params = { params: Promise<{ locale: Locale }> };
@@ -12,7 +12,12 @@ type Item = { t: string; d: string };
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "Life" });
-  return { title: `${t("metaTitle")} — SRMIST`, description: t("intro"), alternates: alternatesFor(locale, "/student-life") };
+  return {
+    title: `${t("metaTitle")} — SRMIST`,
+    description: t("intro"),
+    alternates: alternatesFor(locale, "/student-life"),
+    ...socialFor(locale, { title: t("metaTitle"), description: t("intro"), path: "/student-life" }),
+  };
 }
 
 export default async function StudentLifePage({ params }: Params) {

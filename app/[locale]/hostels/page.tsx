@@ -6,7 +6,7 @@ import { Photo } from "@/components/ui/Photo";
 import { getContent } from "@/lib/content";
 import { HOSTEL_SECTIONS, hostels, telHref, type HostelSection, type Meal } from "@/lib/hostels";
 import { Link, type Locale } from "@/lib/i18n";
-import { alternatesFor } from "@/lib/page-metadata";
+import { alternatesFor, socialFor } from "@/lib/page-metadata";
 
 type Params = { params: Promise<{ locale: Locale }> };
 
@@ -15,7 +15,12 @@ const inr = new Intl.NumberFormat("en-IN");
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "Hostels" });
-  return { title: `${t("metaTitle")} — SRMIST`, description: t("intro"), alternates: alternatesFor(locale, "/hostels") };
+  return {
+    title: `${t("metaTitle")} — SRMIST`,
+    description: t("intro"),
+    alternates: alternatesFor(locale, "/hostels"),
+    ...socialFor(locale, { title: t("metaTitle"), description: t("intro"), path: "/hostels" }),
+  };
 }
 
 /** "07:30" → "7:30 AM" / "முற்பகல் 7:30" / "7:30 am" in the visitor's language. */
