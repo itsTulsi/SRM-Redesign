@@ -766,3 +766,42 @@ form[role="search"] input::-webkit-search-cancel-button {
     border-color: var(--srm-gold);
   }
 }
+
+/* "How far is SRM from home?": arcs from the visitor's city to every campus. They draw in once; under Lite Mode or
+   reduced motion they're simply there. The nearest campus's arc is the bright one. */
+.home-arc {
+  fill: none;
+  stroke: color-mix(in srgb, var(--paper) 38%, transparent);
+  /* The SVG is 1 unit tall and zoomed by the camera (--z): this keeps strokes a constant screen width. Not
+     vector-effect: non-scaling-stroke, which ignores the CSS zoom and breaks the draw-in dashes. */
+  stroke-width: calc(1.5px / (var(--map-h, 600) * var(--z, 1)));
+  stroke-linecap: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: home-arc-draw 1.1s var(--ease-leap) calc(var(--i, 0) * 70ms) forwards;
+}
+.home-arc.is-nearest {
+  stroke: var(--leaf-green-300);
+  stroke-width: calc(3px / (var(--map-h, 600) * var(--z, 1)));
+}
+@keyframes home-arc-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+[data-motion="reduce"] .home-arc {
+  animation: none;
+  stroke-dashoffset: 0;
+}
+@media (prefers-reduced-motion: reduce) {
+  .home-arc {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+}
+/* The home marker shares the pins' counter-scaling, without a stem: it isn't a campus. */
+.home-pin::before,
+.home-pin::after {
+  content: none !important;
+}
+

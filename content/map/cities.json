@@ -1,0 +1,912 @@
+{
+  "_note": "Cities for 'How far is SRM from home?' on the campus map. lat/lng are each city's centre from OpenStreetMap (Nominatim structured search by city + state, 2026-11-05); a city was kept only if OSM placed it in the expected state, and 'osm' is the matched OSM object. Every state and union-territory capital, Tamil Nadu's main cities, and large cities elsewhere. Distances on the site are straight-line, not by road. Tamil and Hindi names need a native speaker's review.",
+  "source": "https://nominatim.openstreetmap.org/",
+  "states": [
+    {
+      "slug": "tamil-nadu",
+      "name": "Tamil Nadu",
+      "nameTa": "தமிழ்நாடு",
+      "nameHi": "तमिलनाडु"
+    },
+    {
+      "slug": "puducherry",
+      "name": "Puducherry",
+      "nameTa": "புதுச்சேரி",
+      "nameHi": "पुडुचेरी"
+    },
+    {
+      "slug": "kerala",
+      "name": "Kerala",
+      "nameTa": "கேரளா",
+      "nameHi": "केरल"
+    },
+    {
+      "slug": "karnataka",
+      "name": "Karnataka",
+      "nameTa": "கர்நாடகா",
+      "nameHi": "कर्नाटक"
+    },
+    {
+      "slug": "andhra-pradesh",
+      "name": "Andhra Pradesh",
+      "nameTa": "ஆந்திரப் பிரதேசம்",
+      "nameHi": "आंध्र प्रदेश"
+    },
+    {
+      "slug": "telangana",
+      "name": "Telangana",
+      "nameTa": "தெலங்கானா",
+      "nameHi": "तेलंगाना"
+    },
+    {
+      "slug": "maharashtra",
+      "name": "Maharashtra",
+      "nameTa": "மகாராஷ்டிரா",
+      "nameHi": "महाराष्ट्र"
+    },
+    {
+      "slug": "goa",
+      "name": "Goa",
+      "nameTa": "கோவா",
+      "nameHi": "गोवा"
+    },
+    {
+      "slug": "gujarat",
+      "name": "Gujarat",
+      "nameTa": "குஜராத்",
+      "nameHi": "गुजरात"
+    },
+    {
+      "slug": "rajasthan",
+      "name": "Rajasthan",
+      "nameTa": "ராஜஸ்தான்",
+      "nameHi": "राजस्थान"
+    },
+    {
+      "slug": "madhya-pradesh",
+      "name": "Madhya Pradesh",
+      "nameTa": "மத்தியப் பிரதேசம்",
+      "nameHi": "मध्य प्रदेश"
+    },
+    {
+      "slug": "chhattisgarh",
+      "name": "Chhattisgarh",
+      "nameTa": "சத்தீஸ்கர்",
+      "nameHi": "छत्तीसगढ़"
+    },
+    {
+      "slug": "odisha",
+      "name": "Odisha",
+      "nameTa": "ஒடிசா",
+      "nameHi": "ओडिशा"
+    },
+    {
+      "slug": "west-bengal",
+      "name": "West Bengal",
+      "nameTa": "மேற்கு வங்காளம்",
+      "nameHi": "पश्चिम बंगाल"
+    },
+    {
+      "slug": "bihar",
+      "name": "Bihar",
+      "nameTa": "பீகார்",
+      "nameHi": "बिहार"
+    },
+    {
+      "slug": "jharkhand",
+      "name": "Jharkhand",
+      "nameTa": "ஜார்க்கண்ட்",
+      "nameHi": "झारखंड"
+    },
+    {
+      "slug": "uttar-pradesh",
+      "name": "Uttar Pradesh",
+      "nameTa": "உத்தரப் பிரதேசம்",
+      "nameHi": "उत्तर प्रदेश"
+    },
+    {
+      "slug": "uttarakhand",
+      "name": "Uttarakhand",
+      "nameTa": "உத்தராகண்ட்",
+      "nameHi": "उत्तराखंड"
+    },
+    {
+      "slug": "himachal-pradesh",
+      "name": "Himachal Pradesh",
+      "nameTa": "இமாச்சலப் பிரதேசம்",
+      "nameHi": "हिमाचल प्रदेश"
+    },
+    {
+      "slug": "chandigarh",
+      "name": "Chandigarh",
+      "nameTa": "சண்டிகர்",
+      "nameHi": "चंडीगढ़"
+    },
+    {
+      "slug": "delhi",
+      "name": "Delhi",
+      "nameTa": "தில்லி",
+      "nameHi": "दिल्ली"
+    },
+    {
+      "slug": "jammu-kashmir",
+      "name": "Jammu and Kashmir",
+      "nameTa": "ஜம்மு காஷ்மீர்",
+      "nameHi": "जम्मू और कश्मीर"
+    },
+    {
+      "slug": "ladakh",
+      "name": "Ladakh",
+      "nameTa": "லடாக்",
+      "nameHi": "लद्दाख"
+    },
+    {
+      "slug": "assam",
+      "name": "Assam",
+      "nameTa": "அசாம்",
+      "nameHi": "असम"
+    },
+    {
+      "slug": "arunachal-pradesh",
+      "name": "Arunachal Pradesh",
+      "nameTa": "அருணாச்சலப் பிரதேசம்",
+      "nameHi": "अरुणाचल प्रदेश"
+    },
+    {
+      "slug": "manipur",
+      "name": "Manipur",
+      "nameTa": "மணிப்பூர்",
+      "nameHi": "मणिपुर"
+    },
+    {
+      "slug": "meghalaya",
+      "name": "Meghalaya",
+      "nameTa": "மேகாலயா",
+      "nameHi": "मेघालय"
+    },
+    {
+      "slug": "mizoram",
+      "name": "Mizoram",
+      "nameTa": "மிசோரம்",
+      "nameHi": "मिज़ोरम"
+    },
+    {
+      "slug": "nagaland",
+      "name": "Nagaland",
+      "nameTa": "நாகாலாந்து",
+      "nameHi": "नागालैंड"
+    },
+    {
+      "slug": "sikkim",
+      "name": "Sikkim",
+      "nameTa": "சிக்கிம்",
+      "nameHi": "सिक्किम"
+    },
+    {
+      "slug": "tripura",
+      "name": "Tripura",
+      "nameTa": "திரிபுரா",
+      "nameHi": "त्रिपुरा"
+    },
+    {
+      "slug": "andaman-nicobar",
+      "name": "Andaman and Nicobar Islands",
+      "nameTa": "அந்தமான் நிக்கோபார் தீவுகள்",
+      "nameHi": "अंडमान और निकोबार द्वीपसमूह"
+    },
+    {
+      "slug": "lakshadweep",
+      "name": "Lakshadweep",
+      "nameTa": "இலட்சத்தீவு",
+      "nameHi": "लक्षद्वीप"
+    },
+    {
+      "slug": "dnh-dd",
+      "name": "Dadra and Nagar Haveli and Daman and Diu",
+      "nameTa": "தாத்ரா நகர் ஹவேலி மற்றும் டாமன் டையூ",
+      "nameHi": "दादरा और नगर हवेली और दमन और दीव"
+    }
+  ],
+  "cities": [
+    {
+      "slug": "chennai",
+      "name": "Chennai",
+      "nameTa": "சென்னை",
+      "nameHi": "चेन्नई",
+      "state": "tamil-nadu",
+      "lat": 13.0801,
+      "lng": 80.2808,
+      "osm": "relation/1766358"
+    },
+    {
+      "slug": "madurai",
+      "name": "Madurai",
+      "nameTa": "மதுரை",
+      "nameHi": "मदुरै",
+      "state": "tamil-nadu",
+      "lat": 9.9261,
+      "lng": 78.1141,
+      "osm": "relation/11268397"
+    },
+    {
+      "slug": "coimbatore",
+      "name": "Coimbatore",
+      "nameTa": "கோயம்புத்தூர்",
+      "nameHi": "कोयंबटूर",
+      "state": "tamil-nadu",
+      "lat": 11.0018,
+      "lng": 76.9628,
+      "osm": "node/245589078"
+    },
+    {
+      "slug": "salem",
+      "name": "Salem",
+      "nameTa": "சேலம்",
+      "nameHi": "सेलम",
+      "state": "tamil-nadu",
+      "lat": 11.6552,
+      "lng": 78.1582,
+      "osm": "node/3780703409"
+    },
+    {
+      "slug": "tiruchirappalli",
+      "name": "Tiruchirappalli",
+      "nameTa": "திருச்சிராப்பள்ளி",
+      "nameHi": "तिरुचिरापल्ली",
+      "state": "tamil-nadu",
+      "lat": 10.8071,
+      "lng": 78.6881,
+      "osm": "relation/10318360"
+    },
+    {
+      "slug": "tirunelveli",
+      "name": "Tirunelveli",
+      "nameTa": "திருநெல்வேலி",
+      "nameHi": "तिरुनेलवेली",
+      "state": "tamil-nadu",
+      "lat": 8.7332,
+      "lng": 77.7103,
+      "osm": "node/245581857"
+    },
+    {
+      "slug": "vellore",
+      "name": "Vellore",
+      "nameTa": "வேலூர்",
+      "nameHi": "वेल्लोर",
+      "state": "tamil-nadu",
+      "lat": 12.9072,
+      "lng": 79.131,
+      "osm": "node/243713144"
+    },
+    {
+      "slug": "erode",
+      "name": "Erode",
+      "nameTa": "ஈரோடு",
+      "nameHi": "ईरोड",
+      "state": "tamil-nadu",
+      "lat": 11.3306,
+      "lng": 77.7277,
+      "osm": "node/314626472"
+    },
+    {
+      "slug": "thanjavur",
+      "name": "Thanjavur",
+      "nameTa": "தஞ்சாவூர்",
+      "nameHi": "तंजावुर",
+      "state": "tamil-nadu",
+      "lat": 10.786,
+      "lng": 79.1381,
+      "osm": "node/245587589"
+    },
+    {
+      "slug": "thoothukudi",
+      "name": "Thoothukudi",
+      "nameTa": "தூத்துக்குடி",
+      "nameHi": "तूतुकुडी",
+      "state": "tamil-nadu",
+      "lat": 8.8053,
+      "lng": 78.1453,
+      "osm": "node/5443775116"
+    },
+    {
+      "slug": "kanyakumari",
+      "name": "Kanyakumari",
+      "nameTa": "கன்னியாகுமரி",
+      "nameHi": "कन्याकुमारी",
+      "state": "tamil-nadu",
+      "lat": 8.0793,
+      "lng": 77.5499,
+      "osm": "node/353039871"
+    },
+    {
+      "slug": "nagercoil",
+      "name": "Nagercoil",
+      "nameTa": "நாகர்கோவில்",
+      "nameHi": "नागरकोइल",
+      "state": "tamil-nadu",
+      "lat": 8.184,
+      "lng": 77.4315,
+      "osm": "node/245580128"
+    },
+    {
+      "slug": "hosur",
+      "name": "Hosur",
+      "nameTa": "ஓசூர்",
+      "nameHi": "होसुर",
+      "state": "tamil-nadu",
+      "lat": 12.7329,
+      "lng": 77.8309,
+      "osm": "node/983364958"
+    },
+    {
+      "slug": "tiruppur",
+      "name": "Tiruppur",
+      "nameTa": "திருப்பூர்",
+      "nameHi": "तिरुप्पुर",
+      "state": "tamil-nadu",
+      "lat": 11.1018,
+      "lng": 77.3452,
+      "osm": "node/4437851490"
+    },
+    {
+      "slug": "dindigul",
+      "name": "Dindigul",
+      "nameTa": "திண்டுக்கல்",
+      "nameHi": "डिंडीगुल",
+      "state": "tamil-nadu",
+      "lat": 10.3656,
+      "lng": 77.9693,
+      "osm": "node/245586375"
+    },
+    {
+      "slug": "kanchipuram",
+      "name": "Kanchipuram",
+      "nameTa": "காஞ்சிபுரம்",
+      "nameHi": "कांचीपुरम",
+      "state": "tamil-nadu",
+      "lat": 12.8364,
+      "lng": 79.7053,
+      "osm": "node/256777854"
+    },
+    {
+      "slug": "cuddalore",
+      "name": "Cuddalore",
+      "nameTa": "கடலூர்",
+      "nameHi": "कडलूर",
+      "state": "tamil-nadu",
+      "lat": 11.7427,
+      "lng": 79.7503,
+      "osm": "way/164051966"
+    },
+    {
+      "slug": "karur",
+      "name": "Karur",
+      "nameTa": "கரூர்",
+      "nameHi": "करूर",
+      "state": "tamil-nadu",
+      "lat": 10.9596,
+      "lng": 78.0808,
+      "osm": "way/82623598"
+    },
+    {
+      "slug": "nagapattinam",
+      "name": "Nagapattinam",
+      "nameTa": "நாகப்பட்டினம்",
+      "nameHi": "नागपट्टिनम",
+      "state": "tamil-nadu",
+      "lat": 10.7648,
+      "lng": 79.8431,
+      "osm": "node/891394162"
+    },
+    {
+      "slug": "kumbakonam",
+      "name": "Kumbakonam",
+      "nameTa": "கும்பகோணம்",
+      "nameHi": "कुंभकोणम",
+      "state": "tamil-nadu",
+      "lat": 10.9604,
+      "lng": 79.3821,
+      "osm": "node/245588875"
+    },
+    {
+      "slug": "villupuram",
+      "name": "Viluppuram",
+      "nameTa": "விழுப்புரம்",
+      "nameHi": "विलुप्पुरम",
+      "state": "tamil-nadu",
+      "lat": 11.9426,
+      "lng": 79.4951,
+      "osm": "node/353162390"
+    },
+    {
+      "slug": "ooty",
+      "name": "Udhagamandalam (Ooty)",
+      "nameTa": "உதகமண்டலம் (ஊட்டி)",
+      "nameHi": "उदगमंडलम (ऊटी)",
+      "state": "tamil-nadu",
+      "lat": 11.4127,
+      "lng": 76.7031,
+      "osm": "node/245592179"
+    },
+    {
+      "slug": "puducherry",
+      "name": "Puducherry",
+      "nameTa": "புதுச்சேரி",
+      "nameHi": "पुडुचेरी",
+      "state": "puducherry",
+      "lat": 11.9341,
+      "lng": 79.8306,
+      "osm": "node/245600130"
+    },
+    {
+      "slug": "thiruvananthapuram",
+      "name": "Thiruvananthapuram",
+      "nameTa": "திருவனந்தபுரம்",
+      "nameHi": "तिरुवनंतपुरम",
+      "state": "kerala",
+      "lat": 8.4882,
+      "lng": 76.9476,
+      "osm": "node/245581432"
+    },
+    {
+      "slug": "kochi",
+      "name": "Kochi",
+      "nameTa": "கொச்சி",
+      "nameHi": "कोच्चि",
+      "state": "kerala",
+      "lat": 9.9679,
+      "lng": 76.2444,
+      "osm": "node/3862624198"
+    },
+    {
+      "slug": "kozhikode",
+      "name": "Kozhikode",
+      "nameTa": "கோழிக்கோடு",
+      "nameHi": "कोझिकोड",
+      "state": "kerala",
+      "lat": 11.2451,
+      "lng": 75.7755,
+      "osm": "node/1348192542"
+    },
+    {
+      "slug": "bengaluru",
+      "name": "Bengaluru",
+      "nameTa": "பெங்களூரு",
+      "nameHi": "बेंगलुरु",
+      "state": "karnataka",
+      "lat": 12.9768,
+      "lng": 77.5901,
+      "osm": "relation/7902476"
+    },
+    {
+      "slug": "mysuru",
+      "name": "Mysuru",
+      "nameTa": "மைசூரு",
+      "nameHi": "मैसूरु",
+      "state": "karnataka",
+      "lat": 12.3052,
+      "lng": 76.6554,
+      "osm": "node/2068274800"
+    },
+    {
+      "slug": "mangaluru",
+      "name": "Mangaluru",
+      "nameTa": "மங்களூரு",
+      "nameHi": "मंगलुरु",
+      "state": "karnataka",
+      "lat": 12.8698,
+      "lng": 74.843,
+      "osm": "node/245612641"
+    },
+    {
+      "slug": "amaravati",
+      "name": "Amaravati",
+      "nameTa": "அமராவதி",
+      "nameHi": "अमरावती",
+      "state": "andhra-pradesh",
+      "lat": 16.5097,
+      "lng": 80.5185,
+      "osm": "node/8434044218"
+    },
+    {
+      "slug": "visakhapatnam",
+      "name": "Visakhapatnam",
+      "nameTa": "விசாகப்பட்டினம்",
+      "nameHi": "विशाखापत्तनम",
+      "state": "andhra-pradesh",
+      "lat": 17.6936,
+      "lng": 83.2921,
+      "osm": "node/245641840"
+    },
+    {
+      "slug": "vijayawada",
+      "name": "Vijayawada",
+      "nameTa": "விஜயவாடா",
+      "nameHi": "विजयवाड़ा",
+      "state": "andhra-pradesh",
+      "lat": 16.5115,
+      "lng": 80.616,
+      "osm": "node/1880441437"
+    },
+    {
+      "slug": "tirupati",
+      "name": "Tirupati",
+      "nameTa": "திருப்பதி",
+      "nameHi": "तिरुपति",
+      "state": "andhra-pradesh",
+      "lat": 13.6316,
+      "lng": 79.4232,
+      "osm": "node/335868152"
+    },
+    {
+      "slug": "nellore",
+      "name": "Nellore",
+      "nameTa": "நெல்லூர்",
+      "nameHi": "नेल्लोर",
+      "state": "andhra-pradesh",
+      "lat": 14.4494,
+      "lng": 79.9874,
+      "osm": "node/1598973198"
+    },
+    {
+      "slug": "hyderabad",
+      "name": "Hyderabad",
+      "nameTa": "ஹைதராபாத்",
+      "nameHi": "हैदराबाद",
+      "state": "telangana",
+      "lat": 17.3606,
+      "lng": 78.4741,
+      "osm": "relation/7868535"
+    },
+    {
+      "slug": "mumbai",
+      "name": "Mumbai",
+      "nameTa": "மும்பை",
+      "nameHi": "मुंबई",
+      "state": "maharashtra",
+      "lat": 19.055,
+      "lng": 72.8692,
+      "osm": "node/16173235"
+    },
+    {
+      "slug": "pune",
+      "name": "Pune",
+      "nameTa": "புனே",
+      "nameHi": "पुणे",
+      "state": "maharashtra",
+      "lat": 18.5214,
+      "lng": 73.8545,
+      "osm": "node/16174445"
+    },
+    {
+      "slug": "nagpur",
+      "name": "Nagpur",
+      "nameTa": "நாக்பூர்",
+      "nameHi": "नागपुर",
+      "state": "maharashtra",
+      "lat": 21.1498,
+      "lng": 79.0821,
+      "osm": "relation/12969115"
+    },
+    {
+      "slug": "panaji",
+      "name": "Panaji",
+      "nameTa": "பனாஜி",
+      "nameHi": "पणजी",
+      "state": "goa",
+      "lat": 15.499,
+      "lng": 73.8282,
+      "osm": "relation/21793032"
+    },
+    {
+      "slug": "gandhinagar",
+      "name": "Gandhinagar",
+      "nameTa": "காந்திநகர்",
+      "nameHi": "गांधीनगर",
+      "state": "gujarat",
+      "lat": 23.2233,
+      "lng": 72.6492,
+      "osm": "way/1104668864"
+    },
+    {
+      "slug": "ahmedabad",
+      "name": "Ahmedabad",
+      "nameTa": "அகமதாபாத்",
+      "nameHi": "अहमदाबाद",
+      "state": "gujarat",
+      "lat": 23.0215,
+      "lng": 72.5801,
+      "osm": "node/245711197"
+    },
+    {
+      "slug": "jaipur",
+      "name": "Jaipur",
+      "nameTa": "ஜெய்ப்பூர்",
+      "nameHi": "जयपुर",
+      "state": "rajasthan",
+      "lat": 26.9155,
+      "lng": 75.819,
+      "osm": "node/315734346"
+    },
+    {
+      "slug": "bhopal",
+      "name": "Bhopal",
+      "nameTa": "போபால்",
+      "nameHi": "भोपाल",
+      "state": "madhya-pradesh",
+      "lat": 23.2585,
+      "lng": 77.402,
+      "osm": "node/245712627"
+    },
+    {
+      "slug": "indore",
+      "name": "Indore",
+      "nameTa": "இந்தூர்",
+      "nameHi": "इंदौर",
+      "state": "madhya-pradesh",
+      "lat": 22.7204,
+      "lng": 75.8682,
+      "osm": "node/245709027"
+    },
+    {
+      "slug": "raipur",
+      "name": "Raipur",
+      "nameTa": "ராய்ப்பூர்",
+      "nameHi": "रायपुर",
+      "state": "chhattisgarh",
+      "lat": 21.2381,
+      "lng": 81.6337,
+      "osm": "node/5308437250"
+    },
+    {
+      "slug": "bhubaneswar",
+      "name": "Bhubaneswar",
+      "nameTa": "புவனேஸ்வர்",
+      "nameHi": "भुवनेश्वर",
+      "state": "odisha",
+      "lat": 20.2603,
+      "lng": 85.8395,
+      "osm": "node/1051669585"
+    },
+    {
+      "slug": "kolkata",
+      "name": "Kolkata",
+      "nameTa": "கொல்கத்தா",
+      "nameHi": "कोलकाता",
+      "state": "west-bengal",
+      "lat": 22.5726,
+      "lng": 88.3639,
+      "osm": "relation/9381363"
+    },
+    {
+      "slug": "patna",
+      "name": "Patna",
+      "nameTa": "பாட்னா",
+      "nameHi": "पटना",
+      "state": "bihar",
+      "lat": 25.6093,
+      "lng": 85.1235,
+      "osm": "relation/21860173"
+    },
+    {
+      "slug": "ranchi",
+      "name": "Ranchi",
+      "nameTa": "ராஞ்சி",
+      "nameHi": "रांची",
+      "state": "jharkhand",
+      "lat": 23.3701,
+      "lng": 85.325,
+      "osm": "node/2510123017"
+    },
+    {
+      "slug": "lucknow",
+      "name": "Lucknow",
+      "nameTa": "லக்னோ",
+      "nameHi": "लखनऊ",
+      "state": "uttar-pradesh",
+      "lat": 26.8381,
+      "lng": 80.9346,
+      "osm": "node/245753718"
+    },
+    {
+      "slug": "kanpur",
+      "name": "Kanpur",
+      "nameTa": "கான்பூர்",
+      "nameHi": "कानपुर",
+      "state": "uttar-pradesh",
+      "lat": 26.4609,
+      "lng": 80.3218,
+      "osm": "node/1180652177"
+    },
+    {
+      "slug": "varanasi",
+      "name": "Varanasi",
+      "nameTa": "வாரணாசி",
+      "nameHi": "वाराणसी",
+      "state": "uttar-pradesh",
+      "lat": 25.3356,
+      "lng": 83.0076,
+      "osm": "node/287687798"
+    },
+    {
+      "slug": "dehradun",
+      "name": "Dehradun",
+      "nameTa": "டேராடூன்",
+      "nameHi": "देहरादून",
+      "state": "uttarakhand",
+      "lat": 30.3256,
+      "lng": 78.0437,
+      "osm": "node/299531301"
+    },
+    {
+      "slug": "shimla",
+      "name": "Shimla",
+      "nameTa": "சிம்லா",
+      "nameHi": "शिमला",
+      "state": "himachal-pradesh",
+      "lat": 31.104,
+      "lng": 77.1708,
+      "osm": "node/316417040"
+    },
+    {
+      "slug": "chandigarh",
+      "name": "Chandigarh",
+      "nameTa": "சண்டிகர்",
+      "nameHi": "चंडीगढ़",
+      "state": "chandigarh",
+      "lat": 30.7334,
+      "lng": 76.7797,
+      "osm": "node/342117043"
+    },
+    {
+      "slug": "new-delhi",
+      "name": "New Delhi",
+      "nameTa": "புது தில்லி",
+      "nameHi": "नई दिल्ली",
+      "state": "delhi",
+      "lat": 28.6139,
+      "lng": 77.209,
+      "osm": "relation/21180662"
+    },
+    {
+      "slug": "srinagar",
+      "name": "Srinagar",
+      "nameTa": "ஸ்ரீநகர்",
+      "nameHi": "श्रीनगर",
+      "state": "jammu-kashmir",
+      "lat": 34.0747,
+      "lng": 74.8204,
+      "osm": "node/273658993"
+    },
+    {
+      "slug": "jammu",
+      "name": "Jammu",
+      "nameTa": "ஜம்மு",
+      "nameHi": "जम्मू",
+      "state": "jammu-kashmir",
+      "lat": 32.7186,
+      "lng": 74.8581,
+      "osm": "node/1685767121"
+    },
+    {
+      "slug": "leh",
+      "name": "Leh",
+      "nameTa": "லே",
+      "nameHi": "लेह",
+      "state": "ladakh",
+      "lat": 34.1642,
+      "lng": 77.5848,
+      "osm": "node/245774579"
+    },
+    {
+      "slug": "guwahati",
+      "name": "Guwahati",
+      "nameTa": "குவாஹாட்டி",
+      "nameHi": "गुवाहाटी",
+      "state": "assam",
+      "lat": 26.1806,
+      "lng": 91.7539,
+      "osm": "node/566672802"
+    },
+    {
+      "slug": "itanagar",
+      "name": "Itanagar",
+      "nameTa": "இட்டாநகர்",
+      "nameHi": "ईटानगर",
+      "state": "arunachal-pradesh",
+      "lat": 27.098,
+      "lng": 93.6237,
+      "osm": "node/245756095"
+    },
+    {
+      "slug": "imphal",
+      "name": "Imphal",
+      "nameTa": "இம்பால்",
+      "nameHi": "इंफाल",
+      "state": "manipur",
+      "lat": 24.7991,
+      "lng": 93.9364,
+      "osm": "node/569040820"
+    },
+    {
+      "slug": "shillong",
+      "name": "Shillong",
+      "nameTa": "ஷில்லாங்",
+      "nameHi": "शिलांग",
+      "state": "meghalaya",
+      "lat": 25.576,
+      "lng": 91.8828,
+      "osm": "node/245735780"
+    },
+    {
+      "slug": "aizawl",
+      "name": "Aizawl",
+      "nameTa": "ஐசால்",
+      "nameHi": "आइज़ोल",
+      "state": "mizoram",
+      "lat": 23.7278,
+      "lng": 92.718,
+      "osm": "node/245716231"
+    },
+    {
+      "slug": "kohima",
+      "name": "Kohima",
+      "nameTa": "கோஹிமா",
+      "nameHi": "कोहिमा",
+      "state": "nagaland",
+      "lat": 25.6619,
+      "lng": 94.1019,
+      "osm": "node/3613137018"
+    },
+    {
+      "slug": "gangtok",
+      "name": "Gangtok",
+      "nameTa": "கேங்டாக்",
+      "nameHi": "गंगटोक",
+      "state": "sikkim",
+      "lat": 27.329,
+      "lng": 88.6123,
+      "osm": "node/342097621"
+    },
+    {
+      "slug": "agartala",
+      "name": "Agartala",
+      "nameTa": "அகர்தலா",
+      "nameHi": "अगरतला",
+      "state": "tripura",
+      "lat": 23.8312,
+      "lng": 91.2824,
+      "osm": "node/245717374"
+    },
+    {
+      "slug": "sri-vijaya-puram",
+      "name": "Sri Vijaya Puram (Port Blair)",
+      "nameTa": "ஸ்ரீ விஜயபுரம் (போர்ட் பிளேர்)",
+      "nameHi": "श्री विजयपुरम (पोर्ट ब्लेयर)",
+      "state": "andaman-nicobar",
+      "lat": 11.6645,
+      "lng": 92.739,
+      "osm": "node/293673885"
+    },
+    {
+      "slug": "kavaratti",
+      "name": "Kavaratti",
+      "nameTa": "கவரத்தி",
+      "nameHi": "कवरत्ती",
+      "state": "lakshadweep",
+      "lat": 10.5672,
+      "lng": 72.6395,
+      "osm": "node/3995066055"
+    },
+    {
+      "slug": "daman",
+      "name": "Daman",
+      "nameTa": "டாமன்",
+      "nameHi": "दमन",
+      "state": "dnh-dd",
+      "lat": 20.417,
+      "lng": 72.8332,
+      "osm": "node/3148784714"
+    }
+  ]
+}

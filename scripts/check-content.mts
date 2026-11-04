@@ -96,6 +96,23 @@ for (const c of arr(files.campuses.campuses) as Obj[]) {
 for (const cl of arr(files.campuses.clusters) as Obj[])
   for (const m of arr(cl.members)) if (!campusSlugs.has(m)) fail(`campuses.json cluster ${cl.id}`, `unknown member "${m}"`);
 
+// ── Cities for "How far is SRM from home?": real coordinates, inside the drawn map ──
+{
+  const cities = load("map/cities.json");
+  const proj = load("map/projection.json") as Record<string, number>;
+  const maxLng = proj.minLng! + proj.width! / (proj.k! * proj.scale!);
+  const minLat = proj.maxLat! - proj.height! / proj.scale!;
+  const stateSlugs = new Set(arr(cities.states).map((s) => (s as Obj).slug));
+  uniqueSlugs("map/cities.json", arr(cities.cities));
+  for (const c of arr(cities.cities) as Obj[]) {
+    const where = `map/cities.json ${c.slug}`;
+    if (!isNum(c.lat) || !isNum(c.lng)) fail(where, "lat/lng must be numbers");
+    else if (c.lng < proj.minLng! || c.lng > maxLng || c.lat > proj.maxLat! || c.lat < minLat) fail(where, "outside the map's bounds (projection.json)");
+    if (!stateSlugs.has(c.state)) fail(where, `unknown state "${c.state}"`);
+    if (!isStr(c.nameTa) || !isStr(c.nameHi)) fail(where, "nameTa and nameHi are required");
+  }
+}
+
 // ── Stories / events ──
 uniqueSlugs("stories.json", arr(files.stories.stories));
 if (!storySlugs.has(files.stories.featured)) fail("stories.json", `featured "${files.stories.featured}" not found`);
