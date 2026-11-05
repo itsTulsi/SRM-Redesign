@@ -122,7 +122,7 @@ export default function AssistantPanel({
                 ) : (
                   <div className="flex max-w-[95%] flex-col gap-2 rounded-2xl rounded-bl-sm border border-line-subtle px-4 py-3">
                     {m.reply.blocks.map((b, i) => (
-                      <BlockView key={i} block={b} sourceLabel={t("source")} />
+                      <BlockView key={i} block={b} sourceLabel={t("source")} aiLabel={t("aiNote")} />
                     ))}
                   </div>
                 )}
@@ -177,11 +177,18 @@ export default function AssistantPanel({
   );
 }
 
-function BlockView({ block, sourceLabel }: { block: Block; sourceLabel: string }) {
+function BlockView({ block, sourceLabel, aiLabel }: { block: Block; sourceLabel: string; aiLabel: string }) {
   const linkClass = "inline-flex min-h-11 items-center font-semibold underline underline-offset-4";
   switch (block.type) {
     case "text":
-      return <p>{block.text}</p>;
+      return block.ai ? (
+        <div>
+          <p>{block.text}</p>
+          <p className="mt-1 text-xs text-fg-muted">{aiLabel}</p>
+        </div>
+      ) : (
+        <p>{block.text}</p>
+      );
     case "facts":
       return (
         <div>

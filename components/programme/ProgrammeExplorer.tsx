@@ -1,10 +1,12 @@
 "use client";
 
 import type Fuse from "fuse.js";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
 import { Crest } from "@/components/grail/Crest";
 import { CompareToggle } from "@/components/programme/CompareToggle";
 import { Link } from "@/lib/i18n";
+import { parseCompare, readCompareSnapshot, serverCompareSnapshot, subscribeCompare } from "@/lib/compare";
+import { recommend } from "@/lib/recommend";
 import { programmeTitleName } from "@/lib/view-transition";
 
 export type ExplorerCard = {
@@ -31,6 +33,9 @@ type Strings = {
   none: string;
   clear: string;
   view: string;
+  suggested: string;
+  suggestedWhy: string;
+  because: string;
 };
 type Level = "all" | "UG" | "PG";
 
@@ -45,6 +50,22 @@ export function ProgrammeExplorer({ cards, colleges, strings }: { cards: Explore
   const [college, setCollege] = useState<string | null>(null);
   const [hits, setHits] = useState<Set<string> | null>(null);
   const fuse = useRef<Fuse<ExplorerCard> | null>(null);
+
+  // "Suggested for you": similar to what you pinned or opened. Both lists live only on this device.
+  const pinned = parseCompare(useSyncExternalStore(subscribeCompare, readCompareSnapshot, serverCompareSnapshot));
+  const [viewed, setViewed] = useState<string[]>([]);
+  useEffect(() => {
+    try {
+      setViewed(JSON.parse(localStorage.getItem("srm-viewed") ?? "[]"));
+    } catch {
+      setViewed([]);
+    }
+  }, []);
+  const suggestions = useMemo(() => {
+    const seedSlugs = new Set([...pinned, ...viewed]);
+    const seeds = cards.filter((c) => seedSlugs.has(c.slug));
+    return seeds.length ? recommend(cards, seeds, 3) : [];
+  }, [cards, pinned, viewed]);
 
   // Searching is client-only; the server render shows everything.
   useEffect(() => {
@@ -200,6 +221,25 @@ export function ProgrammeExplorer({ cards, colleges, strings }: { cards: Explore
           ) : null}
         </p>
       </div>
+
+      {suggestions.length && !filtering ? (
+        <section aria-labelledby="suggested-h" className="mt-8 rounded-[28px] bg-[#000] p-6 text-[#fff]">
+          <h3 id="suggested-h" className="grail-num text-3xl uppercase">
+            {strings.suggested}
+          </h3>
+          <p className="mt-1 text-sm text-[#b8b8b8]">{strings.suggestedWhy}</p>
+          <ul className="mt-5 grid gap-3 md:grid-cols-3">
+            {suggestions.map(({ item, because }) => (
+              <li key={item.slug}>
+                <Link href={`/programmes/${item.slug}`} className="flex h-full flex-col gap-1 rounded-2xl border border-white/20 p-4 text-[#fff] no-underline hover:border-white">
+                  <span className="font-semibold">{item.name}</span>
+                  <span className="text-xs text-[#ecd2f3]">{strings.because.replace("{tags}", because.join(", "))}</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ) : null}
 
       <div className="mt-8 flex flex-col gap-16">
         {section("UG", "level-ug", strings.ug)}

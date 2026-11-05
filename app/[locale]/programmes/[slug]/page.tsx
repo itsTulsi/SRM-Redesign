@@ -3,6 +3,8 @@ import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { StatFigure } from "@/components/acts/StatFigure";
 import { Crest, ghostPill, GrailChapter, GrailHero, GrailPage, GrailStart } from "@/components/grail/GrailPage";
+import { RecordView } from "@/components/programme/RecordView";
+import { recommend } from "@/lib/recommend";
 import { SectionNav } from "@/components/grail/SectionNav";
 import { AskSenior, type SeniorThread } from "@/components/programme/AskSenior";
 import { CompareToggle } from "@/components/programme/CompareToggle";
@@ -49,7 +51,10 @@ export default async function ProgrammePage({ params }: Params) {
   const pt = await getTranslations("Parent");
   const college = getCollege(p.college);
   const campusList = p.campuses.map((c) => getCampus(c)!).filter(Boolean);
-  const related = all.filter((x) => x.college === p.college && x.slug !== p.slug);
+  // "Programmes like this": matched on shared topics across colleges (free, on the server, nothing tracked).
+  const recs = recommend(all, [p], 3);
+  const related = recs.map((r) => r.item);
+  const becauseOf = new Map(recs.map((r) => [r.item.slug, r.because]));
   const threads: SeniorThread[] = seniorsByCollege[p.college] ?? seniorsByCollege.default ?? [];
   const phones = site.admissions.phones.slice(0, 2);
   const level = p.level === "UG" ? t("ug") : t("pg");
@@ -112,6 +117,7 @@ export default async function ProgrammePage({ params }: Params) {
     <GrailPage>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
+      <RecordView slug={p.slug} />
       <GrailHero
         kicker={`${college?.name ?? ""} · ${level}${duration ? ` · ${duration}` : ""}`}
         title={p.name}
@@ -292,7 +298,7 @@ export default async function ProgrammePage({ params }: Params) {
             {p.sources.map((s, i) => (
               <span key={s}>
                 {i > 0 ? " · " : ""}
-                <a href={s}>{new URL(s).hostname.replace(/^www\./, "")}</a>
+                <a href={s} className="inline-flex min-h-11 items-center">{new URL(s).hostname.replace(/^www\./, "")}</a>
               </span>
             ))}
           </p>
@@ -334,7 +340,7 @@ export default async function ProgrammePage({ params }: Params) {
         </div>
 
         {related.length ? (
-          <GrailChapter id="related" className="scroll-mt-32" kicker={college?.shortName ?? ""} level={5} title={t("related", { college: college?.shortName ?? "" })} titleId="related-title" size="text-[clamp(2rem,5vw,4.5rem)]">
+          <GrailChapter id="related" className="scroll-mt-32" kicker={college?.shortName ?? ""} level={5} title={f("similar")} titleId="related-title" intro={<p>{f("similarWhy")}</p>} size="text-[clamp(2rem,5vw,4.5rem)]">
             <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {related.map((r) => (
                 <li key={r.slug}>
@@ -343,6 +349,7 @@ export default async function ProgrammePage({ params }: Params) {
                       {r.name}
                     </span>
                     <span className="text-sm text-fg-muted">{r.summary}</span>
+                    <span className="mt-2 text-xs font-semibold text-tree">{f("because", { tags: (becauseOf.get(r.slug) ?? []).join(", ") })}</span>
                   </Link>
                 </li>
               ))}

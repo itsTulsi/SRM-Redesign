@@ -89,6 +89,9 @@ export default async function ProgrammesPage({ params }: Params) {
             none: f("none"),
             clear: f("clear"),
             view: f("view"),
+            suggested: f("suggested"),
+            suggestedWhy: f("suggestedWhy"),
+            because: f.raw("because") as string,
           }}
         />
       </GrailChapter>

@@ -10,6 +10,7 @@ import {
   type Campus,
   type Programme,
 } from "./content";
+import { askLLM, llmEnabled } from "./llm";
 import { directionsUrl } from "./map";
 import { loadSearcher, tokenize, toSearchDocs, type Searcher } from "./search";
 
@@ -21,7 +22,7 @@ import { loadSearcher, tokenize, toSearchDocs, type Searcher } from "./search";
  */
 
 export type Block =
-  | { type: "text"; text: string }
+  | { type: "text"; text: string; ai?: boolean }
   | { type: "facts"; title?: string; rows: { label: string; value: string }[]; source?: string }
   | { type: "links"; links: { label: string; href: string; external?: boolean }[] }
   | { type: "programmes"; items: { slug: string; name: string; meta: string; href: string }[] }
@@ -307,6 +308,28 @@ export async function reply(query: string, t: Translate, locale: string): Promis
         blocks.push({ type: "text", text: t("programmeMatches") }, { type: "programmes", items });
         suggest.add(t("sFeesFor", { name: items[0]!.name.split(" — ")[0]! }));
       }
+    }
+  }
+
+  // Nothing the rules could answer. If a free AI endpoint is configured, let it answer from the closest verified
+  // records only; otherwise (or if it declines) hand over to a person.
+  if (!blocks.length && llmEnabled()) {
+    searcherPromise ??= loadSearcher(docs);
+    const hits = (await searcherPromise)(query, 4).map((d) => programmes.find((p) => p.slug === d.slug)!);
+    const known = (v: unknown) => (typeof v === "number" || (typeof v === "string" && !isTodo(v)) ? String(v) : "not published");
+    const context = hits
+      .map((p) => `- ${p.name} (${p.level}, ${known(p.durationYears)} years): ${p.summary} Fees per year (INR): ${known(p.feesPerYearINR)}. Eligibility: ${known(p.eligibility)}. Deadline: ${known(p.deadline)}.`)
+      .join("\n");
+    const text = await askLLM(
+      `You are the Ask SRM assistant for SRM Institute of Science and Technology. Answer in the language of the question, in at most 3 short sentences, using ONLY the records below. Never invent fees, dates, eligibility or rankings. If the records do not answer the question, reply exactly: UNSURE.\nRecords:\n${context}`,
+      query,
+    );
+    if (text && !/^UNSURE\b/i.test(text)) {
+      blocks.push({ type: "text", text, ai: true });
+      blocks.push({
+        type: "programmes",
+        items: hits.slice(0, 3).map((p) => ({ slug: p.slug, name: p.name, meta: `${colleges.find((c) => c.slug === p.college)?.shortName ?? ""} · ${p.level}`, href: `${prefix}/programmes/${p.slug}` })),
+      });
     }
   }
 

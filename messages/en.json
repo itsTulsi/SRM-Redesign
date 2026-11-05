@@ -105,7 +105,12 @@
       "glance": "At a glance",
       "onPage": "On this page",
       "placements": "Placements",
-      "related": "More like this"
+      "related": "More like this",
+      "suggested": "Suggested for you",
+      "suggestedWhy": "Based on programmes you pinned or opened. Stays on this device.",
+      "because": "Shares: {tags}",
+      "similar": "Programmes like this",
+      "similarWhy": "Matched on shared topics across colleges"
     }
   },
   "Hero": {
@@ -455,7 +460,8 @@
     "sApply": "How do I apply?",
     "sRanking": "NIRF ranking",
     "sHostel": "Is there a hostel?",
-    "offline": "You're offline, so I can't look that up. Call admissions:"
+    "offline": "You're offline, so I can't look that up. Call admissions:",
+    "aiNote": "AI-written from SRM's published records. Check with admissions before you rely on it."
   },
   "Hostels": {
     "metaTitle": "Hostels & housing",

@@ -316,7 +316,7 @@ export async function GrailHome() {
             ))}
           </ul>
           <p className="mt-8 text-sm">
-            <a href={nirf.source} className="font-semibold text-black underline underline-offset-4">
+            <a href={nirf.source} className="inline-flex min-h-11 items-center font-semibold text-black underline underline-offset-4">
               {t("proof.source", { year: nirf.year })}
             </a>
           </p>
