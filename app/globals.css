@@ -1354,6 +1354,55 @@ html:has([data-grail]) {
 [data-grail-page] .grail-lilac {
   --bg: #e7afe7;
 }
+/* Programme finder: a frosted filter bar that sticks under the header, and cards that arrive in a quick stagger
+   (they also animate in when a filter brings them back). */
+.grail-filterbar {
+  background: rgb(245 245 245 / 0.86);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid #e2e2e2;
+}
+@media (prefers-reduced-motion: no-preference) {
+  [data-motion="full"] .grail-card-in {
+    animation: grail-card-in 0.55s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+    animation-delay: calc(var(--i, 0) * 45ms);
+  }
+}
+@keyframes grail-card-in {
+  from {
+    opacity: 0;
+    translate: 0 18px;
+    scale: 0.98;
+  }
+}
+/* Paper cards on inner pages rise into place as they scroll in (scroll-driven, no JavaScript). Uses translate and
+   opacity, not transform, so the hover tilt still works. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    [data-motion="full"] [data-grail-page] .grail-paper:not(.grail-card-in) {
+      animation: grail-paper-rise linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 55%;
+    }
+  }
+}
+@keyframes grail-paper-rise {
+  from {
+    opacity: 0;
+    translate: 0 40px;
+  }
+}
+/* The floating chapter nav on long pages (SectionNav): a dark frosted pill that sticks under the header. */
+.grail-sectionnav {
+  padding: 10px 16px;
+  pointer-events: none;
+}
+.grail-sectionnav ul {
+  pointer-events: auto;
+  background: rgb(10 10 10 / 0.82);
+  border: 1px solid rgb(255 255 255 / 0.14);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 12px 30px -12px rgb(0 0 0 / 0.6);
+}
 /* Section heads and big numbers inside existing components take the display serif. */
 [data-grail-page] :is(h2, h3).font-display,
 .grail-num {

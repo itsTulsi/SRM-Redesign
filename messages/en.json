@@ -89,7 +89,24 @@
     "collegesHere": "Colleges on this campus",
     "backHome": "Back to home",
     "findUs": "Find us",
-    "address": "Address"
+    "address": "Address",
+    "finder": {
+      "search": "Search programmes",
+      "placeholder": "Try: robots, law, doctor, design…",
+      "all": "All",
+      "ug": "Undergraduate",
+      "pg": "Postgraduate",
+      "colleges": "Colleges",
+      "showing": "Showing {n} of {total}",
+      "none": "Nothing matches yet. Try another word, or clear the filters.",
+      "clear": "Clear filters",
+      "perYear": "₹{amount} a year",
+      "view": "View programme",
+      "glance": "At a glance",
+      "onPage": "On this page",
+      "placements": "Placements",
+      "related": "More like this"
+    }
   },
   "Hero": {
     "title": "What do you want to become?",

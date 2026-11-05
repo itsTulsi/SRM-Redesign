@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { StatFigure } from "@/components/acts/StatFigure";
 import { Crest, ghostPill, GrailChapter, GrailHero, GrailPage, GrailStart } from "@/components/grail/GrailPage";
+import { SectionNav } from "@/components/grail/SectionNav";
 import { AskSenior, type SeniorThread } from "@/components/programme/AskSenior";
 import { CompareToggle } from "@/components/programme/CompareToggle";
 import { SaveOffline } from "@/components/ui/SaveOffline";
@@ -104,6 +105,8 @@ export default async function ProgrammePage({ params }: Params) {
   ];
 
   const g = await getTranslations("Grail");
+  const f = await getTranslations("Pages.finder");
+  const sr = await getTranslations("Senior");
 
   return (
     <GrailPage>
@@ -158,6 +161,20 @@ export default async function ProgrammePage({ params }: Params) {
           <CompareToggle slug={p.slug} name={p.name} className="rounded-full border border-[var(--line)] px-6 text-base text-[var(--fg)] hover:border-[var(--fg)]" />
           <SaveOffline />
         </div>
+        {/* At a glance: the four facts most people came for, above the fold. */}
+        <dl aria-label={f("glance")} className="mt-10 grid max-w-5xl grid-cols-2 gap-3 lg:grid-cols-4">
+          {[
+            { label: t("level"), value: level },
+            { label: t("duration"), value: duration },
+            { label: t("fees"), value: fees },
+            { label: t("campus"), value: campusList.map((c) => c.name).join(", ") },
+          ].map((r) => (
+            <div key={r.label} className="flex min-w-0 flex-col-reverse gap-1 rounded-2xl border border-white/15 bg-white/[0.04] p-4 backdrop-blur">
+              <dt className="text-xs font-semibold tracking-wide text-[var(--fg-muted)] uppercase">{r.label}</dt>
+              <dd className={r.value ? "grail-num text-[clamp(1.05rem,2.2vw,1.9rem)] break-words hyphens-auto" : "text-[var(--fg-muted)]"}>{r.value ?? t("notPublished")}</dd>
+            </div>
+          ))}
+        </dl>
         <div className="mt-8 max-w-4xl">
           <ParentModeToggle variant="banner" />
         </div>
@@ -251,7 +268,17 @@ export default async function ProgrammePage({ params }: Params) {
 
       {/* ── Student view ── */}
       <div className="student-view">
-        <GrailChapter tone="light" kicker={college?.shortName ?? ""} level={2} title={t("keyFacts")} titleId="facts-title">
+        <SectionNav
+          label={f("onPage")}
+          items={[
+            { id: "facts", label: t("keyFacts") },
+            { id: "careers", label: t("careers") },
+            { id: "placements", label: f("placements") },
+            { id: "senior", label: sr("title") },
+            ...(related.length ? [{ id: "related", label: f("related") }] : []),
+          ]}
+        />
+        <GrailChapter id="facts" className="scroll-mt-32" tone="light" kicker={college?.shortName ?? ""} level={2} title={t("keyFacts")} titleId="facts-title">
           <dl className="grid max-w-5xl gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {factRows.map((r) => (
               <div key={r.label} className="grail-paper flex flex-col gap-1 p-5">
@@ -271,7 +298,7 @@ export default async function ProgrammePage({ params }: Params) {
           </p>
         </GrailChapter>
 
-        <GrailChapter kicker={t("careers")} level={3} title={t("careers")} titleId="careers-title" intro={<p>{t("careersNote")}</p>}>
+        <GrailChapter id="careers" className="scroll-mt-32" kicker={t("careers")} level={3} title={t("careers")} titleId="careers-title" intro={<p>{t("careersNote")}</p>}>
           <ul className="flex flex-wrap gap-3">
             {p.outcomes.map((o, i) => (
               <li key={o} className="grail-paper flex items-center gap-3 rounded-full py-2 pr-5 pl-2 text-lg font-semibold">
@@ -283,6 +310,8 @@ export default async function ProgrammePage({ params }: Params) {
         </GrailChapter>
 
         <GrailChapter
+          id="placements"
+          className="scroll-mt-32"
           tone="lilac"
           kicker={g("proof.kicker")}
           level={4}
@@ -298,14 +327,14 @@ export default async function ProgrammePage({ params }: Params) {
           </dl>
         </GrailChapter>
 
-        <div data-tone="light" className="grail-sheet relative">
+        <div id="senior" data-tone="light" className="grail-sheet relative scroll-mt-32">
           <div className="site-container max-w-5xl py-16 lg:py-24">
             <AskSenior programmeSlug={p.slug} threads={threads} />
           </div>
         </div>
 
         {related.length ? (
-          <GrailChapter kicker={college?.shortName ?? ""} level={5} title={t("related", { college: college?.shortName ?? "" })} titleId="related-title" size="text-[clamp(2rem,5vw,4.5rem)]">
+          <GrailChapter id="related" className="scroll-mt-32" kicker={college?.shortName ?? ""} level={5} title={t("related", { college: college?.shortName ?? "" })} titleId="related-title" size="text-[clamp(2rem,5vw,4.5rem)]">
             <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {related.map((r) => (
                 <li key={r.slug}>
