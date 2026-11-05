@@ -1,4 +1,5 @@
 import type Fuse from "fuse.js";
+import type { Lexicon, Understood } from "./ask";
 import type { Campus, College, Programme } from "./content";
 
 /**
@@ -14,6 +15,8 @@ export type SearchDoc = {
   college: string;
   level: "UG" | "PG";
   durationYears: number | null;
+  /** null = not published; result cards say so rather than guess. */
+  feesPerYearINR: number | null;
   campuses: string[];
   tags: string[];
   summary: string;
@@ -30,6 +33,7 @@ export function toSearchDocs(programmes: Programme[], colleges: College[], campu
     college: collegeName.get(p.college) ?? p.college,
     level: p.level,
     durationYears: typeof p.durationYears === "number" ? p.durationYears : null,
+    feesPerYearINR: typeof p.feesPerYearINR === "number" ? p.feesPerYearINR : null,
     campuses: p.campuses.map((c) => campusName.get(c) ?? c),
     tags: p.tags,
     summary: p.summary,
@@ -47,6 +51,19 @@ export function tokenize(query: string): string[] {
     .toLowerCase()
     .split(/[^\p{L}\p{M}\p{N}+#]+/u)
     .filter((w) => w.length >= 2 && !STOPWORDS.has(w));
+}
+
+const norm = (s: string) => s.normalize("NFC").toLowerCase();
+
+/** The visitor's own words that a programme matched: the "why", with nothing generated. Used by the hero and /api/ask. */
+export function matchedWords(u: Understood, words: string[], tags: string[], names: string[]): string[] {
+  const lowered = names.map(norm);
+  return [
+    ...new Set([
+      ...u.terms.filter((t) => tags.includes(t.tag)).map((t) => t.said),
+      ...words.filter((w) => tags.includes(w) || (w.length >= 3 && lowered.some((n) => n.includes(w)))),
+    ]),
+  ];
 }
 
 export type Searcher = (query: string, limit?: number) => SearchDoc[];
@@ -88,4 +105,21 @@ export async function loadSearcher(docs: SearchDoc[]): Promise<Searcher> {
       .slice(0, limit)
       .map(([i]) => docs[i]!);
   };
+}
+
+export type SearchIndex = { search: Searcher; lexicon: Lexicon };
+let index: { locale: string; loading: Promise<SearchIndex> } | null = null;
+
+/** The per-language index plus Fuse, fetched once on first use and shared by the hero and the command palette. */
+export function loadSearchIndex(locale: string): Promise<SearchIndex> {
+  if (index?.locale === locale) return index.loading;
+  const loading = fetch(`/api/search-index/${locale}`)
+    .then((res) => res.json() as Promise<{ docs: SearchDoc[]; lexicon: Lexicon }>)
+    .then(async ({ docs, lexicon }) => ({ search: await loadSearcher(docs), lexicon }));
+  index = { locale, loading };
+  // A failed fetch can be retried on the next use.
+  loading.catch(() => {
+    index = null;
+  });
+  return loading;
 }

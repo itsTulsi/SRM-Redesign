@@ -3,14 +3,18 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { EnquiryForm } from "@/components/admissions/EnquiryForm";
 import { getContent } from "@/lib/content";
 import type { Locale } from "@/lib/i18n";
-import { alternatesFor } from "@/lib/page-metadata";
+import { alternatesFor, socialFor } from "@/lib/page-metadata";
 
 type Params = { params: Promise<{ locale: Locale }> };
 
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "Pages" });
-  return { title: `${t("admissionsTitle")} — SRMIST`, alternates: alternatesFor(locale, "/admissions") };
+  return {
+    title: `${t("admissionsTitle")} — SRMIST`,
+    alternates: alternatesFor(locale, "/admissions"),
+    ...socialFor(locale, { title: t("admissionsTitle"), description: t("admissionsIntro"), path: "/admissions" }),
+  };
 }
 
 export default async function AdmissionsPage({ params }: Params) {

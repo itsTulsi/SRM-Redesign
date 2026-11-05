@@ -5,14 +5,22 @@ import { useLocale, useTranslations } from "next-intl";
 import { useEffect, useId, useRef, useState } from "react";
 import type { Block, Reply } from "@/lib/assistant";
 
-type Message = { id: number; role: "user"; text: string } | { id: number; role: "bot"; reply: Reply | "pending" | "error" };
+type Message = { id: number; role: "user"; text: string } | { id: number; role: "bot"; reply: Reply | "pending" | "error" | "offline" };
 
 /**
  * The "Ask SRM" chat panel. Loaded only when the visitor opens it. Every answer comes from /api/assistant,
  * which answers from verified content only (no AI). A modal <dialog>: focus is contained, Esc closes it,
  * and the conversation is a polite live region so screen readers hear each answer.
  */
-export default function AssistantPanel({ open, onClose }: { open: boolean; onClose: () => void }) {
+export default function AssistantPanel({
+  open,
+  onClose,
+  call,
+}: {
+  open: boolean;
+  onClose: () => void;
+  call: { display: string; tel: string };
+}) {
   const t = useTranslations("Assistant");
   const locale = useLocale();
   const id = useId();
@@ -46,12 +54,13 @@ export default function AssistantPanel({ open, onClose }: { open: boolean; onClo
     const botId = nextId.current++;
     setMessages((m) => [...m, { id: userId, role: "user", text: q }, { id: botId, role: "bot", reply: "pending" }]);
     setText("");
-    let reply: Reply | "error" = "error";
+    let reply: Reply | "error" | "offline" = "error";
     try {
       const res = await fetch(`/api/assistant?q=${encodeURIComponent(q)}&locale=${locale}`);
       if (res.ok) reply = (await res.json()) as Reply;
     } catch {
-      reply = "error";
+      // Answers come from the server, so offline there's nothing to look up: say so, and offer a person instead.
+      reply = navigator.onLine ? "error" : "offline";
     }
     setMessages((m) => m.map((msg) => (msg.id === botId ? { id: botId, role: "bot", reply } : msg)));
   }
@@ -103,6 +112,13 @@ export default function AssistantPanel({ open, onClose }: { open: boolean; onClo
                   <p className="text-fg-muted">{t("thinking")}</p>
                 ) : m.reply === "error" ? (
                   <p>{t("error")}</p>
+                ) : m.reply === "offline" ? (
+                  <p>
+                    {t("offline")}{" "}
+                    <a href={`tel:${call.tel}`} className="font-semibold whitespace-nowrap">
+                      {call.display}
+                    </a>
+                  </p>
                 ) : (
                   <div className="flex max-w-[95%] flex-col gap-2 rounded-2xl rounded-bl-sm border border-line-subtle px-4 py-3">
                     {m.reply.blocks.map((b, i) => (

@@ -1,0 +1,108 @@
+{
+  "_note": "Central Research Laboratories and Facilities and Patents, from srmist.edu.in/research/ and each centre's page (read 2026-10-27). Prose is in messages/{en,ta,hi}.json under 'Centres'. Contacts are institutional (centre heads' published office details). Patent counts are tallied from SRM's own granted-patents, published-patents and technology-transfers tables, which SRM last updated with 2022 entries; the headline patent figure stays stats.json's verified 920+.",
+  "source": "https://www.srmist.edu.in/research/",
+  "heroPhoto": "media/research/nrc.jpg",
+  "dean": {
+    "name": "Dr. Bernaurdshaw Neppolian",
+    "email": "dean.research@srmist.edu.in",
+    "phone": "+91 44 2741 7142",
+    "office": "Room 910, 9th floor, Sir C. V. Raman Research Park"
+  },
+  "centres": [
+    {
+      "slug": "iiism",
+      "acronym": "IIISM",
+      "established": "2008",
+      "photo": "media/research/iiism.jpg",
+      "source": "https://www.srmist.edu.in/research/research-wings/iiism/",
+      "contact": { "name": "Dr. R. C. Satish Kumar", "role": "coordinator", "email": "dean.iiism@srmist.edu.in", "phone": "+91 44 2745 5818" }
+    },
+    {
+      "slug": "reach",
+      "acronym": "REACH",
+      "source": "https://www.srmist.edu.in/research/research-wings/reach/",
+      "contact": { "name": "Prof. Paromita Chakraborty", "role": "head", "email": "head.reach@srmist.edu.in", "phone": "+91 44 2741 7147" }
+    },
+    {
+      "slug": "nrc",
+      "acronym": "NRC",
+      "established": "2006",
+      "photo": "media/research/nrc-lab.jpg",
+      "source": "https://www.srmist.edu.in/research/research-wings/nrc/",
+      "booking": "https://nrc.srmonline.net/instrument.php",
+      "contact": { "name": "Prof. M. Navaneethan", "role": "head", "email": "navaneem@srmist.edu.in" }
+    },
+    {
+      "slug": "cacr",
+      "acronym": "CACR",
+      "established": "2010",
+      "photo": "media/research/cacr.jpg",
+      "source": "https://www.srmist.edu.in/research/research-wings/cacr/",
+      "contact": { "name": "Dr. P. R. Kannan Rajkumar", "role": "coordinator", "email": "kannanrp@srmist.edu.in" }
+    },
+    {
+      "slug": "dbt",
+      "acronym": "SRM-DBT",
+      "photo": "media/research/dbt.jpg",
+      "source": "https://www.srmist.edu.in/department/srm-dbt-platform/",
+      "booking": "https://www.srmist.edu.in/department/srm-dbt-platform/instrument-usage-charges/",
+      "contact": { "name": "Prof. M. Parani", "role": "coordinator", "email": "srmdbt.ktr@srmist.edu.in" }
+    },
+    {
+      "slug": "mrc",
+      "acronym": "DMR",
+      "established": "2008",
+      "source": "https://www.srmist.edu.in/research/research-wings/mrc/",
+      "contact": { "role": "deanMedical", "email": "dean.medresearch@srmist.edu.in" }
+    },
+    {
+      "slug": "statistics",
+      "acronym": "CFS",
+      "source": "https://www.srmist.edu.in/research/research-wings/centre-for-statistics/",
+      "contact": { "role": "head", "email": "statcentre.ktr@srmist.edu.in" }
+    },
+    {
+      "slug": "eqrc",
+      "acronym": "EQRC",
+      "established": "2012",
+      "source": "https://www.srmist.edu.in/research/research-wings/eqrc/",
+      "contact": { "name": "Dr. R. Sivakumar", "role": "coordinator", "email": "eqr.cell.ktr@srmist.edu.in", "phone": "+91 44 2745 5510" }
+    },
+    {
+      "slug": "hpcc",
+      "acronym": "HPCC",
+      "photo": "media/research/hpcc.jpg",
+      "source": "https://www.srmist.edu.in/research/hpcc/",
+      "booking": "https://webstor.srmist.edu.in/web_assets/downloads/2024/hpcc-user-registration-form-24-25.docx",
+      "contact": { "role": "support", "email": "hpc.support@srmist.edu.in", "phone": "+91 44 2741 7150" }
+    },
+    {
+      "slug": "scif",
+      "acronym": "SCIF",
+      "source": "https://www.srmist.edu.in/research/scif/",
+      "contact": { "role": "head", "email": "admin.scif.ktr@srmist.edu.in" }
+    }
+  ],
+  "patents": {
+    "granted": { "total": 112, "byOffice": { "australia": 57, "india": 46, "us": 8, "wipo": 1 }, "years": "2017–2022" },
+    "published": { "total": 1235, "years": "2017–2022" },
+    "transfers": 5,
+    "usGranted": [
+      { "number": "US11382945B2", "year": "2022", "title": "polycystic" },
+      { "number": "US11110064", "year": "2021", "title": "aquasome" },
+      { "number": "US10973798B2", "year": "2021", "title": "formononetin" },
+      { "number": "US10575794B2", "year": "2020", "title": "wheelchair" },
+      { "number": "US10793513B2", "year": "2020", "title": "enantiomers" },
+      { "number": "US10230122B2", "year": "2019", "title": "fuelCells" },
+      { "number": "US9675657B2", "year": "2017", "title": "dementia" },
+      { "number": "US9642886B2", "year": "2017", "title": "metabolic" }
+    ],
+    "transferList": ["earBiometric", "iotPower", "fogEnergy", "fogDistribution", "limeMortar"],
+    "sources": {
+      "patents": "https://www.srmist.edu.in/research/patents/",
+      "granted": "https://www.srmist.edu.in/research/granted-patents/",
+      "published": "https://www.srmist.edu.in/research/published-patents/",
+      "transfers": "https://www.srmist.edu.in/research/technology-transfers/"
+    }
+  }
+}

@@ -181,6 +181,12 @@ export const nirf = {
 };
 export const naacGrade = statsData.naac.grade;
 
+/** Events still to come (or running today), as of the last time the page was built. */
+export const upcomingEvents = <T extends { end: string }>(list: T[]) => {
+  const today = new Date().toISOString().slice(0, 10);
+  return list.filter((e) => e.end >= today);
+};
+
 export const getProgramme = (slug: string) => programmes.find((p) => p.slug === slug);
 export const getCollege = (slug: string) => colleges.find((c) => c.slug === slug);
 export const getCampus = (slug: string) => campuses.find((c) => c.slug === slug);

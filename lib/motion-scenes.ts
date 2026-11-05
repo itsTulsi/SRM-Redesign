@@ -34,6 +34,7 @@ export function startMotion(): () => void {
     cleanups.push(...actTitles(mm));
     curtains();
     cleanups.push(...counters());
+    treeFinale();
   });
   cleanups.push(() => {
     mm.revert();
@@ -116,7 +117,8 @@ function actTitles(mm: gsap.MatchMedia): (() => void)[] {
         pinSpacing: false,
       });
       gsap.to(title, {
-        opacity: 0.16,
+        // Faint enough that the word never competes with the text scrolling over it.
+        opacity: 0.06,
         ease: "none",
         scrollTrigger: { trigger: title, start: "top 14%", end: "+=35%", scrub: true },
       });
@@ -140,6 +142,28 @@ function curtains() {
       scrollTrigger: { trigger: section, start: "top bottom", end: "top 25%", scrub: true },
     });
   });
+}
+
+/**
+ * Tree finale (end of Act III): the branches draw in, the leaves pop out, and the visitor's leaf arrives last and
+ * pulses three times. Only when it starts below the screen, so nothing that's already visible disappears.
+ */
+function treeFinale() {
+  const root = document.querySelector<HTMLElement>("[data-tree-finale]");
+  if (!root || root.getBoundingClientRect().top < window.innerHeight) return;
+  const branches = root.querySelectorAll(".finale-branch");
+  const leaves = root.querySelectorAll(".finale-leaf, .finale-dot");
+  const apex = root.querySelector(".finale-apex");
+  gsap.set(branches, { strokeDasharray: 1, strokeDashoffset: 1 });
+  gsap.set(leaves, { scale: 0, opacity: 0, transformOrigin: "50% 100%" });
+  if (apex) gsap.set(apex, { scale: 0, opacity: 0 });
+  const tl = gsap.timeline({ scrollTrigger: { trigger: root, start: "top 55%", once: true } });
+  tl.to(branches, { strokeDashoffset: 0, duration: 1.1, ease: "power2.out", stagger: 0.006 }).to(
+    leaves,
+    { scale: 1, opacity: 1, duration: 0.45, ease: "back.out(2)", stagger: { each: 0.025, from: "random" } },
+    "-=0.5",
+  );
+  if (apex) tl.to(apex, { scale: 1, opacity: 1, duration: 0.5, ease: "back.out(2)" }).to(apex, { scale: 1.08, duration: 0.4, yoyo: true, repeat: 5, ease: "sine.inOut" });
 }
 
 /**

@@ -35,7 +35,7 @@ export function Photo({ src, alt, sizes, className = "", imgClassName = "", prio
         <a
           href={credit.source}
           lang="en"
-          className="absolute right-2 bottom-2 inline-flex min-h-6 items-center rounded-md bg-bg/85 px-2 text-xs text-fg no-underline hover:underline"
+          className="absolute right-2 bottom-2 z-10 inline-flex min-h-6 items-center rounded-md bg-bg/85 px-2 text-xs text-fg no-underline hover:underline"
         >
           Photo: {credit.author}, {credit.license}
         </a>

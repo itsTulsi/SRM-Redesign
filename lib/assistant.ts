@@ -234,8 +234,8 @@ export async function reply(query: string, t: Translate, locale: string): Promis
         blocks.push({
           type: "links",
           links: [
-            { label: t("antiRagging"), href: site.parentLinks.antiRagging, external: true },
-            { label: t("safety"), href: site.parentLinks.campusSafety, external: true },
+            { label: t("antiRagging"), href: `${prefix}${site.parentLinks.antiRagging}` },
+            { label: t("safety"), href: `${prefix}${site.parentLinks.campusSafety}` },
             ...(grievance ? [{ label: t("grievance"), href: grievance, external: true }] : []),
           ],
         });

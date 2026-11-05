@@ -43,7 +43,7 @@ export function HeroMedia() {
       {/* Contrast scrim, last in DOM so it sits above poster AND video: hero text stays ≥ 4.5:1. */}
       <div
         aria-hidden="true"
-        className="absolute inset-0 -z-10 bg-gradient-to-t from-srm-blue-900 via-srm-blue-900/65 to-srm-blue-900/30"
+        className="absolute inset-0 -z-10 bg-gradient-to-t from-srm-blue-900 via-srm-blue-900/75 to-srm-blue-900/45 sm:via-srm-blue-900/65 sm:to-srm-blue-900/30"
       />
     </>
   );

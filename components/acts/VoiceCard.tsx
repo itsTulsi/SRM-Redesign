@@ -23,6 +23,7 @@ export function VoiceCard({ youtubeId, title, poster, playLabel }: { youtubeId: 
         src={`https://www.youtube-nocookie.com/embed/${youtubeId}?autoplay=1&playsinline=1&rel=0`}
         title={title}
         allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
+        referrerPolicy="strict-origin-when-cross-origin"
         allowFullScreen
         className="size-full border-0"
       />

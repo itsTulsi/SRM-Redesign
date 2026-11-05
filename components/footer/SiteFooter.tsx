@@ -26,6 +26,7 @@ export async function SiteFooter() {
       title: t("study"),
       links: [
         { label: nav("findProgramme"), href: "/programmes" },
+        { label: nav("compare"), href: "/compare" },
         { label: nav("undergraduate"), href: "/programmes#level-ug" },
         { label: nav("postgraduate"), href: "/programmes#level-pg" },
         { label: nav("admissions"), href: "/admissions" },
@@ -40,6 +41,7 @@ export async function SiteFooter() {
         ...campuses.filter((c) => c.kind === "campus").map((c) => ({ label: c.name, href: `/campuses/${c.slug}` })),
         { label: nav("virtualTour"), href: site.virtualTourUrl },
         { label: nav("hostels"), href: "/hostels" },
+        { label: nav("studentLife"), href: "/student-life" },
       ],
     },
     {
@@ -48,6 +50,7 @@ export async function SiteFooter() {
       links: [
         { label: nav("rankings"), href: `/#${SECTION.rankings}` },
         { label: nav("research"), href: `/#${SECTION.research}` },
+        { label: nav("researchCentres"), href: "/research" },
         { label: nav("studentWork"), href: `/#${SECTION.studentWork}` },
         { label: nav("alumni"), href: `/#${SECTION.alumni}` },
         { label: nav("thisWeek"), href: `/#${SECTION.thisWeek}` },

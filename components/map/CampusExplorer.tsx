@@ -2,15 +2,22 @@
 
 import { useTranslations } from "next-intl";
 import { useEffect, useRef, useState } from "react";
+import { haversineKm, project, roundKm, withOrigin } from "@/lib/geo";
 import { Link } from "@/lib/i18n";
-import type { LabelSide, MapCampus, MapCluster, MapGroup } from "@/lib/map";
+import type { LabelSide, MapCampus, MapCluster, MapGroup, MapState } from "@/lib/map";
 import { StreetMap } from "./StreetMap";
 
 type View =
   | { kind: "all" }
   | { kind: "cluster"; id: MapCluster["id"] }
   | { kind: "group"; id: MapGroup["id"] }
-  | { kind: "campus"; slug: MapCampus["slug"] };
+  | { kind: "campus"; slug: MapCampus["slug"] }
+  | { kind: "home" };
+
+/** Where the visitor is coming from: a city from the list, or their own location (kept on this device only). */
+type Home = { key: string; name: string; lat: number; lng: number; x: number; y: number };
+const HOME_KEY = "srm-home";
+const onMap = (h: { x: number; y: number }) => h.x >= 0 && h.x <= 1 && h.y >= 0 && h.y <= 1;
 
 /**
  * Campus constellation (CLAUDE.md §1.5 / step 9). Stylised India (static SVG image) with pins as real links:
@@ -22,12 +29,14 @@ export function CampusExplorer({
   campuses,
   clusters,
   groups,
+  states,
   aspect,
   mapSrc,
 }: {
   campuses: MapCampus[];
   clusters: MapCluster[];
   groups: MapGroup[];
+  states: MapState[];
   aspect: number;
   mapSrc: string;
 }) {
@@ -39,13 +48,81 @@ export function CampusExplorer({
   // Narrow maps (phones) zoom further into a region so 44px pin targets never overlap (WCAG 2.2 target size).
   const mapRef = useRef<HTMLDivElement>(null);
   const [compact, setCompact] = useState(false);
+  const [mapHeight, setMapHeight] = useState(600);
   useEffect(() => {
     const el = mapRef.current;
     if (!el) return;
-    const ro = new ResizeObserver(([entry]) => setCompact((entry?.contentRect.width ?? 999) < 600));
+    const ro = new ResizeObserver(([entry]) => {
+      setCompact((entry?.contentRect.width ?? 999) < 600);
+      setMapHeight(entry?.contentRect.height || 600);
+    });
     ro.observe(el);
     return () => ro.disconnect();
   }, []);
+
+  // ── "How far is SRM from home?" ──
+  const [home, setHome] = useState<Home | null>(null);
+  const [locating, setLocating] = useState(false);
+  const [homeNote, setHomeNote] = useState("");
+  const cityHome = (slug: string): Home | null => {
+    const city = states.flatMap((s) => s.cities).find((c) => c.slug === slug);
+    return city ? { key: city.slug, name: city.name, lat: city.lat, lng: city.lng, x: city.x, y: city.y } : null;
+  };
+  const geoHome = (lat: number, lng: number): Home => ({ key: "geo", name: t("yourLocation"), lat, lng, ...project(lat, lng) });
+
+  // The last choice comes back on the next visit, without moving the camera.
+  useEffect(() => {
+    try {
+      const saved = JSON.parse(localStorage.getItem(HOME_KEY) ?? "null") as { key: string; lat?: number; lng?: number } | null;
+      if (!saved) return;
+      setHome(saved.key === "geo" && saved.lat !== undefined && saved.lng !== undefined ? geoHome(saved.lat, saved.lng) : cityHome(saved.key));
+    } catch {
+      // Storage blocked or unreadable: start fresh.
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- once, on mount
+  }, []);
+
+  const distances = home ? new Map(campuses.map((c) => [c.slug, roundKm(haversineKm(home, c))])) : null;
+  const nearest = distances ? campuses.reduce((a, b) => (distances.get(b.slug)! < distances.get(a.slug)! ? b : a)) : null;
+
+  const chooseHome = (next: Home | null) => {
+    setHome(next);
+    setHomeNote("");
+    try {
+      if (!next) localStorage.removeItem(HOME_KEY);
+      // Your own location is stored rounded to about a kilometre, and only on this device.
+      else localStorage.setItem(HOME_KEY, JSON.stringify(next.key === "geo" ? { key: "geo", lat: +next.lat.toFixed(2), lng: +next.lng.toFixed(2) } : { key: next.key }));
+    } catch {
+      // Storage blocked: the choice lasts for this visit.
+    }
+    if (!next) {
+      setView({ kind: "all" });
+      setAnnounce(t("homeCleared"));
+      return;
+    }
+    const near = campuses.reduce((a, b) => (haversineKm(next, b) < haversineKm(next, a) ? b : a));
+    setView({ kind: "home" });
+    setAnnounce(t("nearestAnnounce", { name: near.name, km: roundKm(haversineKm(next, near)) }));
+  };
+
+  const locate = () => {
+    if (!("geolocation" in navigator)) return setHomeNote(t("locationUnavailable"));
+    setLocating(true);
+    setHomeNote("");
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        setLocating(false);
+        chooseHome(geoHome(pos.coords.latitude, pos.coords.longitude));
+      },
+      (err) => {
+        setLocating(false);
+        const note = err.code === err.PERMISSION_DENIED ? t("locationDenied") : t("locationUnavailable");
+        setHomeNote(note);
+        setAnnounce(note);
+      },
+      { enableHighAccuracy: false, timeout: 10000, maximumAge: 600000 },
+    );
+  };
 
   const bySlug = (slug: string) => campuses.find((c) => c.slug === slug)!;
   const clusterName = (id: MapCluster["id"] | MapGroup["id"]) =>
@@ -68,6 +145,12 @@ export function CampusExplorer({
     if (selected) {
       const cl = selected.cluster ? clusters.find((c) => c.id === selected.cluster) : null;
       return { x: selected.x, y: selected.y, z: (cl ? cl.zoom : 7) * boost };
+    }
+    if (view.kind === "home" && home && nearest) {
+      // Frame home and the nearest campus together; from abroad, just the nearest campus.
+      if (!onMap(home)) return { x: nearest.x, y: nearest.y, z: 4 };
+      const span = Math.max(Math.abs(home.x - nearest.x), Math.abs(home.y - nearest.y), 0.04);
+      return { x: (home.x + nearest.x) / 2, y: (home.y + nearest.y) / 2, z: Math.min(7, Math.max(1, 0.55 / span)) };
     }
     return { x: 0.5, y: 0.5, z: 1 };
   })();
@@ -119,9 +202,12 @@ export function CampusExplorer({
         ref={mapRef}
         role="group"
         aria-label={t("mapLabel")}
-        className="relative overflow-hidden rounded-3xl border border-line-subtle bg-[#0a1640] lg:col-span-7"
-        style={{ aspectRatio: aspect }}
+        data-zoomed={zoomed ? "" : undefined}
+        className="campus-map relative overflow-hidden rounded-3xl border border-line-subtle bg-[#0a1640] lg:col-span-7"
+        // --map-h: the arcs' SVG is 1 unit tall, so a stroke in screen pixels is px ÷ (height × zoom).
+        style={{ aspectRatio: aspect, "--map-h": mapHeight } as React.CSSProperties}
       >
+        <div className="campus-tilt absolute inset-0">
         <div
           className="campus-stage absolute inset-0 origin-top-left"
           style={
@@ -132,7 +218,37 @@ export function CampusExplorer({
           }
         >
           {/* eslint-disable-next-line @next/next/no-img-element -- static SVG art; next/image adds nothing for SVG */}
-          <img src={mapSrc} alt="" aria-hidden="true" loading="lazy" decoding="async" className="size-full select-none" draggable={false} />
+          <img src={mapSrc} alt="" aria-hidden="true" loading="lazy" decoding="async" className="campus-plane relative size-full select-none" draggable={false} />
+
+          {home && onMap(home) ? (
+            <>
+              {/* Arcs from home to every campus: decoration only, the list beside the map carries the distances. */}
+              <svg key={home.key + home.lat} aria-hidden="true" viewBox={`0 0 ${aspect} 1`} preserveAspectRatio="none" className="pointer-events-none absolute inset-0 size-full overflow-visible">
+                {campuses.map((c, i) => {
+                  const [hx, hy, tx, ty] = [home.x * aspect, home.y, c.x * aspect, c.y];
+                  const len = Math.hypot(tx - hx, ty - hy) || 1;
+                  // Bow each arc upward, perpendicular to the straight line.
+                  let [px, py] = [-(ty - hy) / len, (tx - hx) / len];
+                  if (py > 0) [px, py] = [-px, -py];
+                  const bend = len * 0.22;
+                  const isNearest = c.slug === nearest?.slug;
+                  return (
+                    <path
+                      key={c.slug}
+                      d={`M${hx},${hy} Q${(hx + tx) / 2 + px * bend},${(hy + ty) / 2 + py * bend} ${tx},${ty}`}
+                      pathLength={1}
+                      className={`home-arc ${isNearest ? "is-nearest" : ""}`}
+                      style={{ "--i": isNearest ? 0 : i + 1 } as React.CSSProperties}
+                    />
+                  );
+                })}
+              </svg>
+              <span aria-hidden="true" className="campus-pin home-pin pointer-events-none absolute flex min-h-10 min-w-10 items-center justify-center" style={{ left: `${home.x * 100}%`, top: `${home.y * 100}%` }}>
+                <span className="relative size-4 rounded-full border-[3px] border-paper bg-bg" />
+                <span className="absolute bottom-full left-1/2 -mb-1 w-max -translate-x-1/2 rounded-md bg-paper px-2 py-0.5 text-xs leading-tight font-semibold text-ink">{home.name}</span>
+              </span>
+            </>
+          ) : null}
 
           {(zoomed ? [] : overviewMarkers).map((m) => (
             <Pin key={m.key} x={m.x} y={m.y} label={m.label} href={m.href} onClick={m.onClick} count={m.count} side={m.side} cursorLabel={t("exploreCursor")} />
@@ -177,6 +293,7 @@ export function CampusExplorer({
                 ))
             : null}
         </div>
+        </div>
         {zoomed ? (
           <button
             type="button"
@@ -194,14 +311,26 @@ export function CampusExplorer({
           {announce}
         </p>
 
+        <HomeFinder
+          states={states}
+          home={home}
+          locating={locating}
+          note={homeNote}
+          onCity={(slug) => chooseHome(slug ? cityHome(slug) : null)}
+          onLocate={locate}
+          onClear={() => chooseHome(null)}
+        />
+
         {selected ? (
-          <CampusDetail campus={selected} onTour={() => setTourOpen(true)} />
+          <CampusDetail campus={selected} origin={home} km={distances?.get(selected.slug) ?? null} onTour={() => setTourOpen(true)} />
         ) : view.kind === "cluster" || view.kind === "group" ? (
           <div className="flex flex-col gap-4">
             <h3 className="font-display text-3xl font-bold">{clusterName(view.id)}</h3>
             <CampusList
               items={(view.kind === "cluster" ? clusters.find((c) => c.id === view.id)! : groups.find((g) => g.id === view.id)!).members.map(bySlug)}
               onSelect={(c) => select({ kind: "campus", slug: c.slug }, c.name)}
+              distances={distances}
+              nearest={nearest?.slug}
             />
           </div>
         ) : (
@@ -209,11 +338,21 @@ export function CampusExplorer({
             <h3 className="font-display text-3xl font-bold">{t("findCampus")}</h3>
             <div>
               <h4 className="mb-2 text-sm font-semibold tracking-wide text-fg-muted uppercase">{t("ourCampuses")}</h4>
-              <CampusList items={campuses.filter((c) => c.kind === "campus")} onSelect={(c) => select({ kind: "campus", slug: c.slug }, c.name)} />
+              <CampusList
+                items={campuses.filter((c) => c.kind === "campus")}
+                onSelect={(c) => select({ kind: "campus", slug: c.slug }, c.name)}
+                distances={distances}
+                nearest={nearest?.slug}
+              />
             </div>
             <div>
               <h4 className="mb-2 text-sm font-semibold tracking-wide text-fg-muted uppercase">{t("sisters")}</h4>
-              <CampusList items={campuses.filter((c) => c.kind === "sister")} onSelect={(c) => select({ kind: "campus", slug: c.slug }, c.name)} />
+              <CampusList
+                items={campuses.filter((c) => c.kind === "sister")}
+                onSelect={(c) => select({ kind: "campus", slug: c.slug }, c.name)}
+                distances={distances}
+                nearest={nearest?.slug}
+              />
             </div>
           </div>
         )}
@@ -254,7 +393,17 @@ export function CampusExplorer({
   );
 }
 
-function CampusDetail({ campus, onTour }: { campus: MapCampus; onTour: () => void }) {
+function CampusDetail({
+  campus,
+  origin,
+  km,
+  onTour,
+}: {
+  campus: MapCampus;
+  origin: Home | null;
+  km: number | null;
+  onTour: () => void;
+}) {
   const t = useTranslations("Acts.explore");
   return (
     <article aria-labelledby={`campus-${campus.slug}`} className="flex flex-col gap-5">
@@ -268,6 +417,11 @@ function CampusDetail({ campus, onTour }: { campus: MapCampus; onTour: () => voi
         <p className="mt-2 text-fg-muted">
           {campus.address ? <span lang="en">{campus.address}</span> : `${campus.city}, ${campus.state}`}
         </p>
+        {km !== null && origin ? (
+          <p className="mt-2 font-semibold">
+            {t("kmFrom", { km, place: origin.name })} <span className="font-normal text-fg-muted">({t("crowFlies")})</span>
+          </p>
+        ) : null}
       </div>
 
       <div className="flex flex-wrap gap-3">
@@ -281,7 +435,7 @@ function CampusDetail({ campus, onTour }: { campus: MapCampus; onTour: () => voi
             {t("tour")}
           </button>
         ) : null}
-        <a href={campus.directions} className="inline-flex min-h-11 items-center rounded-full border border-line px-5 font-semibold text-fg no-underline hover:border-fg">
+        <a href={withOrigin(campus.directions, origin)} className="inline-flex min-h-11 items-center rounded-full border border-line px-5 font-semibold text-fg no-underline hover:border-fg">
           {t("directions")}
         </a>
         {campus.kind === "sister" ? (
@@ -310,23 +464,38 @@ function CampusDetail({ campus, onTour }: { campus: MapCampus; onTour: () => voi
   );
 }
 
-function CampusList({ items, onSelect }: { items: MapCampus[]; onSelect: (c: MapCampus) => (e?: React.MouseEvent) => void }) {
+function CampusList({
+  items,
+  onSelect,
+  distances,
+  nearest,
+}: {
+  items: MapCampus[];
+  onSelect: (c: MapCampus) => (e?: React.MouseEvent) => void;
+  distances?: Map<string, number> | null;
+  nearest?: string;
+}) {
+  const t = useTranslations("Acts.explore");
+  // Nearest first once we know where the visitor is coming from.
+  const rows = distances ? [...items].sort((a, b) => distances.get(a.slug)! - distances.get(b.slug)!) : items;
   return (
-    <ul className="grid gap-2 sm:grid-cols-2 lg:grid-cols-1">
-      {items.map((c) => (
+    <ul className="grid border-t border-line-subtle sm:grid-cols-2 sm:gap-x-6 lg:grid-cols-1">
+      {rows.map((c) => (
         <li key={c.slug}>
           <Link
             href={`/campuses/${c.slug}`}
             onClick={onSelect(c)}
-            className="flex min-h-11 items-center justify-between gap-3 rounded-2xl border border-line-subtle px-4 py-3 text-fg no-underline hover:border-line"
+            data-no-transition
+            className="group flex min-h-11 flex-col justify-between gap-x-4 border-b border-line-subtle py-2.5 text-fg no-underline hover:border-line sm:flex-row sm:flex-wrap sm:items-baseline"
           >
-            <span>
-              <span className="block font-semibold">{c.name}</span>
-              <span className="block text-sm text-fg-muted">
-                {c.city}, {c.state}
-              </span>
+            <span className="flex flex-wrap items-center gap-2">
+              <span className="font-semibold underline-offset-4 group-hover:underline">{c.name}</span>
+              {c.slug === nearest ? <span className="rounded-full bg-tree px-2 py-0.5 text-xs font-semibold text-ink">{t("nearest")}</span> : null}
             </span>
-            <span aria-hidden="true">→</span>
+            <span className="text-sm text-fg-muted">
+              {distances ? `${t("kmAway", { km: distances.get(c.slug)! })} · ` : ""}
+              {c.city}, {c.state}
+            </span>
           </Link>
         </li>
       ))}
@@ -368,7 +537,7 @@ function Pin({
     <Link
       href={href}
       onClick={onClick}
-      aria-label={label}
+      data-no-transition
       aria-current={active ? "true" : undefined}
       data-cursor-label={cursorLabel}
       // True positions can sit closer than a 44 px box (Chennai and Trichy are 26 px apart on a 360 px map).
@@ -390,8 +559,8 @@ function Pin({
       >
         {count || null}
       </span>
+      {/* The visible label is the link's name (WCAG 2.5.3); the count dot is decoration. */}
       <span
-        aria-hidden="true"
         className={`absolute w-max max-w-32 rounded-md bg-bg/85 px-2 py-0.5 text-xs leading-tight font-semibold sm:max-w-none sm:whitespace-nowrap ${
           LABEL_PLACEMENT[side]
         } ${active ? "text-action" : ""}`}
@@ -399,5 +568,62 @@ function Pin({
         {label}
       </span>
     </Link>
+  );
+}
+
+/** "Where are you coming from?": a city picker, or the visitor's own location, asked for only when they press the button. */
+function HomeFinder({
+  states,
+  home,
+  locating,
+  note,
+  onCity,
+  onLocate,
+  onClear,
+}: {
+  states: MapState[];
+  home: Home | null;
+  locating: boolean;
+  note: string;
+  onCity: (slug: string) => void;
+  onLocate: () => void;
+  onClear: () => void;
+}) {
+  const t = useTranslations("Acts.explore");
+  return (
+    // Hidden without JavaScript (it would do nothing); the map and list work as before.
+    <div className="needs-js mb-8 flex flex-col gap-3 border-b border-line-subtle pb-6">
+      <label htmlFor="home-city" className="font-display text-xl font-bold">
+        {t("fromLabel")}
+      </label>
+      <div className="flex flex-wrap gap-2">
+        <select
+          id="home-city"
+          value={home && home.key !== "geo" ? home.key : ""}
+          onChange={(e) => onCity(e.target.value)}
+          className="min-h-11 min-w-0 flex-1 basis-56 rounded-xl border border-line bg-bg px-3 text-base text-fg"
+        >
+          <option value="">{t("chooseCity")}</option>
+          {states.map((s) => (
+            <optgroup key={s.slug} label={s.name}>
+              {s.cities.map((c) => (
+                <option key={c.slug} value={c.slug}>
+                  {c.name}
+                </option>
+              ))}
+            </optgroup>
+          ))}
+        </select>
+        <button type="button" onClick={onLocate} disabled={locating} className="inline-flex min-h-11 items-center rounded-full border border-line px-4 font-semibold hover:border-fg disabled:opacity-70">
+          {locating ? t("locating") : t("useLocation")}
+        </button>
+        {home ? (
+          <button type="button" onClick={onClear} className="inline-flex min-h-11 items-center px-2 text-sm underline underline-offset-4">
+            {t("clear")}
+          </button>
+        ) : null}
+      </div>
+      <p className="min-h-5 text-sm text-fg-muted">{note || (home ? t("straightLine") : t("locationPrivacy"))}</p>
+    </div>
   );
 }

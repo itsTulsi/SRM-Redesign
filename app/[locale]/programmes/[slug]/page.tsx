@@ -3,11 +3,14 @@ import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { StatFigure } from "@/components/acts/StatFigure";
 import { AskSenior, type SeniorThread } from "@/components/programme/AskSenior";
+import { CompareToggle } from "@/components/programme/CompareToggle";
+import { SaveOffline } from "@/components/ui/SaveOffline";
 import { ParentModeToggle } from "@/components/programme/ParentModeToggle";
 import { getContent, isTodo, programmes } from "@/lib/content";
 import { Link, type Locale } from "@/lib/i18n";
-import { alternatesFor } from "@/lib/page-metadata";
+import { alternatesFor, socialFor } from "@/lib/page-metadata";
 import { directionsUrl } from "@/lib/map";
+import { programmeTitleName } from "@/lib/view-transition";
 
 type Params = { params: Promise<{ locale: Locale; slug: string }> };
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
@@ -21,7 +24,12 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const { locale, slug } = await params;
   const p = getContent(locale).getProgramme(slug);
   return p
-    ? { title: `${p.name} — SRMIST`, description: p.summary, alternates: alternatesFor(locale, `/programmes/${slug}`) }
+    ? {
+        title: `${p.name} — SRMIST`,
+        description: p.summary,
+        alternates: alternatesFor(locale, `/programmes/${slug}`),
+        ...socialFor(locale, { title: p.name, description: p.summary, path: `/programmes/${slug}`, ownImage: true }),
+      }
     : {};
 }
 
@@ -119,7 +127,7 @@ export default async function ProgrammePage({ params }: Params) {
           {college?.name} · {level}
           {duration ? ` · ${duration}` : ""}
         </p>
-        <h1 className="mt-2 font-display text-[clamp(2rem,5vw,4rem)] leading-[1.05] font-bold text-balance">{p.name}</h1>
+        <h1 style={programmeTitleName(p.slug)} className="mt-2 font-display text-[clamp(2rem,5vw,4rem)] leading-[1.05] font-bold text-balance">{p.name}</h1>
         {p.officialName && p.officialName !== p.name ? (
           <p className="mt-2 text-fg-muted">
             {t("officialName")}:{" "}
@@ -151,6 +159,8 @@ export default async function ProgrammePage({ params }: Params) {
         >
           {t("call")}: {phones[0]!.display}
         </a>
+        <CompareToggle slug={p.slug} name={p.name} className="rounded-full border border-line px-6 text-base text-fg hover:border-fg" />
+        <SaveOffline />
       </div>
 
       <div className="mt-8 max-w-4xl">
@@ -206,9 +216,9 @@ export default async function ProgrammePage({ params }: Params) {
                   <p>{pt("safeA")}</p>
                   <ul className="mt-2 flex flex-wrap gap-x-5 gap-y-1">
                     <li>
-                      <a href={site.parentLinks.antiRagging} className="inline-flex min-h-11 items-center font-semibold">
+                      <Link href={site.parentLinks.antiRagging} className="inline-flex min-h-11 items-center font-semibold">
                         {pt("antiRagging")}
-                      </a>
+                      </Link>
                     </li>
                     <li>
                       <Link href={site.parentLinks.hostels} className="inline-flex min-h-11 items-center font-semibold">
@@ -216,9 +226,9 @@ export default async function ProgrammePage({ params }: Params) {
                       </Link>
                     </li>
                     <li>
-                      <a href={site.parentLinks.campusSafety} className="inline-flex min-h-11 items-center font-semibold">
+                      <Link href={site.parentLinks.campusSafety} className="inline-flex min-h-11 items-center font-semibold">
                         {pt("safety")}
-                      </a>
+                      </Link>
                     </li>
                   </ul>
                 </>
@@ -309,7 +319,7 @@ export default async function ProgrammePage({ params }: Params) {
                     href={`/programmes/${r.slug}`}
                     className="flex h-full min-h-11 flex-col gap-1 rounded-2xl border border-line-subtle p-4 text-fg no-underline hover:border-line"
                   >
-                    <span className="font-semibold">{r.name}</span>
+                    <span style={programmeTitleName(r.slug)} className="block font-semibold">{r.name}</span>
                     <span className="text-sm text-fg-muted">{r.summary}</span>
                   </Link>
                 </li>

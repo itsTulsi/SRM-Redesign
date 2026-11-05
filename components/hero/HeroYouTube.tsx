@@ -127,6 +127,7 @@ export function HeroYouTube({ id, title }: { id: string; title: string }) {
           title={title}
           tabIndex={-1}
           allow="autoplay; encrypted-media"
+          referrerPolicy="strict-origin-when-cross-origin"
           onLoad={() => frameRef.current?.contentWindow?.postMessage(JSON.stringify({ event: "listening", id: 1 }), ORIGIN)}
           // Cover the hero at any aspect ratio, overscanned and nudged down so YouTube's edge chrome and the band where
           // captions would sit stay out of frame.
@@ -137,7 +138,8 @@ export function HeroYouTube({ id, title }: { id: string; title: string }) {
         type="button"
         onClick={toggle}
         aria-pressed={!playing}
-        className="absolute bottom-4 left-4 z-10 inline-flex size-11 items-center justify-center rounded-full border border-line bg-bg/70 text-fg"
+        // Phones: top-right of the video, clear of the audience chips; larger screens: bottom-left.
+        className="absolute top-4 right-4 z-10 inline-flex size-11 items-center justify-center rounded-full border border-line bg-bg/70 text-fg sm:top-auto sm:right-auto sm:bottom-4 sm:left-4"
       >
         <span className="sr-only">{playing ? t("pauseVideo") : t("playVideo")}</span>
         <svg aria-hidden="true" viewBox="0 0 16 16" className="size-4">

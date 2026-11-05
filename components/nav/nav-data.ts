@@ -1,12 +1,15 @@
 import { getLocale, getTranslations } from "next-intl/server";
 import { getContent } from "@/lib/content";
 import { missionAnchor, SECTION } from "@/lib/sections";
+import { researchCentres } from "@/lib/research-centres";
+import { LIFE_SECTIONS, lifeSections } from "@/lib/student-life";
 import type { NavData } from "./types";
 
 /** Server-only: builds the menu from content JSON so none of that JSON ships to the client. */
 export async function getNavData(): Promise<NavData> {
   const t = await getTranslations("Nav");
   const hostelT = await getTranslations("Hostels");
+  const lifeT = await getTranslations("Life");
   const { campuses, colleges, featuredStory, missions, naacGrade, nirf, programmes, site, studentWork } = getContent(await getLocale());
   const universityRank = nirf.ranks.find((r) => r.id === "university")?.rank;
   const camber = studentWork[0];
@@ -24,6 +27,8 @@ export async function getNavData(): Promise<NavData> {
     // Apply goes to our hub, not straight to the portal: SRM's portal sometimes answers 403, and the hub has the fallbacks.
     apply: { label: t("applyLong"), href: "/admissions#apply" },
     enquiry: { label: t("enquiry"), href: "/admissions#enquiry" },
+    call: { label: t("callAdmissions"), display: site.admissions.phones[0]!.display, tel: site.admissions.phones[0]!.tel },
+    compare: { label: t("compare"), href: "/compare" },
     sections: [
       {
         id: "study",
@@ -34,6 +39,7 @@ export async function getNavData(): Promise<NavData> {
             title: t("startHere"),
             links: [
               { label: t("findProgramme"), href: "/programmes" },
+              { label: t("compare"), href: "/compare" },
               { label: t("undergraduate"), href: "/programmes#level-ug" },
               { label: t("postgraduate"), href: "/programmes#level-pg" },
               { label: t("admissions"), href: "/admissions" },
@@ -55,6 +61,13 @@ export async function getNavData(): Promise<NavData> {
           {
             title: t("missions"),
             links: missions.map((m) => ({ label: m.name, href: `/#${missionAnchor(m.slug)}` })),
+          },
+          {
+            title: t("researchCentres"),
+            links: [
+              ...researchCentres.centres.map((c) => ({ label: c.acronym, href: `/research#${c.slug}` })),
+              { label: t("patents"), href: "/research#patents" },
+            ],
           },
           { title: t("researchNumbers"), links: [{ label: t("researchNumbers"), href: `/#${SECTION.research}` }] },
         ],
@@ -119,6 +132,10 @@ export async function getNavData(): Promise<NavData> {
               { label: t("thisWeek"), href: `/#${SECTION.thisWeek}` },
               { label: t("admissions"), href: "/admissions" },
             ],
+          },
+          {
+            title: t("studentLife"),
+            links: lifeSections.map((k) => ({ label: lifeT(`sections.${k}`), href: `/student-life#${LIFE_SECTIONS[k]}` })),
           },
         ],
         feature: featuredStory

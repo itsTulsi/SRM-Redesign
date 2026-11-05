@@ -7,13 +7,15 @@ import { SECTION } from "@/lib/sections";
 import { ActHeader } from "./ActHeader";
 
 const HEADLINE_RANKS = ["university", "engineering", "overall"];
+const RANK_AXIS = [1, 20, 40, 60];
+const rankPosition = (rank: number) => `${((Math.min(rank, 60) - 1) / 59) * 100}%`;
 
 export async function ActLearn() {
   const t = await getTranslations("Acts.learn");
   const locale = await getLocale();
   const { colleges, naacGrade, nirf, programmes } = getContent(locale);
   const headline = HEADLINE_RANKS.map((id) => nirf.ranks.find((r) => r.id === id)).filter((r) => r !== undefined);
-  const others = nirf.ranks.filter((r) => !HEADLINE_RANKS.includes(r.id));
+  const ranked = [...nirf.ranks].sort((a, b) => a.rank - b.rank);
 
   return (
     <section id={SECTION.learn} aria-labelledby="act-learn" data-act="learn" className="relative bg-bg text-fg">
@@ -82,11 +84,32 @@ export async function ActLearn() {
         <h4 className="mt-14 text-sm font-semibold tracking-wide text-fg-muted uppercase">
           {t("moreRanks", { year: nirf.year })}
         </h4>
-        <dl className="mt-4 grid grid-cols-1 gap-x-6 gap-y-3 min-[25rem]:grid-cols-2 sm:grid-cols-3 lg:grid-cols-5">
-          {others.map((r) => (
-            <div key={r.id} className="flex min-w-0 items-baseline justify-between gap-3 border-b border-line-subtle pb-2">
-              <dt className="min-w-0">{r.label}</dt>
-              <dd className="font-display text-xl font-bold tabular-nums">#{r.rank}</dd>
+        <p className="mt-2 max-w-prose text-fg-muted">{t("ladderNote")}</p>
+
+        {/* One shared scale, so the categories can be read against each other. The number in each row is the data; the dot only places it. */}
+        <div aria-hidden="true" className="mt-6 flex items-end text-sm text-fg-muted lg:gap-6">
+          <span className="hidden shrink-0 lg:block lg:w-64" />
+          <span className="flex flex-1 gap-4">
+            <span className="relative block h-5 flex-1">
+              {RANK_AXIS.map((tick) => (
+                <span key={tick} className={`absolute tabular-nums ${tick === 60 ? "-translate-x-full" : tick === 1 ? "" : "-translate-x-1/2"}`} style={{ left: rankPosition(tick) }}>
+                  #{tick}
+                </span>
+              ))}
+            </span>
+            <span className="w-12 shrink-0" />
+          </span>
+        </div>
+        <dl className="border-t border-line">
+          {ranked.map((r) => (
+            <div key={r.id} className="flex flex-col gap-1 py-2.5 lg:flex-row lg:items-center lg:gap-6">
+              <dt className="shrink-0 lg:w-64">{r.label}</dt>
+              <dd className="flex flex-1 items-center gap-4">
+                <span aria-hidden="true" className="relative block h-px flex-1 bg-line-subtle">
+                  <span className="rank-node absolute top-1/2 block size-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-tree" style={{ left: rankPosition(r.rank) }} />
+                </span>
+                <span className="w-12 shrink-0 text-right font-display text-xl font-bold tabular-nums">#{r.rank}</span>
+              </dd>
             </div>
           ))}
         </dl>

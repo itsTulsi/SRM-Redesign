@@ -1,0 +1,182 @@
+{
+  "_note": "Kattankulathur student life, from SRM's Student Life pages (srmist.edu.in/life-at-srm/…, the Directorate of Student Affairs, Student Counselling, Anti-Ragging, Anti-Discrimination and Equal Opportunity Cell pages), read 2026-10-27. Prose is in messages/{en,ta,hi}.json under 'Life'. Committee members who are private individuals (students, parents, external members' personal email addresses) are deliberately not republished; institutional contacts are.",
+  "sources": {
+    "holistic": "https://www.srmist.edu.in/life-at-srm/student-life/",
+    "green": "https://www.srmist.edu.in/life-at-srm/getting-around-campus-safety/",
+    "affairs": "https://www.srmist.edu.in/directorate-of-student-affairs/",
+    "diversity": "https://www.srmist.edu.in/life-at-srm/student-life/diversity/",
+    "counselling": "https://www.srmist.edu.in/life-at-srm/student-counselling-services/",
+    "community": "https://www.srmist.edu.in/life-at-srm/student-life/community-centers/",
+    "clubs": "https://www.srmist.edu.in/life-at-srm/student-life/clubs/",
+    "antiRagging": "https://www.srmist.edu.in/life-at-srm/anti-ragging/",
+    "antiDiscrimination": "https://www.srmist.edu.in/life-at-srm/anti-discrimination/",
+    "religious": "https://www.srmist.edu.in/life-at-srm/student-life/religious-life/",
+    "eoc": "https://www.srmist.edu.in/equal-opportunity-cell/"
+  },
+  "stats": {
+    "acres": "250+",
+    "clubs": "15",
+    "houses": "8",
+    "events": "100+",
+    "counselling": "24/7"
+  },
+  "photos": {
+    "holistic": "media/life/holistic.jpg",
+    "cycling": "media/life/cycling.jpg",
+    "transport": "media/life/transport.jpg",
+    "affairs": "media/life/jhalak.jpg",
+    "wellness": "media/life/wellness.jpg",
+    "community": "media/life/community.jpg"
+  },
+  "events": [
+    {
+      "slug": "ace",
+      "name": "ACE",
+      "photo": "media/life/ace.jpg"
+    },
+    {
+      "slug": "khel",
+      "name": "Khel",
+      "photo": "media/life/khel.jpg"
+    },
+    {
+      "slug": "jhalak",
+      "name": "Jhalak",
+      "photo": "media/life/jhalak.jpg"
+    },
+    {
+      "slug": "rendezvous",
+      "name": "Rendezvous",
+      "photo": "media/life/rendezvous.jpg"
+    },
+    {
+      "slug": "josh",
+      "name": "Josh",
+      "photo": "media/life/josh.jpg"
+    },
+    {
+      "slug": "butterflies",
+      "name": "Butterflies",
+      "photo": "media/life/butterflies.jpg"
+    }
+  ],
+  "clubs": [
+    "rotaract",
+    "astrophilia",
+    "fashion",
+    "music",
+    "literature",
+    "festival",
+    "dance",
+    "dramatics",
+    "sports",
+    "creative",
+    "women",
+    "selfDefense",
+    "social",
+    "gaming",
+    "quiz"
+  ],
+  "worship": [
+    {
+      "slug": "temple",
+      "photo": "media/life/temple.jpg"
+    },
+    {
+      "slug": "mosque",
+      "photo": "media/life/mosque.jpg"
+    },
+    {
+      "slug": "church",
+      "photo": "media/life/church.jpg"
+    }
+  ],
+  "contacts": {
+    "campusLife": {
+      "name": "Dr. Thirumurugan V",
+      "email": "assocdirector.cl@srmist.edu.in",
+      "phone": "+91 99400 36026"
+    },
+    "security": "+91 73580 98801",
+    "parking": "+91 44 2741 7420",
+    "dsa": [
+      {
+        "role": "director",
+        "name": "Dr. Nisha Ashokan",
+        "email": "director.sa@srmist.edu.in"
+      },
+      {
+        "role": "deputy",
+        "name": "Dr. Prince Kalyanasundaram",
+        "email": "dydirector.sa@srmist.edu.in"
+      },
+      {
+        "role": "assistant",
+        "name": "Dr. S. Pradeep",
+        "email": "asstdirector.sa@srmist.edu.in"
+      }
+    ],
+    "counsellors": [
+      {
+        "role": "hod",
+        "name": "Dr. Bhasi Sulumaram",
+        "phone": "+91 93838 45040"
+      },
+      {
+        "role": "asst",
+        "name": "P. Pangajam",
+        "phone": "+91 89398 90115"
+      },
+      {
+        "role": "asst",
+        "name": "Nayanthara S",
+        "phone": "+91 75501 72181"
+      },
+      {
+        "role": "asst",
+        "name": "S. Dinesh",
+        "phone": "+91 98848 98077"
+      },
+      {
+        "role": "asst",
+        "name": "Srinivasan Jayaraman",
+        "phone": "+91 73395 71880"
+      }
+    ],
+    "wellness": {
+      "uwp": "jennyars@srmist.edu.in",
+      "centre": "josephpj@srmist.edu.in"
+    },
+    "teleManas": "14416",
+    "antiRagging": {
+      "helpline": [
+        "9940036024",
+        "9940036028"
+      ],
+      "email": "antiragging.helpline@srmist.edu.in",
+      "national": {
+        "phone": "1800-180-5522",
+        "email": "helpline@antiragging.in",
+        "url": "https://www.antiragging.in"
+      },
+      "ugc": {
+        "email": "antiragging@c4yindia.org",
+        "url": "https://www.c4yindia.org"
+      },
+      "squad": {
+        "name": "Dr. T. Rajasekaran",
+        "phone": "9884420995",
+        "email": "rajasekt1@srmist.edu.in"
+      },
+      "committee": {
+        "name": "Dr. R. A. Nazeer",
+        "phone": "9444239282",
+        "email": "nazeerr@srmist.edu.in"
+      }
+    },
+    "eoc": {
+      "name": "Mr. P. Priyanand",
+      "phone": "9444317721"
+    }
+  }
+}

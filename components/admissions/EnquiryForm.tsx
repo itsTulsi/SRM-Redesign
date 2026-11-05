@@ -10,7 +10,11 @@ type Status =
   | { kind: "idle" }
   | { kind: "sending" }
   | { kind: "sent"; ref: string; delivered: boolean }
-  | { kind: "failed"; reason: "failed" | "rateLimited" };
+  | { kind: "failed"; reason: "failed" | "rateLimited" | "offline" };
+
+// What the visitor has typed, kept for this browser tab so an enquiry written offline isn't lost.
+const DRAFT_KEY = "srm-enquiry-draft";
+const DRAFT_FIELDS = ["name", "phone", "email", "state", "programme", "message"] as const;
 
 const FIELD_ORDER: EnquiryField[] = ["name", "phone", "email", "state", "programme", "message", "consent"];
 
@@ -45,6 +49,32 @@ export function EnquiryForm({ programmes, phone }: { programmes: ProgrammeGroup[
     if (status.kind === "sent" || status.kind === "failed") resultRef.current?.focus();
   }, [status]);
 
+  // Bring back a draft from earlier in this tab (e.g. typed while offline), without overwriting anything typed since.
+  const formRef = useRef<HTMLFormElement>(null);
+  useEffect(() => {
+    try {
+      const draft = JSON.parse(sessionStorage.getItem(DRAFT_KEY) ?? "null") as Record<string, string> | null;
+      const form = formRef.current;
+      if (!draft || !form) return;
+      for (const f of DRAFT_FIELDS) {
+        const el = form.elements.namedItem(f) as HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement | null;
+        if (!el || el.value || !draft[f]) continue;
+        if (f === "programme") setProgramme(draft[f]);
+        else el.value = draft[f];
+      }
+    } catch {
+      // Storage blocked: nothing to restore.
+    }
+  }, []);
+  const saveDraft = (form: HTMLFormElement) => {
+    try {
+      const data = new FormData(form);
+      sessionStorage.setItem(DRAFT_KEY, JSON.stringify(Object.fromEntries(DRAFT_FIELDS.map((f) => [f, String(data.get(f) ?? "")]))));
+    } catch {
+      // Storage blocked: the text stays in the form for as long as the page is open.
+    }
+  };
+
   const fieldId = (f: EnquiryField) => `${id}-${f}`;
   const errorId = (f: EnquiryField) => `${id}-${f}-error`;
   const describedBy = (f: EnquiryField, hint?: string) =>
@@ -71,6 +101,9 @@ export function EnquiryForm({ programmes, phone }: { programmes: ProgrammeGroup[
       const data = await res.json();
       if (res.ok && data.ok) {
         setStatus({ kind: "sent", ref: data.ref, delivered: data.delivered });
+        try {
+          sessionStorage.removeItem(DRAFT_KEY);
+        } catch {}
         form.reset();
         setProgramme("");
       } else if (res.status === 422 && data.errors) {
@@ -81,7 +114,8 @@ export function EnquiryForm({ programmes, phone }: { programmes: ProgrammeGroup[
         setStatus({ kind: "failed", reason: res.status === 429 ? "rateLimited" : "failed" });
       }
     } catch {
-      setStatus({ kind: "failed", reason: "failed" });
+      // Never queued, never pretended: offline, nothing was sent, and the text stays in the form.
+      setStatus({ kind: "failed", reason: navigator.onLine ? "failed" : "offline" });
     }
   }
 
@@ -131,7 +165,16 @@ export function EnquiryForm({ programmes, phone }: { programmes: ProgrammeGroup[
     ) : null;
 
   return (
-    <form action="/api/enquiry" method="post" noValidate onSubmit={onSubmit} className="flex flex-col gap-6">
+    <form
+      ref={formRef}
+      action="/api/enquiry"
+      method="post"
+      noValidate
+      onSubmit={onSubmit}
+      onInput={(e) => saveDraft(e.currentTarget)}
+      onChange={(e) => saveDraft(e.currentTarget)}
+      className="flex flex-col gap-6"
+    >
       <input type="hidden" name="locale" value={locale} />
       {/* Honeypot: hidden from people and assistive tech; bots fill it. */}
       <div aria-hidden="true" className="absolute -left-[9999px] h-px w-px overflow-hidden">

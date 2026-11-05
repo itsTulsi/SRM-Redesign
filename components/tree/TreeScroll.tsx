@@ -16,6 +16,7 @@ export function TreeScroll({ children }: { children: React.ReactNode }) {
     const root = ref.current;
     if (!root) return;
     let spans: { top: number; height: number }[] = [];
+    let finaleTop = Infinity;
     let frame = 0;
 
     const measure = () => {
@@ -25,16 +26,23 @@ export function TreeScroll({ children }: { children: React.ReactNode }) {
         const rect = el.getBoundingClientRect();
         return { top: rect.top + window.scrollY, height: Math.max(rect.height, 1) };
       });
+      const finale = document.querySelector("[data-tree-finale]");
+      finaleTop = finale ? finale.getBoundingClientRect().top + window.scrollY : Infinity;
     };
 
     let visible = false;
     const update = () => {
       frame = 0;
-      // Show the tree card only while the acts are on screen: never over the hero search or the footer links.
+      // Show the tree only while the acts are on screen: never over the hero search or the footer links.
       const first = spans[0];
       const last = spans[spans.length - 1];
+      // Hand-off: the corner tree steps aside as the full-grown tree at the end of Act III comes into view.
       const nowVisible =
-        !!first && !!last && window.scrollY + window.innerHeight > first.top + 160 && window.scrollY + window.innerHeight * 0.3 < last.top + last.height;
+        !!first &&
+        !!last &&
+        window.scrollY + window.innerHeight > first.top + 160 &&
+        window.scrollY + window.innerHeight * 0.3 < last.top + last.height &&
+        window.scrollY + window.innerHeight * 0.85 < finaleTop;
       if (nowVisible !== visible) {
         visible = nowVisible;
         root.dataset.treeVisible = String(visible);

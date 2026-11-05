@@ -3,10 +3,11 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { BlockCard } from "@/components/hostels/BlockCard";
 import { FeeTable } from "@/components/hostels/FeeTable";
 import { Photo } from "@/components/ui/Photo";
+import { SaveOffline } from "@/components/ui/SaveOffline";
 import { getContent } from "@/lib/content";
 import { HOSTEL_SECTIONS, hostels, telHref, type HostelSection, type Meal } from "@/lib/hostels";
-import type { Locale } from "@/lib/i18n";
-import { alternatesFor } from "@/lib/page-metadata";
+import { Link, type Locale } from "@/lib/i18n";
+import { alternatesFor, socialFor } from "@/lib/page-metadata";
 
 type Params = { params: Promise<{ locale: Locale }> };
 
@@ -15,7 +16,12 @@ const inr = new Intl.NumberFormat("en-IN");
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "Hostels" });
-  return { title: `${t("metaTitle")} — SRMIST`, description: t("intro"), alternates: alternatesFor(locale, "/hostels") };
+  return {
+    title: `${t("metaTitle")} — SRMIST`,
+    description: t("intro"),
+    alternates: alternatesFor(locale, "/hostels"),
+    ...socialFor(locale, { title: t("metaTitle"), description: t("intro"), path: "/hostels" }),
+  };
 }
 
 /** "07:30" → "7:30 AM" / "முற்பகல் 7:30" / "7:30 am" in the visitor's language. */
@@ -49,6 +55,7 @@ export default async function HostelsPage({ params }: Params) {
         <p className="text-sm font-semibold tracking-wide text-fg-muted uppercase">{t("eyebrow")}</p>
         <h1 className="font-display text-hero font-bold">{t("title")}</h1>
         <p className="max-w-prose text-lg text-fg-muted">{t("intro")}</p>
+        <SaveOffline />
         <Photo src={hostels.heroPhoto} alt="" decorative priority sizes="(min-width: 1440px) 1344px, 100vw" className="mt-6 aspect-[16/9] w-full rounded-3xl md:aspect-[21/9]" />
       </header>
 
@@ -311,7 +318,7 @@ export default async function HostelsPage({ params }: Params) {
                 ))}
               </ul>
               <p className="flex flex-wrap gap-x-6">
-                <a href={site.parentLinks.antiRagging} className={linkClass}>{t("antiRagging")}{ext}</a>
+                <Link href={site.parentLinks.antiRagging} className={linkClass}>{t("antiRagging")}</Link>
                 <a href={hostels.sources.rules} className={linkClass}>{t("rulesLink")}{ext}</a>
               </p>
             </>,

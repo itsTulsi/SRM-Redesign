@@ -346,10 +346,8 @@ html:has(dialog[open]:modal) {
   0%, 100% { scale: 1; opacity: 1; }
   50% { scale: 1.35; opacity: 0.7; }
 }
-/* The tree card floats over every act colour, so it carries its own blue backing. */
+/* The tree floats over every act colour, so it keeps its own colours whichever act is behind it. */
 .living-tree {
-  --bg: var(--srm-blue-900);
-  --line-subtle: #24346b;
   --tree: var(--leaf-green-300);
   --fg-muted: #9aa6c8;
   --line: #6c7bb0;
@@ -619,4 +617,600 @@ html.lenis body {
 }
 .assistant-launcher[aria-expanded="true"] {
   visibility: hidden;
+}
+
+/* ═══ Product layer: command palette, live search, compare, page transitions ═══ */
+
+/* Toggles that do nothing without JavaScript. The head script sets data-lite on every page view. */
+html:not([data-lite]) .needs-js {
+  display: none;
+}
+
+/* The browser draws the search box's clear button white under the dark colour scheme; the hero input is pale. */
+form[role="search"] input::-webkit-search-cancel-button {
+  filter: invert(1);
+}
+
+/* Hero results settle in as they're found (new cards only: they're keyed by programme). */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+.live-card {
+  animation: rise 0.32s cubic-bezier(0.2, 0, 0, 1) calc(var(--i, 0) * 50ms) both;
+}
+.live-chip {
+  animation: rise 0.2s ease-out both;
+}
+
+.compare-tray {
+  animation: rise 0.25s cubic-bezier(0.2, 0, 0, 1) both;
+}
+@media (min-width: 40rem) {
+  .compare-tray {
+    translate: -50% 0;
+  }
+}
+
+/* Page transitions (lib/view-transition.ts): a quick crossfade, the header stays put, programme titles travel. */
+.site-header {
+  view-transition-name: site-header;
+}
+::view-transition-group(*) {
+  animation-duration: 0.34s;
+  animation-timing-function: cubic-bezier(0.2, 0, 0, 1);
+}
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.2s;
+}
+/* Keep a title's proportions as it changes size, instead of stretching the picture of it. */
+::view-transition-old(*):not(::view-transition-old(root)),
+::view-transition-new(*):not(::view-transition-new(root)) {
+  height: 100%;
+  object-fit: contain;
+  object-position: left top;
+}
+
+/* ═══ Visual layer ═══ */
+
+/* Rank chart: each dot grows in as its row scrolls into view. Browsers without scroll timelines just show the dots. */
+@supports (animation-timeline: view()) {
+  [data-motion="full"] .rank-node {
+    animation: rank-node-in linear both;
+    animation-timeline: view();
+    animation-range: entry 20% entry 80%;
+  }
+}
+@keyframes rank-node-in {
+  from {
+    scale: 0;
+  }
+}
+
+@keyframes campus-map-flat {
+  to {
+    perspective: none;
+  }
+}
+@keyframes campus-layer-flat {
+  to {
+    transform-style: flat;
+  }
+}
+
+/* Campus map in 3D, desktop only: phones need the flat map for 44 px targets; Lite Mode and reduced motion stay flat.
+   The whole map tilts back. Each pin turns to face the viewer and floats on a stem whose foot lands exactly on the
+   campus's true coordinates. For a stem of length L at tilt t: lift the pin by L·sin t, move it back by L·cos t.
+   Here L = 45px and t = 42deg, so 30px and 33px. A further 5px of lift keeps the foot's ring above the map instead of
+   half inside it, and 4.5px forward cancels what that lift shifts on screen. Links and focus work as normal: 3D
+   transforms keep hit-testing.
+   Flying in levels the map out to top-down, with pins back on their coordinates. Once there, perspective and 3D come
+   off entirely, because Chrome draws anything under a perspective at low resolution and the zoomed map turned blocky. */
+@media (min-width: 64rem) {
+  [data-motion="full"] .campus-map {
+    --tilt: 42deg;
+    --pin-back: -28.5px;
+    --pin-lift: 35px;
+    perspective: 1500px;
+    perspective-origin: 50% 20%;
+    background-image: radial-gradient(70% 60% at 50% 62%, color-mix(in srgb, var(--srm-blue-500) 42%, transparent), transparent);
+  }
+  [data-motion="full"] .campus-tilt {
+    transform: rotateX(var(--tilt)) translateY(-4%) scale(1.04);
+    transform-style: preserve-3d;
+    transition: transform 900ms var(--ease-leap);
+  }
+  [data-motion="full"] .campus-map[data-zoomed] {
+    --tilt: 0deg;
+    --pin-back: 0px;
+    --pin-lift: 0px;
+    animation: campus-map-flat 0s 950ms forwards;
+  }
+  [data-motion="full"] [data-zoomed] .campus-tilt {
+    transform: rotateX(0deg) translateY(0) scale(1);
+    animation: campus-layer-flat 0s 950ms forwards;
+  }
+  [data-motion="full"] [data-zoomed] .campus-stage,
+  [data-motion="full"] [data-zoomed] .campus-pin {
+    animation: campus-layer-flat 0s 950ms forwards;
+  }
+  [data-motion="full"] [data-zoomed] .campus-pin::before,
+  [data-motion="full"] [data-zoomed] .campus-pin::after {
+    opacity: 0;
+  }
+  [data-motion="full"] .campus-stage {
+    transform-style: preserve-3d;
+  }
+  /* The map's edge: two darker copies underneath, like contour layers, painted as shadows of the one image. */
+  /* Overview only: a filter fixes the map's raster at 1x, so it would turn blocky once the camera zooms in. */
+  [data-motion="full"] .campus-map:not([data-zoomed]) .campus-plane {
+    filter: drop-shadow(0 7px 0 #16296f) drop-shadow(0 7px 0 #0f1d55);
+  }
+  [data-motion="full"] .campus-pin {
+    transform-style: preserve-3d;
+    transform: scale(calc(1 / var(--z, 1))) translate3d(0, var(--pin-back), var(--pin-lift)) rotateX(calc(-1 * var(--tilt))) translate(-50%, -50%);
+  }
+  [data-motion="full"] .campus-pin::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: calc(50% - 1px);
+    width: 2px;
+    height: 45px;
+    background: linear-gradient(var(--leaf-green-300), color-mix(in srgb, var(--leaf-green-300) 45%, transparent));
+    pointer-events: none;
+  }
+  [data-motion="full"] .campus-pin::after {
+    content: "";
+    position: absolute;
+    top: calc(50% + 45px);
+    left: 50%;
+    width: 14px;
+    height: 14px;
+    border-radius: 9999px;
+    border: 2px solid var(--leaf-green-300);
+    transform: translate(-50%, -50%) scaleY(0.72);
+    pointer-events: none;
+  }
+  [data-motion="full"] .campus-pin[aria-current]::before {
+    background: linear-gradient(var(--srm-gold), color-mix(in srgb, var(--srm-gold) 45%, transparent));
+  }
+  [data-motion="full"] .campus-pin[aria-current]::after {
+    border-color: var(--srm-gold);
+  }
+}
+
+/* "How far is SRM from home?": arcs from the visitor's city to every campus. They draw in once; under Lite Mode or
+   reduced motion they're simply there. The nearest campus's arc is the bright one. */
+.home-arc {
+  fill: none;
+  stroke: color-mix(in srgb, var(--paper) 38%, transparent);
+  /* The SVG is 1 unit tall and zoomed by the camera (--z): this keeps strokes a constant screen width. Not
+     vector-effect: non-scaling-stroke, which ignores the CSS zoom and breaks the draw-in dashes. */
+  stroke-width: calc(1.5px / (var(--map-h, 600) * var(--z, 1)));
+  stroke-linecap: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: home-arc-draw 1.1s var(--ease-leap) calc(var(--i, 0) * 70ms) forwards;
+}
+.home-arc.is-nearest {
+  stroke: var(--leaf-green-300);
+  stroke-width: calc(3px / (var(--map-h, 600) * var(--z, 1)));
+}
+@keyframes home-arc-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+[data-motion="reduce"] .home-arc {
+  animation: none;
+  stroke-dashoffset: 0;
+}
+@media (prefers-reduced-motion: reduce) {
+  .home-arc {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+}
+/* The home marker shares the pins' counter-scaling, without a stem: it isn't a campus. */
+.home-pin::before,
+.home-pin::after {
+  content: none !important;
+}
+
+/* ═══ Level Up at SRM (feature/grail-redesign; REFERENCE.md) ═══
+   The reference's palette (black, off-white sheets, lilac, aubergine) and motion (letters rising, sheets sliding over
+   pinned sections, a turning ring of cards, a dock that changes colour). The tokens switch for the whole page, header
+   and footer included, only when the Grail homepage is on it. */
+html:has([data-grail]) {
+  --bg: #000000;
+  --fg: #ffffff;
+  --fg-muted: #b8b8b8;
+  --line: #5c5c5c;
+  --line-subtle: #262626;
+  --link: #ffffff;
+  --focus: #ecd2f3;
+  --action: #ecd2f3;
+  --on-action: #1a1018;
+  --action-edge: transparent;
+  --stat-build: #ff4d2e;
+  --stat-think: #ffc63a;
+  --stat-connect: #9ee3ff;
+  --stat-grow: #ffcdff;
+  background: #000000;
+}
+.grail-display {
+  font-family: var(--font-grail-serif), var(--script-fonts), Georgia, serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  line-height: 0.92;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+:lang(ta) .grail-display,
+:lang(hi) .grail-display {
+  line-height: 1.2;
+  letter-spacing: 0;
+}
+/* Tamil and Devanagari run far taller and wider than the serif: same hierarchy, a smaller scale. */
+:lang(ta) h1.grail-display,
+:lang(hi) h1.grail-display {
+  font-size: clamp(2.4rem, 7.5vw, 6.75rem);
+}
+:lang(ta) h2.grail-display,
+:lang(hi) h2.grail-display {
+  font-size: clamp(2rem, 5.5vw, 4.75rem);
+}
+
+/* Letters rise into place one after another. The hero runs at once; other headings when they scroll into view
+   (GrailMotion sets data-in). Hidden only once that script is running, so without it nothing is ever hidden. */
+.grail-word {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  padding-bottom: 0.1em;
+  margin-bottom: -0.1em;
+}
+.grail-letter {
+  display: inline-block;
+}
+[data-motion="full"] [data-rise="load"] .grail-letter {
+  animation: grail-rise 0.62s cubic-bezier(0.2, 0.7, 0.1, 1) calc(var(--i, 0) * 28ms) both;
+}
+[data-motion="full"][data-grail-ready] [data-rise=""] .grail-letter {
+  transform: translateY(110%);
+  transition: transform 0.62s cubic-bezier(0.2, 0.7, 0.1, 1) calc(var(--i, 0) * 22ms);
+}
+[data-motion="full"][data-grail-ready] [data-rise=""][data-in] .grail-letter {
+  transform: none;
+}
+@keyframes grail-rise {
+  from {
+    transform: translateY(110%);
+  }
+}
+
+/* Chapters: off-white sheets and lilac panels with big rounded corners over the black. */
+.grail-sheet,
+.grail-lilac {
+  position: relative;
+  border-radius: 36px;
+  margin-top: -36px;
+}
+.grail-sheet {
+  background: #f5f5f5;
+  color: #000000;
+  --fg: #000000;
+  --fg-muted: #555555;
+  --line: #8a8a8a;
+  --line-subtle: #e2e2e2;
+  --focus: #623562;
+  --link: #000000;
+}
+.grail-lilac {
+  background:
+    radial-gradient(60% 55% at 18% 25%, #f6cff6 0%, transparent 70%),
+    radial-gradient(55% 60% at 82% 75%, #dda0dd 0%, transparent 70%),
+    #e7afe7;
+  color: #3b1d3b;
+  --fg: #3b1d3b;
+  --fg-muted: #623562;
+  --line: #8f5a8f;
+  --line-subtle: #d39bd3;
+  --focus: #3b1d3b;
+  --link: #3b1d3b;
+  --action: #1a1018;
+  --on-action: #ecd2f3;
+}
+.grail-lilac .grail-display {
+  color: #623562;
+}
+/* Each chapter stays pinned while the next one slides up over it, tilted, straightening as it lands. */
+[data-motion="full"] .grail-stack {
+  position: sticky;
+  top: var(--stack-top, 0px);
+}
+@supports (animation-timeline: view()) {
+  [data-motion="full"] .grail-sheet,
+  [data-motion="full"] .grail-lilac {
+    transform-origin: 0 0;
+    animation: grail-sheet-in linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 70%;
+  }
+}
+@keyframes grail-sheet-in {
+  from {
+    transform: translateY(60px) rotate(3deg);
+  }
+}
+
+.grail-cta {
+  display: inline-flex;
+  min-height: 3.25rem;
+  align-items: center;
+  border-radius: 999px;
+  background: var(--action);
+  padding-inline: 1.75rem;
+  font-size: 1.0625rem;
+  font-weight: 600;
+  color: var(--on-action);
+  text-decoration: none;
+  transition: transform 200ms var(--ease-leap);
+}
+.grail-cta:hover {
+  transform: translateY(-2px);
+}
+.grail-cta-ink {
+  background: #1a1018;
+  color: #ecd2f3;
+}
+/* Quest cards hang slightly crooked, like cards pinned to a board, and straighten when you reach for one. */
+.grail-quest {
+  transform: rotate(var(--tilt, 0deg));
+  transition: transform 350ms var(--ease-leap);
+}
+.grail-quest:hover,
+.grail-quest:focus-within {
+  transform: rotate(0deg) translateY(-6px);
+}
+.grail-bar {
+  transition: transform 800ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+/* Level-up: a burst of kolam-coloured dots from the crest when a path is picked. */
+.grail-burst {
+  position: absolute;
+  top: 3.25rem;
+  left: 3.25rem;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  pointer-events: none;
+  box-shadow:
+    0 -44px 0 4px var(--stat-build),
+    31px -31px 0 3px var(--stat-think),
+    44px 0 0 4px var(--stat-connect),
+    31px 31px 0 3px var(--stat-grow),
+    0 44px 0 4px #623562,
+    -31px 31px 0 3px var(--stat-build),
+    -44px 0 0 4px var(--stat-think),
+    -31px -31px 0 3px var(--stat-connect);
+  animation: grail-burst 900ms ease-out forwards;
+}
+@keyframes grail-burst {
+  from {
+    transform: scale(0.2);
+    opacity: 1;
+  }
+  to {
+    transform: scale(2.6);
+    opacity: 0;
+  }
+}
+.grail-levelup {
+  animation: grail-pop 600ms var(--ease-leap) both;
+}
+@keyframes grail-pop {
+  from {
+    transform: translateY(6px);
+    opacity: 0;
+  }
+}
+[data-motion="reduce"] .grail-burst {
+  display: none;
+}
+
+/* The hero helix: a DNA double strand standing upright, like the reference's turning column of cards. Two strands
+   of cards spiral round a vertical axis, with SRM's emblem in front at the centre. The helix turns
+   about its axis; cards face outward (edge-on at the sides) and show a kolam back when behind. Still under reduced
+   motion or Lite Mode, and pausable (HeroRing). */
+.grail-ring-stage {
+  position: relative;
+  height: 440px;
+  perspective: 1100px;
+  pointer-events: none;
+  overflow: hidden;
+  mask-image: linear-gradient(transparent, #000 8%, #000 92%, transparent);
+  --r: 120px; /* the helix's radius */
+  --step: 44px; /* between rungs, up the axis */
+  --twist: 40deg; /* turn per rung */
+  --card: 0.62;
+  --spin: 22s;
+}
+@media (min-width: 64rem) {
+  .grail-ring-stage {
+    height: 640px;
+    --r: 300px;
+    --step: 62px;
+    --card: 0.8;
+  }
+}
+.grail-helix-view {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform-style: preserve-3d;
+  /* Seen from a little above and leaning, like the reference's column. */
+  transform: rotateZ(-6deg) rotateX(-10deg);
+}
+.grail-helix {
+  transform-style: preserve-3d;
+  animation: grail-helix-spin var(--spin) linear infinite;
+}
+.grail-helix-slot {
+  position: absolute;
+  transform-style: preserve-3d;
+  --a: calc(var(--j) * var(--twist));
+  transform: translateY(calc(-1 * var(--j) * var(--step))) rotateY(var(--a));
+}
+.grail-helix-item {
+  position: absolute;
+  transform-style: preserve-3d;
+  transform: rotateY(calc(var(--strand) * 180deg)) translateZ(var(--r));
+}
+.grail-ring-face {
+  position: relative;
+  scale: var(--card);
+  transform: translate(-50%, -50%);
+  transform-style: preserve-3d;
+}
+.grail-helix-front {
+  backface-visibility: hidden;
+}
+/* The card's back: a dark card with a kolam on it, so nothing is ever seen mirrored. */
+.grail-helix-back {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 18px;
+  background: #1b1b1b;
+  transform: rotateY(180deg);
+  backface-visibility: hidden;
+}
+.grail-helix-back > * {
+  width: 62%;
+  height: auto;
+  aspect-ratio: 1;
+  box-shadow: none;
+}
+.grail-helix-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 2;
+  width: 150px;
+  height: 150px;
+  transform: translate(-50%, -50%);
+  filter: drop-shadow(0 0 40px rgb(236 210 243 / 0.35));
+}
+@media (min-width: 64rem) {
+  .grail-helix-center {
+    width: 240px;
+    height: 240px;
+  }
+}
+.grail-helix[data-paused] {
+  animation-play-state: paused;
+}
+@keyframes grail-helix-spin {
+  to {
+    transform: rotateY(-360deg);
+  }
+}
+.grail-mini {
+  width: 176px;
+  border-radius: 18px;
+  background: #f5f5f5;
+  padding: 14px;
+  color: #000000;
+  box-shadow: 0 20px 40px rgb(0 0 0 / 0.45);
+}
+.grail-tile {
+  display: block;
+  width: 132px;
+  height: 132px;
+  box-shadow: 0 20px 40px rgb(0 0 0 / 0.45);
+  border-radius: 22px;
+}
+@media (max-width: 63.99rem) {
+  .grail-mini {
+    width: 132px;
+    padding: 10px;
+    font-size: 0.8em;
+  }
+  .grail-mini p:last-child {
+    display: none;
+  }
+  .grail-tile {
+    width: 92px;
+    height: 92px;
+  }
+}
+[data-motion="reduce"] .grail-helix {
+  animation: none;
+}
+[data-motion="reduce"] .grail-ring-toggle {
+  display: none;
+}
+
+/* The floating dock (desktop): it takes the colours of the section under it, as in the reference. */
+.grail-dock {
+  display: none;
+}
+@media (min-width: 64rem) {
+  .grail-dock {
+    position: fixed;
+    bottom: 1.5rem;
+    left: 50%;
+    z-index: 40;
+    display: inline-flex;
+    min-height: 3.25rem;
+    align-items: center;
+    gap: 0.75rem;
+    translate: -50% 0;
+    border-radius: 999px;
+    border: 1px solid rgb(255 255 255 / 0.18);
+    background: rgb(20 16 20 / 0.85);
+    padding: 0.375rem 1.25rem 0.375rem 0.375rem;
+    font-weight: 600;
+    color: #ecd2f3;
+    text-decoration: none;
+    backdrop-filter: blur(12px);
+    transition:
+      background-color 300ms,
+      color 300ms,
+      opacity 300ms,
+      translate 300ms;
+  }
+  /* The hero has its own "Start your run" button: the dock waits until you scroll past it. */
+  .grail-dock[data-on="hero"] {
+    opacity: 0;
+    translate: -50% 1.5rem;
+    pointer-events: none;
+    visibility: hidden;
+  }
+  .grail-dock[data-on="light"] {
+    background: rgb(255 255 255 / 0.9);
+    border-color: rgb(0 0 0 / 0.12);
+    color: #1a1018;
+  }
+  .grail-dock[data-on="lilac"] {
+    background: rgb(98 53 98 / 0.9);
+    color: #ffffff;
+  }
+}
+.grail-dock-mark {
+  display: block;
+  width: 2.25rem;
+  height: 2.25rem;
+}
+@media print {
+  .grail-dock,
+  .grail-ring-stage {
+    display: none;
+  }
 }

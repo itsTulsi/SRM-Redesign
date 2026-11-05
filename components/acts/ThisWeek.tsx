@@ -1,6 +1,6 @@
 import { getLocale, getTranslations } from "next-intl/server";
 import { Photo } from "@/components/ui/Photo";
-import { formatEventDate, getContent } from "@/lib/content";
+import { formatEventDate, getContent, upcomingEvents } from "@/lib/content";
 import { Link } from "@/lib/i18n";
 import { SECTION } from "@/lib/sections";
 
@@ -9,7 +9,8 @@ export async function ThisWeek() {
   const t = await getTranslations("Acts.thisWeek");
   const nav = await getTranslations("Nav");
   const locale = await getLocale();
-  const { events, featuredStory } = getContent(locale);
+  const { events: allEvents, featuredStory } = getContent(locale);
+  const events = upcomingEvents(allEvents);
 
   return (
     <section id={SECTION.thisWeek} aria-labelledby="this-week-title" className="bg-bg py-24 text-fg lg:py-32">
@@ -45,22 +46,21 @@ export async function ThisWeek() {
         {events.length > 0 ? (
           <>
             <h3 className="mt-16 text-sm font-semibold tracking-wide text-fg-muted uppercase">{t("upcoming")}</h3>
-            <ul className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            {/* A timeline, because that's what these are: one branch, a node per date. Down the page on phones, across from lg. */}
+            <ol className="mt-6 grid max-w-5xl lg:auto-cols-fr lg:grid-flow-col">
               {events.map((e) => (
-                <li key={e.slug}>
-                  <a
-                    href={e.url}
-                    className="flex h-full min-h-11 flex-col gap-2 rounded-2xl border border-line-subtle p-5 text-fg no-underline hover:border-line"
-                  >
+                <li key={e.slug} className="relative border-l border-line pb-8 pl-6 last:pb-0 lg:border-t lg:border-l-0 lg:pt-6 lg:pr-10 lg:pb-0 lg:pl-0">
+                  <span aria-hidden="true" className="absolute top-2 -left-[6px] size-3 rounded-full bg-tree lg:top-[-6px] lg:left-0" />
+                  <a href={e.url} className="group flex min-h-11 flex-col gap-2 text-fg no-underline">
                     <time dateTime={e.start} className="font-display text-lg font-bold">
                       {formatEventDate(e, locale)}
                     </time>
-                    <span className="leading-snug">{e.title}</span>
+                    <span className="leading-snug underline-offset-4 group-hover:underline">{e.title}</span>
                     <span className="sr-only"> {nav("external")}</span>
                   </a>
                 </li>
               ))}
-            </ul>
+            </ol>
           </>
         ) : null}
       </div>

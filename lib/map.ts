@@ -1,20 +1,20 @@
+import citiesData from "@/content/map/cities.json";
 import projection from "@/content/map/projection.json";
 import { getContent, isTodo, type Campus } from "./content";
+import { project, withOrigin } from "./geo";
+
+export { haversineKm, project, roundKm, withOrigin } from "./geo";
 
 /**
  * Campus map data for the client (server-side; keeps content JSON out of the bundle).
  * Positions are fractions (0..1) of the map art in public/map/india.svg, from the same projection
  * scripts/build-map.mts used to draw it.
  */
-export function project(lat: number, lng: number) {
-  const { width, height, minLng, maxLat, k, scale } = projection;
-  return { x: ((lng - minLng) * k * scale) / width, y: ((maxLat - lat) * scale) / height };
-}
-
 export const mapAspect = projection.width / projection.height;
 
-export const directionsUrl = (c: Campus) =>
-  `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(c.directionsQuery)}`;
+/** Google Maps directions to the campus gate; from `origin` when the visitor has told us where they are. */
+export const directionsUrl = (c: Campus, origin: { lat: number; lng: number } | null = null) =>
+  withOrigin(`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(c.directionsQuery)}`, origin);
 
 /** Pre-rendered street map image (scripts/build-street-maps.mts) + link to the interactive OpenStreetMap. */
 export function streetMap(c: Campus) {
@@ -42,6 +42,8 @@ export type MapCampus = {
   state: string;
   kind: Campus["kind"];
   isMain: boolean;
+  lat: number;
+  lng: number;
   x: number;
   y: number;
   labelSide: LabelSide;
@@ -65,6 +67,8 @@ export function getMapData(locale = "en"): { campuses: MapCampus[]; clusters: Ma
     state: c.state,
     kind: c.kind,
     isMain: c.isMain,
+    lat: c.lat,
+    lng: c.lng,
     ...project(c.lat, c.lng),
     labelSide: LABEL_SIDE[c.slug] ?? "right",
     cluster: c.cluster ?? null,
@@ -92,4 +96,20 @@ export function getMapData(locale = "en"): { campuses: MapCampus[]; clusters: Ma
     };
   });
   return { campuses: list, clusters, groups };
+}
+
+/** A city to measure from: name and state in the page's language, plus its map position. */
+export type MapCity = { slug: string; name: string; lat: number; lng: number; x: number; y: number };
+export type MapState = { slug: string; name: string; cities: MapCity[] };
+
+/** Cities grouped by state for the "Where are you coming from?" picker, trimmed to one language. */
+export function getCities(locale: string): MapState[] {
+  const pick = (o: { name: string; nameTa: string; nameHi: string }) => (locale === "ta" ? o.nameTa : locale === "hi" ? o.nameHi : o.name);
+  return citiesData.states.map((s) => ({
+    slug: s.slug,
+    name: pick(s),
+    cities: citiesData.cities
+      .filter((c) => c.state === s.slug)
+      .map((c) => ({ slug: c.slug, name: pick(c), lat: c.lat, lng: c.lng, ...project(c.lat, c.lng) })),
+  }));
 }

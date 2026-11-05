@@ -33,8 +33,8 @@ export async function Hero() {
       className="relative isolate flex min-h-[calc(100svh-4rem)] flex-col justify-end overflow-hidden bg-bg text-fg"
     >
       <HeroMedia />
-      {/* Phones: bottom padding keeps the last chips clear of the Ask SRM button and the seed. */}
-      <div className="site-container w-full pt-16 pb-20 sm:pb-8 lg:pb-12">
+      {/* Phones: extra bottom room so the floating Ask SRM button never sits on the audience chips. */}
+      <div className="site-container w-full pt-16 pb-24 sm:pb-8 lg:pb-12">
         <h1 id="hero-title" className="max-w-[16ch] font-display text-hero font-bold text-balance">
           {t("title")}
         </h1>

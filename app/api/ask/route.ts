@@ -3,7 +3,7 @@ import lexiconData from "@/content/lexicon.json";
 import { understand, type Answer, type AnswerCard, type Lexicon } from "@/lib/ask";
 import { campuses, colleges, getContent, isTodo, programmes } from "@/lib/content";
 import { routing } from "@/lib/i18n";
-import { loadSearcher, tokenize, toSearchDocs, type Searcher } from "@/lib/search";
+import { loadSearcher, matchedWords, tokenize, toSearchDocs, type Searcher } from "@/lib/search";
 
 /**
  * GET /api/ask?q=… — programme matcher (CLAUDE.md §6), free and offline: no paid AI, no external calls.
@@ -15,8 +15,6 @@ const lexicon = lexiconData as Lexicon;
 const docs = toSearchDocs(programmes, colleges, campuses);
 let searcher: Promise<Searcher> | null = null;
 const MAX_QUERY = 200;
-
-const norm = (s: string) => s.normalize("NFC").toLowerCase();
 
 export async function GET(req: NextRequest) {
   const query = (req.nextUrl.searchParams.get("q") ?? "").trim().slice(0, MAX_QUERY);
@@ -40,11 +38,6 @@ export async function GET(req: NextRequest) {
   const cards: AnswerCard[] = ranked.map((english) => {
     // Match on English (tags, official name); show the visitor's language.
     const p = local.getProgramme(english.slug)!;
-    const name = norm(english.name);
-    const matched = [
-      ...u.terms.filter((t) => p.tags.includes(t.tag)).map((t) => t.said),
-      ...words.filter((w) => w.length >= 2 && (p.tags.includes(w) || (w.length >= 3 && (name.includes(w) || norm(p.name).includes(w))))),
-    ];
     return {
       slug: p.slug,
       name: p.name,
@@ -53,7 +46,7 @@ export async function GET(req: NextRequest) {
       durationYears: typeof p.durationYears === "number" ? p.durationYears : null,
       campuses: p.campuses.map((c) => getCampus(c)?.name ?? c),
       summary: p.summary,
-      matched: [...new Set(matched)],
+      matched: matchedWords(u, words, p.tags, [english.name, p.name]),
       placesNotListed: u.places
         .filter((pl) => !p.campuses.includes(pl as (typeof p.campuses)[number]))
         .map((pl) => getCampus(pl)?.name ?? pl),

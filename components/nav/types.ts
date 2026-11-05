@@ -14,5 +14,7 @@ export type NavData = {
   sections: NavSection[];
   apply: NavLink;
   enquiry: NavLink;
+  call: { label: string; display: string; tel: string };
+  compare: NavLink;
   labels: { primary: string; home: string; menu: string; close: string; language: string; external: string; apply: string };
 };

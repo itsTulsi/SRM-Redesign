@@ -14,15 +14,23 @@ A redesign of [srmist.edu.in](https://www.srmist.edu.in/) built around SRM's own
 
 | | |
 |---|---|
-| **Search is the front door** | Type "robots", "becoming a doctor" or "எனக்கு ரோபோக்கள் பிடிக்கும்", and matching programmes appear instantly. Press **Find** for answer cards with fees, eligibility and entrance details taken straight from SRM's data. |
+| **Search is the front door** | Type "robots", "becoming a doctor" or "எனக்கு ரோபோக்கள் பிடிக்கும்", and matching programmes appear instantly with their fees and the words they matched. Press **Find** for answer cards with fees, eligibility and entrance details taken straight from SRM's data. |
 | **Three acts, one story** | *Learn* (colleges and rankings), *Leap* (student work, startups, research by mission), *Lead* (alumni, leaders on campus, placements). Act titles assemble from fragments, and curtain wipes move between acts. |
 | **Real 2026–27 facts** | Eligibility, entrance exams and 2026 last dates for 29 programmes, and annual fees for every one except MBBS (SRM hasn't published it), from SRM's 2026 admission pages and 2026–27 brochure, each with its source link. |
+| **Command palette** | Press ⌘K or Ctrl+K, or tap the search icon, for one box covering every programme, page and action: call admissions, switch language, Parent Mode, Lite Mode. It works in all three languages and from the keyboard alone. |
+| **Compare programmes** | Pin up to three programmes and see fees, eligibility, entrance and deadlines side by side, with what differs picked out. Each comparison is a link you can share, and it works without JavaScript. |
 | **Ask SRM** | A free, rule-based assistant on every page. It answers from verified content only: fees, campuses, hostels, deadlines. When it doesn't know, it says so and offers the admissions phone numbers. No paid AI, and nothing is invented. |
 | **Parent Mode** | One toggle rewrites any programme page into plain answers about cost, safety, hostel, distance from Chennai and jobs, with large *Call admissions* buttons. |
 | **Lite Mode** | Switches on automatically for Save-Data, slow 3G or reduced motion. It strips video, 3D and smooth scrolling and keeps all the information. |
 | **Three languages** | English, தமிழ் and हिन्दी, including programme names, fees and the assistant. Tamil and Devanagari use the fonts already on the device, so most phones download no extra font. |
-| **Campus map and 360° tour** | A stylised India map with all six campuses and three sister universities, at their true coordinates. Tap a pin to fly in and get directions. For Kattankulathur, SRM's 360° tour opens without leaving the page. |
+| **Campus map and 360° tour** | India in 3D on desktop (a flat map on phones and in Lite Mode), with all six campuses and three sister universities as beacons at their true coordinates. Tap a pin to dive in and get directions. For Kattankulathur, SRM's 360° tour opens without leaving the page. |
+| **How far is SRM from home?** | Pick your city (70 of them, coordinates from OpenStreetMap) or use your location, which never leaves the device. Arcs fly from home to every campus, the nearest is marked, the list re-sorts by straight-line distance, and Directions start from home. |
+| **Every leaf started here** | At the end of Act III the Living Tree is fully grown. Each leaf is a real alumnus, student team or startup, linked to their story, and one gold leaf is the visitor's: Apply. |
+| **Works offline** | A hand-written service worker keeps the homepage, admissions, hostels and any programme page you save working with no signal, search included. Offline, forms and Ask SRM say so plainly and offer the admissions numbers. |
+| **Link previews** | Programme, campus and story links shared on WhatsApp, X or LinkedIn show a branded card with the programme's real fee and NIRF rank. |
 | **Hostels, in full** | Every girls', boys' and international block with photos, room types and warden contacts. Also the 2026–27 fee tables, how to apply, mess timings and canteens, safety rules for parents, and the hostel office contacts. All of it comes from SRM's hostel pages and fee circulars. |
+| **Student life** | All eleven of SRM's student-life pages in one place: the green campus, student affairs and fests, 15 clubs, counselling with the counsellors' numbers, community centres, places of worship and the Equal Opportunity Cell. Anti-ragging helplines and penalties are one tap away for parents. |
+| **Research centres and patents** | All ten central research labs and facilities (IIISM, REACH, NRC, CACR, the SRM-DBT Platform, Medical Research, Statistics, the Earthquake Research Cell, HPCC and SCIF), each with a brief, focus areas, facilities and who to contact. Also SRM's patent register: granted patents by country, the US patents and technology transfers. |
 | **Voices and startups** | Talks by India's science leaders (DRDO, ISRO, INSA, NITI Aayog) play only when tapped. A logo wall shows startups from SRM's incubation centre. |
 | **Ask a Senior** | Moderated Q&A with current students on each programme page. Sample data, with the real moderation states. |
 
@@ -52,7 +60,7 @@ Measured on a production build with Lighthouse (mobile, simulated slow 4G, media
 | Homepage (Tamil) | 94 | 100 | 100 | 100 | 0 |
 | B.Tech CSE programme page | 96 | 100 | 100 | 100 | 0 |
 
-- **Every page** (all 138 sitemap URLs across the three languages) passes axe-core (WCAG 2.2 AA) at 360 px wide. No page scrolls sideways, each has exactly one `h1`, and none logs a console error.
+- **Every page** (all 147 sitemap URLs across the three languages) passes axe-core (WCAG 2.2 AA) at 360 px wide. No page scrolls sideways, each has exactly one `h1`, and none logs a console error.
 - **Keyboard:** a skip link comes first, and every interactive element has a visible focus ring. Focus never lands behind the sticky header, and there are no keyboard traps.
 - **JavaScript:** 136 kB on first load (budget 180 kB). The motion library, smooth scrolling, search index and YouTube player all load later, or only when used.
 - **Reduced motion:** everything is static, nothing is pinned, and the tree appears fully grown.
@@ -85,9 +93,25 @@ npm run dev          # http://localhost:3000
 | `npm run i18n:review` | Exports every Tamil and Hindi string to `docs/translation-review.csv` for a native-speaker review |
 | `npm run build:verify` / `npm run start:verify` | Builds and serves into `.next-verify/`, so a running `npm run dev` is never disturbed |
 
+### Offline support and the kill switch
+
+In production, a hand-written service worker (`public/sw.js`) keeps key pages, programme pages people save, and the
+search index working offline. To ship a change to it, bump `VERSION` at the top: old caches are deleted on the next
+visit. If a bad worker ever ships, replace `public/sw.js` with this and deploy; every visitor's worker removes itself
+and its caches on their next visit:
+
+```js
+self.addEventListener("install", () => self.skipWaiting());
+self.addEventListener("activate", (e) => e.waitUntil(
+  caches.keys().then((keys) => Promise.all(keys.filter((k) => k.startsWith("srm-")).map((k) => caches.delete(k))))
+    .then(() => self.registration.unregister())
+    .then(() => self.clients.matchAll()).then((cs) => cs.forEach((c) => c.navigate(c.url))),
+));
+```
+
 No API keys are needed. The site, the search, the programme matcher and the assistant all work offline. Two optional settings:
 
-- `NEXT_PUBLIC_SITE_URL`: the canonical site address, for the sitemap and SEO tags.
+- `NEXT_PUBLIC_SITE_URL`: the canonical site address, for the sitemap, SEO tags and link previews. **Set it to the real https address in Vercel.** Without it, every preview image points at `localhost:3000`, and links shared on WhatsApp, X or LinkedIn show no image.
 - `ENQUIRY_WEBHOOK_URL`: where the admission enquiry form sends submissions. Without it, the form tells the visitor plainly that nothing was sent.
 
 ## Project structure

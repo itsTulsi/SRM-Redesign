@@ -2,6 +2,30 @@
 
 Production build (`npm run build:verify` then `npm run start:verify -- -p 3123`), headless Chrome.
 
+## Re-run on 2026-11-05, after the final-day features (FINAL-DAY-TASKS.md)
+
+Link previews, "How far is SRM from home?", the tree finale and offline support are all in this build.
+
+| Page (mobile, median of 3) | Performance | Accessibility | Best Practices | SEO | LCP | CLS | TBT |
+|---|---|---|---|---|---|---|---|
+| `/` (English) | 93 | 100 | 100 | 100 | 3.23 s | 0 | 25 ms |
+| `/ta` (Tamil) | 92 | 100 | 100 | 100 | 3.38 s | 0 | 35 ms |
+| `/programmes/btech-cse` | 97 | 100 | 100 | 100 | 2.69 s | 0 | 5 ms |
+
+- **All three bars hold:** Accessibility, Best Practices and SEO are 100, and Performance is at least 90. Two individual runs
+  (one on `/ta`, one on the programme page) ended in a Lighthouse protocol timeout and were re-run.
+- **Performance is 1–3 points lower than on 2026-10-26** (home 94 → 93, Tamil 94 → 92), with homepage LCP about
+  0.15–0.3 s later. The LCP element is still the hero photo, and its delay is render delay, not loading. The new sections
+  add HTML: the homepage is 68 KB compressed. Rendering the tree finale once for all screen sizes, rather than twice,
+  cut it from 73 KB.
+- **Homepage first-load JS:** 139 KB (budget 180 KB). The new features added about 3 KB.
+- **axe-core 4.14 at 360 × 800:** all 147 sitemap pages, plus the three offline pages, have no violations, no
+  sideways scroll, one `h1` each and no console errors.
+- **Feature suites:** palette, compare, transitions and the 3D map, 36 checks; home distance, 27; tree finale, 19;
+  offline, 18. All pass.
+- **Test note:** long runs on this Mac stalled whenever it slept (its power log shows it). The same pages run with
+  `caffeinate` were clean every time.
+
 **Re-run on 2026-10-25 with 27 real photos, the filled-in content and the official SRM logo in the header:** home 94 / 100 / 100 / 100 (LCP 3.1 s simulated, CLS 0; it was 96 before the logo's extra 7 kB request), B.Tech CSE programme page 98 / 100 / 100 / 100 (LCP 2.5 s); all 135 sitemap URLs pass the 360 px axe + overflow crawl. The hero video and Camber car video are still missing, so re-run once they arrive.
 
 ## Lighthouse (mobile)

@@ -55,7 +55,11 @@
     "startHere": "Start here",
     "enquiry": "Admission enquiry",
     "housing": "Housing & residential",
-    "hostels": "Hostels"
+    "hostels": "Hostels",
+    "studentLife": "Student life",
+    "researchCentres": "Research centres",
+    "patents": "Patents",
+    "compare": "Compare programmes"
   },
   "Footer": {
     "label": "Footer",
@@ -70,7 +74,7 @@
   },
   "Pages": {
     "programmesTitle": "Programmes",
-    "programmesIntro": "Every programme, grouped by college. Filters and search arrive next.",
+    "programmesIntro": "Every programme, grouped by college. Pin up to three to compare them side by side.",
     "admissionsTitle": "Admissions",
     "admissionsIntro": "Talk to a person. Admissions teams answer these numbers.",
     "applyIntro": "Applications are made on SRM's official application portal.",
@@ -114,7 +118,8 @@
     "research": "Research",
     "alumni": "Alumni",
     "pauseVideo": "Pause background video",
-    "playVideo": "Play background video"
+    "playVideo": "Play background video",
+    "understood": "Understood"
   },
   "Acts": {
     "learn": {
@@ -128,9 +133,10 @@
       "rankingsIntro": "NIRF {year} — the Government of India's national institutional ranking.",
       "rank": "Rank",
       "naac": "NAAC grade",
-      "moreRanks": "Other NIRF {year} categories",
+      "moreRanks": "All NIRF {year} categories",
       "source": "Source: NIRF {year} table published by SRMIST",
-      "drag": "Drag"
+      "drag": "Drag",
+      "ladderNote": "Each dot is SRM's place on that national list. Further left is better."
     },
     "leap": {
       "kicker": "Act II",
@@ -160,7 +166,13 @@
       "voicesTitle": "Voices at SRM",
       "voicesIntro": "India's science leaders, on campus for the Indian National Science Academy's 90th Anniversary General Meeting.",
       "voicesNote": "Roles as at the time of each talk. Videos play from YouTube when you tap them.",
-      "play": "Play"
+      "play": "Play",
+      "finaleTitle": "Every leaf started here.",
+      "finaleIntro": "Alumni, champions and founders: people who learned, leapt and now lead.",
+      "finaleList": "People and projects that started at SRM",
+      "yourLeaf": "Your leaf is waiting",
+      "apply": "Apply",
+      "startupLine": "Came through SRM's Innovation and Incubation Centre"
     },
     "explore": {
       "title": "Where will you study?",
@@ -189,7 +201,23 @@
       "exploreCursor": "Explore",
       "sisterBadge": "Sister university",
       "mapCredit": "Map: Natural Earth (India boundaries as officially depicted); street maps © OpenStreetMap contributors",
-      "clusterChennaiCity": "Chennai city"
+      "clusterChennaiCity": "Chennai city",
+      "fromLabel": "Where are you coming from?",
+      "chooseCity": "Choose your city",
+      "useLocation": "Use my location",
+      "locating": "Finding you…",
+      "locationPrivacy": "Your location stays on this device. Distances are worked out in your browser.",
+      "nearest": "Nearest",
+      "straightLine": "Distances are in a straight line, as the crow flies, not by road.",
+      "kmAway": "≈ {km, number} km",
+      "kmFrom": "About {km, number} km from {place}",
+      "crowFlies": "as the crow flies",
+      "clear": "Clear",
+      "nearestAnnounce": "Nearest campus: {name}, about {km, number} km.",
+      "homeCleared": "Starting point cleared.",
+      "locationDenied": "Location is turned off for this site. Choose your city from the list instead.",
+      "locationUnavailable": "Couldn't find your location. Choose your city from the list instead.",
+      "yourLocation": "Your location"
     },
     "thisWeek": {
       "title": "This week at SRM",
@@ -237,7 +265,8 @@
     "ctaBody": "Send us an enquiry and a counsellor will call you back — or call now.",
     "ctaButton": "Send an enquiry",
     "consentLabel": "Consent",
-    "demoTitle": "Demo mode — your enquiry wasn't sent"
+    "demoTitle": "Demo mode — your enquiry wasn't sent",
+    "offline": "You're offline, so nothing was sent. What you typed is still here: send it when you're back online, or call us:"
   },
   "Ask": {
     "finding": "Finding programmes…",
@@ -408,7 +437,8 @@
     "sFeesFor": "Fees for {name}",
     "sApply": "How do I apply?",
     "sRanking": "NIRF ranking",
-    "sHostel": "Is there a hostel?"
+    "sHostel": "Is there a hostel?",
+    "offline": "You're offline, so I can't look that up. Call admissions:"
   },
   "Hostels": {
     "metaTitle": "Hostels & housing",
@@ -623,5 +653,706 @@
     "staffLink": "Meet the hostel staff",
     "officialPage": "SRM's official hostel pages",
     "sourceNote": "From SRM's hostel pages, 2026–27 fee circulars and 2026 hostel rules, as of 26 October 2026. Fees and rules can change — confirm with the hostel office."
+  },
+  "Life": {
+    "metaTitle": "Student life",
+    "eyebrow": "Kattankulathur campus",
+    "title": "Student life",
+    "intro": "Life at SRM is what you make of it: clubs, fests, sport, service and support, on a green 250-acre campus. Everything here is from SRM's student-life pages.",
+    "onThisPage": "On this page",
+    "sections": {
+      "holistic": "Holistic development",
+      "green": "Green campus",
+      "affairs": "Student affairs",
+      "diversity": "Diversity",
+      "counselling": "Student counselling",
+      "community": "Community centres",
+      "clubs": "Clubs",
+      "antiRagging": "Anti-ragging",
+      "antiDiscrimination": "Anti-discrimination",
+      "religious": "Religious life",
+      "eoc": "Equal Opportunity Cell"
+    },
+    "holistic": {
+      "lead": "SRM's aim is simple: by the time students leave, they should have the self-belief to be whoever they want to be. Student life can be what each student wants it to be.",
+      "points": [
+        {
+          "t": "Getting around",
+          "d": "Walking and cycling are the most popular ways to move around campus, with security and 24-hour emergency services."
+        },
+        {
+          "t": "Never a dull moment",
+          "d": "From entertainment to extracurriculars and religious life, the activities are as varied as the students."
+        },
+        {
+          "t": "Festivals",
+          "d": "All major Indian festivals are celebrated on campus, with special lunches in the hostels."
+        }
+      ],
+      "housing": "Housing & dining"
+    },
+    "green": {
+      "lead": "Over 250 acres at Kattankulathur: lakes, gardens, lawns, tree-lined walkways and real biodiversity, kept green and safe by campus policy.",
+      "points": [
+        {
+          "t": "Cycling across campus",
+          "d": "Roads named after inspiring people, and statues of Raja Raja Chola, Swami Vivekananda, Mahatma Gandhi, Thiruvalluvar and Socrates along the way."
+        },
+        {
+          "t": "Transport",
+          "d": "Hundreds of AC and non-AC SRM buses move people around campus and, for those who opt in, to and from Chennai and nearby areas."
+        },
+        {
+          "t": "Barrier-free",
+          "d": "Ramps, low-floor buses, lifts to classrooms and labs, battery cars and wheelchair-friendly paths."
+        },
+        {
+          "t": "Round-the-clock security",
+          "d": "A professional security force under a chief security officer, with a surveillance control room, cameras, access control and campus fire safety."
+        }
+      ],
+      "policies": "Green policies: bicycles first, a ban on plastic, landscaping, pedestrian walkways and restricted car entry.",
+      "acres": "acres of green campus",
+      "security": "Security control officer",
+      "parking": "Parking permits and employee cards",
+      "campusLife": "Associate Director, Campus Life – Infrastructure & Facilities"
+    },
+    "affairs": {
+      "lead": "The Directorate of Student Affairs (DSA) runs everything beyond the classroom — clubs, houses, fests, discipline, counselling and student welfare. Of the students, by the students, for the students.",
+      "stats": {
+        "clubs": "clubs under DSA",
+        "houses": "houses across SRMIST",
+        "events": "events a year",
+        "counselling": "counselling support"
+      },
+      "eventsTitle": "Fests and events",
+      "events": {
+        "ace": "SRM's sports club",
+        "khel": "National-level sports festival",
+        "jhalak": "Inter-house cultural competition",
+        "rendezvous": "A fest of dance, music and fashion",
+        "josh": "Cultural and sports event for faculty",
+        "butterflies": "Cultural and sports day for government-school students"
+      },
+      "moreFests": "Also on the calendar: Shuru, Tarana and Milan.",
+      "teamTitle": "Who to contact",
+      "roles": {
+        "director": "Director, Student Affairs",
+        "deputy": "Deputy Director",
+        "assistant": "Assistant Director"
+      }
+    },
+    "diversity": {
+      "lead": "It's a “mini India” at SRM: students from every part of India and from around the world, with regional festivals celebrated on campus.",
+      "body": "Living and learning together builds confidence, camaraderie and the ability to work in diverse teams. Culture, sport, fine arts and entrepreneurship are all encouraged beyond academics."
+    },
+    "counselling": {
+      "lead": "Free, confidential counselling for anything that gets in the way: stress, anxiety, exam pressure, family issues, loneliness, low self-esteem, poor concentration, sleeplessness or thoughts of suicide.",
+      "services": [
+        {
+          "t": "Directorate of Student Affairs",
+          "d": "Counselling for personal problems that affect studies and campus life, offered for over 13 years."
+        },
+        {
+          "t": "Department of Psychiatry, SRM Hospital",
+          "d": "Psychiatrists available 24/7, with individual counselling and therapy for students and staff."
+        },
+        {
+          "t": "Department of Clinical Psychology",
+          "d": "Psychological assessment and therapy (CBT, mindfulness and more) for anxiety, sleep, procrastination, relationships and addictions, including smartphone addiction. SRM Hospital, D-Block extension, 5th floor."
+        },
+        {
+          "t": "“Here For You” app",
+          "d": "SRM's mental-health app, with anonymous, round-the-clock online counselling through YourDOST."
+        },
+        {
+          "t": "Wellness Centre and University Wellness Programme",
+          "d": "Fitness and diet routines with doctors and dieticians, and campus-wide wellbeing campaigns by the School of Public Health."
+        }
+      ],
+      "counsellorsTitle": "Counsellors, Department of Clinical Psychology",
+      "roles": {
+        "hod": "Professor & Head",
+        "asst": "Assistant Professor"
+      },
+      "wellnessContacts": "University Wellness Programme: <uwpMail>{uwp}</uwpMail> · Wellness Centre: <centreMail>{centre}</centreMail>",
+      "urgent": "In crisis right now? Call Tele-MANAS, the Government of India's free 24×7 mental-health line, on <tel>{n}</tel>."
+    },
+    "community": {
+      "lead": "Students are drawn into community service from their first year.",
+      "items": [
+        {
+          "t": "ANNSH School",
+          "d": "A school on campus for drop-outs and the children of construction workers — 32 children, taught by SRM students in the evenings."
+        },
+        {
+          "t": "Butterflies Project",
+          "d": "Sports, literary and cultural days for children from 25 government and private schools around Kattankulathur."
+        },
+        {
+          "t": "NGO canteen",
+          "d": "A canteen in the women's hostel run by a women's self-help group, guided by the NGO Hand in Hand."
+        }
+      ],
+      "impact": "What students take away: leadership, a sense of responsibility, self-esteem, and the discovery that they can make a difference."
+    },
+    "clubs": {
+      "lead": "Fifteen student-run clubs, open to everyone, with workshops, sessions and competitions all year.",
+      "items": {
+        "rotaract": {
+          "t": "Rotaract Club",
+          "d": "Community service with the Rotary Club of Meenambakkam, towards the sustainable development goals."
+        },
+        "astrophilia": {
+          "t": "Astrophilia",
+          "d": "Stars, planets and galaxies: astronomy talks and discussions."
+        },
+        "fashion": {
+          "t": "Fashion",
+          "d": "Styling, grooming and the runway."
+        },
+        "music": {
+          "t": "Music",
+          "d": "Perform, jam and learn with fellow musicians."
+        },
+        "literature": {
+          "t": "Literature Club",
+          "d": "Readers and writers: poetry, stories and essays."
+        },
+        "festival": {
+          "t": "Festival",
+          "d": "Celebrating the festivals of every culture on campus."
+        },
+        "dance": {
+          "t": "Dance Club",
+          "d": "Every style, for beginners and trained dancers alike."
+        },
+        "dramatics": {
+          "t": "Movies and Dramatics",
+          "d": "Acting, stagecraft and the performing arts."
+        },
+        "sports": {
+          "t": "Sports",
+          "d": "Training and competitions across sports, all year."
+        },
+        "creative": {
+          "t": "Creative Arts & Media",
+          "d": "Painting, design and visual art."
+        },
+        "women": {
+          "t": "Women Empowerment",
+          "d": "Awareness, symposiums and camps on gender equality."
+        },
+        "selfDefense": {
+          "t": "Self Defense Club",
+          "d": "Martial-arts basics for staying safe."
+        },
+        "social": {
+          "t": "Social Club",
+          "d": "Volunteering, social service and awareness camps."
+        },
+        "gaming": {
+          "t": "Gaming",
+          "d": "Esports training and tournaments."
+        },
+        "quiz": {
+          "t": "Quiz",
+          "d": "Quizzing for the curious."
+        }
+      }
+    },
+    "antiRagging": {
+      "lead": "Ragging is a criminal offence. SRM condemns it in every form: seniors welcome freshers with flowers and advice, and every incident is acted on.",
+      "helpTitle": "If you see or face ragging",
+      "srm": "SRMIST anti-ragging helpline",
+      "national": "National anti-ragging helpline (24×7, toll free)",
+      "ugc": "UGC monitoring agency (Centre for Youth)",
+      "whatTitle": "What counts as ragging",
+      "what": [
+        "Teasing or rudeness towards a fresher, in words, writing or action",
+        "Making a student do something that causes shame, torment or embarrassment",
+        "Disrupting a fresher's studies, or making them do others' academic work",
+        "Demanding money, or forcing someone to spend",
+        "Physical or sexual abuse, or anything that endangers health",
+        "Insults by email, post or in public, or anything that harms mental health or self-confidence"
+      ],
+      "punishTitle": "Punishments (UGC and AICTE)",
+      "punish": [
+        "An FIR with the police for every incident",
+        "Cancellation of admission, or expulsion and a bar on admission elsewhere",
+        "Suspension from classes, exams or the hostel; results withheld",
+        "Scholarships and other benefits withdrawn",
+        "Rustication for 1 to 4 semesters",
+        "A fine of ₹25,000",
+        "Collective punishment when the culprits aren't identified"
+      ],
+      "officersTitle": "Nodal officers",
+      "squad": "Anti-Ragging Squad (co-convener)",
+      "committee": "Anti-Ragging Committee"
+    },
+    "antiDiscrimination": {
+      "lead": "SRMIST works to give every student and staff member an environment of freedom and dignity.",
+      "body": "Anyone who feels humiliated or targeted because of caste can lodge a complaint in the prescribed form. It goes to a senior official and is followed by an enquiry."
+    },
+    "religious": {
+      "lead": "Places of worship on campus, and the festivals celebrated at each.",
+      "items": {
+        "temple": {
+          "t": "Vinayagar Temple",
+          "d": "Vinayagar Chathurthi, Pongal, Sankatahara Chathurthi, Deepavali, Navarathri (10 days), Pournami, Karthigai, New Year's Day, Tamil New Year"
+        },
+        "mosque": {
+          "t": "Muslim Prayer Hall",
+          "d": "Ramzan, Bakrid, Muharram, Milad-un-Nabi"
+        },
+        "church": {
+          "t": "Christian Prayer Hall",
+          "d": "New Year's Day, Good Friday, Easter, Christmas"
+        }
+      },
+      "festivals": "Festivals"
+    },
+    "eoc": {
+      "lead": "The Equal Opportunity Cell makes sure everyone — whatever their caste, gender, disability, background or identity — has equal access to opportunities, resources and support.",
+      "items": [
+        {
+          "t": "Advocacy and support",
+          "d": "Confidential guidance for anyone facing a difficult situation, and help reaching the right resources."
+        },
+        {
+          "t": "Education and training",
+          "d": "Workshops and seminars on diversity, equity and inclusion."
+        },
+        {
+          "t": "Policy",
+          "d": "Works with administrators and faculty on policies that remove barriers."
+        },
+        {
+          "t": "Outreach",
+          "d": "Engages students, staff and families to build a culture of belonging."
+        }
+      ],
+      "chair": "Chairperson"
+    },
+    "officialPage": "On SRM's site",
+    "sourceNote": "From SRM's student-life pages, as of 27 October 2026. Contacts can change — check SRM's site before you call."
+  },
+  "Centres": {
+    "metaTitle": "Research centres and patents",
+    "eyebrow": "Directorate of Research · Kattankulathur",
+    "title": "Research centres",
+    "intro": "Ten central laboratories and facilities, open across colleges, where SRM's research is done: from Siddha medicine to supercomputing, from zero-cement concrete to earthquake prediction. Each one below in brief, with who to contact.",
+    "onThisPage": "On this page",
+    "centresTitle": "Central research laboratories and facilities",
+    "patentsTitle": "Patents",
+    "deanTitle": "Directorate of Research",
+    "deanRole": "Dean (Research)",
+    "established": "Since {year}",
+    "focus": "Research focus",
+    "facilities": "Facilities",
+    "highlights": "Highlights",
+    "contact": "Contact",
+    "booking": {
+      "nrc": "Book an instrument",
+      "dbt": "Instrument usage charges",
+      "hpcc": "HPCC registration form (Word)"
+    },
+    "roles": {
+      "coordinator": "Coordinator",
+      "head": "Head",
+      "deanMedical": "Dean of Research (Medical & Health Sciences)",
+      "support": "HPC support desk"
+    },
+    "photoAlt": "Inside {name}",
+    "centres": {
+      "iiism": {
+        "name": "Interdisciplinary Institute of Indian System of Medicine",
+        "brief": "Research that validates and standardises herbal medicines from Siddha, Ayurveda and Unani. IIISM works with Banaras Hindu University, has MoUs with AYUSH and the Central Council for Research in Ayurveda and Siddha, and has 200 acres set aside to propagate medicinal plants.",
+        "facilities": [
+          "NMR lab",
+          "Phytochemistry lab",
+          "Molecular biology and immunobiology lab",
+          "Metabolic ward",
+          "Drug testing laboratory for Indian medicine"
+        ]
+      },
+      "reach": {
+        "name": "Centre for Research in Environment, Sustainability Advocacy and Climate Change",
+        "brief": "Environment, sustainable development, advocacy and climate change, guided by the UN Sustainable Development Goals, with partners in academia, industry, start-ups and funding agencies who rely on it for technical, policy and regulatory support.",
+        "focus": [
+          "How pesticides, industrial chemicals and plasticisers move through India's urban hotspots",
+          "Long-range air transport of persistent organic pollutants",
+          "Plasticisers in India's rivers and seas",
+          "Low-cost clean-up of emerging contaminants in soil, water and wastewater",
+          "New products from recycled plastic",
+          "Wastewater-based epidemiology (used during COVID-19)"
+        ],
+        "facilities": [
+          "Environmental radiation monitoring lab",
+          "Environmental science and technology lab: water, wastewater and air testing",
+          "Environmental microbiology lab",
+          "Sustainable Development Cell"
+        ]
+      },
+      "nrc": {
+        "name": "Nanotechnology Research Centre",
+        "brief": "Nanoscience for energy, the environment and healthcare, with labs for synthesis, characterisation, fabrication and computational modelling. Collaborators include Shizuoka University, Université Paris Cité, KTH Sweden, NIMS Japan, BARC, IIT Madras and NPL, and industry partners Ashok Leyland and the Rane Group.",
+        "focus": [
+          "Thermoelectric materials and devices",
+          "2D materials (TMDs) for optoelectronics",
+          "Solar-cell materials and devices",
+          "Flexible, transparent conductors",
+          "Gas sensors",
+          "Supercapacitors",
+          "Thin-film heterostructures",
+          "Photocatalysis and electrocatalysis for clean-up"
+        ]
+      },
+      "cacr": {
+        "name": "Centre for Advanced Concrete Research",
+        "brief": "Portland cement carries a lot of embodied carbon dioxide. CACR develops lower-carbon concretes from industrial wastes such as fly ash and slag, with nano-materials — including geopolymer concretes that need no Portland cement at all.",
+        "focus": [
+          "Geopolymer and zero-cement concretes",
+          "Ultra-high-performance concretes",
+          "Bio-concretes to repair old monuments",
+          "Special concretes for nuclear-waste disposal",
+          "Self-curing and acid-resistant concretes",
+          "Railway sleepers and pavers with new binders"
+        ],
+        "highlights": [
+          "A zero-cement concrete building on campus",
+          "Geopolymer paver blocks, pavements and roads",
+          "Precast toilets"
+        ]
+      },
+      "dbt": {
+        "name": "SRM-DBT Platform for Advanced Life Science Technologies",
+        "brief": "A national core facility set up with the Department of Biotechnology, Government of India, offering research services and skills training in modern life sciences to SRM and outside researchers.",
+        "facilities": [
+          "Genomics",
+          "Proteomics",
+          "Molecular platforms",
+          "Bio-imaging",
+          "Specific-pathogen-free animal facility (CPCSEA guidelines)"
+        ],
+        "highlights": [
+          "Advanced molecular diagnostic services",
+          "One-year Postgraduate Diploma in Genetic Counselling, built on the competencies of the US Accreditation Council for Genetic Counseling"
+        ]
+      },
+      "mrc": {
+        "name": "Division of Medical Research",
+        "brief": "Basic and clinical research in medical and allied sciences, PhD research and research-methodology courses for faculty and students, with a central laboratory, an animal house and an Institutional Ethics Committee.",
+        "highlights": [
+          "BIRAC BioNEST grant of about ₹10 crore (2024, five years) for a biotech innovation ecosystem",
+          "DBT project on Cryptosporidium infection, ₹41.5 lakh (2023)",
+          "ICMR multisite study on spotting early-childhood developmental disorders, ₹1.02 crore (2023)"
+        ]
+      },
+      "statistics": {
+        "name": "Centre for Statistics",
+        "brief": "SRM's hub for statistical training, research and consultancy: helping students, scholars and faculty turn research questions into sound analysis.",
+        "facilities": [
+          "Statistical Training Unit: short courses for internal and external participants",
+          "Data Analytic Unit: research questions into statistical problems",
+          "Statistical Consultancy Unit (fee-based): grant writing, questionnaires, survey design, analysis and reports"
+        ],
+        "focus": [
+          "Basic statistics and biostatistics with SPSS",
+          "Advanced statistics for research",
+          "Systematic review and meta-analysis with R",
+          "Survey design methodology"
+        ]
+      },
+      "eqrc": {
+        "name": "Earthquake Research Cell",
+        "brief": "Set up in July 2012 to study the causes, occurrence and prediction of earthquakes, and to build simulation models for prediction, prevention and damage reduction. Field work covers the Sikkim–Darjeeling Himalaya and the North East, the Andaman region, the Ponnaiyar basin in South India and Gujarat.",
+        "focus": [
+          "Seismic hazard assessment",
+          "Mapping active fault zones",
+          "Crustal deformation models in 3D",
+          "Earthquake prediction with neural networks",
+          "GIS seismic databases",
+          "Earthquake-resistant structures and disaster planning"
+        ]
+      },
+      "hpcc": {
+        "name": "High Performance Computing Centre",
+        "brief": "SRM's supercomputing facility, open to any SRMIST faculty member or student who registers. It runs three clusters — STAR, COMET and GALAXY — plus GENOME and MOON servers and workstations.",
+        "focus": [
+          "Computational materials science",
+          "Computational chemistry",
+          "Big data and data science",
+          "Genetic engineering",
+          "Atmospheric science",
+          "Computational mechanics and fluid dynamics"
+        ]
+      },
+      "scif": {
+        "name": "SRM Central Instrumentation Facility",
+        "brief": "One place to find and book the Directorate of Research's state-of-the-art instruments. Open to SRMIST researchers and to industry and academic users outside SRM, with published service charges."
+      }
+    },
+    "patents": {
+      "lead": "Inventions from SRM's labs, protected in India and abroad, and some already licensed to industry.",
+      "headline": "patents",
+      "registerNote": "SRM's own patent register, last updated with 2022 entries:",
+      "granted": "granted patents, {years}",
+      "published": "published patent and copyright filings, {years}",
+      "transfers": "technologies transferred to industry",
+      "offices": {
+        "australia": "Australia",
+        "india": "India",
+        "us": "United States",
+        "wipo": "WIPO"
+      },
+      "byOffice": "Granted patents by patent office",
+      "usTitle": "Granted in the United States",
+      "us": {
+        "polycystic": "Polyherbal composition for preventing and easing polycystic ovary syndrome",
+        "aquasome": "Aquasome nanocarrier gel carrying a cephalosporin antibiotic",
+        "formononetin": "Formononetin solid lipid nanoparticles and how to make them",
+        "wheelchair": "System for supervising a wheelchair user",
+        "enantiomers": "Electrochemical separation of amino-acid enantiomers",
+        "fuelCells": "Microbial fuel cells",
+        "dementia": "Herbal formulation against age-related neurodegeneration and senile dementia",
+        "metabolic": "Plant-based formulation for metabolic syndrome"
+      },
+      "transfersTitle": "Technology transfers",
+      "transferList": {
+        "earBiometric": "Ear-based biometric authentication",
+        "iotPower": "Efficient, secure power distribution for the Internet of Things",
+        "fogEnergy": "Smart energy management and demand reduction with IoT and fog computing",
+        "fogDistribution": "IoT- and fog-based power distribution for smart energy management",
+        "limeMortar": "Lime mortar composition"
+      },
+      "links": {
+        "granted": "All granted patents",
+        "published": "All published patents",
+        "transfers": "Technology transfers"
+      }
+    },
+    "missionsLink": "Research by mission",
+    "officialPage": "On SRM's website",
+    "sourceNote": "From SRM's research pages, as of 27 October 2026."
+  },
+  "Compare": {
+    "metaTitle": "Compare programmes",
+    "title": "Compare programmes",
+    "intro": "Choose up to three programmes and see their fees, eligibility, entrance and deadlines side by side. Every fact comes from SRM's published pages.",
+    "slot": "Programme {n}",
+    "choose": "Choose a programme",
+    "submit": "Compare",
+    "empty": "Choose at least two programmes to compare them.",
+    "example": "Try: {a} and {b}",
+    "onlyDiff": "Show only what differs",
+    "showAll": "Show all rows",
+    "same": "Same",
+    "lowestFees": "Lowest fees",
+    "college": "College",
+    "source": "Source",
+    "caption": "Comparison of the programmes you chose",
+    "feesNote": "Fees are SRM's published amounts per year. Confirm with admissions before you apply.",
+    "ui": {
+      "add": "Compare",
+      "full": "You can compare up to three programmes. Remove one first.",
+      "trayLabel": "Programmes to compare",
+      "count": "{count} of {max} chosen",
+      "clear": "Clear",
+      "go": "Compare",
+      "copy": "Copy link to this comparison",
+      "copied": "Link copied"
+    }
+  },
+  "Palette": {
+    "open": "Search",
+    "title": "Search the site",
+    "inputLabel": "Search programmes, pages and actions",
+    "placeholder": "Search programmes, pages, actions…",
+    "actions": "Actions",
+    "programmes": "Programmes",
+    "pages": "Pages",
+    "none": "Nothing found for that. Admissions can help:",
+    "switchTo": "Switch to {language}",
+    "parentOn": "Turn on Parent Mode",
+    "parentOff": "Turn off Parent Mode",
+    "liteOn": "Turn on Lite Mode",
+    "liteOff": "Turn off Lite Mode",
+    "hint": "↑↓ to move · Enter to open · Esc to close",
+    "close": "Close",
+    "results": "{count, plural, =0 {No results.} one {# result.} other {# results.}}",
+    "feesValue": "₹{amount} per year"
+  },
+  "Offline": {
+    "title": "You're offline",
+    "intro": "There's no internet connection right now. Pages you've saved on this device still open, and you can always call admissions.",
+    "savedTitle": "Saved on this device",
+    "savedNone": "Nothing saved yet. When you're back online, open a programme page and press “Save for offline”.",
+    "callTitle": "Call admissions",
+    "callBody": "A phone call needs no mobile data.",
+    "banner": "You're offline, showing saved pages.",
+    "save": "Save for offline",
+    "saving": "Saving…",
+    "saved": "Saved. This page works without internet.",
+    "saveFailed": "Couldn't save it just now. Try again when you're online."
+  },
+  "Grail": {
+    "level": "Level {n}",
+    "dock": "Start your run",
+    "hero": {
+      "kicker": "SRM Institute of Science and Technology",
+      "title": "Level up at SRM",
+      "lead": "Your years here, played as a character. Pick a path and watch your stats move: every quest on it is something students really do at SRM.",
+      "pickLegend": "What are you into?",
+      "paths": {
+        "building": "Building things",
+        "research": "Research",
+        "people": "People and clubs",
+        "sport": "Sport and wellbeing",
+        "startups": "Startups"
+      },
+      "cardName": "You",
+      "cardYear": "Year 1 at SRM",
+      "levelPill": "Level {n}",
+      "levelUp": "Level up!",
+      "xp": "XP",
+      "empty": "Pick a path to see your first quests.",
+      "firstQuests": "Your first quests",
+      "announce": "{path}. Your first quests: {quests}.",
+      "start": "Start your run",
+      "find": "Find a programme",
+      "pathKicker": "Your character",
+      "pathTitle": "Pick your path.",
+      "ringPause": "Pause the cards",
+      "ringPlay": "Play the cards"
+    },
+    "stats": {
+      "kicker": "The four stats",
+      "title": "Four stats. All of them yours.",
+      "intro": "Everything you do at SRM counts towards one of these.",
+      "open": "{n, plural, one {See the # quest} other {See the # quests}}",
+      "build": {
+        "name": "Build",
+        "line": "Labs, workshops and teams that make real things."
+      },
+      "think": {
+        "name": "Think",
+        "line": "Research, ideas and the hard questions."
+      },
+      "connect": {
+        "name": "Connect",
+        "line": "Clubs, fests, houses and the people you meet."
+      },
+      "grow": {
+        "name": "Grow",
+        "line": "Sport, wellbeing and starting something of your own."
+      }
+    },
+    "board": {
+      "kicker": "Quest board",
+      "title": "Today's quests",
+      "intro": "Real things students do here. Each one comes with the proof.",
+      "label": "Quest board: scroll sideways for more",
+      "raises": "Raises {stat}",
+      "proof": "Proof"
+    },
+    "quests": {
+      "camber": {
+        "title": "Race a car you built",
+        "summary": "Team Camber Racing designs, builds and races a Formula Student car, with students from mechanical, electrical, electronics and computing.",
+        "proof": "National Champions, Formula Bharat 2026 (combustion)"
+      },
+      "swift": {
+        "title": "Ship an app Apple notices",
+        "summary": "Build something real in Swift and enter Apple's Swift Student Challenge.",
+        "proof": "Distinguished Winner, Swift Student Challenge 2026"
+      },
+      "volvo": {
+        "title": "Work on vehicles with Volvo",
+        "summary": "Vehicle engineering with the Volvo Group, on campus.",
+        "proof": "Volvo Group's first university-based Vehicle Technology Centre"
+      },
+      "nano": {
+        "title": "Make a new material",
+        "summary": "Nanotechnology research for energy, the environment and healthcare.",
+        "proof": "Nanotechnology Research Centre, at Kattankulathur since 2006"
+      },
+      "patent": {
+        "title": "File a patent",
+        "summary": "Turn a lab result into an invention with your name on it.",
+        "proof": "{n} patents at SRMIST"
+      },
+      "hpcc": {
+        "title": "Run code on a supercomputer",
+        "summary": "Big simulations and models on SRM's High Performance Computing Centre.",
+        "proof": "One of ten central research facilities open across colleges"
+      },
+      "clubs": {
+        "title": "Join a club",
+        "summary": "Music, dance, quiz, astronomy, gaming and more, all student-run.",
+        "proof": "{n} clubs, open to everyone"
+      },
+      "jhalak": {
+        "title": "Win it for your house",
+        "summary": "Jhalak is SRM's inter-house cultural competition.",
+        "proof": "{n} houses across SRMIST"
+      },
+      "offer": {
+        "title": "Land your first offer",
+        "summary": "Placement season: interviews, offers and your first job.",
+        "proof": "{n} offers for the {season} batch"
+      },
+      "rotaract": {
+        "title": "Serve your community",
+        "summary": "Community service projects, towards the sustainable development goals.",
+        "proof": "With the Rotary Club of Meenambakkam"
+      },
+      "khel": {
+        "title": "Play at a national fest",
+        "summary": "Khel is SRM's national-level sports festival.",
+        "proof": "One of {n} events a year"
+      },
+      "startup": {
+        "title": "Start a company",
+        "summary": "Paperplane, founded by School of Computing students, runs digital clinics for doctors on WhatsApp.",
+        "proof": "Raised ₹3 crore"
+      },
+      "cycle": {
+        "title": "Cycle across campus",
+        "summary": "Walking and cycling are the most popular ways to get around.",
+        "proof": "{n} acres of green campus"
+      },
+      "talk": {
+        "title": "Talk to someone, any time",
+        "summary": "Free, confidential counselling for stress, exams, family or anything else.",
+        "proof": "{n} counselling support"
+      }
+    },
+    "proof": {
+      "kicker": "Proof wall",
+      "title": "Proof, not promises.",
+      "intro": "Only numbers SRM has published.",
+      "nirf": "NIRF {year} · {category}",
+      "naac": "NAAC grade",
+      "offers": "offers, {season} batch",
+      "highest": "highest CTC, {season} batch",
+      "patents": "patents",
+      "publications": "publications",
+      "source": "Source: NIRF {year} table published by SRMIST"
+    },
+    "media": {
+      "kicker": "Campus",
+      "title": "Campus, in motion.",
+      "label": "Campus photos: scroll sideways for more"
+    },
+    "start": {
+      "kicker": "Start your run",
+      "title": "Start your run.",
+      "intro": "Applications are made on SRM's own portal. Find your programme first, or talk to a person.",
+      "apply": "Apply",
+      "enquire": "Ask admissions",
+      "call": "Call",
+      "findTitle": "What do you want to become?"
+    }
   }
 }

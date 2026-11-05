@@ -6,14 +6,14 @@ const tree = generateTree();
 const window_ = (s: number, e: number) => ({ "--s": s, "--e": e }) as CSSProperties;
 
 /**
- * Homepage-only scroll progress (CLAUDE.md §5). Desktop: small tree card fixed bottom-left, shown only while
+ * Homepage-only scroll progress (CLAUDE.md §5). Desktop: small bare tree fixed bottom-left (no box, so it never hides what's behind it), shown only while
  * the three acts are on screen (the hero shows the seed instead — see HeroSeed). Mobile: thin progress bar.
  * Decorative (aria-hidden): progress through the acts is also conveyed by the act headings themselves.
  */
 export function LivingTree() {
   return (
     <TreeScroll>
-      <div aria-hidden="true" className="living-tree pointer-events-none fixed bottom-4 left-4 z-40 hidden w-20 rounded-2xl border border-[var(--line-subtle)] bg-[var(--bg)] p-2 shadow-lg lg:block xl:w-24">
+      <div aria-hidden="true" className="living-tree pointer-events-none fixed bottom-4 left-4 z-40 hidden w-20 lg:block xl:w-24">
         <svg viewBox={tree.viewBox} focusable="false" className="block w-full overflow-visible">
           <line
             x1={tree.base.x - 46}

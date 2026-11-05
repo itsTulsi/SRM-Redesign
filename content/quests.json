@@ -1,0 +1,27 @@
+{
+  "_note": "Quest board for the 'Level Up at SRM' homepage (SRM-GRAIL-REDESIGN.md). Every quest is something students really do at SRMIST, and every proof comes from content already sourced elsewhere in this repo (stories.json, stats.json, student-life.json, startups.json, research-centres.json). Wording is in messages/{en,ta,hi}.json under Grail.quests.<id>. stat: build | think | connect | grow.",
+  "stats": ["build", "think", "connect", "grow"],
+  "quests": [
+    { "id": "camber", "stat": "build", "href": "/stories/camber-racing-formula-bharat-2026", "photo": "media/camber/poster.jpg" },
+    { "id": "swift", "stat": "build", "href": "/stories/swift-student-challenge-2026", "photo": "media/student-work/swift-challenge.jpg" },
+    { "id": "volvo", "stat": "build", "href": "/stories/volvo-vehicle-technology-centre", "photo": "media/stories/volvo-vtc.jpg" },
+    { "id": "nano", "stat": "think", "href": "/research#nrc", "photo": "media/research/nrc-lab.jpg" },
+    { "id": "patent", "stat": "think", "href": "/research#patents", "photo": "media/research/iiism.jpg" },
+    { "id": "hpcc", "stat": "think", "href": "/research#hpcc", "photo": "media/research/hpcc.jpg" },
+    { "id": "clubs", "stat": "connect", "href": "/student-life#clubs", "photo": "media/life/holistic.jpg" },
+    { "id": "jhalak", "stat": "connect", "href": "/student-life#student-affairs", "photo": "media/life/jhalak.jpg" },
+    { "id": "offer", "stat": "connect", "href": "/programmes", "photo": "media/colleges/engineering.jpg" },
+    { "id": "rotaract", "stat": "connect", "href": "/student-life#clubs", "photo": "media/life/community.jpg" },
+    { "id": "khel", "stat": "grow", "href": "/student-life#student-affairs", "photo": "media/life/khel.jpg" },
+    { "id": "startup", "stat": "grow", "href": "/stories/student-startup", "photo": "media/startups/paperplane.jpg" },
+    { "id": "cycle", "stat": "grow", "href": "/student-life#green-campus", "photo": "media/life/cycling.jpg" },
+    { "id": "talk", "stat": "grow", "href": "/student-life#counselling", "photo": "media/life/wellness.jpg" }
+  ],
+  "paths": [
+    { "id": "building", "stats": { "build": 9, "think": 6, "connect": 4, "grow": 5 }, "quests": ["camber", "swift", "volvo"] },
+    { "id": "research", "stats": { "build": 5, "think": 9, "connect": 4, "grow": 4 }, "quests": ["nano", "patent", "hpcc"] },
+    { "id": "people", "stats": { "build": 3, "think": 4, "connect": 9, "grow": 6 }, "quests": ["clubs", "jhalak", "rotaract"] },
+    { "id": "sport", "stats": { "build": 3, "think": 3, "connect": 6, "grow": 9 }, "quests": ["khel", "cycle", "talk"] },
+    { "id": "startups", "stats": { "build": 7, "think": 5, "connect": 6, "grow": 8 }, "quests": ["startup", "swift", "offer"] }
+  ]
+}
