@@ -84,7 +84,7 @@
     "officialAdmissions": "SRM's Admissions 2026 page",
     "years": "{count, plural, one {# year} other {# years}}",
     "campusTitle": "{name} campus",
-    "openTour": "Open the 360° tour",
+    "openTour": "Open the 360° · VR tour",
     "noTour": "A 360° tour for this campus is coming.",
     "collegesHere": "Colleges on this campus",
     "backHome": "Back to home",
@@ -179,7 +179,7 @@
       "intro": "Six campuses across Tamil Nadu and Delhi NCR — plus three sister universities.",
       "main": "Main campus",
       "sisters": "Sister universities",
-      "tour": "Take the 360° tour",
+      "tour": "Take the 360° · VR tour",
       "visit": "Visit campus",
       "mapLabel": "Map of SRM campuses across India",
       "findCampus": "Find your campus",
@@ -1353,6 +1353,11 @@
       "enquire": "Ask admissions",
       "call": "Call",
       "findTitle": "What do you want to become?"
+    },
+    "explore": {
+      "f1": "Tap a pin and fly in to that campus",
+      "f2": "See how far every campus is from your home",
+      "f3": "Walk through it in 360°, or in VR with a headset"
     }
   }
 }

@@ -430,7 +430,7 @@ function CampusDetail({
             type="button"
             onClick={onTour}
             data-magnetic
-            className="relative inline-flex min-h-11 items-center overflow-hidden rounded-full bg-fg px-5 font-semibold text-bg"
+            className="relative inline-flex min-h-12 items-center overflow-hidden rounded-full bg-action px-6 font-semibold text-on-action"
           >
             {t("tour")}
           </button>
