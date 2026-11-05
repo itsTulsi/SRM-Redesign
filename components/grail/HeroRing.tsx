@@ -2,29 +2,42 @@
 
 import { useState } from "react";
 
+/** Rungs up the helix's axis, bottom to top; 0 is level with the emblem. */
+const RUNGS = [-4, -3, -2, -1, 0, 1, 2, 3, 4];
+
 /**
- * The hero's slowly turning ring of quest cards and kolam tiles (the reference uses 3D canvas; this is plain CSS 3D,
- * so it costs no library and runs on the compositor). Decorative, so it's hidden from screen readers; anything that
- * moves on its own for more than five seconds gets a pause button (WCAG 2.2.2). Still under reduced motion.
+ * The hero's DNA helix, standing upright like the reference's turning column of cards: two strands spiral round
+ * a vertical axis, joined by rungs, with SRM's emblem at the centre. The helix turns; each card faces outward, so it
+ * swings edge-on at the sides, and when it's behind you see its back, a kolam pattern, never mirrored text.
+ * Plain CSS 3D: no library, runs on the compositor. Decorative, so hidden from screen readers; it moves on its own,
+ * so it has a pause button (WCAG 2.2.2). Still under reduced motion or Lite Mode.
  */
 export function HeroRing({ items, center, pause, play }: { items: React.ReactNode[]; center: React.ReactNode; pause: string; play: string }) {
   const [paused, setPaused] = useState(false);
+  const backs = items.filter((_, i) => i % 2 === 1);
+  const cells = RUNGS.map((j, r) => ({ j, cards: [0, 1].map((strand) => ({ strand, i: r * 2 + strand })) }));
   return (
-    // Its own band of the hero, below the title and buttons, so the cards never cover the words.
     <div className="relative mb-10 lg:mb-16">
       <div aria-hidden="true" className="grail-ring-stage">
-        <div className="grail-ring" data-paused={paused ? "" : undefined} style={{ "--n": items.length } as React.CSSProperties}>
-          {/* SRM's emblem sits at the centre; the quests orbit it. Everything turns back to face you as it goes,
-              so nothing is ever seen mirrored, and cards pass in front of and behind the emblem. */}
-          <div className="grail-ring-center">
-            <div className="grail-ring-face">{center}</div>
+        <div className="grail-helix-view">
+          <div className="grail-helix" data-paused={paused ? "" : undefined}>
+            {cells.map(({ j, cards }) => (
+              <div key={j} className="grail-helix-slot" style={{ "--j": j } as React.CSSProperties}>
+                <span className="grail-helix-rung" />
+                {cards.map(({ strand, i }) => (
+                  <div key={strand} className="grail-helix-item" style={{ "--strand": strand } as React.CSSProperties}>
+                    <div className="grail-ring-face">
+                      <div className="grail-helix-front">{items[i % items.length]}</div>
+                      <div className="grail-helix-back">{backs[(i + 1) % backs.length]}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ))}
           </div>
-          {items.map((item, i) => (
-            <div key={i} className="grail-ring-item" style={{ "--i": i } as React.CSSProperties}>
-              <div className="grail-ring-face">{item}</div>
-            </div>
-          ))}
         </div>
+        {/* The emblem sits flat in front, at the helix's centre, so nothing ever covers it. */}
+        <div className="grail-helix-center">{center}</div>
       </div>
       <button
         type="button"

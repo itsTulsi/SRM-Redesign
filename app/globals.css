@@ -1007,79 +1007,113 @@ html:has([data-grail]) {
   display: none;
 }
 
-/* The hero ring: quest cards and kolam tiles orbiting SRM's emblem, in CSS 3D. Every face counter-turns so it keeps
-   facing you. Still under reduced motion or Lite Mode, and pausable (HeroRing). */
+/* The hero helix: a DNA double strand standing upright, like the reference's turning column of cards. Two strands
+   of cards spiral round a vertical axis, joined by rungs, with SRM's emblem in front at the centre. The helix turns
+   about its axis; cards face outward (edge-on at the sides) and show a kolam back when behind. Still under reduced
+   motion or Lite Mode, and pausable (HeroRing). */
 .grail-ring-stage {
   position: relative;
-  height: 340px;
-  perspective: 1600px;
-  perspective-origin: 50% 30%;
+  height: 440px;
+  perspective: 1100px;
   pointer-events: none;
-  --radius: 190px;
-  --spin: 46s;
-  /* Tilted like Saturn's rings: cards pass behind the emblem at the top and below it at the front, so it's never hidden. */
-  --tilt: 26deg;
-  --lift: 34px;
+  overflow: hidden;
+  mask-image: linear-gradient(transparent, #000 8%, #000 92%, transparent);
+  --r: 120px; /* the helix's radius */
+  --step: 44px; /* between rungs, up the axis */
+  --twist: 40deg; /* turn per rung */
+  --card: 0.62;
+  --spin: 22s;
 }
 @media (min-width: 64rem) {
   .grail-ring-stage {
-    height: 580px;
-    --radius: 460px;
-    --tilt: 21deg;
-    --lift: 56px;
+    height: 640px;
+    --r: 300px;
+    --step: 62px;
+    --card: 0.8;
   }
 }
-.grail-ring {
+.grail-helix-view {
   position: absolute;
   top: 50%;
   left: 50%;
   transform-style: preserve-3d;
-  transform: rotateX(calc(-1 * var(--tilt)));
-  animation: grail-spin var(--spin) linear infinite;
+  /* Seen from a little above and leaning, like the reference's column. */
+  transform: rotateZ(-6deg) rotateX(-10deg);
 }
-.grail-ring-item,
-.grail-ring-center {
+.grail-helix {
+  transform-style: preserve-3d;
+  animation: grail-helix-spin var(--spin) linear infinite;
+}
+.grail-helix-slot {
   position: absolute;
   transform-style: preserve-3d;
+  --a: calc(var(--j) * var(--twist));
+  transform: translateY(calc(-1 * var(--j) * var(--step))) rotateY(var(--a));
 }
-.grail-ring-item {
-  transform: rotateY(calc(360deg / var(--n) * var(--i))) translateZ(var(--radius)) rotateY(calc(-360deg / var(--n) * var(--i)));
+/* The base pair: a bar through the axis joining the two strands. */
+.grail-helix-rung {
+  position: absolute;
+  top: -1.5px;
+  left: calc(-1 * var(--r));
+  width: calc(2 * var(--r));
+  height: 3px;
+  border-radius: 3px;
+  background: linear-gradient(90deg, #ecd2f3, rgb(236 210 243 / 0.2) 50%, #ecd2f3);
+  transform: rotateY(90deg);
+}
+.grail-helix-item {
+  position: absolute;
+  transform-style: preserve-3d;
+  transform: rotateY(calc(var(--strand) * 180deg)) translateZ(var(--r));
 }
 .grail-ring-face {
-  transform: translate(-50%, -50%) rotateX(var(--tilt));
-  animation: grail-counter var(--spin) linear infinite;
+  position: relative;
+  scale: var(--card);
+  transform: translate(-50%, -50%);
+  transform-style: preserve-3d;
 }
-.grail-ring-center .grail-ring-face {
-  translate: 0 calc(-1 * var(--lift));
+.grail-helix-front {
+  backface-visibility: hidden;
+}
+/* The card's back: a dark card with a kolam on it, so nothing is ever seen mirrored. */
+.grail-helix-back {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 18px;
+  background: #1b1b1b;
+  transform: rotateY(180deg);
+  backface-visibility: hidden;
+}
+.grail-helix-back > * {
+  width: 62%;
+  height: auto;
+  aspect-ratio: 1;
+  box-shadow: none;
+}
+.grail-helix-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 2;
   width: 150px;
   height: 150px;
+  transform: translate(-50%, -50%);
   filter: drop-shadow(0 0 40px rgb(236 210 243 / 0.35));
 }
 @media (min-width: 64rem) {
-  .grail-ring-center .grail-ring-face {
-    width: 260px;
-    height: 260px;
+  .grail-helix-center {
+    width: 240px;
+    height: 240px;
   }
 }
-.grail-ring[data-paused],
-.grail-ring[data-paused] .grail-ring-face {
+.grail-helix[data-paused] {
   animation-play-state: paused;
 }
-@keyframes grail-spin {
-  from {
-    transform: rotateX(calc(-1 * var(--tilt))) rotateY(0deg);
-  }
+@keyframes grail-helix-spin {
   to {
-    transform: rotateX(calc(-1 * var(--tilt))) rotateY(-360deg);
-  }
-}
-/* Undo both the spin and the tilt, so every face looks straight at you. */
-@keyframes grail-counter {
-  from {
-    transform: translate(-50%, -50%) rotateY(0deg) rotateX(var(--tilt));
-  }
-  to {
-    transform: translate(-50%, -50%) rotateY(360deg) rotateX(var(--tilt));
+    transform: rotateY(-360deg);
   }
 }
 .grail-mini {
@@ -1111,8 +1145,7 @@ html:has([data-grail]) {
     height: 92px;
   }
 }
-[data-motion="reduce"] .grail-ring,
-[data-motion="reduce"] .grail-ring-face {
+[data-motion="reduce"] .grail-helix {
   animation: none;
 }
 [data-motion="reduce"] .grail-ring-toggle {
