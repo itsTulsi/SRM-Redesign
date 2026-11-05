@@ -652,7 +652,40 @@
     "pierre": "Pierre Fauchard hostel warden",
     "staffLink": "Meet the hostel staff",
     "officialPage": "SRM's official hostel pages",
-    "sourceNote": "From SRM's hostel pages, 2026–27 fee circulars and 2026 hostel rules, as of 26 October 2026. Fees and rules can change — confirm with the hostel office."
+    "sourceNote": "From SRM's hostel pages, 2026–27 fee circulars and 2026 hostel rules, as of 26 October 2026. Fees and rules can change — confirm with the hostel office.",
+    "finder": {
+      "kicker": "Kattankulathur campus",
+      "title": "Pick your hostel.",
+      "intro": "A 3D model of the campus. Tap a hostel to fly there and step inside: rooms, fees and who to call.",
+      "filters": {
+        "all": "All",
+        "men": "Men",
+        "women": "Women",
+        "international": "International"
+      },
+      "listLabel": "Hostels",
+      "onMap": "On the 3D map",
+      "notOnMap": "Not on the 3D map yet",
+      "inside": "Inside {name}",
+      "entrance": "At the entrance",
+      "rooms": "Rooms",
+      "fees": "Fees {year}",
+      "feesFrom": "From ₹{amount} a year, mess included",
+      "call": "Hostel office",
+      "details": "All hostel details",
+      "back": "See the whole campus",
+      "pick": "Pick a hostel on the map or from the list.",
+      "drag": "Drag to look around · scroll or pinch to zoom",
+      "loading": "Loading the 3D campus…",
+      "lite": "The 3D view is off in Lite mode. Pick a hostel from the list.",
+      "noWebgl": "Your browser can't show the 3D view. Pick a hostel from the list.",
+      "legend": {
+        "men": "Men's hostel",
+        "women": "Women's hostel",
+        "selected": "Selected"
+      },
+      "credit": "Building outlines © OpenStreetMap contributors. Heights and colours are approximate."
+    }
   },
   "Life": {
     "metaTitle": "Student life",

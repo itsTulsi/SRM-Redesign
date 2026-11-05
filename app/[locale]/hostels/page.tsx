@@ -2,12 +2,15 @@ import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { BlockCard } from "@/components/hostels/BlockCard";
 import { FeeTable } from "@/components/hostels/FeeTable";
+import { HostelFinder, type FinderBlock } from "@/components/hostels/HostelFinder";
 import { chapterTone, GrailChapter, GrailHero, GrailPage, GrailStart, JumpChips } from "@/components/grail/GrailPage";
 import { Photo } from "@/components/ui/Photo";
 import { SaveOffline } from "@/components/ui/SaveOffline";
 import { getContent } from "@/lib/content";
 import { HOSTEL_SECTIONS, hostels, telHref, type HostelSection, type Meal } from "@/lib/hostels";
 import { Link, type Locale } from "@/lib/i18n";
+import { findMedia } from "@/lib/media";
+import campus3d from "@/public/map/ktr-campus.json";
 import { alternatesFor, socialFor } from "@/lib/page-metadata";
 
 type Params = { params: Promise<{ locale: Locale }> };
@@ -41,10 +44,37 @@ export default async function HostelsPage({ params }: Params) {
   const ext = <span className="sr-only"> {nav("external")}</span>;
   const linkClass = "inline-flex min-h-11 items-center font-semibold underline underline-offset-4";
 
+  // The 3D hostel finder: every block, with its entrance photo, its cheapest room this year and whether
+  // OpenStreetMap has mapped its building (so it can be shown in 3D).
+  const onMap = new Set(campus3d.buildings.flatMap((b) => ("slug" in b && b.slug ? [b.slug] : [])));
+  const feeRows = [...fees.men, ...fees.women];
+  const feeFor = (name: string) => {
+    const n = name.toLowerCase().replace(/\s*\(.*\)$/, "");
+    const totals = feeRows.filter((r) => n.startsWith(r.block.toLowerCase()) || r.block.toLowerCase().startsWith(n)).map((r) => r.total);
+    return totals.length ? inr.format(Math.min(...totals)) : null;
+  };
+  const finderBlocks: FinderBlock[] = (["men", "women", "international"] as const).flatMap((group) =>
+    hostels[group].map((b) => ({
+      slug: b.slug,
+      name: b.name,
+      group,
+      ac: b.ac,
+      washroom: b.washroom,
+      sharing: b.sharing,
+      floors: b.floors,
+      phone: b.phone,
+      tel: telHref(b.phone),
+      photo: findMedia(b.photo),
+      mapped: onMap.has(b.slug),
+      offCampus: b.offCampus,
+      feeFrom: feeFor(b.name),
+    })),
+  );
+
   const section = (id: HostelSection, children: React.ReactNode) => {
     const i = HOSTEL_SECTIONS.indexOf(id);
     return (
-      <GrailChapter id={id} tone={chapterTone(i)} kicker={t("eyebrow")} level={i + 2} title={t(`sections.${id}`)} titleId={`${id}-title`} size="text-[clamp(2.2rem,5.5vw,4.75rem)]">
+      <GrailChapter id={id} tone={chapterTone(i)} kicker={t("eyebrow")} level={i + 3} title={t(`sections.${id}`)} titleId={`${id}-title`} size="text-[clamp(2.2rem,5.5vw,4.75rem)]">
         <div className="flex flex-col gap-8">{children}</div>
       </GrailChapter>
     );
@@ -57,8 +87,21 @@ export default async function HostelsPage({ params }: Params) {
           <SaveOffline />
         </div>
         <Photo src={hostels.heroPhoto} alt="" decorative priority sizes="(min-width: 1440px) 1344px, 100vw" className="mt-10 aspect-[16/9] w-full rounded-[36px] md:aspect-[21/9]" />
-        <JumpChips label={t("onThisPage")} items={HOSTEL_SECTIONS.map((id) => ({ href: `#${id}`, label: t(`sections.${id}`) }))} />
+        <JumpChips label={t("onThisPage")} items={[{ href: "#find", label: t("finder.title") }, ...HOSTEL_SECTIONS.map((id) => ({ href: `#${id}`, label: t(`sections.${id}`) }))]} />
       </GrailHero>
+
+      {/* Pick your hostel: the 3D campus. It slides up over the hero like the homepage's campus map. */}
+      <GrailChapter
+        id="find"
+        kicker={t("finder.kicker")}
+        level={2}
+        title={t("finder.title")}
+        titleId="find-title"
+        intro={<p>{t("finder.intro")}</p>}
+        className="z-[1] -mt-9 rounded-t-[36px] border-t border-white/15 bg-[#0a0a0a]"
+      >
+        <HostelFinder blocks={finderBlocks} feeYear={fees.year} />
+      </GrailChapter>
           {section(
             "accommodation",
             <>
@@ -357,7 +400,7 @@ export default async function HostelsPage({ params }: Params) {
               <p className="text-sm text-fg-muted">{t("sourceNote")}</p>
             </>,
           )}
-      <GrailStart level={HOSTEL_SECTIONS.length + 2} />
+      <GrailStart level={HOSTEL_SECTIONS.length + 3} />
     </GrailPage>
   );
 }

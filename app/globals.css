@@ -1247,6 +1247,60 @@ html:has([data-grail]) {
   font-family: var(--font-grail-serif), var(--script-fonts), Georgia, serif;
   font-weight: 400;
 }
+/* ── Hostel finder: name tags floating over the 3D campus (HostelScene) ── */
+.hostel-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 10px 5px 8px;
+  border-radius: 999px;
+  background: rgb(10 10 10 / 0.82);
+  border: 1px solid rgb(255 255 255 / 0.22);
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+  cursor: pointer;
+  user-select: none;
+  backdrop-filter: blur(6px);
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+.hostel-tag:hover {
+  transform: translateY(-2px);
+}
+.hostel-tag-kind {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: #9ee3ff;
+}
+.hostel-tag[data-group="women"] .hostel-tag-kind {
+  background: #ffcdff;
+}
+.hostel-tag[data-group="international"] .hostel-tag-kind {
+  background: #ffc63a;
+}
+.hostel-tag.is-on {
+  background: #ecd2f3;
+  border-color: #623562;
+  color: #1a1018;
+  font-size: 14px;
+  padding: 7px 12px 7px 10px;
+  box-shadow: 0 8px 24px rgb(0 0 0 / 0.45);
+}
+.hostel-landmark {
+  padding: 3px 7px;
+  border-radius: 6px;
+  background: rgb(0 0 0 / 0.55);
+  color: rgb(255 255 255 / 0.75);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  pointer-events: none;
+}
 @media print {
   .grail-dock,
   .grail-ring-stage {

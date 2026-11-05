@@ -65,6 +65,7 @@ export default async function LocaleLayout({
     ...Object.fromEntries(CLIENT_NAMESPACES.map((ns) => [ns, all[ns]])),
     Acts: { explore: all.Acts.explore },
     Compare: { ui: all.Compare.ui },
+    Hostels: { finder: all.Hostels.finder, block: all.Hostels.block },
   };
 
   return (
