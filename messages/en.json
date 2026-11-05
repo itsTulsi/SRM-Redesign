@@ -389,7 +389,7 @@
   "Assistant": {
     "launcher": "Ask SRM",
     "title": "Ask SRM",
-    "subtitle": "Answers come from SRM's published information — no AI guesses.",
+    "subtitle": "Answers come from SRM's published information. When AI helps, it says so.",
     "close": "Close",
     "inputLabel": "Your question",
     "placeholder": "Ask about fees, campuses, admissions…",
@@ -461,7 +461,8 @@
     "sRanking": "NIRF ranking",
     "sHostel": "Is there a hostel?",
     "offline": "You're offline, so I can't look that up. Call admissions:",
-    "aiNote": "AI-written from SRM's published records. Check with admissions before you rely on it."
+    "aiNote": "AI-written from SRM's published records. Check with admissions before you rely on it.",
+    "nudge": "Need help? Ask me!"
   },
   "Hostels": {
     "metaTitle": "Hostels & housing",

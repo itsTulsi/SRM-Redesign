@@ -599,8 +599,81 @@ html.lenis body {
     display: none;
   }
 }
-.assistant-launcher[aria-expanded="true"] {
+.assistant-launcher:has([aria-expanded="true"]) {
   visibility: hidden;
+}
+
+/* ── Leafy, the Ask SRM mascot (components/assistant/Buddy). Motion only when allowed. ── */
+.buddy {
+  overflow: visible;
+}
+.leafy-bubble {
+  animation: leafy-pop 0.45s cubic-bezier(0.2, 1.3, 0.4, 1) both;
+}
+@keyframes leafy-pop {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.85);
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  [data-motion="full"] .leafy-btn .buddy {
+    animation: leafy-bob 3.2s ease-in-out infinite;
+  }
+  [data-motion="full"] .buddy .buddy-eye {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: leafy-blink 5s infinite;
+  }
+  [data-motion="full"] .buddy .buddy-leaf-l,
+  [data-motion="full"] .buddy .buddy-leaf-r {
+    transform-box: fill-box;
+    transform-origin: 50% 100%;
+  }
+  [data-motion="full"] .leafy-btn:hover .buddy-leaf-r,
+  [data-motion="full"] .leafy-btn:focus-visible .buddy-leaf-r {
+    animation: leafy-wave 0.7s ease-in-out 2;
+  }
+  [data-motion="full"] .buddy[data-mood="think"] .buddy-leaf-l,
+  [data-motion="full"] .buddy[data-mood="think"] .buddy-leaf-r {
+    animation: leafy-wiggle 0.6s ease-in-out infinite;
+  }
+  [data-motion="full"] .buddy[data-mood="think"] .buddy-eyes {
+    transform: translateY(-2px);
+  }
+  [data-motion="full"] .leafy-hop {
+    animation: leafy-hop 0.7s cubic-bezier(0.3, 1.4, 0.5, 1);
+  }
+}
+@keyframes leafy-bob {
+  50% {
+    transform: translateY(-2px) rotate(-2deg);
+  }
+}
+@keyframes leafy-blink {
+  0%,
+  92%,
+  100% {
+    transform: scaleY(1);
+  }
+  95% {
+    transform: scaleY(0.1);
+  }
+}
+@keyframes leafy-wave {
+  50% {
+    transform: rotate(22deg);
+  }
+}
+@keyframes leafy-wiggle {
+  50% {
+    transform: rotate(-12deg);
+  }
+}
+@keyframes leafy-hop {
+  35% {
+    transform: translateY(-14px) scale(1.08);
+  }
 }
 
 /* ═══ Product layer: command palette, live search, compare, page transitions ═══ */
