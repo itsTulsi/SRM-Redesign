@@ -2,11 +2,15 @@ import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { BlockCard } from "@/components/hostels/BlockCard";
 import { FeeTable } from "@/components/hostels/FeeTable";
+import { HostelFinder, type FinderBlock } from "@/components/hostels/HostelFinder";
+import { chapterTone, GrailChapter, GrailHero, GrailPage, GrailStart, JumpChips } from "@/components/grail/GrailPage";
 import { Photo } from "@/components/ui/Photo";
 import { SaveOffline } from "@/components/ui/SaveOffline";
 import { getContent } from "@/lib/content";
 import { HOSTEL_SECTIONS, hostels, telHref, type HostelSection, type Meal } from "@/lib/hostels";
 import { Link, type Locale } from "@/lib/i18n";
+import { findMedia } from "@/lib/media";
+import campus3d from "@/public/map/ktr-campus.json";
 import { alternatesFor, socialFor } from "@/lib/page-metadata";
 
 type Params = { params: Promise<{ locale: Locale }> };
@@ -40,52 +44,71 @@ export default async function HostelsPage({ params }: Params) {
   const ext = <span className="sr-only"> {nav("external")}</span>;
   const linkClass = "inline-flex min-h-11 items-center font-semibold underline underline-offset-4";
 
-  const section = (id: HostelSection, children: React.ReactNode) => (
-    <section id={id} aria-labelledby={`${id}-title`} className="scroll-mt-24 border-t border-line-subtle pt-12 pb-4">
-      <h2 id={`${id}-title`} className="font-display text-section font-bold">
-        {t(`sections.${id}`)}
-      </h2>
-      <div className="mt-6 flex flex-col gap-8">{children}</div>
-    </section>
+  // The 3D hostel finder: every block, with its entrance photo, its cheapest room this year and whether
+  // OpenStreetMap has mapped its building (so it can be shown in 3D).
+  const onMap = new Set(campus3d.buildings.flatMap((b) => ("slug" in b && b.slug ? [b.slug] : [])));
+  const feeRows = [...fees.men, ...fees.women];
+  const feeFor = (name: string) => {
+    const n = name.toLowerCase().replace(/\s*\(.*\)$/, "");
+    const totals = feeRows.filter((r) => n.startsWith(r.block.toLowerCase()) || r.block.toLowerCase().startsWith(n)).map((r) => r.total);
+    return totals.length ? inr.format(Math.min(...totals)) : null;
+  };
+  const finderBlocks: FinderBlock[] = (["men", "women", "international"] as const).flatMap((group) =>
+    hostels[group].map((b) => ({
+      slug: b.slug,
+      name: b.name,
+      group,
+      ac: b.ac,
+      washroom: b.washroom,
+      sharing: b.sharing,
+      floors: b.floors,
+      phone: b.phone,
+      tel: telHref(b.phone),
+      photo: findMedia(b.photo),
+      mapped: onMap.has(b.slug),
+      offCampus: b.offCampus,
+      feeFrom: feeFor(b.name),
+    })),
   );
 
+  const section = (id: HostelSection, children: React.ReactNode) => {
+    const i = HOSTEL_SECTIONS.indexOf(id);
+    return (
+      <GrailChapter id={id} tone={chapterTone(i)} kicker={t("eyebrow")} level={i + 3} title={t(`sections.${id}`)} titleId={`${id}-title`} size="text-[clamp(2.2rem,5.5vw,4.75rem)]">
+        <div className="flex flex-col gap-8">{children}</div>
+      </GrailChapter>
+    );
+  };
+
   return (
-    <main id="main" tabIndex={-1} className="site-container py-12 lg:py-20">
-      <header className="flex flex-col gap-4">
-        <p className="text-sm font-semibold tracking-wide text-fg-muted uppercase">{t("eyebrow")}</p>
-        <h1 className="font-display text-hero font-bold">{t("title")}</h1>
-        <p className="max-w-prose text-lg text-fg-muted">{t("intro")}</p>
-        <SaveOffline />
-        <Photo src={hostels.heroPhoto} alt="" decorative priority sizes="(min-width: 1440px) 1344px, 100vw" className="mt-6 aspect-[16/9] w-full rounded-3xl md:aspect-[21/9]" />
-      </header>
+    <GrailPage>
+      <GrailHero kicker={t("eyebrow")} title={t("title")} lead={<p>{t("intro")}</p>}>
+        <div className="mt-6">
+          <SaveOffline />
+        </div>
+        <Photo src={hostels.heroPhoto} alt="" decorative priority sizes="(min-width: 1440px) 1344px, 100vw" className="mt-10 aspect-[16/9] w-full rounded-[36px] md:aspect-[21/9]" />
+        <JumpChips label={t("onThisPage")} items={[{ href: "#find", label: t("finder.title") }, ...HOSTEL_SECTIONS.map((id) => ({ href: `#${id}`, label: t(`sections.${id}`) }))]} />
+      </GrailHero>
 
-      <div className="mt-12 lg:grid lg:grid-cols-[13rem_1fr] lg:gap-12">
-        <nav aria-labelledby="hostels-toc" className="mb-10 lg:mb-0">
-          <h2 id="hostels-toc" className="text-sm font-semibold tracking-wide text-fg-muted uppercase">
-            {t("onThisPage")}
-          </h2>
-          <ul className="mt-3 flex flex-wrap gap-2 lg:sticky lg:top-24 lg:flex-col lg:gap-0">
-            {HOSTEL_SECTIONS.map((id) => (
-              <li key={id}>
-                <a
-                  href={`#${id}`}
-                  className="inline-flex min-h-11 items-center rounded-full border border-line px-4 text-sm font-medium text-fg no-underline hover:border-fg lg:rounded-none lg:border-0 lg:px-0 lg:text-base lg:hover:underline"
-                >
-                  {t(`sections.${id}`)}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </nav>
-
-        <div className="flex min-w-0 flex-col gap-12">
+      {/* Pick your hostel: the 3D campus. It slides up over the hero like the homepage's campus map. */}
+      <GrailChapter
+        id="find"
+        kicker={t("finder.kicker")}
+        level={2}
+        title={t("finder.title")}
+        titleId="find-title"
+        intro={<p>{t("finder.intro")}</p>}
+        className="z-[1] -mt-9 rounded-t-[36px] border-t border-white/15 bg-[#0a0a0a]"
+      >
+        <HostelFinder blocks={finderBlocks} feeYear={fees.year} />
+      </GrailChapter>
           {section(
             "accommodation",
             <>
               <p className="max-w-prose text-lg">{t("accommodationIntro")}</p>
               <dl className="grid gap-6 sm:grid-cols-3">
                 {(["men", "women", "international"] as const).map((k) => (
-                  <div key={k} className="rounded-2xl border border-line-subtle p-5">
+                  <div key={k} className="grail-paper p-5">
                     <dt className="text-sm text-fg-muted">{t(`capacity.${k}`)}</dt>
                     <dd className="mt-1 font-display text-3xl font-bold">{t("approx", { n: hostels.capacity[k] })}</dd>
                   </div>
@@ -104,7 +127,7 @@ export default async function HostelsPage({ params }: Params) {
                   ))}
                 </ul>
               </div>
-              <figure className="rounded-3xl border border-line-subtle p-6 lg:p-8">
+              <figure className="grail-paper p-6 lg:p-8">
                 <blockquote className="border-l-2 border-tree pl-4 text-lg">“{t("directorQuote")}”</blockquote>
                 <figcaption className="mt-4 text-sm">
                   <span className="font-semibold">{contacts.director.name}</span>
@@ -205,7 +228,7 @@ export default async function HostelsPage({ params }: Params) {
                 <h3 className="font-display text-2xl font-bold">{t("checklistTitle")}</h3>
                 <div className="mt-4 grid gap-6 md:grid-cols-3">
                   {(["before", "during", "after"] as const).map((k) => (
-                    <div key={k} className="rounded-2xl border border-line-subtle p-5">
+                    <div key={k} className="grail-paper p-5">
                       <h4 className="font-semibold">{t(k)}</h4>
                       <ul className="mt-3 flex list-disc flex-col gap-2 pl-5 text-sm text-fg-muted">
                         {(t.raw(`${k}Items`) as string[]).map((x) => (
@@ -292,7 +315,7 @@ export default async function HostelsPage({ params }: Params) {
                 <h3 className="font-display text-2xl font-bold">{t("canteensTitle")}</h3>
                 <ul className="mt-4 grid gap-4 sm:grid-cols-2">
                   {dining.canteens.map((c) => (
-                    <li key={c.slug} className="rounded-2xl border border-line-subtle p-5">
+                    <li key={c.slug} className="grail-paper p-5">
                       <h4 className="font-semibold">{c.name}</h4>
                       <p className="mt-1 text-sm text-fg-muted">{t(`canteens.${c.slug}`)}</p>
                       <p className="mt-2 text-sm font-semibold">
@@ -311,7 +334,7 @@ export default async function HostelsPage({ params }: Params) {
               <p className="max-w-prose text-lg">{t("safetyIntro")}</p>
               <ul className="grid gap-4 md:grid-cols-2">
                 {(t.raw("safety") as { t: string; d: string }[]).map((s) => (
-                  <li key={s.t} className="rounded-2xl border border-line-subtle p-5">
+                  <li key={s.t} className="grail-paper p-5">
                     <h3 className="font-semibold">{s.t}</h3>
                     <p className="mt-2 text-fg-muted">{s.d}</p>
                   </li>
@@ -328,7 +351,7 @@ export default async function HostelsPage({ params }: Params) {
             "contact",
             <>
               <div className="grid gap-6 md:grid-cols-2">
-                <div className="rounded-2xl border border-line-subtle p-5">
+                <div className="grail-paper p-5">
                   <h3 className="font-semibold">{t("directorate")}</h3>
                   <p className="mt-1 text-sm text-fg-muted">
                     {contacts.director.name} · {t("directorTitle")}
@@ -339,7 +362,7 @@ export default async function HostelsPage({ params }: Params) {
                 {(["women", "men"] as const).map((k) => {
                   const c = contacts[k];
                   return (
-                    <div key={k} className="rounded-2xl border border-line-subtle p-5">
+                    <div key={k} className="grail-paper p-5">
                       <h3 className="font-semibold">{t(k === "men" ? "menOffice" : "womenOffice")}</h3>
                       <p className="mt-1 text-sm text-fg-muted">
                         {t("blocksLabel")}: {c.blocks}
@@ -361,7 +384,7 @@ export default async function HostelsPage({ params }: Params) {
                     </div>
                   );
                 })}
-                <div className="rounded-2xl border border-line-subtle p-5">
+                <div className="grail-paper p-5">
                   <h3 className="font-semibold">{t("kopperundevi")}</h3>
                   <a href={`mailto:${contacts.kopperundevi.email}`} className="inline-flex min-h-11 items-center break-all text-sm">{contacts.kopperundevi.email}</a>
                   <a href={telHref(contacts.kopperundevi.mobile)} className="flex min-h-11 items-center font-semibold">{contacts.kopperundevi.mobile}</a>
@@ -377,8 +400,7 @@ export default async function HostelsPage({ params }: Params) {
               <p className="text-sm text-fg-muted">{t("sourceNote")}</p>
             </>,
           )}
-        </div>
-      </div>
-    </main>
+      <GrailStart level={HOSTEL_SECTIONS.length + 3} />
+    </GrailPage>
   );
 }

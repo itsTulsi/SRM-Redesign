@@ -1,12 +1,11 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { CompareToggle } from "@/components/programme/CompareToggle";
-import { Fact } from "@/components/ui/Todo";
-import { getContent, type Campus, type Programme } from "@/lib/content";
+import { ProgrammeExplorer, type ExplorerCard } from "@/components/programme/ProgrammeExplorer";
+import { ghostPill, GrailChapter, GrailHero, GrailPage, GrailStart } from "@/components/grail/GrailPage";
+import { getContent, type Campus } from "@/lib/content";
 import { Link } from "@/lib/i18n";
 import type { Locale } from "@/lib/i18n";
 import { alternatesFor, socialFor } from "@/lib/page-metadata";
-import { programmeTitleName } from "@/lib/view-transition";
 
 type Params = { params: Promise<{ locale: Locale }> };
 
@@ -26,77 +25,78 @@ export default async function ProgrammesPage({ params }: Params) {
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations("Pages");
-  const { colleges, programmes, getCampus } = getContent(locale);
-  const campusName = (slug: Campus["slug"]) => getCampus(slug)?.name ?? slug;
+  const f = await getTranslations("Pages.finder");
+  const g = await getTranslations("Grail");
   const nav = await getTranslations("Nav");
+  const { colleges, programmes, campuses, getCampus } = getContent(locale);
+  const campusName = (slug: Campus["slug"]) => getCampus(slug)?.name ?? slug;
+  const inr = new Intl.NumberFormat("en-IN");
 
-  const ug = programmes.filter((p) => p.level === "UG");
-  const pg = programmes.filter((p) => p.level === "PG");
+  // Everything the finder needs, slimmed down; numbers that SRM hasn't published stay null and are simply not shown.
+  const cards: ExplorerCard[] = programmes.map((p) => ({
+    slug: p.slug,
+    name: p.name,
+    alt: p.officialName ?? p.name,
+    summary: p.summary,
+    college: p.college,
+    level: p.level,
+    duration: typeof p.durationYears === "number" ? t("years", { count: p.durationYears }) : null,
+    campuses: p.campuses.map(campusName).join(", "),
+    fee: typeof p.feesPerYearINR === "number" ? f("perYear", { amount: inr.format(p.feesPerYearINR) }) : null,
+    tags: p.tags,
+  }));
+  const used = colleges.filter((c) => programmes.some((p) => p.college === c.slug));
+  const stats = [
+    { n: programmes.length, label: t("programmesTitle") },
+    { n: used.length, label: f("colleges") },
+    { n: campuses.filter((c) => c.kind === "campus").length, label: nav("ourCampuses") },
+  ];
 
   return (
-    <main id="main" tabIndex={-1} className="site-container py-12 lg:py-20">
-      <h1 className="font-display text-hero font-bold">{t("programmesTitle")}</h1>
-      <p className="mt-4 max-w-prose text-lg text-fg-muted">{t("programmesIntro")}</p>
-      <Link href="/compare" className="mt-2 inline-flex min-h-11 items-center font-semibold underline underline-offset-4">
-        {nav("compare")}
-      </Link>
+    <GrailPage>
+      <GrailHero kicker={nav("study")} title={t("programmesTitle")} lead={<p>{t("programmesIntro")}</p>}>
+        <div className="mt-8 flex flex-wrap gap-3">
+          <a href="#find" className="grail-cta">
+            {f("search")}
+          </a>
+          <Link href="/compare" className={ghostPill}>
+            {nav("compare")}
+          </Link>
+        </div>
+        {/* The size of the choice, counted from the content, never typed in. */}
+        <dl className="mt-14 grid max-w-3xl grid-cols-3 gap-4 border-t border-[var(--line)] pt-6">
+          {stats.map((s) => (
+            <div key={s.label} className="flex flex-col-reverse gap-1">
+              <dt className="text-sm text-[var(--fg-muted)]">{s.label}</dt>
+              <dd className="grail-num text-[clamp(2.6rem,6vw,4.5rem)]">{s.n}</dd>
+            </div>
+          ))}
+        </dl>
+      </GrailHero>
 
-      <section id="level-ug" aria-labelledby="h-ug" className="mt-14 scroll-mt-20">
-        <h2 id="h-ug" className="font-display text-section font-bold">{nav("undergraduate")}</h2>
-        {colleges.map((college) => {
-          const list = ug.filter((p) => p.college === college.slug);
-          if (list.length === 0) return null;
-          return (
-            <section key={college.slug} id={college.slug} aria-labelledby={`h-${college.slug}`} className="mt-10 scroll-mt-20">
-              <h3 id={`h-${college.slug}`} className="text-xl font-semibold">
-                {college.name}
-              </h3>
-              <ProgrammeList list={list} heading="h4" campusName={campusName} yearsLabel={(n) => t("years", { count: n })} />
-            </section>
-          );
-        })}
-      </section>
+      <GrailChapter id="find" tone="light" kicker={nav("study")} level={2} title={g("start.findTitle")} titleId="find-title" size="text-[clamp(2.2rem,6vw,5.5rem)]">
+        <ProgrammeExplorer
+          cards={cards}
+          colleges={used.map((c) => ({ slug: c.slug, name: c.shortName }))}
+          strings={{
+            search: f("search"),
+            placeholder: f("placeholder"),
+            all: f("all"),
+            ug: nav("undergraduate"),
+            pg: nav("postgraduate"),
+            colleges: f("colleges"),
+            showing: f.raw("showing") as string,
+            none: f("none"),
+            clear: f("clear"),
+            view: f("view"),
+            suggested: f("suggested"),
+            suggestedWhy: f("suggestedWhy"),
+            because: f.raw("because") as string,
+          }}
+        />
+      </GrailChapter>
 
-      <section id="level-pg" aria-labelledby="h-pg" className="mt-16 scroll-mt-20">
-        <h2 id="h-pg" className="font-display text-section font-bold">{nav("postgraduate")}</h2>
-        <ProgrammeList list={pg} heading="h3" campusName={campusName} yearsLabel={(n) => t("years", { count: n })} />
-      </section>
-    </main>
-  );
-}
-
-function ProgrammeList({
-  list,
-  heading: Heading,
-  campusName,
-  yearsLabel,
-}: {
-  list: Programme[];
-  heading: "h3" | "h4";
-  campusName: (slug: Campus["slug"]) => string;
-  yearsLabel: (n: number) => string;
-}) {
-  return (
-    <ul className="mt-4 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-      {list.map((p) => (
-        <li
-          key={p.slug}
-          id={p.slug}
-          className="flex flex-col gap-2 rounded-2xl border border-line-subtle p-5 target:border-link target:ring-2 target:ring-link"
-        >
-          <Heading style={programmeTitleName(p.slug)} className="font-semibold leading-snug">
-            <Link href={`/programmes/${p.slug}`} className="text-fg underline-offset-4 hover:underline">
-              {p.name}
-            </Link>
-          </Heading>
-          <p className="text-fg-muted">{p.summary}</p>
-          <p className="mt-auto text-sm text-fg-muted">
-            <Fact value={p.durationYears} format={yearsLabel} /> ·{" "}
-            {p.campuses.map(campusName).join(", ")}
-          </p>
-          <CompareToggle slug={p.slug} name={p.name} className="self-start text-fg" />
-        </li>
-      ))}
-    </ul>
+      <GrailStart level={3} />
+    </GrailPage>
   );
 }

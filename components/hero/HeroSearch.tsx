@@ -239,7 +239,7 @@ function SeeAll({ label }: { label: string }) {
   return (
     <Link
       href="/programmes"
-      className="inline-flex min-h-11 items-center gap-1 font-semibold text-ink underline underline-offset-4"
+      className="inline-flex min-h-11 items-center gap-1 font-semibold text-inherit underline underline-offset-4"
     >
       {label} <span aria-hidden="true">→</span>
     </Link>

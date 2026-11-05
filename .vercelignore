@@ -1,0 +1,10 @@
+node_modules
+.next
+.next-verify
+.next-*
+out
+.env
+.env*.local
+.DS_Store
+.claude
+*.tsbuildinfo

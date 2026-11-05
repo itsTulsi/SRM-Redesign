@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { getMessages, getTranslations, setRequestLocale } from "next-intl/server";
+import { ghostPill, GrailChapter, GrailHero, GrailPage, GrailStart } from "@/components/grail/GrailPage";
 import { Photo } from "@/components/ui/Photo";
 import { researchStats } from "@/lib/content";
 import { telHref } from "@/lib/hostels";
@@ -34,7 +35,7 @@ export default async function ResearchCentresPage({ params }: Params) {
   const patentTotal = researchStats.find((s) => s.id === "patents")?.display;
   const ext = <span className="sr-only"> {nav("external")}</span>;
   const linkClass = "inline-flex min-h-11 items-center font-semibold underline underline-offset-4";
-  const card = "rounded-2xl border border-line-subtle p-5";
+  const card = "grail-paper p-5";
 
   const list = (title: string, items: string[] | undefined) =>
     items?.length ? (
@@ -49,14 +50,11 @@ export default async function ResearchCentresPage({ params }: Params) {
     ) : null;
 
   return (
-    <main id="main" tabIndex={-1} className="site-container py-12 lg:py-20">
-      <header className="flex flex-col gap-4">
-        <p className="text-sm font-semibold tracking-wide text-fg-muted uppercase">{t("eyebrow")}</p>
-        <h1 className="font-display text-hero font-bold">{t("title")}</h1>
-        <p className="max-w-prose text-lg text-fg-muted">{t("intro")}</p>
-        <Photo src={heroPhoto} alt="" decorative priority sizes="(min-width: 1440px) 1344px, 100vw" className="mt-6 aspect-[16/9] w-full rounded-3xl md:aspect-[21/9]" />
-        <div className="mt-4 grid gap-4 md:grid-cols-[1fr_auto] md:items-center">
-          <div className={card}>
+    <GrailPage>
+      <GrailHero kicker={t("eyebrow")} title={t("title")} lead={<p>{t("intro")}</p>}>
+        <Photo src={heroPhoto} alt="" decorative priority sizes="(min-width: 1440px) 1344px, 100vw" className="mt-12 aspect-[16/9] w-full rounded-[36px] md:aspect-[21/9]" />
+        <div className="mt-6 grid gap-4 md:grid-cols-[1fr_auto] md:items-center">
+          <div className="grail-paper p-6">
             <p className="font-semibold">{t("deanTitle")}</p>
             <p className="mt-1 text-sm text-fg-muted">
               {dean.name} · {t("deanRole")} · {dean.office}
@@ -70,42 +68,37 @@ export default async function ResearchCentresPage({ params }: Params) {
               </a>
             </p>
           </div>
-          <Link href={`/#${SECTION.research}`} className={`${linkClass} w-fit`}>
+          <Link href={`/#${SECTION.research}`} className={`${ghostPill} w-fit`}>
             {t("missionsLink")}
           </Link>
         </div>
-      </header>
+      </GrailHero>
 
-      <div className="mt-12 lg:grid lg:grid-cols-[13rem_1fr] lg:gap-12">
-        <nav aria-labelledby="research-toc" className="mb-10 lg:mb-0">
-          <h2 id="research-toc" className="text-sm font-semibold tracking-wide text-fg-muted uppercase">
-            {t("onThisPage")}
-          </h2>
-          <ul className="mt-3 flex flex-wrap gap-2 lg:sticky lg:top-24 lg:flex-col lg:gap-0">
-            {[...centres.map((c) => ({ id: c.slug, label: c.acronym, title: copy[c.slug].name })), { id: "patents", label: t("patentsTitle"), title: undefined }].map((l) => (
-              <li key={l.id}>
-                <a
-                  href={`#${l.id}`}
-                  title={l.title}
-                  className="inline-flex min-h-11 items-center rounded-full border border-line px-4 text-sm font-medium text-fg no-underline hover:border-fg lg:rounded-none lg:border-0 lg:px-0 lg:text-base lg:hover:underline"
-                >
-                  {l.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </nav>
-
-        <div className="flex min-w-0 flex-col gap-12">
-          <section aria-labelledby="centres-title" className="border-t border-line-subtle pt-12">
-            <h2 id="centres-title" className="font-display text-section font-bold">
-              {t("centresTitle")}
-            </h2>
-            <div className="mt-8 flex flex-col gap-8">
+      <GrailChapter tone="light" kicker={t("eyebrow")} level={2} title={t("centresTitle")} titleId="centres-title">
+        <div className="lg:grid lg:grid-cols-[13rem_1fr] lg:gap-12">
+          <nav aria-labelledby="research-toc" className="mb-10 lg:mb-0">
+            <h3 id="research-toc" className="text-sm font-semibold tracking-wide text-fg-muted uppercase">
+              {t("onThisPage")}
+            </h3>
+            <ul className="mt-3 flex flex-wrap gap-2 lg:sticky lg:top-24 lg:flex-col lg:gap-0">
+              {[...centres.map((c) => ({ id: c.slug, label: c.acronym, title: copy[c.slug].name })), { id: "patents", label: t("patentsTitle"), title: undefined }].map((l) => (
+                <li key={l.id}>
+                  <a
+                    href={`#${l.id}`}
+                    title={l.title}
+                    className="inline-flex min-h-11 items-center rounded-full border border-line px-4 text-sm font-medium text-fg no-underline hover:border-fg lg:rounded-none lg:border-0 lg:px-0 lg:text-base lg:hover:underline"
+                  >
+                    {l.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+          <div className="flex min-w-0 flex-col gap-8">
               {centres.map((c) => {
                 const k = copy[c.slug];
                 return (
-                  <article key={c.slug} id={c.slug} aria-labelledby={`${c.slug}-title`} className="scroll-mt-24 overflow-hidden rounded-3xl border border-line-subtle lg:grid lg:grid-cols-[2fr_3fr]">
+                  <article key={c.slug} id={c.slug} aria-labelledby={`${c.slug}-title`} className="grail-paper scroll-mt-24 overflow-hidden lg:grid lg:grid-cols-[2fr_3fr]">
                     {c.photo ? (
                       <Photo src={c.photo} alt={t("photoAlt", { name: c.acronym })} sizes="(min-width: 1024px) 30vw, 100vw" className="aspect-[16/10] w-full lg:aspect-auto lg:h-full lg:min-h-72" />
                     ) : (
@@ -119,7 +112,7 @@ export default async function ResearchCentresPage({ params }: Params) {
                           {c.acronym}
                           {c.established ? ` · ${t("established", { year: c.established })}` : ""}
                         </p>
-                        <h3 id={`${c.slug}-title`} className="mt-1 font-display text-2xl font-bold">
+                        <h3 id={`${c.slug}-title`} className="mt-1 text-2xl font-semibold">
                           {k.name}
                         </h3>
                       </div>
@@ -157,18 +150,16 @@ export default async function ResearchCentresPage({ params }: Params) {
                   </article>
                 );
               })}
-            </div>
-          </section>
+          </div>
+        </div>
+      </GrailChapter>
 
-          <section id="patents" aria-labelledby="patents-title" className="scroll-mt-24 border-t border-line-subtle pt-12 pb-4">
-            <h2 id="patents-title" className="font-display text-section font-bold">
-              {t("patentsTitle")}
-            </h2>
-            <div className="mt-6 flex flex-col gap-8">
+      <GrailChapter id="patents" kicker={t("eyebrow")} level={3} title={t("patentsTitle")} titleId="patents-title" className="scroll-mt-24">
+            <div className="flex flex-col gap-10">
               <p className="max-w-prose text-lg">{t("patents.lead")}</p>
               {patentTotal ? (
                 <p className={`${card} w-fit`}>
-                  <span className="block font-display text-5xl font-bold">{patentTotal}</span>
+                  <span className="grail-num block text-6xl">{patentTotal}</span>
                   <span className="text-fg-muted">{t("patents.headline")}</span>
                 </p>
               ) : null}
@@ -233,9 +224,9 @@ export default async function ResearchCentresPage({ params }: Params) {
               </p>
               <p className="text-sm text-fg-muted">{t("sourceNote")}</p>
             </div>
-          </section>
-        </div>
-      </div>
-    </main>
+      </GrailChapter>
+
+      <GrailStart level={4} />
+    </GrailPage>
   );
 }

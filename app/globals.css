@@ -1208,6 +1208,288 @@ html:has([data-grail]) {
   width: 2.25rem;
   height: 2.25rem;
 }
+/* ── "Quest accepted. Clock's running.": a lilac chapter an ink blot spreads into (reference: grail-app.com) ── */
+.grail-ink {
+  background: #000000;
+}
+.grail-ink .grail-ink-layer {
+  margin-top: 0;
+  border-radius: 0;
+  min-height: 100svh;
+}
+@supports (animation-timeline: view()) {
+  @media (min-width: 64rem) {
+    /* The section is tall; its inner screen stays pinned while the blot grows from a speck to the whole view. */
+    [data-motion="full"] .grail-ink {
+      height: 250vh;
+      view-timeline-name: --grail-ink;
+    }
+    [data-motion="full"] .grail-ink-pin {
+      position: sticky;
+      top: 0;
+      height: 100svh;
+      overflow: hidden;
+    }
+    [data-motion="full"] .grail-ink .grail-ink-layer {
+      height: 100%;
+      -webkit-mask-image: url("/brand/ink-blot.svg");
+      mask-image: url("/brand/ink-blot.svg");
+      -webkit-mask-repeat: no-repeat;
+      mask-repeat: no-repeat;
+      -webkit-mask-position: 50% 58%;
+      mask-position: 50% 58%;
+      transform: none;
+      animation: grail-ink linear both;
+      animation-timeline: --grail-ink;
+      animation-range: contain 0% contain 62%;
+    }
+  }
+}
+@keyframes grail-ink {
+  from {
+    -webkit-mask-size: 6vmax 6vmax;
+    mask-size: 6vmax 6vmax;
+  }
+  45% {
+    -webkit-mask-size: 85vmax 85vmax;
+    mask-size: 85vmax 85vmax;
+  }
+  to {
+    -webkit-mask-size: 340vmax 340vmax;
+    mask-size: 340vmax 340vmax;
+  }
+}
+/* Giant, faint, live digits behind the phone. Each digit has a fixed width so the time doesn't jitter. */
+.grail-clock {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-grail-serif), Georgia, serif;
+  font-size: clamp(4.5rem, 17vw, 16rem);
+  line-height: 1;
+  color: #d39bd3;
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+}
+.grail-clock-digit {
+  display: inline-block;
+  width: 0.62em;
+  text-align: center;
+}
+.grail-clock-colon {
+  display: inline-block;
+  width: 0.34em;
+  text-align: center;
+  color: #c98ac9;
+}
+/* The phone: a softly blurred frame with the quest card sharp in front of it. */
+.grail-phone {
+  position: relative;
+  width: clamp(10.5rem, 15vw, 14rem);
+  aspect-ratio: 9 / 18.5;
+  max-height: 100%;
+}
+.grail-phone-frame {
+  position: absolute;
+  inset: 0;
+  border-radius: 2.4rem;
+  border: 9px solid #2b1f2b;
+  background: linear-gradient(#f7ecf8, #ecd2f3);
+  box-shadow: 0 30px 60px -20px rgb(59 29 59 / 0.45);
+  filter: blur(1.6px);
+}
+.grail-phone-notch {
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  width: 34%;
+  height: 16px;
+  border-radius: 999px;
+  background: #2b1f2b;
+  transform: translateX(-50%);
+}
+.grail-phone-bar {
+  position: absolute;
+  bottom: 10%;
+  left: 50%;
+  width: 46%;
+  height: 22px;
+  border-radius: 999px;
+  background: #d9b3dd;
+  transform: translateX(-50%);
+}
+.grail-phone-card {
+  position: absolute;
+  top: 17%;
+  left: -6%;
+  right: -6%;
+  border-radius: 18px;
+  background: #f5f5f5;
+  padding: 14px;
+  box-shadow: 0 18px 40px -12px rgb(59 29 59 / 0.5);
+}
+
+/* ── Inner pages in the "Level up" theme (GrailPage) ── */
+/* Paper cards: the homepage's quest-card look, for lists on any ground. They carry their own ink tokens, so
+   anything inside (links, muted text, borders) reads on paper. */
+.grail-paper {
+  border-radius: 24px;
+  background: #f5f5f5;
+  color: #000000;
+  --fg: #000000;
+  --fg-muted: #555555;
+  --line: #8a8a8a;
+  --line-subtle: #dcdcdc;
+  --focus: #623562;
+  --link: #000000;
+}
+.grail-sheet .grail-paper {
+  background: #ffffff;
+  box-shadow: 0 1px 0 rgb(0 0 0 / 0.04), 0 12px 30px -18px rgb(0 0 0 / 0.25);
+}
+.grail-lilac .grail-paper {
+  background: #fff6ff;
+}
+@media (prefers-reduced-motion: no-preference) {
+  [data-motion="full"] .grail-paper-link {
+    transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  [data-motion="full"] .grail-paper-link:hover {
+    transform: translateY(-4px) rotate(-0.6deg);
+  }
+}
+/* Inside light grounds the page colour is light too, so "inverted" buttons (ink on --bg) stay readable. */
+[data-grail-page] .grail-sheet,
+[data-grail-page] .grail-paper {
+  --bg: #f5f5f5;
+  --tree: #1b6a3f; /* the leaf green, deepened so it passes AA on paper */
+}
+[data-grail-page] .grail-lilac {
+  --bg: #e7afe7;
+}
+/* Programme finder: a frosted filter bar that sticks under the header, and cards that arrive in a quick stagger
+   (they also animate in when a filter brings them back). */
+.grail-filterbar {
+  background: rgb(245 245 245 / 0.86);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid #e2e2e2;
+}
+@media (prefers-reduced-motion: no-preference) {
+  [data-motion="full"] .grail-card-in {
+    animation: grail-card-in 0.55s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+    animation-delay: calc(var(--i, 0) * 45ms);
+  }
+}
+@keyframes grail-card-in {
+  from {
+    opacity: 0;
+    translate: 0 18px;
+    scale: 0.98;
+  }
+}
+/* Paper cards on inner pages rise into place as they scroll in (scroll-driven, no JavaScript). Uses translate and
+   opacity, not transform, so the hover tilt still works. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    [data-motion="full"] [data-grail-page] .grail-paper:not(.grail-card-in) {
+      animation: grail-paper-rise linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 55%;
+    }
+  }
+}
+@keyframes grail-paper-rise {
+  from {
+    opacity: 0;
+    translate: 0 40px;
+  }
+}
+/* The floating chapter nav on long pages (SectionNav): a dark frosted pill that sticks under the header. */
+.grail-sectionnav {
+  padding: 10px 16px;
+  pointer-events: none;
+}
+.grail-sectionnav ul {
+  pointer-events: auto;
+  background: rgb(10 10 10 / 0.82);
+  border: 1px solid rgb(255 255 255 / 0.14);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 12px 30px -12px rgb(0 0 0 / 0.6);
+}
+/* Section heads and big numbers inside existing components take the display serif. */
+[data-grail-page] :is(h2, h3).font-display,
+.grail-num {
+  font-family: var(--font-grail-serif), var(--script-fonts), Georgia, serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  line-height: 1;
+}
+.grail-num {
+  text-transform: none;
+}
+[data-grail-page] dd.font-display,
+[data-grail-page] .stat-figure-value {
+  font-family: var(--font-grail-serif), var(--script-fonts), Georgia, serif;
+  font-weight: 400;
+}
+/* ── Hostel finder: name tags floating over the 3D campus (HostelScene) ── */
+.hostel-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 10px 5px 8px;
+  border-radius: 999px;
+  background: rgb(10 10 10 / 0.82);
+  border: 1px solid rgb(255 255 255 / 0.22);
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+  cursor: pointer;
+  user-select: none;
+  backdrop-filter: blur(6px);
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+.hostel-tag:hover {
+  transform: translateY(-2px);
+}
+.hostel-tag-kind {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: #9ee3ff;
+}
+.hostel-tag[data-group="women"] .hostel-tag-kind {
+  background: #ffcdff;
+}
+.hostel-tag[data-group="international"] .hostel-tag-kind {
+  background: #ffc63a;
+}
+.hostel-tag.is-on {
+  background: #ecd2f3;
+  border-color: #623562;
+  color: #1a1018;
+  font-size: 14px;
+  padding: 7px 12px 7px 10px;
+  box-shadow: 0 8px 24px rgb(0 0 0 / 0.45);
+}
+.hostel-landmark {
+  padding: 3px 7px;
+  border-radius: 6px;
+  background: rgb(0 0 0 / 0.55);
+  color: rgb(255 255 255 / 0.75);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  pointer-events: none;
+}
 @media print {
   .grail-dock,
   .grail-ring-stage {

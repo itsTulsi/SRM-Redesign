@@ -23,3 +23,13 @@ The link-preview images use TTF copies of Space Grotesk and Inter; see `assets/o
   (`REFERENCE.md`). None of Grail's copy, logo, illustrations, fonts or code is used.
 - **Photos** are SRM's own, plus openly licensed photos from Wikimedia Commons, which show their author and licence on
   the image. Every file's origin is listed in `content/media-credits.json`.
+
+## 3D hostel finder (/hostels)
+
+- Building footprints, roads and water: © OpenStreetMap contributors, available under the Open Database Licence
+  (https://www.openstreetmap.org/copyright). Rebuilt with `scripts/build-campus-3d.mjs`. Heights are approximate.
+- three.js (MIT), React Three Fiber and drei (MIT).
+
+## Homepage
+
+- The ink-blot mask (`public/brand/ink-blot.svg`) is original. The "clock" digits are the live time in Chennai.

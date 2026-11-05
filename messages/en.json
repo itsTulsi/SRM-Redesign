@@ -84,12 +84,34 @@
     "officialAdmissions": "SRM's Admissions 2026 page",
     "years": "{count, plural, one {# year} other {# years}}",
     "campusTitle": "{name} campus",
-    "openTour": "Open the 360° tour",
+    "openTour": "Open the 360° · VR tour",
     "noTour": "A 360° tour for this campus is coming.",
     "collegesHere": "Colleges on this campus",
     "backHome": "Back to home",
     "findUs": "Find us",
-    "address": "Address"
+    "address": "Address",
+    "finder": {
+      "search": "Search programmes",
+      "placeholder": "Try: robots, law, doctor, design…",
+      "all": "All",
+      "ug": "Undergraduate",
+      "pg": "Postgraduate",
+      "colleges": "Colleges",
+      "showing": "Showing {n} of {total}",
+      "none": "Nothing matches yet. Try another word, or clear the filters.",
+      "clear": "Clear filters",
+      "perYear": "₹{amount} a year",
+      "view": "View programme",
+      "glance": "At a glance",
+      "onPage": "On this page",
+      "placements": "Placements",
+      "related": "More like this",
+      "suggested": "Suggested for you",
+      "suggestedWhy": "Based on programmes you pinned or opened. Stays on this device.",
+      "because": "Shares: {tags}",
+      "similar": "Programmes like this",
+      "similarWhy": "Matched on shared topics across colleges"
+    }
   },
   "Hero": {
     "title": "What do you want to become?",
@@ -179,7 +201,7 @@
       "intro": "Six campuses across Tamil Nadu and Delhi NCR — plus three sister universities.",
       "main": "Main campus",
       "sisters": "Sister universities",
-      "tour": "Take the 360° tour",
+      "tour": "Take the 360° · VR tour",
       "visit": "Visit campus",
       "mapLabel": "Map of SRM campuses across India",
       "findCampus": "Find your campus",
@@ -438,7 +460,8 @@
     "sApply": "How do I apply?",
     "sRanking": "NIRF ranking",
     "sHostel": "Is there a hostel?",
-    "offline": "You're offline, so I can't look that up. Call admissions:"
+    "offline": "You're offline, so I can't look that up. Call admissions:",
+    "aiNote": "AI-written from SRM's published records. Check with admissions before you rely on it."
   },
   "Hostels": {
     "metaTitle": "Hostels & housing",
@@ -652,7 +675,40 @@
     "pierre": "Pierre Fauchard hostel warden",
     "staffLink": "Meet the hostel staff",
     "officialPage": "SRM's official hostel pages",
-    "sourceNote": "From SRM's hostel pages, 2026–27 fee circulars and 2026 hostel rules, as of 26 October 2026. Fees and rules can change — confirm with the hostel office."
+    "sourceNote": "From SRM's hostel pages, 2026–27 fee circulars and 2026 hostel rules, as of 26 October 2026. Fees and rules can change — confirm with the hostel office.",
+    "finder": {
+      "kicker": "Kattankulathur campus",
+      "title": "Pick your hostel.",
+      "intro": "A 3D model of the campus. Tap a hostel to fly there and step inside: rooms, fees and who to call.",
+      "filters": {
+        "all": "All",
+        "men": "Men",
+        "women": "Women",
+        "international": "International"
+      },
+      "listLabel": "Hostels",
+      "onMap": "On the 3D map",
+      "notOnMap": "Not on the 3D map yet",
+      "inside": "Inside {name}",
+      "entrance": "At the entrance",
+      "rooms": "Rooms",
+      "fees": "Fees {year}",
+      "feesFrom": "From ₹{amount} a year, mess included",
+      "call": "Hostel office",
+      "details": "All hostel details",
+      "back": "See the whole campus",
+      "pick": "Pick a hostel on the map or from the list.",
+      "drag": "Drag to look around · scroll or pinch to zoom",
+      "loading": "Loading the 3D campus…",
+      "lite": "The 3D view is off in Lite mode. Pick a hostel from the list.",
+      "noWebgl": "Your browser can't show the 3D view. Pick a hostel from the list.",
+      "legend": {
+        "men": "Men's hostel",
+        "women": "Women's hostel",
+        "selected": "Selected"
+      },
+      "credit": "Building outlines © OpenStreetMap contributors. Heights and colours are approximate."
+    }
   },
   "Life": {
     "metaTitle": "Student life",
@@ -1353,6 +1409,18 @@
       "enquire": "Ask admissions",
       "call": "Call",
       "findTitle": "What do you want to become?"
+    },
+    "explore": {
+      "f1": "Tap a pin and fly in to that campus",
+      "f2": "See how far every campus is from your home",
+      "f3": "Walk through it in 360°, or in VR with a headset"
+    },
+    "clock": {
+      "kicker": "On campus right now",
+      "title": "Quest accepted. Clock's running.",
+      "lead": "Now there's a clock on it. Every quest on this page is something students are doing on campus, on Chennai time. Pick one and yours starts too.",
+      "side": "The digits behind the phone are the time at Kattankulathur right now. Labs, clubs and fests run all year round; the next one starts without waiting for you.",
+      "cta": "Pick your first quest"
     }
   }
 }

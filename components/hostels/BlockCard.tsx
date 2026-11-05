@@ -15,7 +15,7 @@ export async function BlockCard({ block }: { block: HostelBlock }) {
   ].filter(Boolean);
 
   return (
-    <li className="flex flex-col overflow-hidden rounded-3xl border border-line-subtle">
+    <li className="grail-paper flex flex-col overflow-hidden">
       {findMedia(block.photo) ? (
         <Photo src={block.photo} alt={t("block.photoAlt", { name: block.name })} sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 100vw" className="aspect-[4/3] w-full" />
       ) : (
