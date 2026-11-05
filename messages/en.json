@@ -110,7 +110,10 @@
       "suggestedWhy": "Based on programmes you pinned or opened. Stays on this device.",
       "because": "Shares: {tags}",
       "similar": "Programmes like this",
-      "similarWhy": "Matched on shared topics across colleges"
+      "similarWhy": "Matched on shared topics across colleges",
+      "aiTitle": "AI picks for you",
+      "aiNote": "Found by AI from SRM's programme list. Check the details on each programme page.",
+      "aiThinking": "AI is reading your search…"
     }
   },
   "Hero": {

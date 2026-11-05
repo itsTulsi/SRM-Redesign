@@ -14,6 +14,7 @@
 |---|---|---|
 | Ask SRM assistant (en/ta/hi) | Rule-based, answers only from verified content | Free, offline-capable |
 | Programme matcher + instant search | Fuse.js fuzzy search, understands interests ("I like robots") | Free |
+| AI search (programmes page) | After a short pause the query also goes to `/api/ai-search`: the free LLM reads it (any language, any phrasing) against the programme list and returns up to 5 programmes with a one-line reason, shown as "AI picks for you". Only real programme slugs are accepted; fees and dates come from our data, never the model. Off or failing → keyword search only | Free tier |
 | Programmes like this | Tag-similarity recommender on programme pages, with the shared topics shown | Free |
 | Suggested for you | Same recommender on /programmes, from pinned and opened programmes; stays on the device | Free |
 | Optional free LLM | If `LLM_BASE_URL`, `LLM_API_KEY`, `LLM_MODEL` are set, questions the rules can't answer go to any OpenAI-compatible endpoint (Groq free tier, Gemini's OpenAI-compatible endpoint, OpenRouter free models, or local Ollama). It sees only the closest verified records, must say UNSURE if they don't answer, and its reply is labelled as AI-written | Free tier |

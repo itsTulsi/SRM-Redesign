@@ -12,7 +12,7 @@ const MODEL = process.env.LLM_MODEL;
 
 export const llmEnabled = () => !!(KEY && BASE && MODEL);
 
-export async function askLLM(system: string, user: string): Promise<string | null> {
+export async function askLLM(system: string, user: string, maxTokens = 800): Promise<string | null> {
   if (!llmEnabled()) return null;
   const ctl = new AbortController();
   const timer = setTimeout(() => ctl.abort(), 9000);
@@ -24,7 +24,9 @@ export async function askLLM(system: string, user: string): Promise<string | nul
       body: JSON.stringify({
         model: MODEL,
         temperature: 0.2,
-        max_tokens: 800,
+        max_tokens: maxTokens,
+        // gpt-oss models think before answering; "low" keeps that short, so the answer is not cut off and fewer free-tier tokens are spent.
+        ...(MODEL?.includes("gpt-oss") ? { reasoning_effort: "low" } : {}),
         messages: [
           { role: "system", content: system },
           { role: "user", content: user },

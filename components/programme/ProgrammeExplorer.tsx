@@ -1,6 +1,7 @@
 "use client";
 
 import type Fuse from "fuse.js";
+import { useLocale } from "next-intl";
 import { useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
 import { Crest } from "@/components/grail/Crest";
 import { CompareToggle } from "@/components/programme/CompareToggle";
@@ -36,6 +37,9 @@ type Strings = {
   suggested: string;
   suggestedWhy: string;
   because: string;
+  aiTitle: string;
+  aiNote: string;
+  aiThinking: string;
 };
 type Level = "all" | "UG" | "PG";
 
@@ -50,6 +54,42 @@ export function ProgrammeExplorer({ cards, colleges, strings }: { cards: Explore
   const [college, setCollege] = useState<string | null>(null);
   const [hits, setHits] = useState<Set<string> | null>(null);
   const fuse = useRef<Fuse<ExplorerCard> | null>(null);
+  const locale = useLocale();
+
+  // AI search: after a short pause the query is also read by the AI (server-side, free model), which understands
+  // meaning in any language ("something with sketching and circuits"). Instant keyword results stay as they are;
+  // if the AI is off, slow or fails, nothing changes.
+  const [ai, setAi] = useState<{ q: string; picks: { slug: string; why: string }[] } | null>(null);
+  const [aiBusy, setAiBusy] = useState(false);
+  useEffect(() => {
+    const q = query.trim();
+    if (q.length < 3) {
+      setAi(null);
+      setAiBusy(false);
+      return;
+    }
+    const ctl = new AbortController();
+    setAiBusy(true);
+    const timer = window.setTimeout(async () => {
+      try {
+        const res = await fetch(`/api/ai-search?q=${encodeURIComponent(q)}&locale=${locale}`, { signal: ctl.signal });
+        const data = res.ok ? ((await res.json()) as { enabled: boolean; picks: { slug: string; why: string }[] }) : null;
+        setAi(data?.enabled && data.picks.length ? { q, picks: data.picks } : null);
+      } catch {
+        // Aborted or offline: keep the keyword results.
+      } finally {
+        if (!ctl.signal.aborted) setAiBusy(false);
+      }
+    }, 600);
+    return () => {
+      clearTimeout(timer);
+      ctl.abort();
+    };
+  }, [query, locale]);
+  const aiCards = useMemo(
+    () => (ai && ai.q === query.trim() ? ai.picks.flatMap((p) => cards.filter((c) => c.slug === p.slug).map((c) => ({ card: c, why: p.why }))) : []),
+    [ai, cards, query],
+  );
 
   // "Suggested for you": similar to what you pinned or opened. Both lists live only on this device.
   const pinned = parseCompare(useSyncExternalStore(subscribeCompare, readCompareSnapshot, serverCompareSnapshot));
@@ -94,8 +134,8 @@ export function ProgrammeExplorer({ cards, colleges, strings }: { cards: Explore
   }, [query, cards]);
 
   const shown = useMemo(
-    () => cards.filter((c) => (level === "all" || c.level === level) && (!college || c.college === college) && (!hits || hits.has(c.slug))),
-    [cards, level, college, hits],
+    () => cards.filter((c) => (level === "all" || c.level === level) && (!college || c.college === college) && (!hits || hits.has(c.slug) || aiCards.some((a) => a.card.slug === c.slug))),
+    [cards, level, college, hits, aiCards],
   );
   const visible = new Set(shown.map((c) => c.slug));
   const filtering = level !== "all" || !!college || !!hits;
@@ -221,6 +261,31 @@ export function ProgrammeExplorer({ cards, colleges, strings }: { cards: Explore
           ) : null}
         </p>
       </div>
+
+      {query.trim().length >= 3 && (aiBusy || aiCards.length) ? (
+        <section aria-labelledby="ai-h" aria-live="polite" className="mt-8 rounded-[28px] bg-[#623562] p-6 text-[#fff]">
+          <h3 id="ai-h" className="grail-num text-3xl uppercase">
+            {strings.aiTitle}
+          </h3>
+          {aiCards.length ? (
+            <>
+              <p className="mt-1 text-sm text-[#f3dcf6]">{strings.aiNote}</p>
+              <ol className="mt-5 grid gap-3 md:grid-cols-3">
+                {aiCards.slice(0, 3).map(({ card, why }) => (
+                  <li key={card.slug}>
+                    <Link href={`/programmes/${card.slug}`} className="flex h-full flex-col gap-1 rounded-2xl bg-[#fff] p-4 text-[#1a1018] no-underline hover:bg-[#f5f5f5]">
+                      <span className="font-semibold">{card.name}</span>
+                      <span className="text-sm text-[#555]">{why}</span>
+                    </Link>
+                  </li>
+                ))}
+              </ol>
+            </>
+          ) : (
+            <p className="mt-2 text-[#f3dcf6]">{strings.aiThinking}</p>
+          )}
+        </section>
+      ) : null}
 
       {suggestions.length && !filtering ? (
         <section aria-labelledby="suggested-h" className="mt-8 rounded-[28px] bg-[#000] p-6 text-[#fff]">
