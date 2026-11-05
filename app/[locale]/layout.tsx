@@ -23,7 +23,11 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 const CLIENT_NAMESPACES = ["Lite", "Hero", "Ask", "Enquiry", "Senior", "Parent", "Assistant", "Palette", "Offline"] as const;
 
 // Runs before first paint so Lite Mode and Parent Mode never flash. Failure is harmless: defaults apply.
-const initScript = `try{(${applyLiteMode.toString()})(${JSON.stringify(LITE_STORAGE_KEY)})}catch(e){}try{(${applyParentMode.toString()})(${JSON.stringify(PARENT_STORAGE_KEY)})}catch(e){}`;
+const liteAndParent = `try{(${applyLiteMode.toString()})(${JSON.stringify(LITE_STORAGE_KEY)})}catch(e){}try{(${applyParentMode.toString()})(${JSON.stringify(PARENT_STORAGE_KEY)})}catch(e){}`;
+// The scroll-driven gate intro (components/grail/IntroGate): first visit of a session, on the homepage only, and never in
+// Lite Mode or with reduced motion. Decided here, before first paint, so the page never jumps.
+const introGate = `try{var d=document.documentElement;if(/^\\/(ta|hi)?\\/?$/.test(location.pathname)&&d.dataset.motion==="full"&&d.dataset.lite!=="on"&&!sessionStorage.getItem("srm-intro-seen")&&!(navigator.connection&&navigator.connection.saveData))d.dataset.intro="on"}catch(e){}`;
+const initScript = liteAndParent + introGate;
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));

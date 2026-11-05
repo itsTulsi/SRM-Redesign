@@ -13,6 +13,7 @@ import { studentLife } from "@/lib/student-life";
 import emblem from "@/public/brand/srm-emblem.png";
 import { CharacterCard, type Stat } from "./CharacterCard";
 import { ChennaiClock } from "./ChennaiClock";
+import { IntroGate } from "./IntroGate";
 import { GrailMotion } from "./GrailMotion";
 import { HeroRing } from "./HeroRing";
 import { Kolam } from "./Kolam";
@@ -120,6 +121,7 @@ export async function GrailHome() {
   return (
     <div data-grail className="bg-[var(--bg)] text-[var(--fg)]">
       <GrailMotion />
+      <IntroGate label={t("intro.label")} hint={t("intro.hint")} skip={t("intro.skip")} loading={t("intro.loading")} />
 
       {/* ── 01 Hero: the title over a turning ring of quests around SRM's emblem ── */}
       <section aria-labelledby="grail-title" data-tone="hero" className="grail-stack grail-hero relative overflow-hidden pb-12">
