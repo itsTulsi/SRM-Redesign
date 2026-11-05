@@ -12,6 +12,7 @@ import { SECTION } from "@/lib/sections";
 import { studentLife } from "@/lib/student-life";
 import emblem from "@/public/brand/srm-emblem.png";
 import { CharacterCard, type Stat } from "./CharacterCard";
+import { ChennaiClock } from "./ChennaiClock";
 import { GrailMotion } from "./GrailMotion";
 import { HeroRing } from "./HeroRing";
 import { Kolam } from "./Kolam";
@@ -91,6 +92,8 @@ export async function GrailHome() {
     ...studentLife.events.slice(0, 4).map((e) => ({ key: e.slug, src: e.photo, caption: e.name, href: "/student-life#student-affairs" })),
   ];
 
+  const camberQuest = byId("camber");
+
   // The hero ring: quest cards and kolam tiles, alternating (decorative copies of the quests below).
   const ringItems = quests.slice(0, 6).flatMap((q, i) => [
     <div key={q.id} className="grail-mini">
@@ -146,7 +149,45 @@ export async function GrailHome() {
         </div>
       </section>
 
-      {/* ── 02 Your character (sheet) ── */}
+      {/* ── 02 Quest accepted, clock's running (lilac). On large screens it pins, and an ink blot spreads out of the
+          black until the whole screen is lilac; elsewhere, or with reduced motion, it is simply there. ── */}
+      <section aria-labelledby="grail-clock" data-tone="lilac" className="grail-ink relative z-[1]">
+        <div className="grail-ink-pin">
+          <div className="grail-ink-layer grail-lilac">
+            <div className="site-container flex h-full flex-col pt-20 pb-10 lg:pt-24">
+              {corner(t("clock.kicker"))}
+              <Rise id="grail-clock" text={t("clock.title")} className="mx-auto mt-2 max-w-5xl text-center text-[clamp(2.4rem,5.6vw,5.25rem)]" />
+              <div className="relative my-6 flex min-h-[18rem] flex-1 items-center justify-center lg:my-4">
+                <ChennaiClock className="grail-clock" />
+                <div className="grail-phone">
+                  <div aria-hidden="true" className="grail-phone-frame">
+                    <span className="grail-phone-notch" />
+                    <span className="grail-phone-bar" />
+                  </div>
+                  <div className="grail-phone-card">
+                    <Kolam variant={STAT_KOLAM[camberQuest.stat]} color={STAT_COLOR[camberQuest.stat]} className="size-10" />
+                    <p className="mt-2 text-[11px] font-semibold text-[#555]">{t("board.raises", { stat: statName(camberQuest.stat) })}</p>
+                    <p className="mt-1 text-[clamp(1rem,1.5vw,1.3rem)] leading-tight font-bold text-[#000]">{camberQuest.title}</p>
+                    <p className="mt-2 text-[11px] leading-snug text-[#555]">{camberQuest.summary}</p>
+                    <p className="mt-3 border-t border-[#e2e2e2] pt-2 text-[10px] font-semibold text-[#555]">{camberQuest.proof}</p>
+                  </div>
+                </div>
+              </div>
+              <div className="grid gap-4 border-t border-[var(--line)] pt-5 md:grid-cols-2 md:gap-16">
+                <p className="max-w-xl text-lg leading-snug font-semibold">{t("clock.lead")}</p>
+                <div className="flex flex-col items-start gap-3">
+                  <p className="max-w-xl">{t("clock.side")}</p>
+                  <a href="#grail-path" className="inline-flex min-h-11 items-center font-semibold underline underline-offset-4">
+                    {t("clock.cta")} →
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── 03 Your character (sheet) ── */}
       <section aria-labelledby="grail-path" data-tone="light" className="grail-stack grail-sheet">
         <div className="site-container py-16 lg:py-24">
           {corner(t("hero.pathKicker"))}

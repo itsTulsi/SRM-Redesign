@@ -1391,6 +1391,13 @@
       "f1": "Tap a pin and fly in to that campus",
       "f2": "See how far every campus is from your home",
       "f3": "Walk through it in 360°, or in VR with a headset"
+    },
+    "clock": {
+      "kicker": "On campus right now",
+      "title": "Quest accepted. Clock's running.",
+      "lead": "Now there's a clock on it. Every quest on this page is something students are doing on campus, on Chennai time. Pick one and yours starts too.",
+      "side": "The digits behind the phone are the time at Kattankulathur right now. Labs, clubs and fests run all year round; the next one starts without waiting for you.",
+      "cta": "Pick your first quest"
     }
   }
 }
