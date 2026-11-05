@@ -24,7 +24,7 @@ export async function askLLM(system: string, user: string): Promise<string | nul
       body: JSON.stringify({
         model: MODEL,
         temperature: 0.2,
-        max_tokens: 220,
+        max_tokens: 800,
         messages: [
           { role: "system", content: system },
           { role: "user", content: user },
@@ -33,7 +33,7 @@ export async function askLLM(system: string, user: string): Promise<string | nul
     });
     if (!res.ok) return null;
     const data = (await res.json()) as { choices?: { message?: { content?: string } }[] };
-    const text = data.choices?.[0]?.message?.content?.trim();
+    const text = data.choices?.[0]?.message?.content?.replace(/[\u202f\u00a0]/g, " ").replace(/\s*\n+\s*/g, " ").replace(/\*\*/g, "").trim();
     return text && text.length < 1200 ? text : null;
   } catch {
     return null;

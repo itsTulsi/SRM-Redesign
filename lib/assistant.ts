@@ -317,9 +317,12 @@ export async function reply(query: string, t: Translate, locale: string): Promis
     searcherPromise ??= loadSearcher(docs);
     const hits = (await searcherPromise)(query, 4).map((d) => programmes.find((p) => p.slug === d.slug)!);
     const known = (v: unknown) => (typeof v === "number" || (typeof v === "string" && !isTodo(v)) ? String(v) : "not published");
-    const context = hits
+    const detail = hits
       .map((p) => `- ${p.name} (${p.level}, ${known(p.durationYears)} years): ${p.summary} Fees per year (INR): ${known(p.feesPerYearINR)}. Eligibility: ${known(p.eligibility)}. Deadline: ${known(p.deadline)}.`)
       .join("\n");
+    // Every programme in one line, so a vague question ("sketching and circuits") can still be matched sensibly.
+    const catalogue = programmes.map((p) => `- ${p.name} (${p.level}): ${p.summary}`).join("\n");
+    const context = `Closest matches, with details:\n${detail}\n\nAll programmes:\n${catalogue}`;
     const text = await askLLM(
       `You are the Ask SRM assistant for SRM Institute of Science and Technology. Answer in the language of the question, in at most 3 short sentences, using ONLY the records below. Never invent fees, dates, eligibility or rankings. If the records do not answer the question, reply exactly: UNSURE.\nRecords:\n${context}`,
       query,
