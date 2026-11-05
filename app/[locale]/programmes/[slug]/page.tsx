@@ -1,3 +1,4 @@
+import { safeJson } from "@/lib/jsonld";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
@@ -115,7 +116,7 @@ export default async function ProgrammePage({ params }: Params) {
 
   return (
     <GrailPage>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJson(jsonLd) }} />
 
       <RecordView slug={p.slug} />
       <GrailHero

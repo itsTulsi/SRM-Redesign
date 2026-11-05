@@ -45,7 +45,12 @@ export function IntroGate({ label, hint, skip, loading }: { label: string; hint:
       };
       im.src = src(i);
     };
-    [0, 1, 2, 3].forEach(pump);
+    // The first frame is the backdrop, so it starts now; the other frames wait until the page itself has finished
+    // loading, so the intro never slows the page it introduces.
+    pump(0);
+    const rest = () => [1, 2, 3].forEach(pump);
+    if (document.readyState === "complete") window.setTimeout(rest, 300);
+    else window.addEventListener("load", () => window.setTimeout(rest, 300), { once: true });
 
     let progress = 0;
     let shown = -1;

@@ -1,3 +1,4 @@
+import { safeJson } from "@/lib/jsonld";
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { GrailHome } from "@/components/grail/GrailHome";
@@ -56,7 +57,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
 
   return (
     <main id="main" tabIndex={-1}>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJson(jsonLd) }} />
       <GrailHome />
     </main>
   );
