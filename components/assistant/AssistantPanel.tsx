@@ -4,6 +4,7 @@ import NextLink from "next/link";
 import { useLocale, useTranslations } from "next-intl";
 import { useEffect, useId, useRef, useState } from "react";
 import type { Block, Reply } from "@/lib/assistant";
+import { Buddy } from "./Buddy";
 
 type Message = { id: number; role: "user"; text: string } | { id: number; role: "bot"; reply: Reply | "pending" | "error" | "offline" };
 
@@ -81,11 +82,16 @@ export default function AssistantPanel({
     >
       <div className="flex h-full flex-col">
         <header className="flex items-start justify-between gap-3 border-b border-line-subtle px-4 py-3">
-          <div>
-            <h2 id={`${id}-title`} className="font-display text-xl font-bold">
-              {t("title")}
-            </h2>
-            <p className="text-xs text-fg-muted">{t("subtitle")}</p>
+          <div className="flex items-center gap-3">
+            <span className="grid size-12 shrink-0 place-items-center rounded-full bg-[#623562]">
+              <Buddy mood={messages.some((m) => m.role === "bot" && m.reply === "pending") ? "think" : "idle"} className="size-11" />
+            </span>
+            <div>
+              <h2 id={`${id}-title`} className="font-display text-xl font-bold">
+                {t("title")}
+              </h2>
+              <p className="text-xs text-fg-muted">{t("subtitle")}</p>
+            </div>
           </div>
           <button
             type="button"
@@ -109,7 +115,10 @@ export default function AssistantPanel({
                     {m.text}
                   </p>
                 ) : m.reply === "pending" ? (
-                  <p className="text-fg-muted">{t("thinking")}</p>
+                  <p className="flex items-center gap-2 text-fg-muted">
+                    <Buddy mood="think" className="size-8" />
+                    {t("thinking")}
+                  </p>
                 ) : m.reply === "error" ? (
                   <p>{t("error")}</p>
                 ) : m.reply === "offline" ? (

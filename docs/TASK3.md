@@ -4,7 +4,7 @@
 - Audited 12 pages at 360, 768, 1024 and 1440 px (home, programmes, a programme, admissions, campus, research, hostels,
   student life, compare, a story, Tamil home, Hindi programmes): no horizontal overflow, one h1 on each.
 - Phone: 3D, pinned scenes and the ink reveal step aside; lists and filters stack; tap targets 44 px (logo and source links fixed).
-- Tablet and laptop: screenshots in `docs/screenshots/task3/`.
+- Tablet and laptop: checked in the browser at 768 and 1024 px.
 - Cross-browser: `browserslist` in package.json (Chrome/Edge/Firefox 100+, Safari/iOS 15.4+, Samsung 18+). The build adds
   `-webkit-` prefixes for backdrop-filter and mask. Scroll-driven effects sit behind `@supports`, so older browsers
   simply see the finished layout. Tested in Chromium only; Safari and Firefox still need a manual pass.

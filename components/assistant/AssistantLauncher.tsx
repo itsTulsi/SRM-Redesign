@@ -1,7 +1,9 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { lazy, Suspense, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
+import { lazy, Suspense, useEffect, useRef, useState } from "react";
+import { Buddy } from "./Buddy";
 
 // The panel (and its UI code) loads only when someone reaches for it.
 const loadPanel = () => import("./AssistantPanel");
@@ -13,37 +15,58 @@ export function AssistantLauncher({ call }: { call: { display: string; tel: stri
   const [open, setOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
   const buttonRef = useRef<HTMLButtonElement>(null);
+  const path = usePathname();
+  const [hop, setHop] = useState(0);
+  const [nudge, setNudge] = useState(false);
+
+  // Leafy travels with you: it hops when you move to another page, and says hello once per visit.
+  useEffect(() => {
+    setHop((n) => n + 1);
+  }, [path]);
+  useEffect(() => {
+    try {
+      if (sessionStorage.getItem("srm-leafy-hello")) return;
+      sessionStorage.setItem("srm-leafy-hello", "1");
+    } catch {
+      return;
+    }
+    const show = window.setTimeout(() => setNudge(true), 5000);
+    const hide = window.setTimeout(() => setNudge(false), 12000);
+    return () => {
+      clearTimeout(show);
+      clearTimeout(hide);
+    };
+  }, []);
 
   return (
     <>
-      <button
-        ref={buttonRef}
-        type="button"
-        aria-haspopup="dialog"
-        aria-expanded={open}
-        onPointerEnter={loadPanel}
-        onFocus={loadPanel}
-        onClick={() => {
-          setMounted(true);
-          setOpen(true);
-        }}
-        className="assistant-launcher fixed right-4 bottom-4 z-40 inline-flex min-h-12 min-w-12 items-center justify-center gap-2 rounded-full border border-line bg-paper font-semibold text-ink shadow-lg sm:px-4"
-      >
-        <svg aria-hidden="true" viewBox="0 0 24 24" className="size-5 shrink-0">
-          <path
-            d="M4 5h16v11H9l-5 4V5z"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinejoin="round"
-          />
-          <circle cx="9" cy="10.5" r="1.2" fill="currentColor" />
-          <circle cx="12.5" cy="10.5" r="1.2" fill="currentColor" />
-          <circle cx="16" cy="10.5" r="1.2" fill="currentColor" />
-        </svg>
-        {/* Icon-only on phones so it covers as little content as possible; the name stays for screen readers. */}
-        <span className="max-sm:sr-only">{t("launcher")}</span>
-      </button>
+      <div className="assistant-launcher fixed right-3 bottom-3 z-40 flex items-end gap-2 sm:right-4 sm:bottom-4">
+        {nudge ? (
+          <p aria-hidden="true" className="leafy-bubble mb-3 max-w-[11rem] rounded-2xl rounded-br-sm bg-[#fff] px-3 py-2 text-sm font-semibold text-[#1a1018] shadow-lg">
+            {t("nudge")}
+          </p>
+        ) : null}
+        <button
+          ref={buttonRef}
+          type="button"
+          aria-haspopup="dialog"
+          aria-expanded={open}
+          onPointerEnter={loadPanel}
+          onFocus={loadPanel}
+          onClick={() => {
+            setNudge(false);
+            setMounted(true);
+            setOpen(true);
+          }}
+          className="leafy-btn group relative inline-flex size-14 items-center justify-center rounded-full border border-line bg-paper shadow-lg"
+        >
+          <span key={hop} className="leafy-hop grid size-12 shrink-0 place-items-center rounded-full bg-[#623562]">
+            <Buddy className="size-11" />
+          </span>
+          {/* Only Leafy is shown; the name stays for screen readers. */}
+          <span className="sr-only">{t("launcher")}</span>
+        </button>
+      </div>
       {mounted ? (
         <Suspense fallback={null}>
           <AssistantPanel
