@@ -1,6 +1,7 @@
 "use client";
 
 import { useLocale } from "next-intl";
+import { useEffect, useState } from "react";
 import { Link, localeNames, locales, usePathname, type Locale } from "@/lib/i18n";
 
 const shortNames: Record<Locale, string> = { en: "EN", ta: "த", hi: "हि" };
@@ -20,7 +21,13 @@ export function LanguageSwitcher({
 }) {
   const locale = useLocale();
   const pathname = usePathname();
+  const [search, setSearch] = useState("");
 
+  useEffect(() => {
+    setSearch(window.location.search);
+  }, [pathname]);
+
+  const targetHref = search ? `${pathname}${search}` : pathname;
   const Wrapper = landmark ? "nav" : "div";
   return (
     <Wrapper aria-label={label} role={landmark ? undefined : "group"} className={className}>
@@ -30,7 +37,7 @@ export function LanguageSwitcher({
           return (
             <li key={l}>
               <Link
-                href={pathname}
+                href={targetHref}
                 locale={l}
                 lang={l}
                 hrefLang={l}

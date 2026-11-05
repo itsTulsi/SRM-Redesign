@@ -75,8 +75,8 @@ export default function AssistantPanel({
       data-lenis-prevent
       onClose={onClose}
       onClick={(e) => {
-        // Following a link inside an answer closes the panel.
-        if ((e.target as HTMLElement).closest("a")) onClose();
+        // A click on the backdrop lands on the dialog element itself; following a link inside an answer also closes.
+        if (e.target === dialogRef.current || (e.target as HTMLElement).closest("a")) onClose();
       }}
       className="assistant-panel m-0 h-dvh max-h-none w-full max-w-none overflow-hidden bg-bg p-0 text-fg backdrop:bg-ink/50 sm:fixed sm:inset-auto sm:right-4 sm:bottom-4 sm:h-[min(42rem,calc(100dvh-2rem))] sm:w-[26rem] sm:rounded-3xl sm:border sm:border-line sm:shadow-2xl sm:backdrop:bg-transparent"
     >

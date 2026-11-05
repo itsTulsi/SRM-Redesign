@@ -18,6 +18,13 @@ const catalogue = programmes.map((p) => `${p.slug}: ${p.name}; ${p.tags.slice(0,
 const hits = new Map<string, number[]>();
 const limited = (ip: string) => {
   const now = Date.now();
+  if (hits.size > 500) {
+    for (const [k, timestamps] of hits.entries()) {
+      if (!timestamps.length || now - timestamps[timestamps.length - 1]! >= 60_000) {
+        hits.delete(k);
+      }
+    }
+  }
   const recent = (hits.get(ip) ?? []).filter((t) => now - t < 60_000);
   recent.push(now);
   hits.set(ip, recent);
@@ -32,7 +39,8 @@ export async function GET(req: NextRequest) {
   const locale = routing.locales.find((l) => l === requested) ?? routing.defaultLocale;
   if (q.length < 3) return NextResponse.json({ error: "missing q" }, { status: 400 });
   if (!llmEnabled()) return NextResponse.json({ enabled: false, picks: [] });
-  if (limited(req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "anon")) {
+  const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim();
+  if (ip && limited(ip)) {
     return NextResponse.json({ enabled: false, picks: [] }, { status: 429 });
   }
 
