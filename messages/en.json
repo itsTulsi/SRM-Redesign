@@ -1422,6 +1422,12 @@
       "lead": "Now there's a clock on it. Every quest on this page is something students are doing on campus, on Chennai time. Pick one and yours starts too.",
       "side": "The digits behind the phone are the time at Kattankulathur right now. Labs, clubs and fests run all year round; the next one starts without waiting for you.",
       "cta": "Pick your first quest"
+    },
+    "intro": {
+      "label": "Welcome to SRM",
+      "hint": "Scroll to walk in",
+      "skip": "Skip intro",
+      "loading": "Getting the gate ready"
     }
   }
 }

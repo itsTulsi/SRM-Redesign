@@ -33,3 +33,7 @@ The link-preview images use TTF copies of Space Grotesk and Inter; see `assets/o
 ## Homepage
 
 - The ink-blot mask (`public/brand/ink-blot.svg`) is original. The "clock" digits are the live time in Chennai.
+
+## Gate intro (homepage, first visit)
+
+- `public/media/intro/`: 73 frames cut from a team-supplied video of the SRM gate. TODO: record who shot it and where it came from.
