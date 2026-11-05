@@ -7,7 +7,7 @@ const RUNGS = [-4, -3, -2, -1, 0, 1, 2, 3, 4];
 
 /**
  * The hero's DNA helix, standing upright like the reference's turning column of cards: two strands spiral round
- * a vertical axis, joined by rungs, with SRM's emblem at the centre. The helix turns; each card faces outward, so it
+ * a vertical axis, with SRM's emblem at the centre. The helix turns; each card faces outward, so it
  * swings edge-on at the sides, and when it's behind you see its back, a kolam pattern, never mirrored text.
  * Plain CSS 3D: no library, runs on the compositor. Decorative, so hidden from screen readers; it moves on its own,
  * so it has a pause button (WCAG 2.2.2). Still under reduced motion or Lite Mode.
@@ -23,7 +23,6 @@ export function HeroRing({ items, center, pause, play }: { items: React.ReactNod
           <div className="grail-helix" data-paused={paused ? "" : undefined}>
             {cells.map(({ j, cards }) => (
               <div key={j} className="grail-helix-slot" style={{ "--j": j } as React.CSSProperties}>
-                <span className="grail-helix-rung" />
                 {cards.map(({ strand, i }) => (
                   <div key={strand} className="grail-helix-item" style={{ "--strand": strand } as React.CSSProperties}>
                     <div className="grail-ring-face">

@@ -1008,7 +1008,7 @@ html:has([data-grail]) {
 }
 
 /* The hero helix: a DNA double strand standing upright, like the reference's turning column of cards. Two strands
-   of cards spiral round a vertical axis, joined by rungs, with SRM's emblem in front at the centre. The helix turns
+   of cards spiral round a vertical axis, with SRM's emblem in front at the centre. The helix turns
    about its axis; cards face outward (edge-on at the sides) and show a kolam back when behind. Still under reduced
    motion or Lite Mode, and pausable (HeroRing). */
 .grail-ring-stage {
@@ -1049,17 +1049,6 @@ html:has([data-grail]) {
   transform-style: preserve-3d;
   --a: calc(var(--j) * var(--twist));
   transform: translateY(calc(-1 * var(--j) * var(--step))) rotateY(var(--a));
-}
-/* The base pair: a bar through the axis joining the two strands. */
-.grail-helix-rung {
-  position: absolute;
-  top: -1.5px;
-  left: calc(-1 * var(--r));
-  width: calc(2 * var(--r));
-  height: 3px;
-  border-radius: 3px;
-  background: linear-gradient(90deg, #ecd2f3, rgb(236 210 243 / 0.2) 50%, #ecd2f3);
-  transform: rotateY(90deg);
 }
 .grail-helix-item {
   position: absolute;
