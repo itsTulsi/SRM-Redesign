@@ -62,7 +62,7 @@ export function SiteHeader({ nav }: { nav: NavData }) {
       }}
     >
       <div className="site-container flex h-16 items-center gap-2 xl:gap-4">
-        <Link href="/" aria-label={nav.labels.home} className="mr-auto flex items-center gap-2 text-fg no-underline">
+        <Link href="/" aria-label={nav.labels.home} className="mr-auto flex shrink-0 items-center gap-2 text-fg no-underline">
           <Wordmark />
         </Link>
 

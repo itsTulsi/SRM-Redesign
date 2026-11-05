@@ -265,7 +265,8 @@
     "ctaBody": "Send us an enquiry and a counsellor will call you back — or call now.",
     "ctaButton": "Send an enquiry",
     "consentLabel": "Consent",
-    "demoTitle": "Demo mode — your enquiry wasn't sent"
+    "demoTitle": "Demo mode — your enquiry wasn't sent",
+    "offline": "You're offline, so nothing was sent. What you typed is still here: send it when you're back online, or call us:"
   },
   "Ask": {
     "finding": "Finding programmes…",
@@ -436,7 +437,8 @@
     "sFeesFor": "Fees for {name}",
     "sApply": "How do I apply?",
     "sRanking": "NIRF ranking",
-    "sHostel": "Is there a hostel?"
+    "sHostel": "Is there a hostel?",
+    "offline": "You're offline, so I can't look that up. Call admissions:"
   },
   "Hostels": {
     "metaTitle": "Hostels & housing",
@@ -1180,5 +1182,18 @@
     "close": "Close",
     "results": "{count, plural, =0 {No results.} one {# result.} other {# results.}}",
     "feesValue": "₹{amount} per year"
+  },
+  "Offline": {
+    "title": "You're offline",
+    "intro": "There's no internet connection right now. Pages you've saved on this device still open, and you can always call admissions.",
+    "savedTitle": "Saved on this device",
+    "savedNone": "Nothing saved yet. When you're back online, open a programme page and press “Save for offline”.",
+    "callTitle": "Call admissions",
+    "callBody": "A phone call needs no mobile data.",
+    "banner": "You're offline, showing saved pages.",
+    "save": "Save for offline",
+    "saving": "Saving…",
+    "saved": "Saved. This page works without internet.",
+    "saveFailed": "Couldn't save it just now. Try again when you're online."
   }
 }

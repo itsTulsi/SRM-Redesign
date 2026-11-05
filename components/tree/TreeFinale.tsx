@@ -32,86 +32,69 @@ export async function TreeFinale() {
     .map((leaf, i) => ({ ...leaf, ...canopy.slots[i]! }))
     .sort((a, b) => Math.round(a.y * 12) - Math.round(b.y * 12) || a.x - b.x);
 
-  const drawing = (withLeaves: boolean) => (
-    <svg viewBox={canopy.viewBox} aria-hidden="true" focusable="false" className="absolute inset-0 size-full overflow-visible">
-      {[...canopy.trunk, ...canopy.branches].map((s, i) => (
-        <path key={i} d={s.d} pathLength={1} strokeWidth={s.width} className="finale-branch fill-none stroke-tree" strokeLinecap="round" />
-      ))}
-      {canopy.stems.map((d, i) => (
-        <path key={`s${i}`} d={d} pathLength={1} strokeWidth={0.8} className="finale-branch fill-none stroke-tree opacity-60" strokeLinecap="round" />
-      ))}
-      {withLeaves
-        ? canopy.slots.map((p, i) => (
-            <ellipse key={`l${i}`} rx={4.5} ry={2.6} className="finale-dot fill-tree" transform={`translate(${minX + p.x * vw} ${minY + p.y * vh}) rotate(${(i * 47) % 180})`} />
-          ))
-        : null}
-    </svg>
-  );
-
+  // One drawing and one list for every screen size (rendering them twice doubled the homepage's HTML). Phones: the
+  // drawing as decoration, then the links as a two-column list. Desktop: the same links placed on the canopy.
   return (
     <div data-tree-finale className="site-container pb-24 lg:pb-40">
       <h3 className="font-display text-section font-bold">{t("finaleTitle")}</h3>
       <p className="mt-3 max-w-prose text-fg-muted">{t("finaleIntro")}</p>
 
-      {/* ── Desktop: links on the canopy ── */}
-      <div className="relative mx-auto mt-10 hidden h-[680px] lg:block" style={{ aspectRatio: `${vw} / ${vh}` }}>
-        {drawing(false)}
-        <ul aria-label={t("finaleList")} className="absolute inset-0">
+      <div className="relative mx-auto mt-8 lg:mt-10 lg:h-[680px] lg:w-[calc(680px*var(--ar))]" style={{ "--ar": vw / vh } as React.CSSProperties}>
+        <div className="relative mx-auto w-full max-w-md lg:absolute lg:inset-0 lg:max-w-none" style={{ aspectRatio: `${vw} / ${vh}` }}>
+          <svg viewBox={canopy.viewBox} aria-hidden="true" focusable="false" className="absolute inset-0 size-full overflow-visible">
+            {[...canopy.trunk, ...canopy.branches].map((seg, i) => (
+              <path key={i} d={seg.d} pathLength={1} strokeWidth={seg.width} className="finale-branch fill-none stroke-tree" strokeLinecap="round" />
+            ))}
+            {canopy.stems.map((d, i) => (
+              <path key={`s${i}`} d={d} pathLength={1} strokeWidth={0.8} className="finale-branch fill-none stroke-tree opacity-60" strokeLinecap="round" />
+            ))}
+            {/* Phones only: the leaves as decoration (on desktop the links themselves are the leaves). */}
+            {canopy.slots.map((p, i) => (
+              <ellipse key={`l${i}`} rx={4.5} ry={2.6} className="finale-dot fill-tree lg:hidden" transform={`translate(${minX + p.x * vw} ${minY + p.y * vh}) rotate(${(i * 47) % 180})`} />
+            ))}
+          </svg>
+        </div>
+
+        <ul aria-label={t("finaleList")} className="mt-8 grid grid-cols-2 gap-x-4 gap-y-1 lg:absolute lg:inset-0 lg:mt-0 lg:block">
           {placed.map((leaf) => (
             // The hovered or focused leaf comes to the front, so its card isn't hidden under later leaves.
-            <li key={leaf.key} className="absolute hover:z-20 focus-within:z-20" style={{ left: `${leaf.x * 100}%`, top: `${leaf.y * 100}%` }}>
+            <li
+              key={leaf.key}
+              className="lg:absolute lg:top-[calc(var(--y)*100%)] lg:left-[calc(var(--x)*100%)] lg:hover:z-20 lg:focus-within:z-20"
+              style={{ "--x": leaf.x, "--y": leaf.y } as React.CSSProperties}
+            >
               <Link
                 href={leaf.href}
-                className="finale-leaf group relative flex size-11 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full text-fg no-underline"
+                className="finale-leaf group relative flex min-h-12 items-center gap-3 py-1 text-fg no-underline lg:size-11 lg:min-h-0 lg:-translate-x-1/2 lg:-translate-y-1/2 lg:justify-center lg:rounded-full lg:py-0"
               >
-                <span aria-hidden="true" className="block size-5 rotate-45 rounded-[0_100%_0_100%] bg-tree transition-transform group-hover:scale-125 group-focus-visible:scale-125" />
-                {/* The card is the link's text: always there for screen readers, shown on hover and focus. */}
+                <span aria-hidden="true" className="hidden size-5 rotate-45 rounded-[0_100%_0_100%] bg-tree transition-transform group-hover:scale-125 group-focus-visible:scale-125 lg:block" />
+                {/* Phones: the row itself. Desktop: the link's card, there for screen readers and shown on hover and focus. */}
                 <span
-                  className={`finale-card pointer-events-none absolute top-1/2 z-10 flex w-64 -translate-y-1/2 items-center gap-3 rounded-2xl border border-line bg-bg p-3 text-left opacity-0 shadow-2xl transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100 ${
-                    leaf.x > 0.55 ? "right-full mr-2" : "left-full ml-2"
+                  className={`finale-card flex min-w-0 items-center gap-3 lg:pointer-events-none lg:absolute lg:top-1/2 lg:z-10 lg:w-64 lg:-translate-y-1/2 lg:rounded-2xl lg:border lg:border-line lg:bg-bg lg:p-3 lg:text-left lg:opacity-0 lg:shadow-2xl lg:transition-opacity lg:group-hover:opacity-100 lg:group-focus-visible:opacity-100 ${
+                    leaf.x > 0.55 ? "lg:right-full lg:mr-2" : "lg:left-full lg:ml-2"
                   }`}
                 >
-                  <Photo src={leaf.image} alt="" decorative sizes="56px" className="size-14 shrink-0 rounded-xl bg-paper" />
+                  <Photo src={leaf.image} alt="" decorative sizes="(min-width: 1024px) 56px, 40px" className="size-10 shrink-0 rounded-lg bg-paper lg:size-14 lg:rounded-xl" />
                   <span className="flex min-w-0 flex-col">
-                    <span className="leading-snug font-semibold">{leaf.name}</span>
-                    <span className="mt-0.5 line-clamp-2 text-sm text-fg-muted">{leaf.line}</span>
+                    <span className="line-clamp-2 text-sm leading-snug font-semibold lg:line-clamp-none lg:text-base">{leaf.name}</span>
+                    <span className="mt-0.5 hidden text-sm text-fg-muted lg:line-clamp-2">{leaf.line}</span>
                   </span>
                 </span>
               </Link>
             </li>
           ))}
         </ul>
-        <Link
-          href="/admissions#apply"
-          className="finale-apex absolute flex min-h-12 -translate-x-1/2 -translate-y-1/2 items-center gap-3 rounded-full bg-action py-2 pr-5 pl-3 font-semibold whitespace-nowrap text-on-action no-underline"
-          style={{ left: `${canopy.apex.x * 100}%`, top: `${canopy.apex.y * 100}%` }}
-        >
-          <span aria-hidden="true" className="block size-5 rotate-45 rounded-[0_100%_0_100%] border-2 border-ink" />
-          {t("yourLeaf")} · {t("apply")}
-        </Link>
-      </div>
 
-      {/* ── Phones and tablets: the drawing as decoration, the same links as a list ── */}
-      <div className="lg:hidden">
-        <div className="relative mx-auto mt-8 w-full max-w-md" style={{ aspectRatio: `${vw} / ${vh}` }}>
-          {drawing(true)}
-        </div>
-        <ul aria-label={t("finaleList")} className="mt-8 grid grid-cols-2 gap-x-4 gap-y-1">
-          {leaves.map((leaf) => (
-            <li key={leaf.key}>
-              <Link href={leaf.href} className="flex min-h-12 items-center gap-3 py-1 text-fg no-underline">
-                <Photo src={leaf.image} alt="" decorative sizes="40px" className="size-10 shrink-0 rounded-lg bg-paper" />
-                <span className="line-clamp-2 text-sm leading-snug font-semibold">{leaf.name}</span>
-              </Link>
-            </li>
-          ))}
-        </ul>
+        {/* The visitor's leaf: Apply. Gold, because it is the action. Top of the crown on desktop, full width on phones. */}
         <Link
           href="/admissions#apply"
-          className="mt-8 flex min-h-12 w-full flex-col items-center justify-center rounded-2xl bg-action px-5 py-3 text-center text-on-action no-underline"
+          className="finale-apex mt-8 flex min-h-12 w-full flex-col items-center justify-center rounded-2xl bg-action px-5 py-3 text-center text-on-action no-underline lg:absolute lg:top-[calc(var(--ay)*100%)] lg:left-[calc(var(--ax)*100%)] lg:mt-0 lg:w-auto lg:-translate-x-1/2 lg:-translate-y-1/2 lg:flex-row lg:gap-3 lg:rounded-full lg:py-2 lg:pr-5 lg:pl-3 lg:whitespace-nowrap"
+          style={{ "--ax": canopy.apex.x, "--ay": canopy.apex.y } as React.CSSProperties}
         >
-          <span className="text-sm">{t("yourLeaf")}</span>
-          <span className="text-lg font-bold">{t("apply")}</span>
+          <span aria-hidden="true" className="hidden size-5 rotate-45 rounded-[0_100%_0_100%] border-2 border-ink lg:block" />
+          <span className="text-sm lg:text-base lg:font-semibold">{t("yourLeaf")}</span>
+          <span aria-hidden="true" className="hidden lg:inline">·</span>
+          <span className="text-lg font-bold lg:text-base lg:font-semibold">{t("apply")}</span>
         </Link>
       </div>
     </div>

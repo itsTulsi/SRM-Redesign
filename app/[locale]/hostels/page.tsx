@@ -3,6 +3,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { BlockCard } from "@/components/hostels/BlockCard";
 import { FeeTable } from "@/components/hostels/FeeTable";
 import { Photo } from "@/components/ui/Photo";
+import { SaveOffline } from "@/components/ui/SaveOffline";
 import { getContent } from "@/lib/content";
 import { HOSTEL_SECTIONS, hostels, telHref, type HostelSection, type Meal } from "@/lib/hostels";
 import { Link, type Locale } from "@/lib/i18n";
@@ -54,6 +55,7 @@ export default async function HostelsPage({ params }: Params) {
         <p className="text-sm font-semibold tracking-wide text-fg-muted uppercase">{t("eyebrow")}</p>
         <h1 className="font-display text-hero font-bold">{t("title")}</h1>
         <p className="max-w-prose text-lg text-fg-muted">{t("intro")}</p>
+        <SaveOffline />
         <Photo src={hostels.heroPhoto} alt="" decorative priority sizes="(min-width: 1440px) 1344px, 100vw" className="mt-6 aspect-[16/9] w-full rounded-3xl md:aspect-[21/9]" />
       </header>
 

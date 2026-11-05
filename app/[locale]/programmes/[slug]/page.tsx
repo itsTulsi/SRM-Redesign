@@ -4,6 +4,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { StatFigure } from "@/components/acts/StatFigure";
 import { AskSenior, type SeniorThread } from "@/components/programme/AskSenior";
 import { CompareToggle } from "@/components/programme/CompareToggle";
+import { SaveOffline } from "@/components/ui/SaveOffline";
 import { ParentModeToggle } from "@/components/programme/ParentModeToggle";
 import { getContent, isTodo, programmes } from "@/lib/content";
 import { Link, type Locale } from "@/lib/i18n";
@@ -159,6 +160,7 @@ export default async function ProgrammePage({ params }: Params) {
           {t("call")}: {phones[0]!.display}
         </a>
         <CompareToggle slug={p.slug} name={p.name} className="rounded-full border border-line px-6 text-base text-fg hover:border-fg" />
+        <SaveOffline />
       </div>
 
       <div className="mt-8 max-w-4xl">

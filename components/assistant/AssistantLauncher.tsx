@@ -8,7 +8,7 @@ const loadPanel = () => import("./AssistantPanel");
 const AssistantPanel = lazy(loadPanel);
 
 /** Floating "Ask SRM" button on every page. Tiny; the chat panel is fetched on hover/focus/tap. */
-export function AssistantLauncher() {
+export function AssistantLauncher({ call }: { call: { display: string; tel: string } }) {
   const t = useTranslations("Assistant");
   const [open, setOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
@@ -47,6 +47,7 @@ export function AssistantLauncher() {
       {mounted ? (
         <Suspense fallback={null}>
           <AssistantPanel
+            call={call}
             open={open}
             onClose={() => {
               setOpen(false);
