@@ -14,6 +14,13 @@ The person who wrote this brief could only read Grail's page metadata, not its r
 
 Verified from metadata only: title "Grail: Real-world quests, every day"; one daily real-world quest meant to break autopilot; four growth stats (Strength, Intellect, Charisma, Wisdom); game-like language ("quests", "stats", "graduate"); subscription that ends at graduation; theme colour `#FAFAFA`; social card `OG.png` 1200x630.
 
+**Update after Step ZERO (2026-11-05, see `REFERENCE.md`):** the live site is mostly **black**, with off-white sheets
+and one soft accent per section. It is not warm paper with lime and ember. Its display face is a light, uppercase,
+high-contrast serif, not a grotesk. So the build uses a black ground, warm off-white sheets, kolam colours for the four
+stats (kumkum red, turmeric, sky, leaf green), lime only for the single action, and Instrument Serif over Inter.
+Content stays in `content/` (`content/quests.json`), not `data/`, because that's where this project's content checks
+look.
+
 ## 1. Concept: "Level Up at SRM"
 
 Grail turns real life into quests with stats. SRM's version: **a student's years at SRM as a character that levels up.** The site is not a brochure, it is a character sheet and a quest board.
