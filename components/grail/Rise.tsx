@@ -14,17 +14,19 @@ export function Rise({
   id,
   className = "",
   onLoad = false,
+  style,
 }: {
   as?: "h1" | "h2" | "h3";
   text: string;
   id?: string;
   className?: string;
   onLoad?: boolean;
+  style?: React.CSSProperties;
 }) {
   let i = 0;
   const words = text.split(" ");
   return (
-    <Tag id={id} data-rise={onLoad ? "load" : ""} className={`grail-display ${className}`}>
+    <Tag id={id} style={style} data-rise={onLoad ? "load" : ""} className={`grail-display ${className}`}>
       {words.map((word, w) => (
         <Fragment key={w}>
           <span className="grail-word">

@@ -1192,6 +1192,61 @@ html:has([data-grail]) {
   width: 2.25rem;
   height: 2.25rem;
 }
+/* ── Inner pages in the "Level up" theme (GrailPage) ── */
+/* Paper cards: the homepage's quest-card look, for lists on any ground. They carry their own ink tokens, so
+   anything inside (links, muted text, borders) reads on paper. */
+.grail-paper {
+  border-radius: 24px;
+  background: #f5f5f5;
+  color: #000000;
+  --fg: #000000;
+  --fg-muted: #555555;
+  --line: #8a8a8a;
+  --line-subtle: #dcdcdc;
+  --focus: #623562;
+  --link: #000000;
+}
+.grail-sheet .grail-paper {
+  background: #ffffff;
+  box-shadow: 0 1px 0 rgb(0 0 0 / 0.04), 0 12px 30px -18px rgb(0 0 0 / 0.25);
+}
+.grail-lilac .grail-paper {
+  background: #fff6ff;
+}
+@media (prefers-reduced-motion: no-preference) {
+  [data-motion="full"] .grail-paper-link {
+    transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  [data-motion="full"] .grail-paper-link:hover {
+    transform: translateY(-4px) rotate(-0.6deg);
+  }
+}
+/* Inside light grounds the page colour is light too, so "inverted" buttons (ink on --bg) stay readable. */
+[data-grail-page] .grail-sheet,
+[data-grail-page] .grail-paper {
+  --bg: #f5f5f5;
+  --tree: #1b6a3f; /* the leaf green, deepened so it passes AA on paper */
+}
+[data-grail-page] .grail-lilac {
+  --bg: #e7afe7;
+}
+/* Section heads and big numbers inside existing components take the display serif. */
+[data-grail-page] :is(h2, h3).font-display,
+.grail-num {
+  font-family: var(--font-grail-serif), var(--script-fonts), Georgia, serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  line-height: 1;
+}
+.grail-num {
+  text-transform: none;
+}
+[data-grail-page] dd.font-display,
+[data-grail-page] .stat-figure-value {
+  font-family: var(--font-grail-serif), var(--script-fonts), Georgia, serif;
+  font-weight: 400;
+}
 @media print {
   .grail-dock,
   .grail-ring-stage {

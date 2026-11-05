@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { StatFigure } from "@/components/acts/StatFigure";
+import { Crest, ghostPill, GrailChapter, GrailHero, GrailPage, GrailStart } from "@/components/grail/GrailPage";
 import { AskSenior, type SeniorThread } from "@/components/programme/AskSenior";
 import { CompareToggle } from "@/components/programme/CompareToggle";
 import { SaveOffline } from "@/components/ui/SaveOffline";
@@ -102,78 +103,69 @@ export default async function ProgrammePage({ params }: Params) {
     { label: t("deadline"), value: deadline },
   ];
 
+  const g = await getTranslations("Grail");
+
   return (
-    <main id="main" tabIndex={-1} className="site-container py-10 lg:py-16">
+    <GrailPage>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
-      <nav aria-label="Breadcrumb" className="text-sm text-fg-muted">
-        <ol className="flex flex-wrap items-center gap-1">
-          <li>
-            <Link href="/programmes" className="inline-flex min-h-11 items-center">
-              {t("programmes")}
-            </Link>
-          </li>
-          <li aria-hidden="true">›</li>
-          <li>
-            <Link href={`/programmes#${p.college}`} className="inline-flex min-h-11 items-center">
-              {college?.shortName}
-            </Link>
-          </li>
-        </ol>
-      </nav>
-
-      <header className="mt-2 max-w-4xl">
-        <p className="text-sm font-semibold tracking-wide text-fg-muted uppercase">
-          {college?.name} · {level}
-          {duration ? ` · ${duration}` : ""}
-        </p>
-        <h1 style={programmeTitleName(p.slug)} className="mt-2 font-display text-[clamp(2rem,5vw,4rem)] leading-[1.05] font-bold text-balance">{p.name}</h1>
-        {p.officialName && p.officialName !== p.name ? (
-          <p className="mt-2 text-fg-muted">
-            {t("officialName")}:{" "}
-            <span lang="en" className="font-semibold text-fg">
-              {p.officialName}
-            </span>
-          </p>
-        ) : null}
-        <p className="mt-4 text-xl text-fg-muted">{p.summary}</p>
-      </header>
-
-      <div className="mt-8 flex flex-wrap gap-3">
-        <Link
-          href="/admissions#apply"
-          data-magnetic
-          className="relative inline-flex min-h-12 items-center overflow-hidden rounded-full bg-action px-6 font-semibold text-on-action no-underline"
-        >
-          {t("apply")}
-        </Link>
-        <Link
-          href={`/admissions?programme=${p.slug}#enquiry`}
-          className="inline-flex min-h-12 items-center rounded-full border border-line px-6 font-semibold text-fg no-underline hover:border-fg"
-        >
-          {t("enquire")}
-        </Link>
-        <a
-          href={`tel:${phones[0]!.tel}`}
-          className="inline-flex min-h-12 items-center rounded-full border border-line px-6 font-semibold text-fg no-underline hover:border-fg"
-        >
-          {t("call")}: {phones[0]!.display}
-        </a>
-        <CompareToggle slug={p.slug} name={p.name} className="rounded-full border border-line px-6 text-base text-fg hover:border-fg" />
-        <SaveOffline />
-      </div>
-
-      <div className="mt-8 max-w-4xl">
-        <ParentModeToggle variant="banner" />
-      </div>
+      <GrailHero
+        kicker={`${college?.name ?? ""} · ${level}${duration ? ` · ${duration}` : ""}`}
+        title={p.name}
+        titleStyle={programmeTitleName(p.slug)}
+        size="text-[clamp(2.3rem,6vw,5.75rem)]"
+        before={
+          <nav aria-label="Breadcrumb" className="mb-2 text-sm text-[var(--fg-muted)]">
+            <ol className="flex flex-wrap items-center gap-1">
+              <li>
+                <Link href="/programmes" className="inline-flex min-h-11 items-center text-[var(--fg-muted)]">
+                  {t("programmes")}
+                </Link>
+              </li>
+              <li aria-hidden="true">›</li>
+              <li>
+                <Link href={`/programmes#${p.college}`} className="inline-flex min-h-11 items-center text-[var(--fg-muted)]">
+                  {college?.shortName}
+                </Link>
+              </li>
+            </ol>
+          </nav>
+        }
+        lead={
+          <>
+            {p.officialName && p.officialName !== p.name ? (
+              <p className="mb-3 text-base">
+                {t("officialName")}:{" "}
+                <span lang="en" className="font-semibold text-[var(--fg)]">
+                  {p.officialName}
+                </span>
+              </p>
+            ) : null}
+            <p className="text-xl">{p.summary}</p>
+          </>
+        }
+      >
+        <div className="mt-10 flex flex-wrap gap-3">
+          <Link href="/admissions#apply" data-magnetic className="grail-cta relative overflow-hidden">
+            {t("apply")}
+          </Link>
+          <Link href={`/admissions?programme=${p.slug}#enquiry`} className={ghostPill}>
+            {t("enquire")}
+          </Link>
+          <a href={`tel:${phones[0]!.tel}`} className={ghostPill}>
+            {t("call")}: {phones[0]!.display}
+          </a>
+          <CompareToggle slug={p.slug} name={p.name} className="rounded-full border border-[var(--line)] px-6 text-base text-[var(--fg)] hover:border-[var(--fg)]" />
+          <SaveOffline />
+        </div>
+        <div className="mt-8 max-w-4xl">
+          <ParentModeToggle variant="banner" />
+        </div>
+      </GrailHero>
 
       {/* ── Parent view: plain answers first (shown when <html data-parent="on">) ── */}
-      <section aria-labelledby="parent-title" className="parent-view mt-12 max-w-4xl">
-        <h2 id="parent-title" className="font-display text-section font-bold">
-          {pt("title")}
-        </h2>
-        <p className="mt-3 max-w-prose text-fg-muted">{pt("intro")}</p>
-        <dl className="mt-8 flex flex-col gap-4">
+      <GrailChapter tone="light" className="parent-view" kicker={pt("title")} level={2} title={pt("title")} titleId="parent-title" intro={<p>{pt("intro")}</p>}>
+        <dl className="grid max-w-5xl gap-4 md:grid-cols-2">
           {[
             {
               q: pt("studyQ"),
@@ -187,11 +179,7 @@ export default async function ProgrammePage({ params }: Params) {
             { q: pt("costQ"), a: <p>{fees ?? pt("costUnknown")}</p> },
             {
               q: pt("admitQ"),
-              a: (
-                <p>
-                  {[entrance, eligibility].filter(Boolean).join(" · ") || t("notPublished")}
-                </p>
-              ),
+              a: <p>{[entrance, eligibility].filter(Boolean).join(" · ") || t("notPublished")}</p>,
             },
             {
               q: pt("whereQ"),
@@ -248,96 +236,93 @@ export default async function ProgrammePage({ params }: Params) {
               ),
             },
           ].map((item) => (
-            <div key={item.q} className="rounded-2xl border border-line-subtle p-5">
-              <dt className="font-display text-xl font-bold">{item.q}</dt>
+            <div key={item.q} className="grail-paper p-6">
+              <dt className="text-xl font-semibold">{item.q}</dt>
               <dd className="mt-2 text-lg">{item.a}</dd>
             </div>
           ))}
         </dl>
-        <div className="mt-8 rounded-3xl border border-line p-6">
-          <h3 className="font-display text-2xl font-bold">{pt("callTitle")}</h3>
-          <p className="mt-2 mb-4 text-fg-muted">{pt("callBody")}</p>
+        <div className="mt-8 max-w-5xl rounded-[28px] bg-[#000000] p-6 text-[#ffffff] lg:p-8">
+          <h3 className="grail-num text-3xl uppercase">{pt("callTitle")}</h3>
+          <p className="mt-2 mb-5 text-[#b8b8b8]">{pt("callBody")}</p>
           {callButtons}
         </div>
-      </section>
+      </GrailChapter>
 
       {/* ── Student view ── */}
-      <div className="student-view mt-12 flex flex-col gap-16">
-        <section aria-labelledby="facts-title" className="max-w-4xl">
-          <h2 id="facts-title" className="font-display text-section font-bold">
-            {t("keyFacts")}
-          </h2>
-          <dl className="mt-6 grid gap-x-8 gap-y-3 border-t border-line-subtle pt-6 sm:grid-cols-[max-content_1fr]">
+      <div className="student-view">
+        <GrailChapter tone="light" kicker={college?.shortName ?? ""} level={2} title={t("keyFacts")} titleId="facts-title">
+          <dl className="grid max-w-5xl gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {factRows.map((r) => (
-              <div key={r.label} className="contents">
-                <dt className="font-semibold">{r.label}</dt>
-                <dd className={r.value ? "" : "text-fg-muted"}>{r.value ?? t("notPublished")}</dd>
+              <div key={r.label} className="grail-paper flex flex-col gap-1 p-5">
+                <dt className="text-sm font-semibold tracking-wide text-fg-muted uppercase">{r.label}</dt>
+                <dd className={`text-lg ${r.value ? "font-semibold" : "text-fg-muted"}`}>{r.value ?? t("notPublished")}</dd>
               </div>
             ))}
           </dl>
-        </section>
+          <p className="mt-10 text-sm text-[var(--fg-muted)]">
+            {t("sources")}:{" "}
+            {p.sources.map((s, i) => (
+              <span key={s}>
+                {i > 0 ? " · " : ""}
+                <a href={s}>{new URL(s).hostname.replace(/^www\./, "")}</a>
+              </span>
+            ))}
+          </p>
+        </GrailChapter>
 
-        <section aria-labelledby="careers-title" className="max-w-4xl">
-          <h2 id="careers-title" className="font-display text-section font-bold">
-            {t("careers")}
-          </h2>
-          <ul className="mt-6 flex flex-wrap gap-2">
-            {p.outcomes.map((o) => (
-              <li key={o} className="rounded-full border border-line px-4 py-2">
+        <GrailChapter kicker={t("careers")} level={3} title={t("careers")} titleId="careers-title" intro={<p>{t("careersNote")}</p>}>
+          <ul className="flex flex-wrap gap-3">
+            {p.outcomes.map((o, i) => (
+              <li key={o} className="grail-paper flex items-center gap-3 rounded-full py-2 pr-5 pl-2 text-lg font-semibold">
+                <Crest seed={o + i} className="size-9" />
                 {o}
               </li>
             ))}
           </ul>
-          <p className="mt-3 text-sm text-fg-muted">{t("careersNote")}</p>
-        </section>
+        </GrailChapter>
 
-        <section aria-labelledby="placements-title">
-          <h2 id="placements-title" className="font-display text-section font-bold">
-            {t("placementsTitle", { season: placements.season })}
-          </h2>
-          <p className="mt-3 text-fg-muted">{t("placementsNote")}</p>
-          <dl className="mt-8 grid grid-cols-2 gap-x-6 gap-y-10 lg:grid-cols-5">
+        <GrailChapter
+          tone="lilac"
+          kicker={g("proof.kicker")}
+          level={4}
+          title={t("placementsTitle", { season: placements.season })}
+          titleId="placements-title"
+          intro={<p>{t("placementsNote")}</p>}
+          size="text-[clamp(2.2rem,5.5vw,5rem)]"
+        >
+          <dl className="grid grid-cols-2 gap-x-6 gap-y-10 lg:grid-cols-5">
             {placements.items.map((s) => (
               <StatFigure key={s.id} stat={s} size="md" />
             ))}
           </dl>
-        </section>
+        </GrailChapter>
 
-        <div className="max-w-4xl">
-          <AskSenior programmeSlug={p.slug} threads={threads} />
+        <div data-tone="light" className="grail-sheet relative">
+          <div className="site-container max-w-5xl py-16 lg:py-24">
+            <AskSenior programmeSlug={p.slug} threads={threads} />
+          </div>
         </div>
 
         {related.length ? (
-          <section aria-labelledby="related-title">
-            <h2 id="related-title" className="font-display text-2xl font-bold">
-              {t("related", { college: college?.shortName ?? "" })}
-            </h2>
-            <ul className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          <GrailChapter kicker={college?.shortName ?? ""} level={5} title={t("related", { college: college?.shortName ?? "" })} titleId="related-title" size="text-[clamp(2rem,5vw,4.5rem)]">
+            <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {related.map((r) => (
                 <li key={r.slug}>
-                  <Link
-                    href={`/programmes/${r.slug}`}
-                    className="flex h-full min-h-11 flex-col gap-1 rounded-2xl border border-line-subtle p-4 text-fg no-underline hover:border-line"
-                  >
-                    <span style={programmeTitleName(r.slug)} className="block font-semibold">{r.name}</span>
+                  <Link href={`/programmes/${r.slug}`} className="grail-paper grail-paper-link flex h-full min-h-11 flex-col gap-1 p-5 text-fg no-underline">
+                    <span style={programmeTitleName(r.slug)} className="block text-lg font-semibold">
+                      {r.name}
+                    </span>
                     <span className="text-sm text-fg-muted">{r.summary}</span>
                   </Link>
                 </li>
               ))}
             </ul>
-          </section>
+          </GrailChapter>
         ) : null}
-
-        <p className="text-sm text-fg-muted">
-          {t("sources")}:{" "}
-          {p.sources.map((s, i) => (
-            <span key={s}>
-              {i > 0 ? " · " : ""}
-              <a href={s}>{new URL(s).hostname.replace(/^www\./, "")}</a>
-            </span>
-          ))}
-        </p>
       </div>
-    </main>
+
+      <GrailStart level={related.length ? 6 : 5} />
+    </GrailPage>
   );
 }

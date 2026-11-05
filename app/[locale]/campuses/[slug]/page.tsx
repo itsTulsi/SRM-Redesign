@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { Crest, ghostPill, GrailChapter, GrailHero, GrailPage } from "@/components/grail/GrailPage";
 import { StreetMap } from "@/components/map/StreetMap";
 import { Photo } from "@/components/ui/Photo";
 import { Fact } from "@/components/ui/Todo";
@@ -42,106 +43,99 @@ export default async function CampusPage({ params }: Params) {
   const ex = await getTranslations("Acts.explore");
   const street = streetMap(campus);
 
+  const title = campus.kind === "sister" ? campus.name : t("campusTitle", { name: campus.name });
+  const kicker = campus.kind === "sister" ? nav("sisterUniversities") : nav("ourCampuses");
+
   return (
-    <main id="main" tabIndex={-1} className="site-container py-12 lg:py-20">
-      <p className="text-sm font-semibold tracking-wide text-fg-muted uppercase">
-        {campus.kind === "sister" ? nav("sisterUniversities") : nav("ourCampuses")}
-      </p>
-      <h1 className="mt-2 font-display text-hero font-bold">
-        {campus.kind === "sister" ? campus.name : t("campusTitle", { name: campus.name })}
-      </h1>
-      <p className="mt-4 text-lg text-fg-muted">
-        {campus.city}, {campus.state}
-        {/* In production a TODO renders nothing, so don't leave a dangling separator. */}
-        {campus.distanceFromChennai && !(isTodo(campus.distanceFromChennai) && process.env.NODE_ENV === "production") ? (
-          <>
-            {" · "}
-            <Fact value={campus.distanceFromChennai} />
-          </>
-        ) : null}
-      </p>
-
-      <Photo
-        src={campus.photo}
-        alt={`${campus.name} campus`}
-        sizes="(min-width: 1440px) 1344px, 100vw"
-        priority
-        className="mt-10 aspect-[16/9] w-full rounded-2xl"
-      />
-
-      <div className="mt-10">
-        {campus.tour360Url ? (
-          <a
-            href={campus.tour360Url}
-            className="inline-flex min-h-12 items-center rounded-full border border-line px-6 font-semibold text-fg no-underline hover:border-fg"
-          >
-            {t("openTour")}
-            <span className="sr-only"> {nav("external")}</span>
+    <GrailPage>
+      <GrailHero
+        kicker={kicker}
+        title={title}
+        lead={
+          <p>
+            {campus.city}, {campus.state}
+            {/* In production a TODO renders nothing, so don't leave a dangling separator. */}
+            {campus.distanceFromChennai && !(isTodo(campus.distanceFromChennai) && process.env.NODE_ENV === "production") ? (
+              <>
+                {" · "}
+                <Fact value={campus.distanceFromChennai} />
+              </>
+            ) : null}
+          </p>
+        }
+      >
+        <div className="mt-8 flex flex-wrap gap-3">
+          {campus.tour360Url ? (
+            <a href={campus.tour360Url} className="grail-cta">
+              {t("openTour")}
+              <span className="sr-only"> {nav("external")}</span>
+            </a>
+          ) : (
+            <p className="text-[var(--fg-muted)]">{t("noTour")}</p>
+          )}
+          <a href={directionsUrl(campus)} className={ghostPill}>
+            {ex("directions")}
           </a>
-        ) : (
-          <p className="text-fg-muted">{t("noTour")}</p>
-        )}
-      </div>
-
-      <section aria-labelledby="h-find-us" className="mt-14 grid gap-8 lg:grid-cols-12">
-        <div className="flex flex-col gap-4 lg:col-span-5">
-          <h2 id="h-find-us" className="font-display text-section font-bold">
-            {t("findUs")}
-          </h2>
-          <div>
-            <h3 className="text-sm font-semibold tracking-wide text-fg-muted uppercase">{t("address")}</h3>
-            <p className="mt-1 text-lg">
-              {isTodo(campus.address) ? (
-                <>
-                  {campus.city}, {campus.state} <Fact value={campus.address} />
-                </>
-              ) : (
-                <span lang="en">{campus.address}</span>
-              )}
-            </p>
-          </div>
-          <div className="flex flex-wrap gap-3">
-            <a
-              href={directionsUrl(campus)}
-              className="inline-flex min-h-11 items-center rounded-full bg-fg px-5 font-semibold text-bg no-underline"
-            >
-              {ex("directions")}
-            </a>
-            <a
-              href={campus.website}
-              className="inline-flex min-h-11 items-center rounded-full border border-line px-5 font-semibold text-fg no-underline hover:border-fg"
-            >
-              {ex("website")}
-            </a>
-          </div>
-          {campus.coordsApprox ? <p className="text-sm text-fg-muted">{ex("approx")}</p> : null}
         </div>
-        <StreetMap
-          image={street.image}
-          link={street.link}
-          alt={`${ex("streetMap")}: ${campus.name}`}
-          linkLabel={ex("openMap")}
-          approx={campus.coordsApprox}
-          className="lg:col-span-7"
+        <Photo
+          src={campus.photo}
+          alt={`${campus.name} campus`}
+          sizes="(min-width: 1440px) 1344px, 100vw"
+          priority
+          className="mt-12 aspect-[16/9] w-full rounded-[36px] md:aspect-[21/9]"
         />
-      </section>
+      </GrailHero>
+
+      <GrailChapter tone="light" kicker={kicker} level={2} title={t("findUs")} titleId="h-find-us">
+        <div className="grid gap-8 lg:grid-cols-12">
+          <div className="flex flex-col gap-5 lg:col-span-5">
+            <div className="grail-paper p-6">
+              <h3 className="text-sm font-semibold tracking-wide text-fg-muted uppercase">{t("address")}</h3>
+              <p className="mt-2 text-xl">
+                {isTodo(campus.address) ? (
+                  <>
+                    {campus.city}, {campus.state} <Fact value={campus.address} />
+                  </>
+                ) : (
+                  <span lang="en">{campus.address}</span>
+                )}
+              </p>
+            </div>
+            <div className="flex flex-wrap gap-3">
+              <a href={directionsUrl(campus)} className="inline-flex min-h-12 items-center rounded-full bg-[#000000] px-6 font-semibold text-[#ffffff] no-underline">
+                {ex("directions")}
+              </a>
+              <a href={campus.website} className={ghostPill}>
+                {ex("website")}
+              </a>
+            </div>
+            {campus.coordsApprox ? <p className="text-sm text-fg-muted">{ex("approx")}</p> : null}
+          </div>
+          <StreetMap
+            image={street.image}
+            link={street.link}
+            alt={`${ex("streetMap")}: ${campus.name}`}
+            linkLabel={ex("openMap")}
+            approx={campus.coordsApprox}
+            className="lg:col-span-7"
+          />
+        </div>
+      </GrailChapter>
 
       {here.length > 0 ? (
-        <section aria-labelledby="h-colleges" className="mt-12">
-          <h2 id="h-colleges" className="text-xl font-semibold">
-            {t("collegesHere")}
-          </h2>
-          <ul className="mt-4 grid gap-2 md:grid-cols-2">
+        <GrailChapter tone="lilac" kicker={kicker} level={3} title={t("collegesHere")} titleId="h-colleges" size="text-[clamp(2.2rem,6vw,5.5rem)]">
+          <ul className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             {here.map((c) => (
               <li key={c.slug}>
-                <Link href={`/programmes#${c.slug}`} className="inline-flex min-h-11 items-center">
+                <Link href={`/programmes#${c.slug}`} className="grail-paper grail-paper-link flex min-h-11 items-center gap-4 p-5 font-semibold text-fg no-underline">
+                  <Crest seed={c.slug} className="size-11" />
                   {c.name}
                 </Link>
               </li>
             ))}
           </ul>
-        </section>
+        </GrailChapter>
       ) : null}
-    </main>
+    </GrailPage>
   );
 }
