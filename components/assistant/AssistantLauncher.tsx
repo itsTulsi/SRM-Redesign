@@ -58,13 +58,13 @@ export function AssistantLauncher({ call }: { call: { display: string; tel: stri
             setMounted(true);
             setOpen(true);
           }}
-          className="leafy-btn group relative inline-flex min-h-14 items-center gap-2 rounded-full border border-line bg-paper pr-1 pl-1 font-semibold text-ink shadow-lg sm:pr-4"
+          className="leafy-btn group relative inline-flex size-14 items-center justify-center rounded-full border border-line bg-paper shadow-lg"
         >
           <span key={hop} className="leafy-hop grid size-12 shrink-0 place-items-center rounded-full bg-[#623562]">
             <Buddy className="size-11" />
           </span>
-          {/* Icon-only on phones so it covers as little content as possible; the name stays for screen readers. */}
-          <span className="max-sm:sr-only">{t("launcher")}</span>
+          {/* Only Leafy is shown; the name stays for screen readers. */}
+          <span className="sr-only">{t("launcher")}</span>
         </button>
       </div>
       {mounted ? (
