@@ -27,7 +27,7 @@ export function StreetMap({
         <span
           aria-hidden="true"
           className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full ${
-            approx ? "size-24 border-2 border-dashed border-action bg-action/10" : "size-5 border-[3px] border-ink bg-action shadow-[0_0_0_6px_rgb(198_244_50/0.35)]"
+            approx ? "size-24 border-2 border-dashed border-action bg-action/10" : "size-5 border-[3px] border-ink bg-action shadow-[0_0_0_6px_rgb(242_182_50/0.35)]"
           }`}
         />
       </div>

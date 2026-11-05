@@ -11,7 +11,7 @@
  * To ship changes, bump VERSION: the next visit installs the new worker and deletes every older srm-* cache.
  * Kill switch (see README): deploy a sw.js that unregisters itself and deletes all srm-* caches.
  */
-const VERSION = "v1";
+const VERSION = "v2";
 const PAGES = `srm-${VERSION}-pages`;
 const STATIC = `srm-${VERSION}-static`;
 const MEDIA = `srm-${VERSION}-media`;
@@ -85,7 +85,7 @@ async function networkFirst(request) {
     if (saved) return saved;
     // Not saved: go to the offline page, so the address matches what's shown.
     const fallback = offlinePage(url.pathname);
-    if (url.pathname !== fallback && (await cache.match(fallback))) return Response.redirect(fallback, 302);
+    if (url.pathname !== fallback && (await cache.match(fallback))) return Response.redirect(new URL(fallback, url.origin).href, 302);
     return new Response("You're offline.", { status: 503, headers: { "Content-Type": "text/plain; charset=utf-8" } });
   }
 }

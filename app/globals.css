@@ -740,11 +740,17 @@ form[role="search"] input::-webkit-search-cancel-button {
   animation-duration: 0.2s;
 }
 /* Keep a title's proportions as it changes size, instead of stretching the picture of it. */
-::view-transition-old(*):not(::view-transition-old(root)),
-::view-transition-new(*):not(::view-transition-new(root)) {
+::view-transition-old(*),
+::view-transition-new(*) {
   height: 100%;
   object-fit: contain;
   object-position: left top;
+}
+::view-transition-old(root),
+::view-transition-new(root) {
+  height: 100%;
+  object-fit: fill;
+  object-position: 50% 50%;
 }
 
 /* ═══ Visual layer ═══ */

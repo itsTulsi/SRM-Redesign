@@ -17,6 +17,13 @@ const hits = new Map<string, number[]>();
 
 function rateLimited(ip: string) {
   const now = Date.now();
+  if (hits.size > 500) {
+    for (const [k, timestamps] of hits.entries()) {
+      if (!timestamps.length || now - timestamps[timestamps.length - 1]! >= WINDOW_MS) {
+        hits.delete(k);
+      }
+    }
+  }
   const recent = (hits.get(ip) ?? []).filter((t) => now - t < WINDOW_MS);
   recent.push(now);
   hits.set(ip, recent);

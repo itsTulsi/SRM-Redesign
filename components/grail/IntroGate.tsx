@@ -78,42 +78,55 @@ export function IntroGate({ label, hint, skip, loading }: { label: string; hint:
     // The spacer is 300svh tall; the page's own content starts 200svh down. The glide plays over the first 85% of that
     // and the picture fades out over the last 25%, as the camera passes under the gate.
     let frame = 0;
+    let completed = false;
+    const header = document.querySelector("header");
+    const unlock = () => header?.removeAttribute("inert");
+
     const tick = () => {
       frame = 0;
+      if (completed) return;
       const D = window.innerHeight * 2;
       const y = window.scrollY;
       progress = clamp(y / (D * 0.85));
       const fade = clamp((y - D * 0.75) / (D * 0.25));
       box.style.opacity = String(1 - fade);
-      box.style.visibility = fade >= 1 ? "hidden" : "visible";
-      box.style.pointerEvents = fade > 0.4 ? "none" : "auto";
+      if (fade >= 1) {
+        box.style.visibility = "hidden";
+        box.style.pointerEvents = "none";
+        box.style.display = "none";
+        completed = true;
+        unlock();
+        // The intro is over for this visit: collapse its scroll space and keep the reader exactly where they are, so
+        // scrolling back up reaches the homepage hero instead of an empty stretch.
+        delete html.dataset.intro;
+        window.scrollTo(0, Math.max(0, y - D));
+        try {
+          sessionStorage.setItem("srm-intro-seen", "1");
+        } catch {
+          // Storage blocked
+        }
+        setDone(true);
+      } else {
+        box.style.visibility = "visible";
+        box.style.pointerEvents = fade > 0.4 ? "none" : "auto";
+      }
       const idx = Math.round(progress * (FRAMES - 1));
       if (idx !== shown) {
         shown = idx;
         draw();
       }
-      if (y >= D * 0.98) {
-        try {
-          sessionStorage.setItem("srm-intro-seen", "1");
-        } catch {
-          // Storage blocked: the intro may play again on the next visit; harmless.
-        }
-        setDone(true);
-      } else setDone(false);
     };
     const onScroll = () => {
-      if (!frame) frame = requestAnimationFrame(tick);
+      if (!frame && !completed) frame = requestAnimationFrame(tick);
     };
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", size);
     tick();
 
     // While the intro covers the screen, keep the page behind it out of the tab order.
-    const header = document.querySelector("header");
     header?.setAttribute("inert", "");
-    const unlock = () => header?.removeAttribute("inert");
     const watch = window.setInterval(() => {
-      if (box.style.visibility === "hidden") unlock();
+      if (completed || box.style.visibility === "hidden" || html.dataset.intro !== "on") unlock();
       else header?.setAttribute("inert", "");
     }, 300);
 
@@ -135,6 +148,13 @@ export function IntroGate({ label, hint, skip, loading }: { label: string; hint:
     }
     const html = document.documentElement;
     delete html.dataset.intro; // the spacer collapses, the page is where it should be
+    if (root.current) {
+      root.current.style.visibility = "hidden";
+      root.current.style.display = "none";
+      root.current.style.pointerEvents = "none";
+    }
+    document.querySelector("header")?.removeAttribute("inert");
+    setDone(true);
     window.scrollTo(0, 0);
   }
 

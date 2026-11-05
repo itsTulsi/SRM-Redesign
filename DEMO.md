@@ -2,21 +2,19 @@
 
 Kept up to date as the build progresses (CLAUDE.md §10). Full audit results: [docs/AUDIT.md](docs/AUDIT.md).
 
-1. ✅ Hero: type "robotics" → matching programmes appear instantly in the gold block. Press **Find** on "I want to become a dentist" → answer card with real eligibility + entrance from the data (no AI, no cost). Try Tamil "எனக்கு ரோபோக்கள் பிடிக்கும்" or Hindi "मुझे डॉक्टर बनना है"; "astronaut chef" shows the honest "I'm not sure" + admissions numbers.
-2. ✅ Scroll to Act II → Team Camber Racing pinned scene (scrubs once car frames are supplied; callouts work now).
-3. ✅ Explore map → click "Chennai region" → camera flies in → click Kattankulathur (address, directions, street map).
-   Then "here's a parent in Madurai": pick **Madurai** under "Where are you coming from?" → arcs fly out to every campus, Tiruchirappalli is marked nearest (≈ 135 km, as the crow flies), the list re-sorts, and its Directions start from Madurai.
-4. ✅ Scroll to the end of Act III: the tree is fully grown and every leaf is a real alumnus, team or startup. Hover Sriram Krishnan's leaf, then point to the gold leaf at the top: "This one's yours" (it opens Apply).
-5. ✅ "Take the 360° tour" → SRM's real Kattankulathur tour opens in-page (modal; Esc closes).
-6. ✅ Toggle Tamil: header switcher **EN · த · हि** (top right; inside "Menu" on phones) — same page, now in Tamil.
-7. ✅ Click the hero's **Parents** chip (or the Parent mode toggle on any programme page, e.g. /programmes/bds) → the page leads with plain answers: cost, admission, location + directions, safety/hostel links, jobs, big Call admissions buttons. Scroll the student view for **Ask a Senior** (demo threads + moderation states).
-8. ✅ **Ask SRM** (chat button, bottom-right on every page): "fees for B.Tech CSE" → ₹4,75,000 a year from SRM's 2026 fee table, with the source link; "fees for MBBS" → honest "not published yet" + call buttons; "where is the main campus?" → address + directions; Tamil "விடுதி உள்ளதா?"; "can I bring my pet tiger" → "no verified answer" + question forwarded to the enquiry form. Free, no AI.
-9. ✅ Press ⌘K (or tap the search icon on a phone), type "dentist", press Enter: the programme's title travels into its page. Tick **Compare** on two programmes, then **Compare** in the tray: fees, eligibility and deadlines side by side, in a link you can share.
-10. ✅ Works offline: open a programme page, tap **Save for offline**, then turn on airplane mode and reload: "Still here, fees and all." A page that wasn't saved shows the offline page, with saved pages and admissions numbers that work without data.
-11. ✅ Lighthouse mobile: Performance 96 (English) / 95 (Tamil, Hindi), Accessibility 100, Best Practices 100, SEO 100, CLS 0. Take the screenshot from a production build (`npm run build:verify && npm run start:verify`), not `npm run dev`: dev mode always scores low.
+1. ✅ **Gate intro & 3D Helix Hero**: On first visit, a scroll-driven camera glide towards the SRM arch welcomes you into the site (with an instant Skip button). The hero features "Level Up at SRM" over an interactive 3D turning helix of quest cards around SRM's emblem.
+2. ✅ **Character Card & Path Picker**: Under "Your Character", pick a path (**Building · Research · Sport · Startups**) → the character levels up, XP bars fill, and verified SRM quests appear in real time.
+3. ✅ **Live Kattankulathur Clock & National Champions**: Scroll to the lilac chapter to see the live time at the campus and Team Camber Racing's Formula Bharat national championship quest card.
+4. ✅ **Quest Board & Verified Proof**: Scroll the horizontal quest board (real student work, Apple Swift Student Challenge winner, the Volvo Vehicle Technology Centre) and verified proof points: NIRF 2025 #11 University, NAAC A++, 10,190+ offers (2025 batch).
+5. ✅ **Explore Map & "How far is SRM from home?"**: Pick **Madurai** under "Where are you coming from?" → arcs fly out to every campus, Tiruchirappalli is marked nearest (≈ 135 km), the list re-sorts by distance, and directions start from home. Tap **Take the 360° tour** for Kattankulathur's in-page virtual tour.
+6. ✅ **Programme Finder with AI**: Under "Start your run", type "robotics" or "I want to become a dentist" → instant answer cards with real fees, eligibility, and entrance details. Or search by meaning on `/programmes` for "AI picks for you".
+7. ✅ **Toggle Tamil & Hindi**: Header switcher **EN · த · हि** (top right; inside "Menu" on mobile) — translates the full site, preserving your current search and parameters.
+8. ✅ **Parent Mode on Programme Pages**: Open `/programmes/btech-cse`, toggle **Parent Mode** → the page leads with plain answers: cost, admission, location + directions, safety/hostel links, jobs, and large Call Admissions buttons. Below it, check **Ask a Senior** (demo threads that show the moderation states; not real students yet).
+9. ✅ **Command Palette & Compare**: Press ⌘K (or tap search on phone) to jump anywhere. Check **Compare** on two programmes to see fees, eligibility and deadlines side by side with differences highlighted in a shareable link.
+10. ✅ **Ask SRM Assistant (Leafy)**: Tap the Leafy mascot button (bottom-right on any page) → verified answers on fees, deadlines, and hostels with Admissions direct dial, backed by a free AI fallback.
+11. ✅ **Works Offline**: Tap **Save for offline**, disconnect network and reload → offline service worker serves saved pages and helpful offline fallback.
+12. ✅ **3D Hostels**: Visit `/hostels` to explore every block with photos, warden contacts, 2026–27 fee tables, mess timings, and an interactive 3D campus model.
 
 Before the demo: paste a programme link into WhatsApp Web and check the preview card appears (it needs `NEXT_PUBLIC_SITE_URL` set to the live https address in Vercel). Keep the walkthrough under 90 seconds, and record it as a screen capture in case the venue's Wi-Fi fails.
 
-Bonus: turn on "Reduce motion" in OS settings → Lite Mode switches on automatically and says why.
-
-Also worth a look: **/hostels**. It covers every block with photos and warden contacts, the 2026–27 fee tables, how to apply, mess timings, canteens and safety rules. On a phone, the fee table turns into cards.
+Bonus: turn on "Reduce motion" in OS settings → Lite Mode switches on automatically, strips 3D/video, and displays why.

@@ -138,6 +138,7 @@ export async function GrailHome() {
         />
         <div className="site-container relative z-10">
           <div className="mx-auto flex max-w-3xl flex-col items-center gap-5 text-center">
+            <p className="grail-num text-2xl tracking-wide text-[var(--action)]">Learn. Leap. Lead.</p>
             <p className="max-w-xl text-lg text-[var(--fg-muted)]">{t("hero.lead")}</p>
             <div className="flex flex-wrap justify-center gap-3">
               <Link href="/admissions#apply" className="grail-cta">
@@ -148,6 +149,36 @@ export async function GrailHome() {
               </Link>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* ── 02 Learn. Leap. Lead.: SRM's tagline as the site's three acts (black). Each word leads to its part of the site. ── */}
+      <section aria-labelledby="grail-slogan" data-tone="dark" className="grail-stack bg-black py-20 lg:py-28">
+        <div className="site-container">
+          {corner(t("slogan.kicker"))}
+          <Rise id="grail-slogan" text={t("slogan.title")} className="mt-4 text-[clamp(3rem,10vw,9rem)]" />
+          <p className="mt-4 max-w-xl text-lg text-[var(--fg-muted)]">{t("slogan.intro")}</p>
+          <ol className="mt-12 grid gap-4 md:grid-cols-3">
+            {(
+              [
+                { k: "learn", href: "/programmes", kolam: "lattice", color: "var(--stat-think)" },
+                { k: "leap", href: "#grail-board", kolam: "rings", color: "var(--stat-build)" },
+                { k: "lead", href: "#grail-proof", kolam: "petals", color: "var(--stat-connect)" },
+              ] as const
+            ).map((a, i) => (
+              <li key={a.k} className="flex flex-col gap-4 rounded-[28px] border border-white/15 bg-white/[0.04] p-6">
+                <div className="flex items-center gap-4">
+                  <Kolam variant={a.kolam} color={a.color} className="size-14 shrink-0" />
+                  <span aria-hidden="true" className="grail-num text-6xl text-white/25">{i + 1}</span>
+                </div>
+                <h3 className="grail-num text-4xl uppercase">{t(`slogan.${a.k}.name`)}</h3>
+                <p className="text-[var(--fg-muted)]">{t(`slogan.${a.k}.line`, { n: programmes.length, c: colleges.length })}</p>
+                <Link href={a.href} className="mt-auto inline-flex min-h-11 items-center font-semibold text-[var(--fg)] underline underline-offset-4">
+                  {t(`slogan.${a.k}.cta`)} →
+                </Link>
+              </li>
+            ))}
+          </ol>
         </div>
       </section>
 

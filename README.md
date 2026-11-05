@@ -2,7 +2,7 @@
 
 **Redesigned by Shreyas** ([@shreyascode11](https://github.com/shreyascode11)) · An entry for the *Next-Gen SRM Website Design Challenge*
 
-A redesign of [srmist.edu.in](https://www.srmist.edu.in/) built around SRM's own tagline, **Learn. Leap. Lead.** The homepage is a three-act scroll, and a living tree grows as you read. Underneath, it is a fast, accessible site in English, Tamil and Hindi, built so that a parent on a budget Android phone can find B.Tech CSE fees in a few taps.
+A redesign of [srmist.edu.in](https://www.srmist.edu.in/) built around the bold, game-inspired concept **"Level Up at SRM"** (alongside SRM's classic tagline *Learn. Leap. Lead.*). The site turns a student's years into an interactive character sheet, quest board, and live campus exploration. Underneath, it is a fast, accessible site in English, Tamil and Hindi, built so that a parent on a budget Android phone can find B.Tech CSE fees in a few taps.
 
 > This is an independent design-challenge entry, not the official SRM website. Facts, fees and dates come from SRM's published pages (see [Content you can trust](#content-you-can-trust)); always confirm admissions details with SRM.
 

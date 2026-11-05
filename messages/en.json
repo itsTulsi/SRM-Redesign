@@ -110,7 +110,10 @@
       "suggestedWhy": "Based on programmes you pinned or opened. Stays on this device.",
       "because": "Shares: {tags}",
       "similar": "Programmes like this",
-      "similarWhy": "Matched on shared topics across colleges"
+      "similarWhy": "Matched on shared topics across colleges",
+      "aiTitle": "AI picks for you",
+      "aiNote": "Found by AI from SRM's programme list. Check the details on each programme page.",
+      "aiThinking": "AI is reading your search…"
     }
   },
   "Hero": {
@@ -1428,6 +1431,26 @@
       "hint": "Scroll to walk in",
       "skip": "Skip intro",
       "loading": "Getting the gate ready"
+    },
+    "slogan": {
+      "kicker": "Our promise",
+      "title": "Learn. Leap. Lead.",
+      "intro": "Three words that shape every year at SRM, and this whole site.",
+      "learn": {
+        "name": "Learn",
+        "line": "Find the programme that fits, from {n} programmes across {c} colleges, with fees and eligibility from SRM's own pages.",
+        "cta": "Find your programme"
+      },
+      "leap": {
+        "name": "Leap",
+        "line": "Build, race, ship and start things: real student work, from a Formula Bharat champion car to an Apple Swift winner.",
+        "cta": "See today's quests"
+      },
+      "lead": {
+        "name": "Lead",
+        "line": "Where it leads: SRM's rankings and accreditation, placements and research, all with their sources.",
+        "cta": "See the proof"
+      }
     }
   }
 }
