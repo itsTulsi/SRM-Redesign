@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { chapterTone, GrailChapter, GrailHero, GrailPage, GrailStart, JumpChips } from "@/components/grail/GrailPage";
 import { Photo } from "@/components/ui/Photo";
 import { telHref } from "@/lib/hostels";
 import { Link, type Locale } from "@/lib/i18n";
@@ -29,24 +30,22 @@ export default async function StudentLifePage({ params }: Params) {
   const ar = contacts.antiRagging;
   const ext = <span className="sr-only"> {nav("external")}</span>;
   const linkClass = "inline-flex min-h-11 items-center font-semibold underline underline-offset-4";
-  const card = "rounded-2xl border border-line-subtle p-5";
+  const card = "grail-paper p-5";
   const halfPhoto = "(min-width: 1024px) 40vw, (min-width: 640px) 50vw, 100vw";
 
   const section = (key: LifeSection, children: React.ReactNode) => {
     const id = LIFE_SECTIONS[key];
+    const i = lifeSections.indexOf(key);
     return (
-      <section id={id} aria-labelledby={`${id}-title`} className="scroll-mt-24 border-t border-line-subtle pt-12 pb-4">
-        <h2 id={`${id}-title`} className="font-display text-section font-bold">
-          {t(`sections.${key}`)}
-        </h2>
-        <div className="mt-6 flex flex-col gap-8">
+      <GrailChapter id={id} tone={chapterTone(i)} kicker={t("eyebrow")} level={i + 2} title={t(`sections.${key}`)} titleId={`${id}-title`} size="text-[clamp(2.2rem,5.5vw,4.75rem)]">
+        <div className="flex flex-col gap-8">
           {children}
           <a href={sources[key]} className={`${linkClass} w-fit text-sm`}>
             {t("officialPage")}
             {ext}
           </a>
         </div>
-      </section>
+      </GrailChapter>
     );
   };
 
@@ -88,34 +87,11 @@ export default async function StudentLifePage({ params }: Params) {
   );
 
   return (
-    <main id="main" tabIndex={-1} className="site-container py-12 lg:py-20">
-      <header className="flex flex-col gap-4">
-        <p className="text-sm font-semibold tracking-wide text-fg-muted uppercase">{t("eyebrow")}</p>
-        <h1 className="font-display text-hero font-bold">{t("title")}</h1>
-        <p className="max-w-prose text-lg text-fg-muted">{t("intro")}</p>
-        <Photo src={photos.holistic} alt="" decorative priority sizes="(min-width: 1440px) 1344px, 100vw" className="mt-6 aspect-[16/9] w-full rounded-3xl md:aspect-[21/9]" />
-      </header>
-
-      <div className="mt-12 lg:grid lg:grid-cols-[13rem_1fr] lg:gap-12">
-        <nav aria-labelledby="life-toc" className="mb-10 lg:mb-0">
-          <h2 id="life-toc" className="text-sm font-semibold tracking-wide text-fg-muted uppercase">
-            {t("onThisPage")}
-          </h2>
-          <ul className="mt-3 flex flex-wrap gap-2 lg:sticky lg:top-24 lg:flex-col lg:gap-0">
-            {lifeSections.map((key) => (
-              <li key={key}>
-                <a
-                  href={`#${LIFE_SECTIONS[key]}`}
-                  className="inline-flex min-h-11 items-center rounded-full border border-line px-4 text-sm font-medium text-fg no-underline hover:border-fg lg:rounded-none lg:border-0 lg:px-0 lg:text-base lg:hover:underline"
-                >
-                  {t(`sections.${key}`)}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </nav>
-
-        <div className="flex min-w-0 flex-col gap-12">
+    <GrailPage>
+      <GrailHero kicker={t("eyebrow")} title={t("title")} lead={<p>{t("intro")}</p>}>
+        <Photo src={photos.holistic} alt="" decorative priority sizes="(min-width: 1440px) 1344px, 100vw" className="mt-10 aspect-[16/9] w-full rounded-[36px] md:aspect-[21/9]" />
+        <JumpChips label={t("onThisPage")} items={lifeSections.map((key) => ({ href: `#${LIFE_SECTIONS[key]}`, label: t(`sections.${key}`) }))} />
+      </GrailHero>
           {section(
             "holistic",
             <>
@@ -133,7 +109,7 @@ export default async function StudentLifePage({ params }: Params) {
               <div className="grid items-start gap-6 md:grid-cols-[1fr_auto]">
                 <p className="max-w-prose text-lg">{t("green.lead")}</p>
                 <p className={card}>
-                  <span className="block font-display text-4xl font-bold">{stats.acres}</span>
+                  <span className="grail-num block text-5xl">{stats.acres}</span>
                   <span className="text-sm text-fg-muted">{t("green.acres")}</span>
                 </p>
               </div>
@@ -177,7 +153,7 @@ export default async function StudentLifePage({ params }: Params) {
                 <h3 className="font-display text-2xl font-bold">{t("affairs.eventsTitle")}</h3>
                 <ul className="mt-4 grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
                   {events.map((e) => (
-                    <li key={e.slug} className="overflow-hidden rounded-3xl border border-line-subtle">
+                    <li key={e.slug} className="grail-paper overflow-hidden">
                       <Photo src={e.photo} alt="" decorative sizes="(min-width: 1280px) 25vw, (min-width: 640px) 45vw, 100vw" className="aspect-[4/3] w-full" />
                       <div className="p-5">
                         <h4 className="font-display text-xl font-bold">{e.name}</h4>
@@ -360,7 +336,7 @@ export default async function StudentLifePage({ params }: Params) {
               <p className="max-w-prose text-lg">{t("religious.lead")}</p>
               <ul className="grid gap-6 md:grid-cols-3">
                 {worship.map((w) => (
-                  <li key={w.slug} className="overflow-hidden rounded-3xl border border-line-subtle">
+                  <li key={w.slug} className="grail-paper overflow-hidden">
                     <Photo src={w.photo} alt="" decorative sizes="(min-width: 768px) 30vw, 100vw" className="aspect-[4/3] w-full" />
                     <div className="p-5">
                       <h3 className="font-display text-xl font-bold">{t(`religious.items.${w.slug}.t`)}</h3>
@@ -384,8 +360,7 @@ export default async function StudentLifePage({ params }: Params) {
               <p className="text-sm text-fg-muted">{t("sourceNote")}</p>
             </>,
           )}
-        </div>
-      </div>
-    </main>
+      <GrailStart level={lifeSections.length + 2} />
+    </GrailPage>
   );
 }

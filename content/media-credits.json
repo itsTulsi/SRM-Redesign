@@ -457,6 +457,11 @@
       "owner": "SRMIST",
       "source": "https://www.srmist.edu.in/research/hpcc/",
       "image": "https://www.srmist.edu.in/wp-content/uploads/2026/08/HPC-Server-Room-1.jpeg"
+    },
+    "media/campuses/ramapuram.jpg": {
+      "owner": "Supplied by the team",
+      "source": "TODO: original source of the Ramapuram gate photo",
+      "image": "srm-university-ramapuram-campus-chennai-215395.webp"
     }
   }
 }

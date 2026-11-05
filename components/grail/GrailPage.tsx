@@ -142,3 +142,27 @@ export async function GrailStart({ level }: { level: number }) {
 /** An outline pill for secondary actions on black. */
 export const ghostPill =
   "inline-flex min-h-12 items-center rounded-full border border-[var(--line)] px-6 font-semibold text-[var(--fg)] no-underline hover:border-[var(--fg)]";
+
+/** "On this page" as a row of chips in the hero: every chapter one tap away (replaces the old sidebar list). */
+export function JumpChips({ label, items }: { label: string; items: { href: string; label: string }[] }) {
+  return (
+    <nav aria-label={label} className="mt-12">
+      <p className="text-sm font-semibold opacity-80">{label}</p>
+      <ul className="mt-3 flex flex-wrap gap-2">
+        {items.map((l) => (
+          <li key={l.href}>
+            <a
+              href={l.href}
+              className="inline-flex min-h-11 items-center rounded-full border border-[var(--line)] px-4 text-sm font-semibold text-[var(--fg)] no-underline hover:border-[var(--fg)]"
+            >
+              {l.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  );
+}
+
+/** Grounds for a run of chapters: off-white and black in turn, with lilac every fourth. */
+export const chapterTone = (i: number): "light" | "dark" | "lilac" => (i % 4 === 3 ? "lilac" : i % 2 === 0 ? "light" : "dark");

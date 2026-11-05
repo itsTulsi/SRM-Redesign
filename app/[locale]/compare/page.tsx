@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { GrailHero, GrailPage, GrailStart } from "@/components/grail/GrailPage";
 import { CompareCopyLink } from "@/components/programme/CompareCopyLink";
 import { compareHref, MAX_COMPARE } from "@/lib/compare";
 import { getContent, isTodo } from "@/lib/content";
@@ -34,6 +35,7 @@ export default async function ComparePage({ params, searchParams }: Props) {
   const query = await searchParams;
   const t = await getTranslations("Compare");
   const pt = await getTranslations("Programme");
+  const nav = await getTranslations("Nav");
   const { colleges, getCampus, getCollege, getProgramme, programmes } = getContent(locale);
 
   const slugs = [...new Set([query.p ?? []].flat())];
@@ -67,11 +69,9 @@ export default async function ComparePage({ params, searchParams }: Props) {
   const linkClass = "inline-flex min-h-11 items-center font-semibold underline underline-offset-4";
 
   return (
-    <main id="main" tabIndex={-1} className="site-container py-12 lg:py-20">
-      <h1 className="font-display text-hero font-bold">{t("title")}</h1>
-      <p className="mt-4 max-w-prose text-lg text-fg-muted">{t("intro")}</p>
-
-      <form action={getPathname({ href: "/compare", locale })} method="get" className="mt-8 grid items-end gap-4 md:grid-cols-[1fr_1fr_1fr_auto]">
+    <GrailPage>
+      <GrailHero kicker={nav("study")} title={t("title")} lead={<p>{t("intro")}</p>}>
+      <form action={getPathname({ href: "/compare", locale })} method="get" className="mt-10 grid items-end gap-4 md:grid-cols-[1fr_1fr_1fr_auto]">
         {Array.from({ length: MAX_COMPARE }, (_, i) => (
           <label key={i} className="flex min-w-0 flex-col gap-1 text-sm font-semibold">
             {t("slot", { n: i + 1 })}
@@ -98,9 +98,13 @@ export default async function ComparePage({ params, searchParams }: Props) {
           {t("submit")}
         </button>
       </form>
+      </GrailHero>
 
+      {/* The comparison itself sits on an off-white sheet that slides over the hero. */}
+      <div data-tone="light" className="grail-sheet relative">
+      <div className="site-container py-16 lg:py-24">
       {chosen.length < 2 ? (
-        <div className="mt-10 rounded-2xl border border-line-subtle p-6">
+        <div className="grail-paper p-6">
           <p className="text-lg">{t("empty")}</p>
           {example.length === 2 ? (
             <Link href={compareHref(example.map((p) => p.slug))} className={linkClass}>
@@ -109,7 +113,7 @@ export default async function ComparePage({ params, searchParams }: Props) {
           ) : null}
         </div>
       ) : (
-        <section aria-label={t("caption")} className="mt-10">
+        <section aria-label={t("caption")}>
           <div className="flex flex-wrap items-center gap-x-6">
             <Link href={compareHref(chosenSlugs, onlyDiff ? "" : "&diff=1")} scroll={false} className={linkClass}>
               {onlyDiff ? t("showAll") : t("onlyDiff")}
@@ -185,6 +189,10 @@ export default async function ComparePage({ params, searchParams }: Props) {
           <p className="mt-6 text-sm text-fg-muted">{t("feesNote")}</p>
         </section>
       )}
-    </main>
+      </div>
+      </div>
+
+      <GrailStart level={2} />
+    </GrailPage>
   );
 }
