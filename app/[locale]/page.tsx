@@ -1,12 +1,6 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { ActLead } from "@/components/acts/ActLead";
-import { ActLeap } from "@/components/acts/ActLeap";
-import { ActLearn } from "@/components/acts/ActLearn";
-import { ThisWeek } from "@/components/acts/ThisWeek";
-import { Hero } from "@/components/hero/Hero";
-import { Explore } from "@/components/map/Explore";
-import { LivingTree } from "@/components/tree/LivingTree";
+import { GrailHome } from "@/components/grail/GrailHome";
 import { getContent, upcomingEvents } from "@/lib/content";
 import type { Locale } from "@/lib/i18n";
 import { alternatesFor, socialFor } from "@/lib/page-metadata";
@@ -20,7 +14,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: L
 // Rebuilt daily so "Coming up" drops events once they've passed.
 export const revalidate = 86400;
 
-// Homepage = exactly the sections in CLAUDE.md §1, in order. Nothing else goes here.
+// Homepage on feature/grail-redesign: "Level Up at SRM" (SRM-GRAIL-REDESIGN.md). main keeps the three-act version.
 export default async function HomePage({ params }: { params: Promise<{ locale: Locale }> }) {
   const { locale } = await params;
   setRequestLocale(locale);
@@ -63,13 +57,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
   return (
     <main id="main" tabIndex={-1}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <Hero />
-      <ActLearn />
-      <ActLeap />
-      <ActLead />
-      <Explore />
-      <ThisWeek />
-      <LivingTree />
+      <GrailHome />
     </main>
   );
 }

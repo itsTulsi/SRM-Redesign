@@ -1195,5 +1195,164 @@
     "saving": "Saving…",
     "saved": "Saved. This page works without internet.",
     "saveFailed": "Couldn't save it just now. Try again when you're online."
+  },
+  "Grail": {
+    "level": "Level {n}",
+    "dock": "Start your run",
+    "hero": {
+      "kicker": "SRM Institute of Science and Technology",
+      "title": "Level up at SRM",
+      "lead": "Your years here, played as a character. Pick a path and watch your stats move: every quest on it is something students really do at SRM.",
+      "pickLegend": "What are you into?",
+      "paths": {
+        "building": "Building things",
+        "research": "Research",
+        "people": "People and clubs",
+        "sport": "Sport and wellbeing",
+        "startups": "Startups"
+      },
+      "cardName": "You",
+      "cardYear": "Year 1 at SRM",
+      "levelPill": "Level {n}",
+      "levelUp": "Level up!",
+      "xp": "XP",
+      "empty": "Pick a path to see your first quests.",
+      "firstQuests": "Your first quests",
+      "announce": "{path}. Your first quests: {quests}.",
+      "start": "Start your run",
+      "find": "Find a programme",
+      "pathKicker": "Your character",
+      "pathTitle": "Pick your path.",
+      "ringPause": "Pause the cards",
+      "ringPlay": "Play the cards"
+    },
+    "stats": {
+      "kicker": "The four stats",
+      "title": "Four stats. All of them yours.",
+      "intro": "Everything you do at SRM counts towards one of these.",
+      "open": "{n, plural, one {See the # quest} other {See the # quests}}",
+      "build": {
+        "name": "Build",
+        "line": "Labs, workshops and teams that make real things."
+      },
+      "think": {
+        "name": "Think",
+        "line": "Research, ideas and the hard questions."
+      },
+      "connect": {
+        "name": "Connect",
+        "line": "Clubs, fests, houses and the people you meet."
+      },
+      "grow": {
+        "name": "Grow",
+        "line": "Sport, wellbeing and starting something of your own."
+      }
+    },
+    "board": {
+      "kicker": "Quest board",
+      "title": "Today's quests",
+      "intro": "Real things students do here. Each one comes with the proof.",
+      "label": "Quest board: scroll sideways for more",
+      "raises": "Raises {stat}",
+      "proof": "Proof"
+    },
+    "quests": {
+      "camber": {
+        "title": "Race a car you built",
+        "summary": "Team Camber Racing designs, builds and races a Formula Student car, with students from mechanical, electrical, electronics and computing.",
+        "proof": "National Champions, Formula Bharat 2026 (combustion)"
+      },
+      "swift": {
+        "title": "Ship an app Apple notices",
+        "summary": "Build something real in Swift and enter Apple's Swift Student Challenge.",
+        "proof": "Distinguished Winner, Swift Student Challenge 2026"
+      },
+      "volvo": {
+        "title": "Work on vehicles with Volvo",
+        "summary": "Vehicle engineering with the Volvo Group, on campus.",
+        "proof": "Volvo Group's first university-based Vehicle Technology Centre"
+      },
+      "nano": {
+        "title": "Make a new material",
+        "summary": "Nanotechnology research for energy, the environment and healthcare.",
+        "proof": "Nanotechnology Research Centre, at Kattankulathur since 2006"
+      },
+      "patent": {
+        "title": "File a patent",
+        "summary": "Turn a lab result into an invention with your name on it.",
+        "proof": "{n} patents at SRMIST"
+      },
+      "hpcc": {
+        "title": "Run code on a supercomputer",
+        "summary": "Big simulations and models on SRM's High Performance Computing Centre.",
+        "proof": "One of ten central research facilities open across colleges"
+      },
+      "clubs": {
+        "title": "Join a club",
+        "summary": "Music, dance, quiz, astronomy, gaming and more, all student-run.",
+        "proof": "{n} clubs, open to everyone"
+      },
+      "jhalak": {
+        "title": "Win it for your house",
+        "summary": "Jhalak is SRM's inter-house cultural competition.",
+        "proof": "{n} houses across SRMIST"
+      },
+      "offer": {
+        "title": "Land your first offer",
+        "summary": "Placement season: interviews, offers and your first job.",
+        "proof": "{n} offers for the {season} batch"
+      },
+      "rotaract": {
+        "title": "Serve your community",
+        "summary": "Community service projects, towards the sustainable development goals.",
+        "proof": "With the Rotary Club of Meenambakkam"
+      },
+      "khel": {
+        "title": "Play at a national fest",
+        "summary": "Khel is SRM's national-level sports festival.",
+        "proof": "One of {n} events a year"
+      },
+      "startup": {
+        "title": "Start a company",
+        "summary": "Paperplane, founded by School of Computing students, runs digital clinics for doctors on WhatsApp.",
+        "proof": "Raised ₹3 crore"
+      },
+      "cycle": {
+        "title": "Cycle across campus",
+        "summary": "Walking and cycling are the most popular ways to get around.",
+        "proof": "{n} acres of green campus"
+      },
+      "talk": {
+        "title": "Talk to someone, any time",
+        "summary": "Free, confidential counselling for stress, exams, family or anything else.",
+        "proof": "{n} counselling support"
+      }
+    },
+    "proof": {
+      "kicker": "Proof wall",
+      "title": "Proof, not promises.",
+      "intro": "Only numbers SRM has published.",
+      "nirf": "NIRF {year} · {category}",
+      "naac": "NAAC grade",
+      "offers": "offers, {season} batch",
+      "highest": "highest CTC, {season} batch",
+      "patents": "patents",
+      "publications": "publications",
+      "source": "Source: NIRF {year} table published by SRMIST"
+    },
+    "media": {
+      "kicker": "Campus",
+      "title": "Campus, in motion.",
+      "label": "Campus photos: scroll sideways for more"
+    },
+    "start": {
+      "kicker": "Start your run",
+      "title": "Start your run.",
+      "intro": "Applications are made on SRM's own portal. Find your programme first, or talk to a person.",
+      "apply": "Apply",
+      "enquire": "Ask admissions",
+      "call": "Call",
+      "findTitle": "What do you want to become?"
+    }
   }
 }

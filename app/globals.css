@@ -805,3 +805,374 @@ form[role="search"] input::-webkit-search-cancel-button {
   content: none !important;
 }
 
+/* ═══ Level Up at SRM (feature/grail-redesign; REFERENCE.md) ═══
+   The reference's palette (black, off-white sheets, lilac, aubergine) and motion (letters rising, sheets sliding over
+   pinned sections, a turning ring of cards, a dock that changes colour). The tokens switch for the whole page, header
+   and footer included, only when the Grail homepage is on it. */
+html:has([data-grail]) {
+  --bg: #000000;
+  --fg: #ffffff;
+  --fg-muted: #b8b8b8;
+  --line: #5c5c5c;
+  --line-subtle: #262626;
+  --link: #ffffff;
+  --focus: #ecd2f3;
+  --action: #ecd2f3;
+  --on-action: #1a1018;
+  --action-edge: transparent;
+  --stat-build: #ff4d2e;
+  --stat-think: #ffc63a;
+  --stat-connect: #9ee3ff;
+  --stat-grow: #ffcdff;
+  background: #000000;
+}
+.grail-display {
+  font-family: var(--font-grail-serif), var(--script-fonts), Georgia, serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  line-height: 0.92;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+:lang(ta) .grail-display,
+:lang(hi) .grail-display {
+  line-height: 1.2;
+  letter-spacing: 0;
+}
+/* Tamil and Devanagari run far taller and wider than the serif: same hierarchy, a smaller scale. */
+:lang(ta) h1.grail-display,
+:lang(hi) h1.grail-display {
+  font-size: clamp(2.4rem, 7.5vw, 6.75rem);
+}
+:lang(ta) h2.grail-display,
+:lang(hi) h2.grail-display {
+  font-size: clamp(2rem, 5.5vw, 4.75rem);
+}
+
+/* Letters rise into place one after another. The hero runs at once; other headings when they scroll into view
+   (GrailMotion sets data-in). Hidden only once that script is running, so without it nothing is ever hidden. */
+.grail-word {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  padding-bottom: 0.1em;
+  margin-bottom: -0.1em;
+}
+.grail-letter {
+  display: inline-block;
+}
+[data-motion="full"] [data-rise="load"] .grail-letter {
+  animation: grail-rise 0.62s cubic-bezier(0.2, 0.7, 0.1, 1) calc(var(--i, 0) * 28ms) both;
+}
+[data-motion="full"][data-grail-ready] [data-rise=""] .grail-letter {
+  transform: translateY(110%);
+  transition: transform 0.62s cubic-bezier(0.2, 0.7, 0.1, 1) calc(var(--i, 0) * 22ms);
+}
+[data-motion="full"][data-grail-ready] [data-rise=""][data-in] .grail-letter {
+  transform: none;
+}
+@keyframes grail-rise {
+  from {
+    transform: translateY(110%);
+  }
+}
+
+/* Chapters: off-white sheets and lilac panels with big rounded corners over the black. */
+.grail-sheet,
+.grail-lilac {
+  position: relative;
+  border-radius: 36px;
+  margin-top: -36px;
+}
+.grail-sheet {
+  background: #f5f5f5;
+  color: #000000;
+  --fg: #000000;
+  --fg-muted: #555555;
+  --line: #8a8a8a;
+  --line-subtle: #e2e2e2;
+  --focus: #623562;
+  --link: #000000;
+}
+.grail-lilac {
+  background:
+    radial-gradient(60% 55% at 18% 25%, #f6cff6 0%, transparent 70%),
+    radial-gradient(55% 60% at 82% 75%, #dda0dd 0%, transparent 70%),
+    #e7afe7;
+  color: #3b1d3b;
+  --fg: #3b1d3b;
+  --fg-muted: #623562;
+  --line: #8f5a8f;
+  --line-subtle: #d39bd3;
+  --focus: #3b1d3b;
+  --link: #3b1d3b;
+  --action: #1a1018;
+  --on-action: #ecd2f3;
+}
+.grail-lilac .grail-display {
+  color: #623562;
+}
+/* Each chapter stays pinned while the next one slides up over it, tilted, straightening as it lands. */
+[data-motion="full"] .grail-stack {
+  position: sticky;
+  top: var(--stack-top, 0px);
+}
+@supports (animation-timeline: view()) {
+  [data-motion="full"] .grail-sheet,
+  [data-motion="full"] .grail-lilac {
+    transform-origin: 0 0;
+    animation: grail-sheet-in linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 70%;
+  }
+}
+@keyframes grail-sheet-in {
+  from {
+    transform: translateY(60px) rotate(3deg);
+  }
+}
+
+.grail-cta {
+  display: inline-flex;
+  min-height: 3.25rem;
+  align-items: center;
+  border-radius: 999px;
+  background: var(--action);
+  padding-inline: 1.75rem;
+  font-size: 1.0625rem;
+  font-weight: 600;
+  color: var(--on-action);
+  text-decoration: none;
+  transition: transform 200ms var(--ease-leap);
+}
+.grail-cta:hover {
+  transform: translateY(-2px);
+}
+.grail-cta-ink {
+  background: #1a1018;
+  color: #ecd2f3;
+}
+/* Quest cards hang slightly crooked, like cards pinned to a board, and straighten when you reach for one. */
+.grail-quest {
+  transform: rotate(var(--tilt, 0deg));
+  transition: transform 350ms var(--ease-leap);
+}
+.grail-quest:hover,
+.grail-quest:focus-within {
+  transform: rotate(0deg) translateY(-6px);
+}
+.grail-bar {
+  transition: transform 800ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+/* Level-up: a burst of kolam-coloured dots from the crest when a path is picked. */
+.grail-burst {
+  position: absolute;
+  top: 3.25rem;
+  left: 3.25rem;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  pointer-events: none;
+  box-shadow:
+    0 -44px 0 4px var(--stat-build),
+    31px -31px 0 3px var(--stat-think),
+    44px 0 0 4px var(--stat-connect),
+    31px 31px 0 3px var(--stat-grow),
+    0 44px 0 4px #623562,
+    -31px 31px 0 3px var(--stat-build),
+    -44px 0 0 4px var(--stat-think),
+    -31px -31px 0 3px var(--stat-connect);
+  animation: grail-burst 900ms ease-out forwards;
+}
+@keyframes grail-burst {
+  from {
+    transform: scale(0.2);
+    opacity: 1;
+  }
+  to {
+    transform: scale(2.6);
+    opacity: 0;
+  }
+}
+.grail-levelup {
+  animation: grail-pop 600ms var(--ease-leap) both;
+}
+@keyframes grail-pop {
+  from {
+    transform: translateY(6px);
+    opacity: 0;
+  }
+}
+[data-motion="reduce"] .grail-burst {
+  display: none;
+}
+
+/* The hero ring: quest cards and kolam tiles orbiting SRM's emblem, in CSS 3D. Every face counter-turns so it keeps
+   facing you. Still under reduced motion or Lite Mode, and pausable (HeroRing). */
+.grail-ring-stage {
+  position: relative;
+  height: 340px;
+  perspective: 1600px;
+  perspective-origin: 50% 30%;
+  pointer-events: none;
+  --radius: 190px;
+  --spin: 46s;
+  /* Tilted like Saturn's rings: cards pass behind the emblem at the top and below it at the front, so it's never hidden. */
+  --tilt: 26deg;
+  --lift: 34px;
+}
+@media (min-width: 64rem) {
+  .grail-ring-stage {
+    height: 580px;
+    --radius: 460px;
+    --tilt: 21deg;
+    --lift: 56px;
+  }
+}
+.grail-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform-style: preserve-3d;
+  transform: rotateX(calc(-1 * var(--tilt)));
+  animation: grail-spin var(--spin) linear infinite;
+}
+.grail-ring-item,
+.grail-ring-center {
+  position: absolute;
+  transform-style: preserve-3d;
+}
+.grail-ring-item {
+  transform: rotateY(calc(360deg / var(--n) * var(--i))) translateZ(var(--radius)) rotateY(calc(-360deg / var(--n) * var(--i)));
+}
+.grail-ring-face {
+  transform: translate(-50%, -50%) rotateX(var(--tilt));
+  animation: grail-counter var(--spin) linear infinite;
+}
+.grail-ring-center .grail-ring-face {
+  translate: 0 calc(-1 * var(--lift));
+  width: 150px;
+  height: 150px;
+  filter: drop-shadow(0 0 40px rgb(236 210 243 / 0.35));
+}
+@media (min-width: 64rem) {
+  .grail-ring-center .grail-ring-face {
+    width: 260px;
+    height: 260px;
+  }
+}
+.grail-ring[data-paused],
+.grail-ring[data-paused] .grail-ring-face {
+  animation-play-state: paused;
+}
+@keyframes grail-spin {
+  from {
+    transform: rotateX(calc(-1 * var(--tilt))) rotateY(0deg);
+  }
+  to {
+    transform: rotateX(calc(-1 * var(--tilt))) rotateY(-360deg);
+  }
+}
+/* Undo both the spin and the tilt, so every face looks straight at you. */
+@keyframes grail-counter {
+  from {
+    transform: translate(-50%, -50%) rotateY(0deg) rotateX(var(--tilt));
+  }
+  to {
+    transform: translate(-50%, -50%) rotateY(360deg) rotateX(var(--tilt));
+  }
+}
+.grail-mini {
+  width: 176px;
+  border-radius: 18px;
+  background: #f5f5f5;
+  padding: 14px;
+  color: #000000;
+  box-shadow: 0 20px 40px rgb(0 0 0 / 0.45);
+}
+.grail-tile {
+  display: block;
+  width: 132px;
+  height: 132px;
+  box-shadow: 0 20px 40px rgb(0 0 0 / 0.45);
+  border-radius: 22px;
+}
+@media (max-width: 63.99rem) {
+  .grail-mini {
+    width: 132px;
+    padding: 10px;
+    font-size: 0.8em;
+  }
+  .grail-mini p:last-child {
+    display: none;
+  }
+  .grail-tile {
+    width: 92px;
+    height: 92px;
+  }
+}
+[data-motion="reduce"] .grail-ring,
+[data-motion="reduce"] .grail-ring-face {
+  animation: none;
+}
+[data-motion="reduce"] .grail-ring-toggle {
+  display: none;
+}
+
+/* The floating dock (desktop): it takes the colours of the section under it, as in the reference. */
+.grail-dock {
+  display: none;
+}
+@media (min-width: 64rem) {
+  .grail-dock {
+    position: fixed;
+    bottom: 1.5rem;
+    left: 50%;
+    z-index: 40;
+    display: inline-flex;
+    min-height: 3.25rem;
+    align-items: center;
+    gap: 0.75rem;
+    translate: -50% 0;
+    border-radius: 999px;
+    border: 1px solid rgb(255 255 255 / 0.18);
+    background: rgb(20 16 20 / 0.85);
+    padding: 0.375rem 1.25rem 0.375rem 0.375rem;
+    font-weight: 600;
+    color: #ecd2f3;
+    text-decoration: none;
+    backdrop-filter: blur(12px);
+    transition:
+      background-color 300ms,
+      color 300ms,
+      opacity 300ms,
+      translate 300ms;
+  }
+  /* The hero has its own "Start your run" button: the dock waits until you scroll past it. */
+  .grail-dock[data-on="hero"] {
+    opacity: 0;
+    translate: -50% 1.5rem;
+    pointer-events: none;
+    visibility: hidden;
+  }
+  .grail-dock[data-on="light"] {
+    background: rgb(255 255 255 / 0.9);
+    border-color: rgb(0 0 0 / 0.12);
+    color: #1a1018;
+  }
+  .grail-dock[data-on="lilac"] {
+    background: rgb(98 53 98 / 0.9);
+    color: #ffffff;
+  }
+}
+.grail-dock-mark {
+  display: block;
+  width: 2.25rem;
+  height: 2.25rem;
+}
+@media print {
+  .grail-dock,
+  .grail-ring-stage {
+    display: none;
+  }
+}
