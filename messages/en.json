@@ -1495,5 +1495,421 @@
     "scholarship": "Scholarships can lower this. Ask admissions:",
     "sources": "Sources: SRM admissions fee tables and 2026–27 hostel circulars",
     "breakdown": "Cost breakdown"
+  },
+  "Walk": {
+    "meta": {
+      "title": "Walk SRM: explore the Kattankulathur campus",
+      "description": "Walk the real Kattankulathur campus as a student, talk to people at real buildings and take six small campus quests. Every building leads to its page."
+    },
+    "hero": {
+      "kicker": "Kattankulathur, in 3D",
+      "title": "Walk SRM",
+      "lead": "Arrive at the gate as a new student. Walk the real campus, talk to people at real buildings, take small quests, and open any building's page on the way.",
+      "begin": "Begin",
+      "outfitFirst": "Make your student first",
+      "textTour": "Explore without the game",
+      "loading": "Building the campus…",
+      "noWebgl": "This device can't show 3D. Everything in the game is in the tour below.",
+      "lite": "Lite Mode is on, so the 3D walk is off. Everything in it is in the tour below.",
+      "time": "About 10 minutes · keyboard, mouse or touch",
+      "credit": "Map data © OpenStreetMap contributors (ODbL). Building heights are approximate. The quests are a game; what people tell you is SRM's own published information."
+    },
+    "ui": {
+      "exit": "Exit",
+      "pause": "Pause",
+      "paused": "Paused",
+      "resume": "Resume",
+      "quests": "Quests",
+      "map": "Map",
+      "talk": "Talk",
+      "pick": "Pick up: {item}",
+      "emote": "Emote",
+      "outfit": "Outfit",
+      "done": "Done",
+      "random": "Random",
+      "close": "Close",
+      "openPage": "Open the page",
+      "carrying": "Carrying",
+      "questDone": "Quest complete: {title}",
+      "newQuest": "New quest: {title}",
+      "keys": "WASD or arrow keys to walk · Shift to run · E to talk · Q emote · M map · Esc pause",
+      "touch": "Drag the stick or tap the ground to walk",
+      "walkThere": "Walk there",
+      "jumpThere": "Jump there",
+      "askOther": "Ask something else",
+      "askLabel": "Your question",
+      "askPlaceholder": "Ask about fees, hostels, programmes…",
+      "send": "Send",
+      "thinking": "Thinking…",
+      "aiNote": "Answered from SRM's own data",
+      "askFailed": "I couldn't answer that just now. Admissions can: {phone}",
+      "bye": "Bye!",
+      "sure": "Sure!",
+      "notNow": "Not now",
+      "next": "Next",
+      "noQuests": "Talk to people with a speech bubble above them to get quests.",
+      "active": "In progress",
+      "completed": "Done",
+      "available": "Not started",
+      "stats": "Your stats",
+      "level": "Level {n}",
+      "allDoneTitle": "You levelled up at SRM",
+      "allDoneText": "Six quests, four stats, one campus. The real thing starts with a programme.",
+      "findProgramme": "Find your programme",
+      "apply": "Apply",
+      "share": "Share",
+      "shareText": "I walked the SRM Kattankulathur campus and levelled up. Try it:",
+      "copied": "Link copied",
+      "keepWalking": "Keep walking",
+      "places": "Places",
+      "here": "You are here",
+      "target": "Next stop",
+      "nearby": "Nearby",
+      "step": "Step {n} of {total}",
+      "sound": "Sound",
+      "quality": "Graphics",
+      "qualityAuto": "Auto",
+      "qualityLow": "Low",
+      "qualityHigh": "High",
+      "fps": "Smooth",
+      "help": "How to play",
+      "touchTalk": "Tap a person to talk",
+      "leafy": "Leafy",
+      "leafyHint": "Leafy points the way to your next stop.",
+      "minimap": "Map of the campus",
+      "light": "Light",
+      "lightLive": "Chennai time",
+      "lightDay": "Always day"
+    },
+    "kinds": {
+      "arrival": "Getting here",
+      "admin": "Admin and admissions",
+      "library": "Library",
+      "food": "Food",
+      "tech": "Tech and startups",
+      "events": "Events",
+      "academic": "Teaching block",
+      "workshop": "Workshop",
+      "health": "Hospital",
+      "hostel": "Hostel",
+      "faith": "Place of worship",
+      "park": "Park"
+    },
+    "items": {
+      "coffee": "a filter coffee",
+      "part": "a spare part",
+      "book": "a library book",
+      "deck": "a pitch deck"
+    },
+    "stats": {
+      "build": "Build",
+      "think": "Think",
+      "connect": "Connect",
+      "grow": "Grow"
+    },
+    "emotes": {
+      "wave": "Wave",
+      "thumbs": "Thumbs up",
+      "laugh": "Laugh",
+      "heart": "Heart",
+      "vanakkam": "Vanakkam",
+      "cheer": "Cheer",
+      "party": "Party",
+      "question": "Question",
+      "wow": "Wow",
+      "leaf": "Leaf"
+    },
+    "outfit": {
+      "title": "Make your student",
+      "hair": "Hair",
+      "hairColor": "Hair colour",
+      "skin": "Skin",
+      "top": "Top",
+      "bottom": "Bottom",
+      "shoes": "Shoes",
+      "bag": "Bag",
+      "hairNames": [
+        "Short",
+        "Bun",
+        "Long",
+        "Ponytail",
+        "Curly",
+        "Buzz cut"
+      ],
+      "hairColorNames": [
+        "Black",
+        "Dark brown",
+        "Auburn",
+        "Grey",
+        "Brown"
+      ],
+      "skinNames": [
+        "Tone 1",
+        "Tone 2",
+        "Tone 3",
+        "Tone 4",
+        "Tone 5",
+        "Tone 6"
+      ],
+      "topNames": [
+        "SRM navy and gold",
+        "Camber Racing tee",
+        "Lab coat",
+        "Kurta",
+        "Hoodie",
+        "NCC uniform",
+        "Sports jersey",
+        "Plain tee"
+      ],
+      "bottomNames": [
+        "Jeans",
+        "Trousers",
+        "Long skirt",
+        "Shorts"
+      ],
+      "shoesNames": [
+        "Sneakers",
+        "Sandals",
+        "Boots",
+        "Canvas shoes"
+      ],
+      "bagNames": [
+        "No bag",
+        "Backpack",
+        "Tote bag",
+        "Sling bag"
+      ]
+    },
+    "people": {
+      "counsellor": {
+        "name": "Admissions counsellor",
+        "greet": "Hello! I work in admissions. Ask me anything about joining SRM.",
+        "topics": {
+          "apply": {
+            "q": "How do I apply?",
+            "a": "Applications are made on SRM's own portal. Find your programme first, then apply.",
+            "link": "Admissions"
+          },
+          "phones": {
+            "q": "Who do I call?",
+            "a": "{p1label}: {p1}. {p2label}: {p2}. {p3label}: {p3}."
+          }
+        }
+      },
+      "librarian": {
+        "name": "Librarian",
+        "greet": "Welcome to the library. Quiet voices, please!",
+        "topics": {
+          "research": {
+            "q": "What research happens here?",
+            "a": "SRM research in numbers: {stats}.",
+            "link": "Research"
+          }
+        }
+      },
+      "senior": {
+        "name": "Senior student",
+        "greet": "Hey, fresher! Need any tips?",
+        "topics": {
+          "seniors": {
+            "q": "Can I ask seniors about a programme?",
+            "a": "Yes. Every programme page has Ask a Senior, where students answer applicants' questions.",
+            "link": "Programmes"
+          },
+          "clubs": {
+            "q": "What is there to do after class?",
+            "a": "Clubs, fests, sport and more are on the Student life page.",
+            "link": "Student life"
+          }
+        }
+      },
+      "friend": {
+        "name": "Friend",
+        "greet": "Hi! Have you seen how big this campus is?",
+        "topics": {}
+      },
+      "camber": {
+        "name": "Camber Racing team member",
+        "greet": "Mind the tools! This is where Team Camber Racing builds its car.",
+        "topics": {
+          "camber": {
+            "q": "What has the team won?",
+            "a": "{title}. {dek}",
+            "link": "Read the story"
+          }
+        }
+      },
+      "techpark": {
+        "name": "Tech Park student",
+        "greet": "Hi! I study in the Tech Park.",
+        "topics": {
+          "programmes": {
+            "q": "What can I study?",
+            "a": "Our programme finder has {n} programmes across {c} colleges. B.Tech Computer Science and Engineering is {fee} a year at Kattankulathur.",
+            "link": "Find a programme"
+          }
+        }
+      },
+      "founder": {
+        "name": "Student founder",
+        "greet": "Welcome to the Innovation and Incubation Centre!",
+        "topics": {
+          "startups": {
+            "q": "Which startups came from here?",
+            "a": "SRM counts {count} startups from its incubation centre, including {names}.",
+            "link": "Stories"
+          }
+        }
+      },
+      "host": {
+        "name": "Event host",
+        "greet": "Welcome to TP Ganesan Auditorium!",
+        "topics": {
+          "events": {
+            "q": "What's coming up?",
+            "a": "Coming up on campus: {events}.",
+            "aNone": "SRM lists its upcoming events on its website; we show the latest on our Stories page.",
+            "link": "This week at SRM"
+          }
+        }
+      },
+      "warden": {
+        "name": "Hostel warden",
+        "greet": "Welcome! Students who live on campus stay in these hostels.",
+        "topics": {
+          "hostels": {
+            "q": "What does a room cost?",
+            "a": "Kattankulathur has {men} hostel blocks for boys and {women} for girls. For {year}, a room with mess costs from {min} to {max} a year.",
+            "link": "Hostels"
+          }
+        }
+      }
+    },
+    "quests": {
+      "first-day": {
+        "title": "First day",
+        "done": "You found your way around. Welcome to SRM!",
+        "steps": [
+          {
+            "hint": "Talk to the admissions counsellor at the SRM University Building",
+            "lines": [
+              "Welcome to SRM! Is it your first day?",
+              "Your senior is waiting for you at Java Food Court. Go and say hello!"
+            ]
+          },
+          {
+            "hint": "Find your senior at Java Food Court",
+            "lines": [
+              "You made it! Welcome to SRM.",
+              "Java Food Court is a good place to meet between classes."
+            ]
+          }
+        ]
+      },
+      "lunch-rush": {
+        "title": "Lunch rush",
+        "done": "Delivered, still hot.",
+        "steps": [
+          {
+            "hint": "Talk to the senior at Java Food Court",
+            "lines": [
+              "Can you do me a favour?",
+              "Take this filter coffee to my friend at Vendhar Square, please."
+            ]
+          },
+          {
+            "hint": "Take the coffee to the friend at Vendhar Square",
+            "lines": [
+              "Filter coffee! Thank you, you're a star."
+            ]
+          }
+        ]
+      },
+      "pit-crew": {
+        "title": "Pit crew",
+        "done": "The car is ready for its next test.",
+        "steps": [
+          {
+            "hint": "Talk to the Camber Racing member at the Mechanical Hangar",
+            "lines": [
+              "We need a spare part from the Aerospace Hangar next door.",
+              "Can you fetch it for us?"
+            ]
+          },
+          {
+            "hint": "Pick up the part at the Aerospace Hangar",
+            "lines": [
+              "Got it: one spare part."
+            ]
+          },
+          {
+            "hint": "Bring the part back to the Mechanical Hangar",
+            "lines": [
+              "That's the one. Welcome to the pit crew!"
+            ]
+          }
+        ]
+      },
+      "overdue": {
+        "title": "Overdue",
+        "done": "Book returned on time.",
+        "steps": [
+          {
+            "hint": "Talk to the student at SRM Tech Park",
+            "lines": [
+              "My library book is due today and my lab starts in five minutes.",
+              "Could you return it to the SRM Library for me?"
+            ]
+          },
+          {
+            "hint": "Return the book at the SRM Library",
+            "lines": [
+              "Right on time. Thank you!"
+            ]
+          }
+        ]
+      },
+      "pitch-day": {
+        "title": "Pitch day",
+        "done": "The pitch can start.",
+        "steps": [
+          {
+            "hint": "Talk to the founder at the Innovation and Incubation Centre",
+            "lines": [
+              "Our pitch is about to start at TP Ganesan Auditorium, and I left the deck here.",
+              "Please take it to the host!"
+            ]
+          },
+          {
+            "hint": "Take the deck to the host at TP Ganesan Auditorium",
+            "lines": [
+              "The deck! Now we can begin. Thank you!"
+            ]
+          }
+        ]
+      },
+      "home": {
+        "title": "Home",
+        "done": "You found where students live.",
+        "steps": [
+          {
+            "hint": "Talk to the warden at Paari Hostel",
+            "lines": [
+              "This is home for many students during the year.",
+              "Every hostel, room type and this year's fees are on our Hostels page."
+            ]
+          }
+        ]
+      }
+    },
+    "tour": {
+      "title": "The tour, without the game",
+      "intro": "The same places, people and quests as the walk, for any device and any screen reader.",
+      "placesTitle": "Places on the walk",
+      "peopleTitle": "People you meet",
+      "questsTitle": "Quests",
+      "at": "At {place}",
+      "skip": "Skip to the tour"
+    }
   }
 }
