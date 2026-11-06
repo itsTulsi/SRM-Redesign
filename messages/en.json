@@ -59,7 +59,8 @@
     "studentLife": "Student life",
     "researchCentres": "Research centres",
     "patents": "Patents",
-    "compare": "Compare programmes"
+    "compare": "Compare programmes",
+    "allStories": "All stories and alumni"
   },
   "Footer": {
     "label": "Footer",
@@ -1452,5 +1453,16 @@
         "cta": "See the proof"
       }
     }
+  },
+  "Stories": {
+    "metaTitle": "Stories, student work and alumni",
+    "kicker": "Stories",
+    "title": "Made at SRM",
+    "intro": "What students built this year, what is happening on campus this week, and where SRM graduates went next.",
+    "onThisPage": "On this page",
+    "studentWorkTitle": "Student work",
+    "studentWorkIntro": "Champions, award winners and founders, each with the facts from SRM's own source.",
+    "alumniIntro": "Graduates and the paths they took, from SRM's notable-alumni page.",
+    "source": "Source: SRM notable alumni"
   }
 }

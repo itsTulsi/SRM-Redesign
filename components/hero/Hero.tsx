@@ -1,7 +1,7 @@
 import { getLocale, getTranslations } from "next-intl/server";
 import { SmartLink } from "@/components/ui/SmartLink";
 import { getContent } from "@/lib/content";
-import { SECTION } from "@/lib/sections";
+import { HREF } from "@/lib/sections";
 import { HeroSeed } from "@/components/tree/HeroSeed";
 import { HeroMedia } from "./HeroMedia";
 import { HeroSearch } from "./HeroSearch";
@@ -21,8 +21,8 @@ export async function Hero() {
     // Switches Parent Mode on: every programme page then leads with plain answers for families.
     { label: t("parents"), href: "/programmes?parent=on" },
     { label: t("international"), href: site.admissions.internationalUrl },
-    { label: t("research"), href: `/#${SECTION.research}` },
-    { label: t("alumni"), href: `/#${SECTION.alumni}` },
+    { label: t("research"), href: HREF.research },
+    { label: t("alumni"), href: HREF.alumni },
   ];
 
   return (

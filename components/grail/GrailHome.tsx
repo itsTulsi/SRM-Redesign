@@ -325,7 +325,7 @@ export async function GrailHome() {
       </section>
 
       {/* ── 05 Proof (sheet) ── */}
-      <section aria-labelledby="grail-proof" data-tone="light" className="grail-stack grail-sheet">
+      <section id={SECTION.rankings} aria-labelledby="grail-proof" data-tone="light" className="grail-stack grail-sheet scroll-mt-16">
         <div className="site-container py-16 lg:py-24">
           {corner(t("proof.kicker"))}
           <Rise id="grail-proof" text={t("proof.title")} className="mt-4 text-[clamp(2.8rem,8vw,7rem)]" />

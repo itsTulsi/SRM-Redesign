@@ -2,12 +2,14 @@ import type { Metadata } from "next";
 import { getMessages, getTranslations, setRequestLocale } from "next-intl/server";
 import { ghostPill, GrailChapter, GrailHero, GrailPage, GrailStart } from "@/components/grail/GrailPage";
 import { Photo } from "@/components/ui/Photo";
-import { researchStats } from "@/lib/content";
+import { StatFigure } from "@/components/acts/StatFigure";
+import { Fact } from "@/components/ui/Todo";
+import { getContent, isTodo } from "@/lib/content";
 import { telHref } from "@/lib/hostels";
-import { Link, type Locale } from "@/lib/i18n";
+import type { Locale } from "@/lib/i18n";
 import { alternatesFor, socialFor } from "@/lib/page-metadata";
 import { researchCentres, type CentreCopy, type CentreSlug } from "@/lib/research-centres";
-import { SECTION } from "@/lib/sections";
+import { missionAnchor, SECTION } from "@/lib/sections";
 
 type Params = { params: Promise<{ locale: Locale }> };
 
@@ -29,6 +31,8 @@ export default async function ResearchCentresPage({ params }: Params) {
   setRequestLocale(locale);
   const t = await getTranslations("Centres");
   const nav = await getTranslations("Nav");
+  const leap = await getTranslations("Acts.leap");
+  const { missions, researchStats } = getContent(locale);
   const { centres, dean, heroPhoto, patents } = researchCentres;
   // Whole objects per centre (the lists vary by centre), so read the messages directly rather than key by key.
   const copy = (await getMessages()).Centres.centres as Record<CentreSlug, CentreCopy>;
@@ -68,13 +72,46 @@ export default async function ResearchCentresPage({ params }: Params) {
               </a>
             </p>
           </div>
-          <Link href={`/#${SECTION.research}`} className={`${ghostPill} w-fit`}>
+          <a href={`#${SECTION.research}`} className={`${ghostPill} w-fit`}>
             {t("missionsLink")}
-          </Link>
+          </a>
         </div>
       </GrailHero>
 
-      <GrailChapter tone="light" kicker={t("eyebrow")} level={2} title={t("centresTitle")} titleId="centres-title">
+      {/* Research by mission (Melbourne model): the problems, not the departments. Each mission is its own anchor. */}
+      <GrailChapter id={SECTION.research} kicker={nav("missions")} level={2} title={leap("researchTitle")} titleId="missions-title" intro={leap("researchIntro")}>
+        <ul className="grid gap-6 md:grid-cols-2">
+          {missions.map((m) => (
+            <li key={m.slug} id={missionAnchor(m.slug)} className="grail-paper flex scroll-mt-24 flex-col overflow-hidden">
+              <Photo src={m.photo} alt="" decorative sizes="(min-width: 768px) 50vw, 100vw" className="aspect-[16/9] w-full" />
+              <div className="flex flex-col gap-3 p-6 lg:p-8">
+                <h3 className="grail-num text-4xl uppercase">{m.name}</h3>
+                <p className="text-lg text-fg-muted">{m.question}</p>
+                <ul className="mt-1 flex list-disc flex-col gap-2 pl-5">
+                  {m.highlights.filter((h) => !isTodo(h)).map((h) => (
+                    <li key={h}>{h}</li>
+                  ))}
+                </ul>
+                {m.highlights.filter((h) => isTodo(h)).map((h) => (
+                  <p key={h}>
+                    <Fact value={h} />
+                  </p>
+                ))}
+              </div>
+            </li>
+          ))}
+        </ul>
+      </GrailChapter>
+
+      <GrailChapter id="research-numbers" tone="lilac" kicker={t("eyebrow")} level={3} title={leap("researchNumbers")} titleId="research-numbers-title">
+        <dl className="grid grid-cols-2 gap-x-6 gap-y-10 lg:grid-cols-4">
+          {researchStats.map((s) => (
+            <StatFigure key={s.id} stat={s} size="md" />
+          ))}
+        </dl>
+      </GrailChapter>
+
+      <GrailChapter tone="light" kicker={t("eyebrow")} level={4} title={t("centresTitle")} titleId="centres-title">
         <div className="lg:grid lg:grid-cols-[13rem_1fr] lg:gap-12">
           <nav aria-labelledby="research-toc" className="mb-10 lg:mb-0">
             <h3 id="research-toc" className="text-sm font-semibold tracking-wide text-fg-muted uppercase">
@@ -154,7 +191,7 @@ export default async function ResearchCentresPage({ params }: Params) {
         </div>
       </GrailChapter>
 
-      <GrailChapter id="patents" kicker={t("eyebrow")} level={3} title={t("patentsTitle")} titleId="patents-title" className="scroll-mt-24">
+      <GrailChapter id="patents" kicker={t("eyebrow")} level={5} title={t("patentsTitle")} titleId="patents-title" className="scroll-mt-24">
             <div className="flex flex-col gap-10">
               <p className="max-w-prose text-lg">{t("patents.lead")}</p>
               {patentTotal ? (
@@ -226,7 +263,7 @@ export default async function ResearchCentresPage({ params }: Params) {
             </div>
       </GrailChapter>
 
-      <GrailStart level={4} />
+      <GrailStart level={6} />
     </GrailPage>
   );
 }

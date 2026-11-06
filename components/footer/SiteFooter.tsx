@@ -7,7 +7,7 @@ import { SmartLink } from "@/components/ui/SmartLink";
 import srmLogo from "@/public/brand/srm-logo-white.png";
 import { Link } from "@/lib/i18n";
 import { getContent } from "@/lib/content";
-import { SECTION } from "@/lib/sections";
+import { HREF } from "@/lib/sections";
 import { FooterAccordion } from "./FooterAccordion";
 
 type Group = { id: string; title: string; links: { label: string; href: string; detail?: string }[] };
@@ -48,12 +48,12 @@ export async function SiteFooter() {
       id: "about",
       title: t("about"),
       links: [
-        { label: nav("rankings"), href: `/#${SECTION.rankings}` },
-        { label: nav("research"), href: `/#${SECTION.research}` },
+        { label: nav("rankings"), href: HREF.rankings },
+        { label: nav("research"), href: HREF.research },
         { label: nav("researchCentres"), href: "/research" },
-        { label: nav("studentWork"), href: `/#${SECTION.studentWork}` },
-        { label: nav("alumni"), href: `/#${SECTION.alumni}` },
-        { label: nav("thisWeek"), href: `/#${SECTION.thisWeek}` },
+        { label: nav("studentWork"), href: HREF.studentWork },
+        { label: nav("alumni"), href: HREF.alumni },
+        { label: nav("thisWeek"), href: HREF.thisWeek },
       ],
     },
     {
