@@ -1220,6 +1220,14 @@ html:has([data-grail]) {
   display: none;
 }
 
+/* ── A/B variants (lib/ab.ts): the head script sets html[data-ab-<experiment>]; without it, variant A shows. ── */
+html:not([data-ab-hero-cta="b"]) [data-ab="hero-cta"][data-ab-variant="b"],
+html[data-ab-hero-cta="b"] [data-ab="hero-cta"][data-ab-variant="a"],
+html:not([data-ab-programme-cta="b"]) [data-ab="programme-cta"][data-ab-variant="b"],
+html[data-ab-programme-cta="b"] [data-ab="programme-cta"][data-ab-variant="a"] {
+  display: none;
+}
+
 /* The floating dock (desktop): it takes the colours of the section under it, as in the reference. */
 .grail-dock {
   display: none;

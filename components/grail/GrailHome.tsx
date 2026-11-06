@@ -34,6 +34,7 @@ export async function GrailHome() {
   const ex = await getTranslations("Acts.explore");
   const nav = await getTranslations("Nav");
   const locale = await getLocale();
+  const hero = await getTranslations("Hero");
   const map = getMapData(locale);
   const all = await getMessages();
   const copy = all.Grail.quests as Record<string, QuestCopy>;
@@ -140,12 +141,39 @@ export async function GrailHome() {
           <div className="mx-auto flex max-w-3xl flex-col items-center gap-5 text-center">
             <p className="grail-num text-2xl tracking-wide text-[var(--action)]">Learn. Leap. Lead.</p>
             <p className="max-w-xl text-lg text-[var(--fg-muted)]">{t("hero.lead")}</p>
-            <div className="flex flex-wrap justify-center gap-3">
+            {/* A/B test "hero-cta" (lib/ab.ts). A: the game-style run button first. B: search first ("What do you want to
+                become?"), which opens the programme finder with the words already in it. */}
+            <div data-ab="hero-cta" data-ab-variant="a" data-ab-goal="hero-cta" className="flex flex-wrap justify-center gap-3">
               <Link href="/admissions#apply" className="grail-cta">
                 {t("hero.start")}
               </Link>
               <Link href="/programmes" className="inline-flex min-h-12 items-center rounded-full border border-[var(--line)] bg-black/40 px-6 font-semibold text-[var(--fg)] no-underline backdrop-blur hover:border-[var(--fg)]">
                 {t("hero.find")}
+              </Link>
+            </div>
+            <div data-ab="hero-cta" data-ab-variant="b" data-ab-goal="hero-cta" className="flex w-full max-w-xl flex-col items-center gap-3">
+              <p aria-hidden="true" className="grail-display text-[clamp(1.6rem,3.4vw,2.4rem)] leading-tight">
+                {hero("title")}
+              </p>
+              <form role="search" action={locale === "en" ? "/programmes" : `/${locale}/programmes`} className="flex w-full items-center gap-2 rounded-full border border-white/25 bg-black/50 p-1.5 pl-5 backdrop-blur focus-within:border-[var(--fg)]">
+                <label htmlFor="hero-ask" className="sr-only">
+                  {hero("inputLabel")}
+                </label>
+                <input
+                  id="hero-ask"
+                  name="q"
+                  type="search"
+                  autoComplete="off"
+                  maxLength={120}
+                  placeholder={`${(hero.raw("examples") as string[]).slice(0, 3).join(" · ")}…`}
+                  className="min-h-11 min-w-0 flex-1 bg-transparent text-base text-[var(--fg)] outline-none placeholder:text-[var(--fg-muted)]"
+                />
+                <button type="submit" className="grail-cta min-h-11 shrink-0 px-5">
+                  {hero("submit")}
+                </button>
+              </form>
+              <Link href="/admissions#apply" className="inline-flex min-h-11 items-center font-semibold text-[var(--fg)] underline underline-offset-4">
+                {t("hero.start")} →
               </Link>
             </div>
           </div>
