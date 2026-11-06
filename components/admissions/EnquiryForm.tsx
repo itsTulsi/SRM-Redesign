@@ -347,7 +347,7 @@ export function EnquiryForm({ programmes, phone }: { programmes: ProgrammeGroup[
             required
             aria-invalid={!!errors.consent}
             aria-describedby={describedBy("consent")}
-            className="mt-1 size-5 shrink-0 accent-[var(--srm-gold)]"
+            className="mt-0.5 size-6 shrink-0 accent-[var(--srm-gold)]"
           />
           <span>{t("consent")}</span>
         </label>

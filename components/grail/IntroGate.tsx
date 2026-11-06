@@ -2,6 +2,9 @@
 
 import { useEffect, useRef, useState } from "react";
 
+/** How many screens of scrolling the gate takes. Lower = faster. Keep in step with .grail-intro-spacer (100svh + this). */
+const INTRO_SCREENS = 1.2;
+
 const FRAMES = 73;
 const src = (i: number) => `/media/intro/f-${String(i + 1).padStart(3, "0")}.webp`;
 const clamp = (n: number) => Math.min(1, Math.max(0, n));
@@ -80,7 +83,7 @@ export function IntroGate({ label, hint, skip, loading }: { label: string; hint:
     };
     size();
 
-    // The spacer is 300svh tall; the page's own content starts 200svh down. The glide plays over the first 85% of that
+    // The spacer is 220svh tall; the page's own content starts 120svh down (INTRO_SCREENS screens of scrolling). The glide plays over the first 85% of that
     // and the picture fades out over the last 25%, as the camera passes under the gate.
     let frame = 0;
     let completed = false;
@@ -90,7 +93,7 @@ export function IntroGate({ label, hint, skip, loading }: { label: string; hint:
     const tick = () => {
       frame = 0;
       if (completed) return;
-      const D = window.innerHeight * 2;
+      const D = window.innerHeight * INTRO_SCREENS;
       const y = window.scrollY;
       progress = clamp(y / (D * 0.85));
       const fade = clamp((y - D * 0.75) / (D * 0.25));

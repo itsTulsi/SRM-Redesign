@@ -153,7 +153,7 @@ export async function GrailHome() {
       </section>
 
       {/* ── 02 Learn. Leap. Lead.: SRM's tagline as the site's three acts (black). Each word leads to its part of the site. ── */}
-      <section aria-labelledby="grail-slogan" data-tone="dark" className="grail-stack bg-black py-20 lg:py-28">
+      <section aria-labelledby="grail-slogan" data-tone="dark" className="relative bg-black py-20 lg:py-28">
         <div className="site-container">
           {corner(t("slogan.kicker"))}
           <Rise id="grail-slogan" text={t("slogan.title")} className="mt-4 text-[clamp(3rem,10vw,9rem)]" />

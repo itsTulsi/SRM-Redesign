@@ -42,7 +42,7 @@ export function HeroRing({ items, center, pause, play }: { items: React.ReactNod
         type="button"
         aria-pressed={paused}
         onClick={() => setPaused((p) => !p)}
-        className="grail-ring-toggle absolute right-4 bottom-4 z-20 inline-flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-full border border-[var(--line)] bg-black/60 px-3 text-sm text-[var(--fg)] backdrop-blur sm:right-8 lg:bottom-8"
+        className="grail-ring-toggle absolute left-4 bottom-4 z-20 inline-flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-full border border-[var(--line)] bg-black/60 px-3 text-sm text-[var(--fg)] backdrop-blur sm:left-8 lg:bottom-8"
       >
         <svg aria-hidden="true" viewBox="0 0 16 16" className="size-3.5">
           {paused ? <path d="M4 2l10 6-10 6z" fill="currentColor" /> : <path d="M4 2h3v12H4zM9 2h3v12H9z" fill="currentColor" />}
