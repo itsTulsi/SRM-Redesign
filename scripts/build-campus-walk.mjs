@@ -213,7 +213,8 @@ for (const pl of walk.places) {
     // A named point inside a building (the library in the University Building): its door faces that point;
     // otherwise the door faces the nearest road.
     door = n.building === undefined ? doorOf(buildings[bi].p, [n.x, n.z]) : doorOf(buildings[bi].p, nearestRoadPoint(n.x, n.z));
-    if (pl.kind !== "arrival" && pl.kind !== "park") buildings[bi].n = pl.id;
+    // First place wins (the University Building, not the library inside it).
+    if (pl.kind !== "arrival" && pl.kind !== "park" && !buildings[bi].n) buildings[bi].n = pl.id;
   } else door = [r(n.x), r(n.z)];
   places[pl.id] = { x: r(n.x), z: r(n.z), door, ...(bi >= 0 ? { b: bi } : {}) };
 }
@@ -240,10 +241,24 @@ for (let tries = 0; trees.length < 1100 && tries < 40000; tries++) {
   trees.push([r(x), r(z), Math.round((0.7 + rand() * 0.8) * 10) / 10]);
 }
 
-const out = { origin: [LAT0, LON0], bounds, spawn: walk.spawn, buildings, roads, water, green, trees, places };
+// Bus stops (one shelter per stop; pairs a few metres apart are one stop).
+const stops = [];
+for (const n of osmNames.filter((x) => x.tags.highway === "bus_stop" && x.building === undefined)) {
+  const xz = [r(n.x), r(n.z)];
+  if (xz[0] < bounds.minX || xz[0] > bounds.maxX || xz[1] < bounds.minZ || xz[1] > bounds.maxZ) continue;
+  if (stops.some(([sx, sz]) => Math.hypot(sx - xz[0], sz - xz[1]) < 12)) continue;
+  // Stand the shelter beside the road, not on it.
+  const q = nearestRoadPoint(xz[0], xz[1]);
+  const dx = xz[0] - q[0];
+  const dz = xz[1] - q[1];
+  const d = Math.hypot(dx, dz) || 1;
+  stops.push(d < 6 ? [r(q[0] + (dx / d) * 6), r(q[1] + (dz / d) * 6)] : xz);
+}
+
+const out = { origin: [LAT0, LON0], bounds, spawn: walk.spawn, buildings, roads, water, green, trees, stops, places };
 mkdirSync(new URL("../public/walk/", import.meta.url), { recursive: true });
 writeFileSync(new URL("../public/walk/ktr-world.json", import.meta.url), JSON.stringify(out));
 console.log(
-  `${buildings.length} buildings, ${roads.length} roads (${roads.filter((x) => x.f).length} footpaths), ${water.length} water, ${green.length} green, ${trees.length} trees, ${Object.keys(places).length}/${walk.places.length} places` +
+  `${buildings.length} buildings, ${stops.length} bus stops, ${roads.length} roads (${roads.filter((x) => x.f).length} footpaths), ${water.length} water, ${green.length} green, ${trees.length} trees, ${Object.keys(places).length}/${walk.places.length} places` +
     (missing.length ? `\nnot found in OSM: ${missing.join(", ")}` : ""),
 );

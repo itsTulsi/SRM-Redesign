@@ -36,7 +36,7 @@ export const newGame = (start: XZ, people: string[]): Game => ({
   run: false,
   route: [],
   onArrive: null,
-  cam: { yaw: 0.6, pitch: 0.48, dist: 11.5, minDist: 11.5 },
+  cam: { yaw: 0.6, pitch: 0.2, dist: 5.2, minDist: 5.2 },
   frozen: false,
   paused: false,
   anim: newAnim(),

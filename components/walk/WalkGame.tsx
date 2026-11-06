@@ -8,12 +8,15 @@ import { Dialogue, EmoteWheel, Finish, fmt, hudBtn, Joystick, MapPanel, Minimap,
 import { type Npc, type Overlay, Scene, type Sky } from "./Scene";
 import { carrying, type Game, loadOutfit, loadProgress, newGame, type Progress, saveOutfit, saveProgress, stepTarget } from "./state";
 
-/** Light and sky by Chennai's time of day (like the homepage clock). */
+/** Light and sky: a painted teal day by default (anime style), or Chennai's real time of day. */
 function skyFor(h: number): Sky {
-  if (h >= 6 && h < 10) return { sky: "#fce3c9", fog: "#f7dcc8", sun: "#ffd8a8", sunI: 1.6, hemiTop: "#ffe7cf", hemiBottom: "#8db87a", night: 0 };
-  if (h >= 10 && h < 16) return { sky: "#bfe3f7", fog: "#cde9f6", sun: "#fff6e5", sunI: 2.1, hemiTop: "#ffffff", hemiBottom: "#b5d99a", night: 0 };
-  if (h >= 16 && h < 19) return { sky: "#f3c7dd", fog: "#ecd2f3", sun: "#ffc9a0", sunI: 1.5, hemiTop: "#ffd9ec", hemiBottom: "#8aa97a", night: 0.25 };
-  return { sky: "#5a5296", fog: "#6a60a6", sun: "#d6dcff", sunI: 0.9, hemiTop: "#d4d6ff", hemiBottom: "#6f9a7c", night: 1 };
+  if (h >= 6 && h < 10)
+    return { fog: "#e6e4d6", sun: "#ffe2bf", sunI: 2.2, hemiTop: "#f3ece0", hemiBottom: "#8f9f98", hemiI: 1.2, night: 0, top: "#7fc4cc", horizon: "#f2dcc6", cloud: "#fff6ec", cloudShade: "#e3c6b8" };
+  if (h >= 10 && h < 16)
+    return { fog: "#cfe6df", sun: "#fff3df", sunI: 2.4, hemiTop: "#eaf6f2", hemiBottom: "#87a29f", hemiI: 1.25, night: 0, top: "#62bdbb", horizon: "#d3ebe3", cloud: "#f6fbf8", cloudShade: "#b9dcd5" };
+  if (h >= 16 && h < 19)
+    return { fog: "#e9cfc4", sun: "#ffc9a0", sunI: 2.0, hemiTop: "#f6dcd8", hemiBottom: "#7f8c99", hemiI: 1.1, night: 0.2, top: "#7f8fc0", horizon: "#f1c9b6", cloud: "#ffe6d8", cloudShade: "#c99db0" };
+  return { fog: "#34436a", sun: "#cdd8ff", sunI: 0.9, hemiTop: "#9fb3e0", hemiBottom: "#3a4a5a", hemiI: 0.9, night: 1, top: "#17213d", horizon: "#3a4c78", cloud: "#5a6a92", cloudShade: "#36436a" };
 }
 
 const QUALITY_DPR = { auto: [1, 1.6], low: [0.7, 0.85], high: [1.5, 2] } as const;
@@ -32,9 +35,10 @@ export default function WalkGame({ script, onExit, startWithOutfit }: { script: 
   const [quality, setQuality] = useState<"auto" | "low" | "high">("auto");
   const [touch, setTouch] = useState(false);
   const overlay = useMemo<Overlay>(() => ({ els: new Map(), anchors: new Map(), range: new Map() }), []);
-  const [light, setLight] = useState<"live" | "day">("live");
+  const [light, setLight] = useState<"live" | "day">("day");
   const sky = useMemo(() => skyFor(light === "day" ? 12 : chennaiHour()), [light]);
   const base = script.locale === "en" ? "" : `/${script.locale}`;
+  const placeNames = useMemo(() => Object.fromEntries(script.places.map((p) => [p.id, p.name])), [script.places]);
 
   // ── Load the campus ──
   useEffect(() => {
@@ -174,9 +178,9 @@ export default function WalkGame({ script, onExit, startWithOutfit }: { script: 
       const g = game.current;
       const n = npcs.find((x) => x.id === personId);
       if (!n || !tools || g.frozen) return;
-      if (Math.hypot(n.x - g.pos.x, n.z - g.pos.z) < 4.5) return startTalk(personId);
-      // Stop a couple of metres in front of them.
-      const stand: XZ = [n.x + Math.sin(n.face) * 2.2, n.z + Math.cos(n.face) * 2.2];
+      if (Math.hypot(n.x - g.pos.x, n.z - g.pos.z) < 3.2) return startTalk(personId);
+      // Stop just in front of them.
+      const stand: XZ = [n.x + Math.sin(n.face) * 1.4, n.z + Math.cos(n.face) * 1.4];
       g.route = tools.paths.route([g.pos.x, g.pos.z], stand);
       g.onArrive = () => startTalk(personId);
     },
@@ -258,13 +262,13 @@ export default function WalkGame({ script, onExit, startWithOutfit }: { script: 
     if (!g) return;
     g.paused = panel === "pause" || panel === "map" || panel === "quests" || panel === "finish";
     if (panel === "outfit") {
-      g.cam.dist = 5.5;
-      g.cam.pitch = 0.25;
+      g.cam.dist = 3.2;
+      g.cam.pitch = 0.12;
       g.cam.yaw = g.heading;
       g.frozen = true;
     } else if (!talk) {
       g.cam.dist = g.cam.minDist;
-      g.cam.pitch = Math.max(g.cam.pitch, 0.42);
+      g.cam.pitch = Math.max(g.cam.pitch, 0.22);
       g.frozen = false;
     }
   }, [panel, talk, world]);
@@ -282,7 +286,7 @@ export default function WalkGame({ script, onExit, startWithOutfit }: { script: 
       overlay.range.set(`place:${p.id}`, 90);
     }
     for (const n of npcs) {
-      overlay.anchors.set(`person:${n.id}`, [n.x, 3.7, n.z]);
+      overlay.anchors.set(`person:${n.id}`, [n.x, 2.25, n.z]);
       overlay.range.set(`person:${n.id}`, 45);
     }
   }, [world, npcs, script.places, overlay]);
@@ -339,7 +343,9 @@ export default function WalkGame({ script, onExit, startWithOutfit }: { script: 
           <Canvas
             aria-hidden="true"
             dpr={QUALITY_DPR[quality] as unknown as [number, number]}
-            camera={{ fov: 50, near: 0.5, far: 1400, position: [0, 30, 30] }}
+            camera={{ fov: 56, near: 0.3, far: 1400, position: [0, 30, 30] }}
+            flat
+            shadows={quality !== "low"}
             gl={{ antialias: quality !== "low", powerPreference: "high-performance" }}
             frameloop={panel === "pause" || panel === "finish" ? "demand" : "always"}
             className="!absolute inset-0"
@@ -357,6 +363,8 @@ export default function WalkGame({ script, onExit, startWithOutfit }: { script: 
               highlight={near.place}
               pickAt={targetInfo?.pick ?? null}
               sky={sky}
+              quality={quality}
+              names={placeNames}
             />
           </Canvas>
 

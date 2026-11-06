@@ -15,6 +15,8 @@ export type World = {
   water: { p: XZ[] }[];
   green: { p: XZ[] }[];
   trees: [number, number, number][];
+  /** Bus stops (OpenStreetMap), for shelters. */
+  stops?: XZ[];
   places: Record<string, { x: number; z: number; door: XZ; b?: number }>;
 };
 

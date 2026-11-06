@@ -8,6 +8,8 @@ import type { Collider, Paths, World, XZ } from "@/lib/walk/world";
 import { type Anim, Character, newAnim, OUTFIT_SIZES } from "./Character";
 import { curve, dropAt, toon } from "./curve";
 import type { Game } from "./state";
+import { Ink } from "./Ink";
+import { Sky as SkyDome } from "./Sky";
 import { WorldMeshes } from "./WorldMeshes";
 
 export type Npc = { id: string; x: number; z: number; face: number; outfit: Outfit };
@@ -20,12 +22,24 @@ export type Overlay = {
   range: Map<string, number>;
 };
 
-const WALK = 6;
-const RUN = 11;
+const WALK = 4.2;
+const RUN = 8;
 const tmp = new THREE.Vector3();
-const UP = 2.8;
+const UP = 1.35;
 
-export type Sky = { sky: string; fog: string; sun: string; sunI: number; hemiTop: string; hemiBottom: string; night: number };
+export type Sky = {
+  fog: string;
+  sun: string;
+  sunI: number;
+  hemiTop: string;
+  hemiBottom: string;
+  hemiI: number;
+  night: number;
+  top: string;
+  horizon: string;
+  cloud: string;
+  cloudShade: string;
+};
 
 export function Scene({
   world,
@@ -39,6 +53,8 @@ export function Scene({
   highlight,
   pickAt,
   sky,
+  quality,
+  names,
 }: {
   world: World;
   collider: Collider;
@@ -51,6 +67,8 @@ export function Scene({
   highlight: string | null;
   pickAt: XZ | null;
   sky: Sky;
+  quality: "auto" | "low" | "high";
+  names: Record<string, string>;
 }) {
   const { camera, gl, size, scene } = useThree();
   const player = useRef<THREE.Group>(null);
@@ -68,6 +86,8 @@ export function Scene({
     [world],
   );
   const leafy = useRef<THREE.Group>(null);
+  const sun = useRef<THREE.DirectionalLight>(null);
+  const skyColors = useMemo(() => ({ top: sky.top, horizon: sky.horizon, cloud: sky.cloud, cloudShade: sky.cloudShade, night: sky.night }), [sky]);
   // A few students walking the campus on their own, between real places, along real paths.
   const walkers = useMemo(() => {
     const ids = Object.keys(world.places);
@@ -88,7 +108,7 @@ export function Scene({
 
   useEffect(() => {
     scene.background = new THREE.Color(sky.fog);
-    scene.fog = new THREE.Fog(sky.fog, 90, 330);
+    scene.fog = new THREE.Fog(sky.fog, 70, 300);
     curve.uNight.value = sky.night;
   }, [scene, sky]);
 
@@ -114,7 +134,7 @@ export function Scene({
         p.y = e.clientY;
         const [a, b] = [...pointers.values()];
         const d = Math.hypot(a!.x - b!.x, a!.y - b!.y);
-        if (pinch) g.cam.minDist = g.cam.dist = Math.min(45, Math.max(7, g.cam.dist * (pinch / d)));
+        if (pinch) g.cam.minDist = g.cam.dist = Math.min(30, Math.max(3.5, g.cam.dist * (pinch / d)));
         pinch = d;
         return;
       }
@@ -140,7 +160,7 @@ export function Scene({
     const wheel = (e: WheelEvent) => {
       e.preventDefault();
       const g = game.current;
-      g.cam.minDist = g.cam.dist = Math.min(45, Math.max(7, g.cam.dist * (1 + Math.sign(e.deltaY) * 0.1)));
+      g.cam.minDist = g.cam.dist = Math.min(30, Math.max(3.5, g.cam.dist * (1 + Math.sign(e.deltaY) * 0.1)));
     };
     const rect = () => el.getBoundingClientRect();
     // The ground is drawn bent, so find where the click ray meets the bent surface (bisection along the ray).
@@ -237,7 +257,7 @@ export function Scene({
     if (g.speed > 0.02) {
       const nx = g.pos.x + Math.sin(g.heading) * g.speed * dt;
       const nz = g.pos.z + Math.cos(g.heading) * g.speed * dt;
-      const [rx, rz] = collider.resolve(nx, nz, 0.6);
+      const [rx, rz] = collider.resolve(nx, nz, 0.35);
       // Stuck against a wall while following a route: skip to the next point.
       if (g.route.length && Math.hypot(rx - g.pos.x, rz - g.pos.z) < g.speed * dt * 0.15) g.route.shift();
       g.pos.x = rx;
@@ -248,6 +268,12 @@ export function Scene({
     if (player.current) {
       player.current.position.set(g.pos.x, 0, g.pos.z);
       player.current.rotation.y = g.heading;
+    }
+    // The sun (and its shadow box) follows you.
+    if (sun.current) {
+      sun.current.position.set(g.pos.x + 40, 70, g.pos.z + 25);
+      sun.current.target.position.set(g.pos.x, 0, g.pos.z);
+      sun.current.target.updateMatrixWorld();
     }
 
     // ── Camera: follows with a little lag, pulls in when a building is in the way ──
@@ -281,7 +307,7 @@ export function Scene({
 
     // ── People: look at you when you're near, turn to you while talking; hidden when far away ──
     let nearPerson: string | null = null;
-    let nearD = 4.5;
+    let nearD = 3.2;
     for (const n of npcs) {
       const grp = npcRefs.current.get(n.id);
       const a = g.npc[n.id]!;
@@ -368,12 +394,12 @@ export function Scene({
     if (leafy.current) {
       const t = curve.uTime.value;
       const side = g.heading + 2.3;
-      const lx = g.pos.x + Math.sin(side) * 1.9;
-      const lz = g.pos.z + Math.cos(side) * 1.9;
+      const lx = g.pos.x + Math.sin(side) * 0.9;
+      const lz = g.pos.z + Math.cos(side) * 0.9;
       const lp = leafy.current.position;
       lp.x += (lx - lp.x) * Math.min(1, dt * 4);
       lp.z += (lz - lp.z) * Math.min(1, dt * 4);
-      lp.y = 3.1 + (g.reduced ? 0 : Math.sin(t * 2.4) * 0.22);
+      lp.y = 2.05 + (g.reduced ? 0 : Math.sin(t * 2.4) * 0.12);
       const look = g.target ? Math.atan2(g.target[0] - lp.x, g.target[1] - lp.z) : g.heading;
       let dh = look - leafy.current.rotation.y;
       while (dh > Math.PI) dh -= Math.PI * 2;
@@ -395,7 +421,7 @@ export function Scene({
       arrow.current.visible = show;
       if (show) {
         const a = Math.atan2(g.target![0] - g.pos.x, g.target![1] - g.pos.z);
-        arrow.current.position.set(g.pos.x + Math.sin(a) * 1.9, 0.12, g.pos.z + Math.cos(a) * 1.9);
+        arrow.current.position.set(g.pos.x + Math.sin(a) * 1.1, 0.08, g.pos.z + Math.cos(a) * 1.1);
         arrow.current.rotation.set(-Math.PI / 2, 0, a + Math.PI);
       }
     }
@@ -410,13 +436,13 @@ export function Scene({
     // ── Emote floats up above you ──
     if (g.emote) {
       g.emote.t -= dt;
-      overlay.anchors.set("emote", [g.pos.x, 4.6 + (2 - g.emote.t) * 0.8, g.pos.z]);
+      overlay.anchors.set("emote", [g.pos.x, 2.3 + (2 - g.emote.t) * 0.5, g.pos.z]);
       if (g.emote.t <= 0) {
         g.emote = null;
         overlay.anchors.delete("emote");
       }
     }
-    overlay.anchors.set("me", [g.pos.x, 3.6, g.pos.z]);
+    overlay.anchors.set("me", [g.pos.x, 2.1, g.pos.z]);
 
     // ── DOM labels follow their anchors on the bent world ──
     for (const [k, el] of overlay.els) {
@@ -441,11 +467,27 @@ export function Scene({
 
   return (
     <>
-      <hemisphereLight args={[sky.hemiTop, sky.hemiBottom, 1.6]} />
-      <directionalLight position={[120, 200, 80]} intensity={sky.sunI} color={sky.sun} />
-      <WorldMeshes world={world} highlight={highlight} />
+      <SkyDome colors={skyColors} />
+      <hemisphereLight args={[sky.hemiTop, sky.hemiBottom, sky.hemiI]} />
+      <directionalLight
+        ref={sun}
+        intensity={sky.sunI}
+        color={sky.sun}
+        castShadow={quality !== "low"}
+        shadow-mapSize={quality === "high" ? [4096, 4096] : [2048, 2048]}
+        shadow-camera-left={-38}
+        shadow-camera-right={38}
+        shadow-camera-top={38}
+        shadow-camera-bottom={-38}
+        shadow-camera-near={1}
+        shadow-camera-far={220}
+        shadow-bias={-0.0006}
+        shadow-normalBias={0.04}
+      />
+      <Ink lines={quality !== "low"} />
+      <WorldMeshes world={world} highlight={highlight} names={names} />
       <group ref={player}>
-        <Character outfit={outfit} anim={playerAnim as React.RefObject<Anim>} scale={1.3} />
+        <Character outfit={outfit} anim={playerAnim as React.RefObject<Anim>} blob={quality === "low"} />
       </group>
       {npcs.map((n) => (
         <group
@@ -457,7 +499,7 @@ export function Scene({
           position={[n.x, 0, n.z]}
           rotation-y={n.face}
         >
-          <Character outfit={n.outfit} anim={npcAnims.get(n.id) as React.RefObject<Anim>} scale={1.3} />
+          <Character outfit={n.outfit} anim={npcAnims.get(n.id) as React.RefObject<Anim>} blob={quality === "low"} />
         </group>
       ))}
       {walkers.map((w) => (
@@ -468,10 +510,10 @@ export function Scene({
             else walkerRefs.current.delete(w.i);
           }}
         >
-          <Character outfit={w.outfit} anim={w.anim as React.RefObject<Anim>} scale={1.2} />
+          <Character outfit={w.outfit} anim={w.anim as React.RefObject<Anim>} blob={quality === "low"} />
         </group>
       ))}
-      <group ref={leafy}>
+      <group ref={leafy} scale={0.5}>
         <mesh material={toon({ color: "#7cc36b" })}>
           <sphereGeometry args={[0.42, 16, 12]} />
         </mesh>
@@ -488,7 +530,7 @@ export function Scene({
           <torusGeometry args={[0.08, 0.025, 6, 10, Math.PI]} />
         </mesh>
       </group>
-      <group ref={beacon} visible={false}>
+      <group ref={beacon} visible={false} userData={{ noInk: true }}>
         <mesh position-y={40} material={toon({ color: "#ffd166", transparent: true, opacity: 0.22 })}>
           <cylinderGeometry args={[1.6, 1.6, 80, 16, 1, true]} />
         </mesh>
@@ -496,8 +538,8 @@ export function Scene({
           <ringGeometry args={[2.2, 2.8, 32]} />
         </mesh>
       </group>
-      <mesh ref={arrow} visible={false} material={toon({ color: "#ffd166" })}>
-        <coneGeometry args={[0.45, 1.1, 3]} />
+      <mesh ref={arrow} visible={false} material={toon({ color: "#ffd166" })} userData={{ noInk: true }}>
+        <coneGeometry args={[0.22, 0.55, 3]} />
       </mesh>
       <group ref={crate} visible={false}>
         <mesh material={toon({ color: "#d4a373" })}>
