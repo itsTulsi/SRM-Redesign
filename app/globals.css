@@ -1465,6 +1465,19 @@ html[data-ab-programme-cta="b"] [data-ab="programme-cta"][data-ab-variant="a"] {
     animation-delay: calc(var(--i, 0) * 45ms);
   }
 }
+/* A number that just changed (the cost calculator's totals) settles into place. */
+@media (prefers-reduced-motion: no-preference) {
+  [data-motion="full"] .grail-pop {
+    display: inline-block;
+    animation: grail-pop 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+}
+@keyframes grail-pop {
+  from {
+    opacity: 0.4;
+    translate: 0 8px;
+  }
+}
 @keyframes grail-card-in {
   from {
     opacity: 0;

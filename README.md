@@ -29,6 +29,8 @@ A redesign of [srmist.edu.in](https://www.srmist.edu.in/) built around the idea 
 | **Recommendations** | "Programmes like this" on every programme page and "Suggested for you" in the finder, matched on shared topics. Free, and the history stays on your device. |
 | **Compare** | Pin up to three programmes and see fees, eligibility, entrance and deadlines side by side, with differences picked out and a shareable link. Works without JavaScript. |
 | **Programme pages** | An at-a-glance strip (level, duration, fees, campus), a floating section menu, key facts, careers, placements and Ask a Senior (demo threads with real moderation states). |
+| **What will it cost?** | On every programme page: tuition + hostel + mess (+ optional laundry) for the whole course, from SRM's published 2026–27 fee tables and hostel circulars only. Says so when SRM hasn't published a figure. |
+| **Stories** | `/stories`: this week at SRM (the curated story and what's coming up), all student work, and alumni with their career paths. |
 | **Parent Mode** | One toggle rewrites a programme page into plain answers about cost, admission, location, safety, hostel and jobs, with large call buttons. |
 | **Command palette** | ⌘K or Ctrl+K for every programme, page and action, in all three languages. |
 
@@ -50,6 +52,9 @@ Open Leafy on any page. Questions about fees, deadlines, hostels, rankings and c
 | **Lite Mode** | Automatic on Save-Data, slow connections or reduced motion: strips video, 3D and smooth scrolling, keeps all the information. |
 | **Works offline** | A hand-written service worker keeps key pages and any programme you save working with no signal. |
 | **Link previews** | Programme, campus and story links shared on WhatsApp, X or LinkedIn show a branded card with the real fee and NIRF rank. |
+
+### Testing what works (A/B)
+Built-in, private A/B testing (`lib/ab.ts`): a visitor gets variant A or B of each experiment at random, chosen before first paint so pages stay static and never flicker; no cookies, no personal data. Running now: a search-first homepage hero vs the game-style button, and "What will it cost?" first vs "Apply" first on programme pages. Results with a significance test at `/lab` (not indexed); force a variant with `?ab=hero-cta:b`.
 
 ## Performance, accessibility and security
 
@@ -130,7 +135,7 @@ content/i18n/        Tamil and Hindi translations of the content
 messages/            interface text in en / ta / hi
 lib/                 content loading, search, recommender, llm, assistant, Lite Mode, Parent Mode, map maths
 public/media/        photos and the intro frames (sources in content/media-credits.json)
-scripts/             content checks, media status, map builders, translation review
+scripts/             content checks, media status, map builders, translation review, link check, UI audit, A/B end-to-end check
 docs/                audits (AUDIT.md, AUDIT-TASK4.md), Task 3 notes, translation review
 ```
 

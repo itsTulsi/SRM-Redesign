@@ -114,12 +114,12 @@ export function CostCalculator({ tuition, years, rooms, laundry, hostelCampus, b
             <div className="grid gap-6 sm:grid-cols-2">
               {years > 0 ? (
                 <p className="flex flex-col">
-                  <span className="grail-num text-[clamp(2rem,5vw,3.5rem)] leading-none">{rupees(perYear * years)}</span>
+                  <span key={perYear} className="grail-num grail-pop text-[clamp(2rem,5vw,3.5rem)] leading-none">{rupees(perYear * years)}</span>
                   <span className="mt-2 text-[var(--fg-muted)]">{t("total", { years: yearsLabel })}</span>
                 </p>
               ) : null}
               <p className="flex flex-col">
-                <span className="grail-num text-[clamp(1.6rem,3.5vw,2.5rem)] leading-none">{rupees(perYear)}</span>
+                <span key={perYear} className="grail-num grail-pop text-[clamp(1.6rem,3.5vw,2.5rem)] leading-none">{rupees(perYear)}</span>
                 <span className="mt-2 text-[var(--fg-muted)]">{t("perYear")}</span>
               </p>
             </div>

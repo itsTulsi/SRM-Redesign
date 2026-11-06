@@ -53,7 +53,7 @@ export default async function StoriesPage({ params }: Params) {
       <GrailChapter id={SECTION.thisWeek} tone="light" kicker={t("kicker")} level={2} title={week("title")} titleId="this-week-title">
         {featuredStory ? (
           <article aria-labelledby="featured-story" className="grid gap-8 lg:grid-cols-12 lg:items-center">
-            <StoryVisual story={featuredStory} sizes="(min-width: 1024px) 58vw, 100vw" className="aspect-[16/10] rounded-[28px] lg:col-span-7" />
+            <StoryVisual story={featuredStory} priority sizes="(min-width: 1024px) 58vw, 100vw" className="aspect-[16/10] rounded-[28px] lg:col-span-7" />
             <div className="flex flex-col gap-4 lg:col-span-5">
               <p className="text-sm font-semibold tracking-wide text-fg-muted uppercase">{week("featured")}</p>
               <h3 id="featured-story" className="grail-display text-[clamp(1.9rem,3.6vw,3rem)] leading-[1.05] text-balance">
@@ -73,7 +73,7 @@ export default async function StoriesPage({ params }: Params) {
             <ol className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
               {events.map((e) => (
                 <li key={e.slug}>
-                  <a href={e.url} className="grail-paper group flex h-full min-h-11 flex-col gap-2 p-5 text-[var(--fg)] no-underline">
+                  <a href={e.url} className="grail-paper grail-paper-link group flex h-full min-h-11 flex-col gap-2 p-5 text-[var(--fg)] no-underline">
                     <time dateTime={e.start} className="grail-num text-2xl">
                       {formatEventDate(e, locale)}
                     </time>
@@ -91,7 +91,7 @@ export default async function StoriesPage({ params }: Params) {
         <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {published.map((s) => (
             <li key={s.slug}>
-              <article className="grail-paper relative flex h-full flex-col overflow-hidden focus-within:outline-3 focus-within:outline-offset-3 focus-within:outline-[var(--focus)]">
+              <article className="grail-paper grail-paper-link group relative flex h-full flex-col overflow-hidden focus-within:outline-3 focus-within:outline-offset-3 focus-within:outline-[var(--focus)]">
                 <StoryVisual story={s} sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw" className="aspect-[16/10] w-full" />
                 <div className="flex flex-1 flex-col gap-2 p-5">
                   {!isTodo(s.date) ? <p className="text-sm text-fg-muted">{s.date}</p> : null}
