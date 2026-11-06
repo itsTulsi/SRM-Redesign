@@ -420,7 +420,7 @@ export function MapPanel({
 
 // ─────────────────────────── Character configuration ───────────────────────────
 
-const CATS: (keyof Outfit)[] = ["hair", "hairColor", "skin", "top", "bottom", "shoes", "bag"];
+const CATS: (keyof Outfit)[] = ["body", "hair", "hairColor", "skin", "top", "bottom", "shoes", "bag"];
 const swatch = (cat: keyof Outfit, i: number): string | null =>
   cat === "skin"
     ? PALETTE.skin[i]!
@@ -569,7 +569,6 @@ export function PauseMenu({
       <h3 className="mt-5 text-sm font-semibold text-white/70 uppercase">{ui.help}</h3>
       <p className="mt-1 text-sm">{ui.keys}</p>
       <p className="mt-1 text-sm">{ui.touch}</p>
-      <p className="mt-1 text-sm">{ui.leafyHint}</p>
       <fieldset className="mt-5">
         <legend className="text-sm font-semibold text-white/70 uppercase">{ui.quality}</legend>
         <div className="mt-2 flex gap-2">

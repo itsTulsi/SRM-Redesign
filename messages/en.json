@@ -1576,8 +1576,6 @@
       "fps": "Smooth",
       "help": "How to play",
       "touchTalk": "Tap a person to talk",
-      "leafy": "Leafy",
-      "leafyHint": "Leafy points the way to your next stop.",
       "minimap": "Map of the campus",
       "light": "Light",
       "lightLive": "Chennai time",
@@ -1632,11 +1630,10 @@
       "bag": "Bag",
       "hairNames": [
         "Short",
-        "Bun",
+        "Buns",
         "Long",
-        "Ponytail",
-        "Curly",
-        "Buzz cut"
+        "Buzz cut",
+        "Short with beard"
       ],
       "hairColorNames": [
         "Black",
@@ -1666,7 +1663,7 @@
       "bottomNames": [
         "Jeans",
         "Trousers",
-        "Long skirt",
+        "Track pants",
         "Shorts"
       ],
       "shoesNames": [
@@ -1680,6 +1677,11 @@
         "Backpack",
         "Tote bag",
         "Sling bag"
+      ],
+      "body": "Body",
+      "bodyNames": [
+        "Type 1",
+        "Type 2"
       ]
     },
     "people": {

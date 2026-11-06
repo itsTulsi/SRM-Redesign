@@ -37,6 +37,9 @@ The link-preview images use TTF copies of Space Grotesk and Inter; see `assets/o
   `scripts/build-campus-walk.mjs`. Building heights are approximate.
 - Inspired by Abeto's Messenger (messenger.abeto.co, by Vicente Lucendo and Michael Sungaila). No art, models, music or
   code were taken from it: the characters, Leafy, the world style and every line are our own.
+- Characters: Quaternius, Universal Base Characters and Universal Animation Library (quaternius.com), CC0 1.0
+  (public domain). Rebuilt for the web with `scripts/build-walk-characters.mjs`: bodies, hairstyles and seven clips,
+  without the original textures; every outfit is our own, painted by our shader.
 - The cover image is a frame from the game itself.
 
 ## Homepage

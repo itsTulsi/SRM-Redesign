@@ -345,7 +345,7 @@ export default function WalkGame({ script, onExit, startWithOutfit }: { script: 
             dpr={QUALITY_DPR[quality] as unknown as [number, number]}
             camera={{ fov: 56, near: 0.3, far: 1400, position: [0, 30, 30] }}
             flat
-            shadows={quality !== "low"}
+            shadows={quality !== "low" ? "percentage" : false}
             gl={{ antialias: quality !== "low", powerPreference: "high-performance" }}
             frameloop={panel === "pause" || panel === "finish" ? "demand" : "always"}
             className="!absolute inset-0"

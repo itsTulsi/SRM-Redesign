@@ -181,7 +181,7 @@ export function WorldMeshes({ world, highlight, names }: { world: World; highlig
 
   // Trees: every fourth one a coconut palm.
   const palms = useMemo(() => world.trees.filter((_, i) => i % 4 === 0), [world]);
-  const leafy = useMemo(() => world.trees.filter((_, i) => i % 4 !== 0), [world]);
+  const broadleaf = useMemo(() => world.trees.filter((_, i) => i % 4 !== 0), [world]);
   const trunks = useRef<THREE.InstancedMesh>(null);
   const crowns = useRef<THREE.InstancedMesh>(null);
   const palmTrunks = useRef<THREE.InstancedMesh>(null);
@@ -192,7 +192,7 @@ export function WorldMeshes({ world, highlight, names }: { world: World; highlig
     const t = trunks.current;
     const cr = crowns.current;
     if (t && cr) {
-      leafy.forEach(([x, z, s], i) => {
+      broadleaf.forEach(([x, z, s], i) => {
         o.position.set(x, 1.5 * s, z);
         o.scale.set(s, s, s);
         o.rotation.set(0, i, 0);
@@ -228,7 +228,7 @@ export function WorldMeshes({ world, highlight, names }: { world: World; highlig
       pt.instanceMatrix.needsUpdate = true;
       pp.instanceMatrix.needsUpdate = true;
     }
-  }, [leafy, palms]);
+  }, [broadleaf, palms]);
 
   const hi = highlight !== null ? world.buildings.findIndex((b) => b.n === highlight) : -1;
   const hiGeo = useMemo(() => {
@@ -255,10 +255,10 @@ export function WorldMeshes({ world, highlight, names }: { world: World; highlig
       <mesh geometry={statics.streets} material={toon({ vertexColors: true })} castShadow receiveShadow />
       <Signs signs={statics.signs} />
       {hiGeo ? <mesh geometry={hiGeo} material={toon({ color: "#ffd166", transparent: true, opacity: 0.45 })} userData={{ noInk: true }} /> : null}
-      <instancedMesh ref={trunks} args={[undefined, undefined, leafy.length]} material={toon({ color: "#7a5b45" })} castShadow>
+      <instancedMesh ref={trunks} args={[undefined, undefined, broadleaf.length]} material={toon({ color: "#7a5b45" })} castShadow>
         <cylinderGeometry args={[0.22, 0.32, 3, 7]} />
       </instancedMesh>
-      <instancedMesh ref={crowns} args={[CROWN, undefined, leafy.length]} material={toon({ color: "#ffffff", sway: true })} castShadow receiveShadow />
+      <instancedMesh ref={crowns} args={[CROWN, undefined, broadleaf.length]} material={toon({ color: "#ffffff", sway: true })} castShadow receiveShadow />
       <instancedMesh ref={palmTrunks} args={[undefined, undefined, palms.length]} material={toon({ color: "#8d7457" })} castShadow>
         <cylinderGeometry args={[0.16, 0.24, 1, 7]} />
       </instancedMesh>

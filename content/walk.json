@@ -2,62 +2,498 @@
   "_note": "Walk SRM (app/[locale]/walk): the places, people and quests of the walkable campus. Places are matched by their OpenStreetMap name ('osm'; © OpenStreetMap contributors, ODbL) and positioned by scripts/build-campus-walk.mjs into public/walk/ktr-world.json. 'name' is what we show; it fixes OSM spellings (Hanger → Hangar) and casing, nothing else. People are roles, not real people. Quests are a game story; every fact a character tells you is read from our other content files when the page is built (see lib/walk.ts). Lines and descriptions are in messages/{en,ta,hi}.json under 'Walk'.",
   "spawn": "gate",
   "places": [
-    { "id": "gate", "osm": "SRM In Gate Bus Stop", "name": "SRM main gate", "kind": "arrival", "href": "/campuses/kattankulathur", "photo": "media/campuses/kattankulathur.jpg" },
-    { "id": "potheri", "osm": "Potheri", "osmType": "railway", "name": "Potheri railway station", "kind": "arrival", "href": "/campuses/kattankulathur" },
-    { "id": "university-building", "osm": "SRM University Building", "name": "SRM University Building", "kind": "admin", "href": "/admissions" },
-    { "id": "library", "osm": "SRM Library", "name": "SRM Library", "kind": "library", "href": "/research" },
-    { "id": "java", "osm": "Java Food Court", "name": "Java Food Court", "kind": "food", "href": "/student-life" },
-    { "id": "vendhar", "osm": "Vendhar Square", "name": "Vendhar Square", "kind": "food", "href": "/student-life" },
-    { "id": "tech-park", "osm": "SRM Tech Park", "name": "SRM Tech Park", "kind": "tech", "href": "/programmes/btech-cse" },
-    { "id": "tech-park-2", "osm": "Tech Park 2", "name": "Tech Park 2", "kind": "tech", "href": "/programmes#engineering" },
-    { "id": "incubation", "osm": "SRM Innovation and Incubation Center", "name": "SRM Innovation and Incubation Centre", "kind": "tech", "href": "/stories#student-work" },
-    { "id": "auditorium", "osm": "TP Ganeshan Auditorium", "name": "TP Ganesan Auditorium", "kind": "events", "href": "/student-life" },
-    { "id": "main-block", "osm": "Main Block", "name": "Main Block", "kind": "academic", "href": "/programmes#engineering", "photo": "media/colleges/engineering.jpg" },
-    { "id": "hi-tech", "osm": "High Tech Block", "name": "Hi-Tech Block", "kind": "academic", "href": "/programmes#engineering" },
-    { "id": "electrical", "osm": "Electrical Sciences Block", "name": "Electrical Sciences Block", "kind": "academic", "href": "/programmes/btech-eee" },
-    { "id": "mechanical", "osm": "Mechanical Block", "name": "Mechanical Block", "kind": "academic", "href": "/programmes/btech-mechanical" },
-    { "id": "mech-hangar", "osm": "Mechanical Hanger", "name": "Mechanical Hangar", "kind": "workshop", "href": "/stories/camber-racing-formula-bharat-2026", "photo": "media/camber/poster.jpg" },
-    { "id": "aero-hangar", "osm": "Aerospace Hanger", "name": "Aerospace Hangar", "kind": "workshop", "href": "/programmes/btech-aerospace" },
-    { "id": "cv-raman", "osm": "C V Raman Block", "name": "C V Raman Block", "kind": "academic", "href": "/research" },
-    { "id": "biotech", "osm": "biotech block", "name": "Biotech Block", "kind": "academic", "href": "/programmes/btech-biotechnology" },
-    { "id": "architecture", "osm": "Architecture Block", "name": "Architecture Block", "kind": "academic", "href": "/programmes/barch", "photo": "media/colleges/architecture.jpg" },
-    { "id": "mba", "osm": "MBA Block", "name": "MBA Block", "kind": "academic", "href": "/programmes/mba", "photo": "media/colleges/management.jpg" },
-    { "id": "hospital", "osm": "SRM General Hospital", "name": "SRM General Hospital", "kind": "health", "href": "/programmes/mbbs", "photo": "media/colleges/medicine.jpg" },
-    { "id": "medical-college", "osm": "Srm Medical College Hospital And Research Centre", "name": "SRM Medical College Hospital and Research Centre", "kind": "health", "href": "/programmes/mbbs" },
-    { "id": "paari", "osm": "Paari Hostel", "name": "Paari Hostel", "kind": "hostel", "href": "/hostels#men", "photo": "media/hostels/paari.jpg" },
-    { "id": "kaari", "osm": "Kaari Hostel", "name": "Kaari Hostel", "kind": "hostel", "href": "/hostels#men", "photo": "media/hostels/kaari.jpg" },
-    { "id": "oori", "osm": "Oori Hostel", "name": "Oori Hostel", "kind": "hostel", "href": "/hostels#men", "photo": "media/hostels/oori.jpg" },
-    { "id": "adhiyaman", "osm": "Adhyaman Hostel", "name": "Adhiyaman Hostel", "kind": "hostel", "href": "/hostels#men", "photo": "media/hostels/adhiyaman.jpg" },
-    { "id": "nelson-mandela", "osm": "Nelson Mandela Hostel", "name": "Nelson Mandela Hostel", "kind": "hostel", "href": "/hostels#men", "photo": "media/hostels/nelson-mandela.jpg" },
-    { "id": "agasthiyar", "osm": "Agasthayar Hostel", "name": "Agasthiyar Hostel", "kind": "hostel", "href": "/hostels#men" },
-    { "id": "manoranjitham", "osm": "Manoranjitham Hostel", "name": "Manoranjitham Hostel", "kind": "hostel", "href": "/hostels#men", "photo": "media/hostels/manoranjitham.jpg" },
-    { "id": "meenakshi", "osm": "Menakshi Hostel Block", "name": "Meenakshi Hostel", "kind": "hostel", "href": "/hostels#women", "photo": "media/hostels/meenakshi.jpg" },
-    { "id": "sannasi-c", "osm": "Sannasi C Block, Hostel", "name": "Sannasi C Block", "kind": "hostel", "href": "/hostels#women" },
-    { "id": "kalpana-chawla", "osm": "Kalpana Chawla Hostel", "name": "Kalpana Chawla Hostel", "kind": "hostel", "href": "/hostels#women", "photo": "media/hostels/kalpana-chawla.jpg" },
-    { "id": "m-block", "osm": "M Block Girls Hostel", "name": "M Block (Kopperundevi) Hostel", "kind": "hostel", "href": "/hostels#women", "photo": "media/hostels/kopperundevi.jpg" },
-    { "id": "n-block", "osm": "N Block Mens Hostel", "name": "N Block Hostel", "kind": "hostel", "href": "/hostels#men" },
-    { "id": "d-block", "osm": "D-Block Mens Hostel", "name": "D Block Hostel", "kind": "hostel", "href": "/hostels#men" },
-    { "id": "ganesh-temple", "osm": "Ganesh Temple", "osmNear": [12.82318, 80.04297], "name": "Ganesh Temple", "kind": "faith", "href": "/student-life#religious-life", "photo": "media/life/temple.jpg" },
-    { "id": "mosque-church", "osm": "Mosque & Church", "name": "Mosque and Church", "kind": "faith", "href": "/student-life#religious-life", "photo": "media/life/mosque.jpg" },
-    { "id": "park", "osm": "PARK", "name": "Campus park", "kind": "park" }
+    {
+      "id": "gate",
+      "osm": "SRM In Gate Bus Stop",
+      "name": "SRM main gate",
+      "kind": "arrival",
+      "href": "/campuses/kattankulathur",
+      "photo": "media/campuses/kattankulathur.jpg"
+    },
+    {
+      "id": "potheri",
+      "osm": "Potheri",
+      "osmType": "railway",
+      "name": "Potheri railway station",
+      "kind": "arrival",
+      "href": "/campuses/kattankulathur"
+    },
+    {
+      "id": "university-building",
+      "osm": "SRM University Building",
+      "name": "SRM University Building",
+      "kind": "admin",
+      "href": "/admissions"
+    },
+    {
+      "id": "library",
+      "osm": "SRM Library",
+      "name": "SRM Library",
+      "kind": "library",
+      "href": "/research"
+    },
+    {
+      "id": "java",
+      "osm": "Java Food Court",
+      "name": "Java Food Court",
+      "kind": "food",
+      "href": "/student-life"
+    },
+    {
+      "id": "vendhar",
+      "osm": "Vendhar Square",
+      "name": "Vendhar Square",
+      "kind": "food",
+      "href": "/student-life"
+    },
+    {
+      "id": "tech-park",
+      "osm": "SRM Tech Park",
+      "name": "SRM Tech Park",
+      "kind": "tech",
+      "href": "/programmes/btech-cse"
+    },
+    {
+      "id": "tech-park-2",
+      "osm": "Tech Park 2",
+      "name": "Tech Park 2",
+      "kind": "tech",
+      "href": "/programmes#engineering"
+    },
+    {
+      "id": "incubation",
+      "osm": "SRM Innovation and Incubation Center",
+      "name": "SRM Innovation and Incubation Centre",
+      "kind": "tech",
+      "href": "/stories#student-work"
+    },
+    {
+      "id": "auditorium",
+      "osm": "TP Ganeshan Auditorium",
+      "name": "TP Ganesan Auditorium",
+      "kind": "events",
+      "href": "/student-life"
+    },
+    {
+      "id": "main-block",
+      "osm": "Main Block",
+      "name": "Main Block",
+      "kind": "academic",
+      "href": "/programmes#engineering",
+      "photo": "media/colleges/engineering.jpg"
+    },
+    {
+      "id": "hi-tech",
+      "osm": "High Tech Block",
+      "name": "Hi-Tech Block",
+      "kind": "academic",
+      "href": "/programmes#engineering"
+    },
+    {
+      "id": "electrical",
+      "osm": "Electrical Sciences Block",
+      "name": "Electrical Sciences Block",
+      "kind": "academic",
+      "href": "/programmes/btech-eee"
+    },
+    {
+      "id": "mechanical",
+      "osm": "Mechanical Block",
+      "name": "Mechanical Block",
+      "kind": "academic",
+      "href": "/programmes/btech-mechanical"
+    },
+    {
+      "id": "mech-hangar",
+      "osm": "Mechanical Hanger",
+      "name": "Mechanical Hangar",
+      "kind": "workshop",
+      "href": "/stories/camber-racing-formula-bharat-2026",
+      "photo": "media/camber/poster.jpg"
+    },
+    {
+      "id": "aero-hangar",
+      "osm": "Aerospace Hanger",
+      "name": "Aerospace Hangar",
+      "kind": "workshop",
+      "href": "/programmes/btech-aerospace"
+    },
+    {
+      "id": "cv-raman",
+      "osm": "C V Raman Block",
+      "name": "C V Raman Block",
+      "kind": "academic",
+      "href": "/research"
+    },
+    {
+      "id": "biotech",
+      "osm": "biotech block",
+      "name": "Biotech Block",
+      "kind": "academic",
+      "href": "/programmes/btech-biotechnology"
+    },
+    {
+      "id": "architecture",
+      "osm": "Architecture Block",
+      "name": "Architecture Block",
+      "kind": "academic",
+      "href": "/programmes/barch",
+      "photo": "media/colleges/architecture.jpg"
+    },
+    {
+      "id": "mba",
+      "osm": "MBA Block",
+      "name": "MBA Block",
+      "kind": "academic",
+      "href": "/programmes/mba",
+      "photo": "media/colleges/management.jpg"
+    },
+    {
+      "id": "hospital",
+      "osm": "SRM General Hospital",
+      "name": "SRM General Hospital",
+      "kind": "health",
+      "href": "/programmes/mbbs",
+      "photo": "media/colleges/medicine.jpg"
+    },
+    {
+      "id": "medical-college",
+      "osm": "Srm Medical College Hospital And Research Centre",
+      "name": "SRM Medical College Hospital and Research Centre",
+      "kind": "health",
+      "href": "/programmes/mbbs"
+    },
+    {
+      "id": "paari",
+      "osm": "Paari Hostel",
+      "name": "Paari Hostel",
+      "kind": "hostel",
+      "href": "/hostels#men",
+      "photo": "media/hostels/paari.jpg"
+    },
+    {
+      "id": "kaari",
+      "osm": "Kaari Hostel",
+      "name": "Kaari Hostel",
+      "kind": "hostel",
+      "href": "/hostels#men",
+      "photo": "media/hostels/kaari.jpg"
+    },
+    {
+      "id": "oori",
+      "osm": "Oori Hostel",
+      "name": "Oori Hostel",
+      "kind": "hostel",
+      "href": "/hostels#men",
+      "photo": "media/hostels/oori.jpg"
+    },
+    {
+      "id": "adhiyaman",
+      "osm": "Adhyaman Hostel",
+      "name": "Adhiyaman Hostel",
+      "kind": "hostel",
+      "href": "/hostels#men",
+      "photo": "media/hostels/adhiyaman.jpg"
+    },
+    {
+      "id": "nelson-mandela",
+      "osm": "Nelson Mandela Hostel",
+      "name": "Nelson Mandela Hostel",
+      "kind": "hostel",
+      "href": "/hostels#men",
+      "photo": "media/hostels/nelson-mandela.jpg"
+    },
+    {
+      "id": "agasthiyar",
+      "osm": "Agasthayar Hostel",
+      "name": "Agasthiyar Hostel",
+      "kind": "hostel",
+      "href": "/hostels#men"
+    },
+    {
+      "id": "manoranjitham",
+      "osm": "Manoranjitham Hostel",
+      "name": "Manoranjitham Hostel",
+      "kind": "hostel",
+      "href": "/hostels#men",
+      "photo": "media/hostels/manoranjitham.jpg"
+    },
+    {
+      "id": "meenakshi",
+      "osm": "Menakshi Hostel Block",
+      "name": "Meenakshi Hostel",
+      "kind": "hostel",
+      "href": "/hostels#women",
+      "photo": "media/hostels/meenakshi.jpg"
+    },
+    {
+      "id": "sannasi-c",
+      "osm": "Sannasi C Block, Hostel",
+      "name": "Sannasi C Block",
+      "kind": "hostel",
+      "href": "/hostels#women"
+    },
+    {
+      "id": "kalpana-chawla",
+      "osm": "Kalpana Chawla Hostel",
+      "name": "Kalpana Chawla Hostel",
+      "kind": "hostel",
+      "href": "/hostels#women",
+      "photo": "media/hostels/kalpana-chawla.jpg"
+    },
+    {
+      "id": "m-block",
+      "osm": "M Block Girls Hostel",
+      "name": "M Block (Kopperundevi) Hostel",
+      "kind": "hostel",
+      "href": "/hostels#women",
+      "photo": "media/hostels/kopperundevi.jpg"
+    },
+    {
+      "id": "n-block",
+      "osm": "N Block Mens Hostel",
+      "name": "N Block Hostel",
+      "kind": "hostel",
+      "href": "/hostels#men"
+    },
+    {
+      "id": "d-block",
+      "osm": "D-Block Mens Hostel",
+      "name": "D Block Hostel",
+      "kind": "hostel",
+      "href": "/hostels#men"
+    },
+    {
+      "id": "ganesh-temple",
+      "osm": "Ganesh Temple",
+      "osmNear": [
+        12.82318,
+        80.04297
+      ],
+      "name": "Ganesh Temple",
+      "kind": "faith",
+      "href": "/student-life#religious-life",
+      "photo": "media/life/temple.jpg"
+    },
+    {
+      "id": "mosque-church",
+      "osm": "Mosque & Church",
+      "name": "Mosque and Church",
+      "kind": "faith",
+      "href": "/student-life#religious-life",
+      "photo": "media/life/mosque.jpg"
+    },
+    {
+      "id": "park",
+      "osm": "PARK",
+      "name": "Campus park",
+      "kind": "park"
+    }
   ],
   "people": [
-    { "id": "counsellor", "at": "university-building", "outfit": { "skin": 2, "hair": 3, "hairColor": 0, "top": 0, "bottom": 1, "shoes": 0, "bag": 0 } },
-    { "id": "librarian", "at": "library", "outfit": { "skin": 4, "hair": 1, "hairColor": 3, "top": 6, "bottom": 0, "shoes": 1, "bag": 0 } },
-    { "id": "senior", "at": "java", "outfit": { "skin": 3, "hair": 0, "hairColor": 0, "top": 4, "bottom": 2, "shoes": 2, "bag": 1 } },
-    { "id": "friend", "at": "vendhar", "outfit": { "skin": 1, "hair": 4, "hairColor": 1, "top": 7, "bottom": 0, "shoes": 3, "bag": 2 } },
-    { "id": "camber", "at": "mech-hangar", "outfit": { "skin": 5, "hair": 2, "hairColor": 0, "top": 1, "bottom": 1, "shoes": 0, "bag": 0 } },
-    { "id": "techpark", "at": "tech-park", "outfit": { "skin": 2, "hair": 5, "hairColor": 0, "top": 3, "bottom": 2, "shoes": 2, "bag": 3 } },
-    { "id": "founder", "at": "incubation", "outfit": { "skin": 0, "hair": 0, "hairColor": 2, "top": 5, "bottom": 1, "shoes": 1, "bag": 0 } },
-    { "id": "host", "at": "auditorium", "outfit": { "skin": 3, "hair": 3, "hairColor": 0, "top": 2, "bottom": 3, "shoes": 0, "bag": 0 } },
-    { "id": "warden", "at": "paari", "outfit": { "skin": 4, "hair": 1, "hairColor": 4, "top": 0, "bottom": 1, "shoes": 1, "bag": 0 } }
+    {
+      "id": "counsellor",
+      "at": "university-building",
+      "outfit": {
+        "body": 1,
+        "skin": 2,
+        "hair": 2,
+        "hairColor": 0,
+        "top": 0,
+        "bottom": 1,
+        "shoes": 0,
+        "bag": 0
+      }
+    },
+    {
+      "id": "librarian",
+      "at": "library",
+      "outfit": {
+        "body": 0,
+        "skin": 4,
+        "hair": 4,
+        "hairColor": 3,
+        "top": 6,
+        "bottom": 0,
+        "shoes": 1,
+        "bag": 0
+      }
+    },
+    {
+      "id": "senior",
+      "at": "java",
+      "outfit": {
+        "body": 1,
+        "skin": 3,
+        "hair": 1,
+        "hairColor": 0,
+        "top": 4,
+        "bottom": 1,
+        "shoes": 2,
+        "bag": 1
+      }
+    },
+    {
+      "id": "friend",
+      "at": "vendhar",
+      "outfit": {
+        "body": 0,
+        "skin": 1,
+        "hair": 0,
+        "hairColor": 1,
+        "top": 7,
+        "bottom": 0,
+        "shoes": 3,
+        "bag": 2
+      }
+    },
+    {
+      "id": "camber",
+      "at": "mech-hangar",
+      "outfit": {
+        "body": 1,
+        "skin": 5,
+        "hair": 1,
+        "hairColor": 0,
+        "top": 1,
+        "bottom": 1,
+        "shoes": 0,
+        "bag": 0
+      }
+    },
+    {
+      "id": "techpark",
+      "at": "tech-park",
+      "outfit": {
+        "body": 0,
+        "skin": 2,
+        "hair": 0,
+        "hairColor": 0,
+        "top": 3,
+        "bottom": 1,
+        "shoes": 2,
+        "bag": 3
+      }
+    },
+    {
+      "id": "founder",
+      "at": "incubation",
+      "outfit": {
+        "body": 1,
+        "skin": 0,
+        "hair": 2,
+        "hairColor": 2,
+        "top": 5,
+        "bottom": 1,
+        "shoes": 1,
+        "bag": 0
+      }
+    },
+    {
+      "id": "host",
+      "at": "auditorium",
+      "outfit": {
+        "body": 0,
+        "skin": 3,
+        "hair": 3,
+        "hairColor": 0,
+        "top": 2,
+        "bottom": 3,
+        "shoes": 0,
+        "bag": 0
+      }
+    },
+    {
+      "id": "warden",
+      "at": "paari",
+      "outfit": {
+        "body": 0,
+        "skin": 4,
+        "hair": 4,
+        "hairColor": 4,
+        "top": 0,
+        "bottom": 1,
+        "shoes": 1,
+        "bag": 0
+      }
+    }
   ],
   "quests": [
-    { "id": "first-day", "stat": "connect", "steps": [{ "talk": "counsellor" }, { "talk": "senior" }] },
-    { "id": "lunch-rush", "stat": "grow", "steps": [{ "talk": "senior", "item": "coffee" }, { "talk": "friend" }] },
-    { "id": "pit-crew", "stat": "build", "steps": [{ "talk": "camber" }, { "pick": "aero-hangar", "item": "part" }, { "talk": "camber" }] },
-    { "id": "overdue", "stat": "think", "steps": [{ "talk": "techpark", "item": "book" }, { "talk": "librarian" }] },
-    { "id": "pitch-day", "stat": "build", "steps": [{ "talk": "founder", "item": "deck" }, { "talk": "host" }] },
-    { "id": "home", "stat": "connect", "steps": [{ "talk": "warden" }] }
+    {
+      "id": "first-day",
+      "stat": "connect",
+      "steps": [
+        {
+          "talk": "counsellor"
+        },
+        {
+          "talk": "senior"
+        }
+      ]
+    },
+    {
+      "id": "lunch-rush",
+      "stat": "grow",
+      "steps": [
+        {
+          "talk": "senior",
+          "item": "coffee"
+        },
+        {
+          "talk": "friend"
+        }
+      ]
+    },
+    {
+      "id": "pit-crew",
+      "stat": "build",
+      "steps": [
+        {
+          "talk": "camber"
+        },
+        {
+          "pick": "aero-hangar",
+          "item": "part"
+        },
+        {
+          "talk": "camber"
+        }
+      ]
+    },
+    {
+      "id": "overdue",
+      "stat": "think",
+      "steps": [
+        {
+          "talk": "techpark",
+          "item": "book"
+        },
+        {
+          "talk": "librarian"
+        }
+      ]
+    },
+    {
+      "id": "pitch-day",
+      "stat": "build",
+      "steps": [
+        {
+          "talk": "founder",
+          "item": "deck"
+        },
+        {
+          "talk": "host"
+        }
+      ]
+    },
+    {
+      "id": "home",
+      "stat": "connect",
+      "steps": [
+        {
+          "talk": "warden"
+        }
+      ]
+    }
   ]
 }

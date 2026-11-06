@@ -85,7 +85,6 @@ export function Scene({
         .map(([id, p]) => ({ id, x: p.door[0], z: p.door[1] })),
     [world],
   );
-  const leafy = useRef<THREE.Group>(null);
   const sun = useRef<THREE.DirectionalLight>(null);
   const skyColors = useMemo(() => ({ top: sky.top, horizon: sky.horizon, cloud: sky.cloud, cloudShade: sky.cloudShade, night: sky.night }), [sky]);
   // A few students walking the campus on their own, between real places, along real paths.
@@ -390,24 +389,6 @@ export function Scene({
       }
     }
 
-    // ── Leafy, the companion: floats beside you and leans towards the next stop ──
-    if (leafy.current) {
-      const t = curve.uTime.value;
-      const side = g.heading + 2.3;
-      const lx = g.pos.x + Math.sin(side) * 0.9;
-      const lz = g.pos.z + Math.cos(side) * 0.9;
-      const lp = leafy.current.position;
-      lp.x += (lx - lp.x) * Math.min(1, dt * 4);
-      lp.z += (lz - lp.z) * Math.min(1, dt * 4);
-      lp.y = 2.05 + (g.reduced ? 0 : Math.sin(t * 2.4) * 0.12);
-      const look = g.target ? Math.atan2(g.target[0] - lp.x, g.target[1] - lp.z) : g.heading;
-      let dh = look - leafy.current.rotation.y;
-      while (dh > Math.PI) dh -= Math.PI * 2;
-      while (dh < -Math.PI) dh += Math.PI * 2;
-      leafy.current.rotation.y += dh * Math.min(1, dt * 3);
-      leafy.current.rotation.z = g.reduced ? 0 : Math.sin(t * 1.7) * 0.12;
-    }
-
     // ── Way-finding: a light column over the next stop, and an arrow at your feet ──
     if (beacon.current) {
       beacon.current.visible = !!g.target && Math.hypot(g.target[0] - g.pos.x, g.target[1] - g.pos.z) > 14;
@@ -513,23 +494,6 @@ export function Scene({
           <Character outfit={w.outfit} anim={w.anim as React.RefObject<Anim>} blob={quality === "low"} />
         </group>
       ))}
-      <group ref={leafy} scale={0.5}>
-        <mesh material={toon({ color: "#7cc36b" })}>
-          <sphereGeometry args={[0.42, 16, 12]} />
-        </mesh>
-        <mesh position={[0.08, 0.5, -0.05]} rotation={[0.3, 0, -0.7]} scale={[0.32, 0.08, 0.6]} material={toon({ color: "#3f8d58" })}>
-          <sphereGeometry args={[1, 12, 8]} />
-        </mesh>
-        <mesh position={[-0.14, 0.08, 0.36]} material={toon({ color: "#1b1b1b" })}>
-          <sphereGeometry args={[0.06, 8, 6]} />
-        </mesh>
-        <mesh position={[0.14, 0.08, 0.36]} material={toon({ color: "#1b1b1b" })}>
-          <sphereGeometry args={[0.06, 8, 6]} />
-        </mesh>
-        <mesh position={[0, -0.06, 0.38]} rotation={[0.2, 0, Math.PI]} material={toon({ color: "#f28b82" })}>
-          <torusGeometry args={[0.08, 0.025, 6, 10, Math.PI]} />
-        </mesh>
-      </group>
       <group ref={beacon} visible={false} userData={{ noInk: true }}>
         <mesh position-y={40} material={toon({ color: "#ffd166", transparent: true, opacity: 0.22 })}>
           <cylinderGeometry args={[1.6, 1.6, 80, 16, 1, true]} />
