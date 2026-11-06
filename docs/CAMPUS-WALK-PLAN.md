@@ -4,7 +4,7 @@ A playable, walkable 3D Kattankulathur campus inside our website, in the spirit 
 (messenger.abeto.co). You arrive at the SRM gate as a student character, walk the real campus layout, talk to people
 at real buildings, take small campus quests, and every building is a doorway into the right page of our site.
 
-Status: **plan only. Nothing is built until this is approved.** Decisions needed are in section 11.
+Status (7 Nov 2026): **built**, phases 1–5, at `/walk`. Decisions taken: curved world, no multiplayer yet, the character made in code (instead of a downloaded pack), free-text questions through Ask SRM, no music yet, all six quests. Still open: multiplayer (phase 6) and a team check of the landmark names on campus.
 
 ---
 

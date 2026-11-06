@@ -5,7 +5,7 @@ import { useEffect, useMemo, useRef } from "react";
 import * as THREE from "three";
 import type { Outfit } from "@/lib/walk/script";
 import type { Collider, Paths, World, XZ } from "@/lib/walk/world";
-import { type Anim, Character } from "./Character";
+import { type Anim, Character, newAnim, OUTFIT_SIZES } from "./Character";
 import { curve, dropAt, toon } from "./curve";
 import type { Game } from "./state";
 import { WorldMeshes } from "./WorldMeshes";
@@ -67,6 +67,20 @@ export function Scene({
         .map(([id, p]) => ({ id, x: p.door[0], z: p.door[1] })),
     [world],
   );
+  const leafy = useRef<THREE.Group>(null);
+  // A few students walking the campus on their own, between real places, along real paths.
+  const walkers = useMemo(() => {
+    const ids = Object.keys(world.places);
+    let seed = 5;
+    const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+    return Array.from({ length: 6 }, (_, i) => {
+      const start = world.places[ids[Math.floor(rnd() * ids.length)]!]!.door;
+      const outfit = Object.fromEntries((Object.keys(OUTFIT_SIZES) as (keyof Outfit)[]).map((k) => [k, Math.floor(rnd() * OUTFIT_SIZES[k])])) as Outfit;
+      return { i, outfit, pos: { x: start[0] + 3, z: start[1] + 3 }, route: [] as XZ[], heading: 0, wait: rnd() * 3, anim: { current: newAnim() } };
+    });
+  }, [world]);
+  const walkerRefs = useRef(new Map<number, THREE.Group>());
+  const placeIds = useMemo(() => Object.keys(world.places), [world]);
   const camPos = useRef(new THREE.Vector3());
   const lastNear = useRef<string>("");
   const frame = useRef(0);
@@ -313,6 +327,61 @@ export function Scene({
       onNear(nearPerson, nearPlace);
     }
 
+    // ── Students walking about ──
+    for (const w of walkers) {
+      const grp = walkerRefs.current.get(w.i);
+      if (!w.route.length) {
+        w.anim.current.speed = 0;
+        w.wait -= dt;
+        if (w.wait <= 0 && frame.current % 6 === w.i) {
+          const to = world.places[placeIds[Math.floor(Math.random() * placeIds.length)]!]!.door;
+          w.route = paths.route([w.pos.x, w.pos.z], [to[0] + 2, to[1] + 2]);
+          w.wait = 2 + Math.random() * 6;
+        }
+      } else {
+        const [tx2, tz2] = w.route[0]!;
+        const dx = tx2 - w.pos.x;
+        const dz = tz2 - w.pos.z;
+        const d = Math.hypot(dx, dz);
+        if (d < 1) w.route.shift();
+        else {
+          const h = Math.atan2(dx, dz);
+          let dh = h - w.heading;
+          while (dh > Math.PI) dh -= Math.PI * 2;
+          while (dh < -Math.PI) dh += Math.PI * 2;
+          w.heading += dh * Math.min(1, dt * 6);
+          const [rx, rz] = collider.resolve(w.pos.x + Math.sin(w.heading) * 3.2 * dt, w.pos.z + Math.cos(w.heading) * 3.2 * dt, 0.5);
+          if (Math.hypot(rx - w.pos.x, rz - w.pos.z) < 0.01) w.route.shift();
+          w.pos.x = rx;
+          w.pos.z = rz;
+          w.anim.current.speed = 3.2;
+        }
+      }
+      if (grp) {
+        grp.visible = Math.hypot(w.pos.x - g.pos.x, w.pos.z - g.pos.z) < 170;
+        grp.position.set(w.pos.x, 0, w.pos.z);
+        grp.rotation.y = w.heading;
+      }
+    }
+
+    // ── Leafy, the companion: floats beside you and leans towards the next stop ──
+    if (leafy.current) {
+      const t = curve.uTime.value;
+      const side = g.heading + 2.3;
+      const lx = g.pos.x + Math.sin(side) * 1.9;
+      const lz = g.pos.z + Math.cos(side) * 1.9;
+      const lp = leafy.current.position;
+      lp.x += (lx - lp.x) * Math.min(1, dt * 4);
+      lp.z += (lz - lp.z) * Math.min(1, dt * 4);
+      lp.y = 3.1 + (g.reduced ? 0 : Math.sin(t * 2.4) * 0.22);
+      const look = g.target ? Math.atan2(g.target[0] - lp.x, g.target[1] - lp.z) : g.heading;
+      let dh = look - leafy.current.rotation.y;
+      while (dh > Math.PI) dh -= Math.PI * 2;
+      while (dh < -Math.PI) dh += Math.PI * 2;
+      leafy.current.rotation.y += dh * Math.min(1, dt * 3);
+      leafy.current.rotation.z = g.reduced ? 0 : Math.sin(t * 1.7) * 0.12;
+    }
+
     // ── Way-finding: a light column over the next stop, and an arrow at your feet ──
     if (beacon.current) {
       beacon.current.visible = !!g.target && Math.hypot(g.target[0] - g.pos.x, g.target[1] - g.pos.z) > 14;
@@ -391,6 +460,34 @@ export function Scene({
           <Character outfit={n.outfit} anim={npcAnims.get(n.id) as React.RefObject<Anim>} scale={1.3} />
         </group>
       ))}
+      {walkers.map((w) => (
+        <group
+          key={w.i}
+          ref={(el) => {
+            if (el) walkerRefs.current.set(w.i, el);
+            else walkerRefs.current.delete(w.i);
+          }}
+        >
+          <Character outfit={w.outfit} anim={w.anim as React.RefObject<Anim>} scale={1.2} />
+        </group>
+      ))}
+      <group ref={leafy}>
+        <mesh material={toon({ color: "#7cc36b" })}>
+          <sphereGeometry args={[0.42, 16, 12]} />
+        </mesh>
+        <mesh position={[0.08, 0.5, -0.05]} rotation={[0.3, 0, -0.7]} scale={[0.32, 0.08, 0.6]} material={toon({ color: "#3f8d58" })}>
+          <sphereGeometry args={[1, 12, 8]} />
+        </mesh>
+        <mesh position={[-0.14, 0.08, 0.36]} material={toon({ color: "#1b1b1b" })}>
+          <sphereGeometry args={[0.06, 8, 6]} />
+        </mesh>
+        <mesh position={[0.14, 0.08, 0.36]} material={toon({ color: "#1b1b1b" })}>
+          <sphereGeometry args={[0.06, 8, 6]} />
+        </mesh>
+        <mesh position={[0, -0.06, 0.38]} rotation={[0.2, 0, Math.PI]} material={toon({ color: "#f28b82" })}>
+          <torusGeometry args={[0.08, 0.025, 6, 10, Math.PI]} />
+        </mesh>
+      </group>
       <group ref={beacon} visible={false}>
         <mesh position-y={40} material={toon({ color: "#ffd166", transparent: true, opacity: 0.22 })}>
           <cylinderGeometry args={[1.6, 1.6, 80, 16, 1, true]} />

@@ -8,7 +8,7 @@ import { join } from "node:path";
 
 const BASE = process.argv[2] ?? "http://localhost:3123";
 const CHROME = process.env.CHROME ?? "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
-const PAGES = ["/en", "/en/programmes", "/en/programmes/btech-cse", "/en/compare", "/en/admissions", "/en/hostels", "/en/student-life", "/en/research", "/en/stories", "/en/stories/camber-racing-formula-bharat-2026", "/en/campuses/kattankulathur", "/ta", "/hi/programmes"];
+const PAGES = ["/en", "/en/programmes", "/en/programmes/btech-cse", "/en/compare", "/en/admissions", "/en/hostels", "/en/student-life", "/en/research", "/en/stories", "/en/stories/camber-racing-formula-bharat-2026", "/en/campuses/kattankulathur", "/en/walk", "/ta", "/hi/programmes"];
 const WIDTHS = [360, 768, 1440];
 
 const port = 9333;
@@ -75,7 +75,18 @@ const coverProbe = `(async () => {
       const top = document.elementFromPoint(cx, cy);
       if (!top || el.contains(top) || top.contains(el)) continue;
       const f = top.closest(".assistant-launcher, [data-dock], .grail-dock, header, nav[aria-label], [class*=dock], [class*=launcher]");
-      if (f && getComputedStyle(f).position === "fixed") hits.add((el.textContent || el.getAttribute("aria-label") || "").trim().slice(0, 40) + " <under> " + (f.className || f.tagName).toString().slice(0, 40));
+      if (f && getComputedStyle(f).position === "fixed") {
+        // Floating buttons pass over content while you scroll; it only matters if scrolling can't bring the link clear.
+        const y0 = scrollY;
+        el.scrollIntoView({ block: "center" });
+        await new Promise((r) => setTimeout(r, 60));
+        const r2 = el.getBoundingClientRect();
+        const t2 = document.elementFromPoint(r2.left + r2.width / 2, r2.top + r2.height / 2);
+        if (t2 && !el.contains(t2) && !t2.contains(el) && t2.closest(".assistant-launcher, .grail-dock, [class*=dock], [class*=launcher]"))
+          hits.add((el.textContent || el.getAttribute("aria-label") || "").trim().slice(0, 40) + " <under> " + (f.className || f.tagName).toString().slice(0, 40));
+        scrollTo(0, y0);
+        await new Promise((r) => setTimeout(r, 40));
+      }
     }
   }
   scrollTo(0, 0);

@@ -12,11 +12,16 @@ type Params = { params: Promise<{ locale: Locale }> };
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "Walk.meta" });
+  const social = socialFor(locale, { title: t("title"), description: t("description"), path: "/walk", ownImage: true });
+  // The link preview is a real frame from the game.
+  const image = { url: "/walk/cover.jpg", width: 1200, height: 630, alt: t("coverAlt") };
   return {
     title: `${t("title")} — SRMIST`,
     description: t("description"),
     alternates: alternatesFor(locale, "/walk"),
-    ...socialFor(locale, { title: t("title"), description: t("description"), path: "/walk" }),
+    ...social,
+    openGraph: { ...social.openGraph, images: [image] },
+    twitter: { ...social.twitter, images: [image.url] },
   };
 }
 
@@ -50,7 +55,16 @@ export default async function WalkPage({ params }: Params) {
           script={script}
           labels={{ begin: t("hero.begin"), outfitFirst: t("hero.outfitFirst"), textTour: t("hero.textTour"), lite: t("hero.lite"), noWebgl: t("hero.noWebgl") }}
         />
-        <p className="mt-10 max-w-2xl text-xs text-[var(--fg-muted)]">{t("hero.credit")}</p>
+        <Image
+          src="/walk/cover.jpg"
+          alt={t("meta.coverAlt")}
+          width={1200}
+          height={630}
+          priority
+          sizes="(min-width: 1440px) 1344px, 100vw"
+          className="mt-10 w-full rounded-[28px] border border-white/15"
+        />
+        <p className="mt-6 max-w-2xl text-xs text-[var(--fg-muted)]">{t("hero.credit")}</p>
       </GrailHero>
 
       <div id="walk-tour" className="scroll-mt-16">

@@ -35,6 +35,7 @@ export async function GrailHome() {
   const nav = await getTranslations("Nav");
   const locale = await getLocale();
   const hero = await getTranslations("Hero");
+  const walk = await getTranslations("Walk");
   const map = getMapData(locale);
   const all = await getMessages();
   const copy = all.Grail.quests as Record<string, QuestCopy>;
@@ -422,6 +423,17 @@ export async function GrailHome() {
             <CampusExplorer campuses={map.campuses} clusters={map.clusters} groups={map.groups} states={getCities(locale)} aspect={mapAspect} mapSrc="/map/india.svg" />
           </div>
           <p className="mt-6 text-xs text-[var(--fg-muted)]">{ex("mapCredit")}</p>
+          {/* Walk SRM: the campus as a small walkable world (/walk). */}
+          <div className="mt-10 grid items-center gap-6 overflow-hidden rounded-[28px] border border-white/15 bg-gradient-to-br from-[#1f4fd8]/25 via-[#14101a] to-[#623562]/40 p-6 md:grid-cols-[1fr_auto] lg:p-10">
+            <div>
+              <p className="text-sm font-semibold text-[#ffd166]">{walk("promo.kicker")}</p>
+              <h3 className="grail-display mt-2 text-[clamp(2rem,4.5vw,3.5rem)] leading-none">{walk("promo.title")}</h3>
+              <p className="mt-3 max-w-xl text-[var(--fg-muted)]">{walk("promo.text")}</p>
+            </div>
+            <Link href="/walk" className="grail-cta w-fit">
+              {walk("promo.cta")} ▸
+            </Link>
+          </div>
         </div>
       </section>
 

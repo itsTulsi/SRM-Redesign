@@ -76,6 +76,11 @@ export default async function CampusPage({ params }: Params) {
           <a href={directionsUrl(campus)} className={ghostPill}>
             {ex("directions")}
           </a>
+          {campus.slug === "kattankulathur" ? (
+            <Link href="/walk" className={ghostPill}>
+              🚶 {nav("walk")}
+            </Link>
+          ) : null}
         </div>
         <Photo
           src={campus.photo}

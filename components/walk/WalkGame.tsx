@@ -470,7 +470,7 @@ export default function WalkGame({ script, onExit, startWithOutfit }: { script: 
                 <PlaceCard place={nearPlace} ui={ui} />
               </div>
             ) : null}
-            {!talk && !panel ? <p className="absolute bottom-3 left-1/2 hidden -translate-x-1/2 text-xs font-semibold text-white/90 drop-shadow lg:block">{ui.keys}</p> : null}
+            {!talk && !panel && !nearPlace ? <p className="absolute bottom-3 left-1/2 hidden -translate-x-1/2 text-xs font-semibold text-white/90 drop-shadow lg:block">{ui.keys}</p> : null}
           </div>
 
           {touch && !talk && !panel ? <Joystick game={game} label={ui.touch!} /> : null}

@@ -60,7 +60,8 @@
     "researchCentres": "Research centres",
     "patents": "Patents",
     "compare": "Compare programmes",
-    "allStories": "All stories and alumni"
+    "allStories": "All stories and alumni",
+    "walk": "Walk the campus (3D)"
   },
   "Footer": {
     "label": "Footer",
@@ -1499,7 +1500,8 @@
   "Walk": {
     "meta": {
       "title": "Walk SRM: explore the Kattankulathur campus",
-      "description": "Walk the real Kattankulathur campus as a student, talk to people at real buildings and take six small campus quests. Every building leads to its page."
+      "description": "Walk the real Kattankulathur campus as a student, talk to people at real buildings and take six small campus quests. Every building leads to its page.",
+      "coverAlt": "A student in a Camber Racing tee, with Leafy, meets the admissions counsellor outside the SRM University Building in Walk SRM."
     },
     "hero": {
       "kicker": "Kattankulathur, in 3D",
@@ -1910,6 +1912,13 @@
       "questsTitle": "Quests",
       "at": "At {place}",
       "skip": "Skip to the tour"
+    },
+    "promo": {
+      "kicker": "New: Walk SRM",
+      "title": "Walk Kattankulathur in 3D",
+      "text": "Arrive at the gate, walk the real campus, talk to people at real buildings and take six small quests. About 10 minutes.",
+      "cta": "Start walking",
+      "hostel": "Walk to your hostel in 3D"
     }
   }
 }

@@ -94,9 +94,10 @@ export async function getNavData(): Promise<NavData> {
         groups: [
           {
             title: t("ourCampuses"),
-            links: campuses
-              .filter((c) => c.kind === "campus")
-              .map((c) => ({ label: c.name, href: `/campuses/${c.slug}` })),
+            links: [
+              { label: t("walk"), href: "/walk" },
+              ...campuses.filter((c) => c.kind === "campus").map((c) => ({ label: c.name, href: `/campuses/${c.slug}` })),
+            ],
           },
           {
             title: t("housing"),
