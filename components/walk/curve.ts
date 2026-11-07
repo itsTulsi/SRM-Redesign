@@ -36,6 +36,8 @@ type Opts = {
   vertexColors?: boolean;
   windows?: boolean;
   grass?: boolean;
+  /** Road surfaces (geometry carries aLat across, aLen along, aW width): 1 asphalt · 2 painted kerb · 3 paver tiles. */
+  surface?: 1 | 2 | 3;
   sway?: boolean;
   transparent?: boolean;
   opacity?: number;
@@ -65,7 +67,7 @@ export function toon(opts: Opts = {}): THREE.MeshToonMaterial {
   return m;
 }
 
-export function bend<T extends THREE.Material>(m: T, opts: Pick<Opts, "windows" | "sway" | "grass"> = {}): T {
+export function bend<T extends THREE.Material>(m: T, opts: Pick<Opts, "windows" | "sway" | "grass" | "surface"> = {}): T {
   m.onBeforeCompile = (s) => {
     s.uniforms.uCurve = curve.uCurve;
     s.uniforms.uCenter = curve.uCenter;
@@ -75,7 +77,8 @@ export function bend<T extends THREE.Material>(m: T, opts: Pick<Opts, "windows" 
       .replace(
         "#include <common>",
         "#include <common>\nuniform float uCurve;\nuniform vec2 uCenter;\nuniform float uTime;\nvarying vec3 vWorld;\nvarying vec3 vWNormal;" +
-          (opts.windows ? "\nattribute float aStyle;\nattribute float aU;\nvarying float vStyle;\nvarying float vU;" : ""),
+          (opts.windows ? "\nattribute float aStyle;\nattribute float aU;\nvarying float vStyle;\nvarying float vU;" : "") +
+          (opts.surface ? "\nattribute float aLat;\nattribute float aLen;\nattribute float aW;\nvarying float vLat;\nvarying float vLen;\nvarying float vW;" : ""),
       )
       .replace(
         "#include <project_vertex>",
@@ -87,6 +90,7 @@ export function bend<T extends THREE.Material>(m: T, opts: Pick<Opts, "windows" 
   ${opts.sway ? "wp.x += sin(uTime * 1.3 + wp.x * 0.15 + wp.z * 0.11) * max(0.0, transformed.y - 1.0) * 0.06;" : ""}
   vWorld = wp.xyz;
   ${opts.windows ? "vStyle = aStyle; vU = aU;" : ""}
+  ${opts.surface ? "vLat = aLat; vLen = aLen; vW = aW;" : ""}
   vWNormal = normalize(mat3(modelMatrix) * objectNormal);
   vec2 dd = wp.xz - uCenter;
   wp.y -= dot(dd, dd) * uCurve;
@@ -97,6 +101,7 @@ export function bend<T extends THREE.Material>(m: T, opts: Pick<Opts, "windows" 
       "#include <common>",
       "#include <common>\nuniform float uNight;\nuniform float uTime;\nvarying vec3 vWorld;\nvarying vec3 vWNormal;" +
         (opts.windows ? "\nvarying float vStyle;\nvarying float vU;" : "") +
+        (opts.surface ? "\nvarying float vLat;\nvarying float vLen;\nvarying float vW;" : "") +
         "\nfloat h21(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}\nfloat n21(vec2 p){vec2 i=floor(p),f=fract(p);vec2 u=f*f*(3.-2.*f);return mix(mix(h21(i),h21(i+vec2(1,0)),u.x),mix(h21(i+vec2(0,1)),h21(i+vec2(1,1)),u.x),u.y);}" +
         "\nfloat box2(vec2 p, vec2 lo, vec2 hi){return step(lo.x,p.x)*step(p.x,hi.x)*step(lo.y,p.y)*step(p.y,hi.y);}",
     );
@@ -112,6 +117,49 @@ export function bend<T extends THREE.Material>(m: T, opts: Pick<Opts, "windows" 
   vec2 gf = fract(g) - vec2(h21(gi), h21(gi + 3.1)) * 0.6 - 0.2;
   float stroke = step(0.82, h21(gi + 7.7)) * step(abs(gf.x + gf.y * 0.35), 0.03) * step(abs(gf.y), 0.22);
   diffuseColor.rgb = mix(diffuseColor.rgb, diffuseColor.rgb * 0.62, stroke);`,
+      );
+    }
+    if (opts.surface === 1) {
+      // Asphalt: grain, repaired patches, lighter tyre tracks, white edge lines and centre dashes (wide roads).
+      s.fragmentShader = s.fragmentShader.replace(
+        "#include <color_fragment>",
+        `#include <color_fragment>
+  float grain = h21(floor(vWorld.xz * 7.0));
+  diffuseColor.rgb *= 0.94 + 0.08 * grain;
+  float patchN = n21(vWorld.xz * 0.07 + 3.0);
+  float repaired = smoothstep(0.72, 0.74, patchN);
+  diffuseColor.rgb = mix(diffuseColor.rgb, diffuseColor.rgb * 0.82, repaired);
+  diffuseColor.rgb = mix(diffuseColor.rgb, vec3(0.13, 0.15, 0.2), (smoothstep(0.715, 0.72, patchN) - smoothstep(0.72, 0.725, patchN)) * 0.5);
+  float lat = abs(vLat);
+  float track = 1.0 - smoothstep(0.0, 0.1, abs(lat - 0.42));
+  diffuseColor.rgb = mix(diffuseColor.rgb, diffuseColor.rgb * 1.1, track * 0.6);
+  float edgeLine = step(0.82, lat) * step(lat, 0.88) * step(5.5, vW);
+  float dash = step(lat, 0.035) * step(fract(vLen / 7.0), 0.42) * step(7.0, vW);
+  diffuseColor.rgb = mix(diffuseColor.rgb, vec3(0.93, 0.92, 0.86), max(edgeLine, dash) * 0.95);`,
+      );
+    }
+    if (opts.surface === 2) {
+      // Kerb stones painted in black and yellow bands.
+      s.fragmentShader = s.fragmentShader.replace(
+        "#include <color_fragment>",
+        `#include <color_fragment>
+  float band = step(0.5, fract(vLen / 1.1));
+  diffuseColor.rgb = mix(vec3(0.16, 0.17, 0.19), vec3(0.95, 0.8, 0.27), band);
+  diffuseColor.rgb = mix(diffuseColor.rgb, vec3(0.13, 0.15, 0.2), step(fract(vLen / 1.1), 0.03) * 0.6);`,
+      );
+    }
+    if (opts.surface === 3) {
+      // Footpaths: interlocking paver tiles in a running bond.
+      s.fragmentShader = s.fragmentShader.replace(
+        "#include <color_fragment>",
+        `#include <color_fragment>
+  vec2 t = vec2(vLen / 0.45, (vLat * 0.5 + 0.5) * vW / 0.3);
+  t.x += step(1.0, mod(floor(t.y), 2.0)) * 0.5;
+  vec2 f = fract(t);
+  float joint = step(f.x, 0.07) + step(f.y, 0.1);
+  float tone = h21(floor(t)) * 0.08;
+  diffuseColor.rgb *= 0.95 + tone;
+  diffuseColor.rgb = mix(diffuseColor.rgb, diffuseColor.rgb * 0.72, clamp(joint, 0.0, 1.0));`,
       );
     }
     if (opts.windows) {
@@ -156,6 +204,9 @@ export function bend<T extends THREE.Material>(m: T, opts: Pick<Opts, "windows" 
       line = step(abs(fy - 4.2), 0.06);
     }
     winMask = clamp(win, 0.0, 1.0);
+    // Monsoon weathering: faint vertical streaks under the windows and darker toward the ground.
+    float streak = smoothstep(0.55, 0.95, n21(vec2(vU * 0.9, floor(fy / 3.4) * 7.0 + fy * 0.05)));
+    diffuseColor.rgb *= (1.0 - 0.07 * streak * (1.0 - winMask)) * (0.94 + 0.06 * smoothstep(0.0, 4.0, fy));
     diffuseColor.rgb = mix(diffuseColor.rgb, glassC, winMask);
     // A soft sky reflection band on the glass.
     diffuseColor.rgb += winMask * 0.08 * step(0.55, fract(vU * 0.21 + row * 0.6));
@@ -165,6 +216,6 @@ export function bend<T extends THREE.Material>(m: T, opts: Pick<Opts, "windows" 
         .replace("#include <dithering_fragment>", "#include <dithering_fragment>\n  gl_FragColor.rgb += winMask * uNight * vec3(1.0, 0.8, 0.5) * 0.45;");
     }
   };
-  m.customProgramCacheKey = () => `bend${opts.windows ? "w" : ""}${opts.sway ? "s" : ""}${opts.grass ? "g" : ""}`;
+  m.customProgramCacheKey = () => `bend${opts.windows ? "w" : ""}${opts.sway ? "s" : ""}${opts.grass ? "g" : ""}${opts.surface ?? ""}`;
   return m;
 }

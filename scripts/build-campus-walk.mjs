@@ -87,6 +87,7 @@ const clipLine = (geom) => {
 };
 
 const buildings = [];
+const buildingByOsmId = new Map(); // OSM way id → index, for places OSM doesn't name (content/walk.json "osmId")
 const osmNames = []; // [name, x, z, tags] for every named building or node, to find places by name
 const roads = [];
 const water = [];
@@ -115,6 +116,7 @@ for (const e of elements) {
     else h = 6 + Math.round(rand() * 6);
     const b = { p: pts, h: Math.round(h), k: kindOf(t) };
     buildings.push(b);
+    buildingByOsmId.set(e.id, buildings.length - 1);
     if (t.name) {
       const c = pts.reduce((s, q) => [s[0] + q[0] / pts.length, s[1] + q[1] / pts.length], [0, 0]);
       osmNames.push({ name: t.name, x: c[0], z: c[1], tags: t, building: buildings.length - 1 });
@@ -195,6 +197,21 @@ const doorOf = (poly, toward) => {
 const places = {};
 const missing = [];
 for (const pl of walk.places) {
+  // A building OSM maps but doesn't name (the CRC Block): matched by its OSM way id.
+  if (pl.osmId !== undefined) {
+    const bi = buildingByOsmId.get(pl.osmId);
+    if (bi === undefined) {
+      missing.push(pl.id);
+      continue;
+    }
+    const bb = buildings[bi];
+    if (pl.floors) bb.h = Math.round(pl.floors * 3.4);
+    bb.k = KIND[pl.kind] ?? bb.k;
+    bb.n = pl.id;
+    const c = bb.p.reduce((s, q) => [s[0] + q[0] / bb.p.length, s[1] + q[1] / bb.p.length], [0, 0]);
+    places[pl.id] = { x: r(c[0]), z: r(c[1]), door: doorOf(bb.p, nearestRoadPoint(c[0], c[1])), b: bi };
+    continue;
+  }
   let cands = osmNames.filter((n) => n.name === pl.osm);
   if (pl.osmType) cands = cands.filter((n) => n.tags[pl.osmType]);
   if (pl.osmNear) {
@@ -217,6 +234,46 @@ for (const pl of walk.places) {
     if (pl.kind !== "arrival" && pl.kind !== "park" && !buildings[bi].n) buildings[bi].n = pl.id;
   } else door = [r(n.x), r(n.z)];
   places[pl.id] = { x: r(n.x), z: r(n.z), door, ...(bi >= 0 ? { b: bi } : {}) };
+}
+
+// A clock tower beside a building's entrance (content/walk.json "clockTower"): a 7 m square standing out from the
+// entrance wall, near one end of it, 13 m taller than the building. Its own footprint, so you can't walk through it.
+for (const pl of walk.places.filter((x) => x.clockTower)) {
+  const P = places[pl.id];
+  if (!P) continue;
+  const bb = buildings[P.b];
+  let best = 0;
+  let bd = Infinity;
+  bb.p.forEach((a, i) => {
+    const c = bb.p[(i + 1) % bb.p.length];
+    const d = Math.hypot((a[0] + c[0]) / 2 - P.door[0], (a[1] + c[1]) / 2 - P.door[1]);
+    if (d < bd) {
+      bd = d;
+      best = i;
+    }
+  });
+  const a = bb.p[best];
+  const c = bb.p[(best + 1) % bb.p.length];
+  const len = Math.hypot(c[0] - a[0], c[1] - a[1]);
+  const ux = (c[0] - a[0]) / len;
+  const uz = (c[1] - a[1]) / len;
+  let nx = uz;
+  let nz = -ux;
+  if (inside((a[0] + c[0]) / 2 + nx, (a[1] + c[1]) / 2 + nz, bb.p)) {
+    nx = -nx;
+    nz = -nz;
+  }
+  const t = Math.min(len * 0.22, len / 2 - 6);
+  const s = 3.5;
+  const cx = a[0] + ux * t + nx * (s + 0.2);
+  const cz = a[1] + uz * t + nz * (s + 0.2);
+  const sq = [
+    [cx - ux * s - nx * s, cz - uz * s - nz * s],
+    [cx + ux * s - nx * s, cz + uz * s - nz * s],
+    [cx + ux * s + nx * s, cz + uz * s + nz * s],
+    [cx - ux * s + nx * s, cz - uz * s + nz * s],
+  ].map(([x, z]) => [r(x), r(z)]);
+  buildings.push({ p: sq, h: bb.h + 13, k: 8, n: `${pl.id}-tower` });
 }
 
 // Two places on one building (library, University Building) must not share a door: nudge the second along the wall.

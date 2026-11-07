@@ -1,5 +1,5 @@
 {
-  "_note": "Walk SRM (app/[locale]/walk): the places, people and quests of the walkable campus. Places are matched by their OpenStreetMap name ('osm'; © OpenStreetMap contributors, ODbL) and positioned by scripts/build-campus-walk.mjs into public/walk/ktr-world.json. 'name' is what we show; it fixes OSM spellings (Hanger → Hangar) and casing, nothing else. People are roles, not real people. Quests are a game story; every fact a character tells you is read from our other content files when the page is built (see lib/walk.ts). Lines and descriptions are in messages/{en,ta,hi}.json under 'Walk'.",
+  "_note": "Walk SRM (app/[locale]/walk): the places, people and quests of the walkable campus. Places are matched by their OpenStreetMap name ('osm'; © OpenStreetMap contributors, ODbL) and positioned by scripts/build-campus-walk.mjs into public/walk/ktr-world.json. 'name' is what we show; it fixes OSM spellings (Hanger → Hangar) and casing, nothing else. People are roles, not real people. Quests are a game story; every fact a character tells you is read from our other content files when the page is built (see lib/walk.ts). Lines and descriptions are in messages/{en,ta,hi}.json under 'Walk'. Places OSM maps but doesn't name are matched by 'osmId' (the CRC Block: SRM's building list gives it G+8, so 'floors': 9; its position is from a public map listing, 12.82033, 80.03785).",
   "spawn": "gate",
   "places": [
     {
@@ -73,6 +73,15 @@
       "name": "TP Ganesan Auditorium",
       "kind": "events",
       "href": "/student-life"
+    },
+    {
+      "id": "crc",
+      "osmId": 1429494686,
+      "name": "CRC Block",
+      "kind": "academic",
+      "floors": 9,
+      "href": "/campuses/kattankulathur",
+      "clockTower": true
     },
     {
       "id": "main-block",

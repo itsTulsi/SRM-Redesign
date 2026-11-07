@@ -112,6 +112,22 @@ const offset = (p: XZ[], d: number): XZ[] =>
     return [v[0] + (mx * d) / cos, v[1] + (mz * d) / cos];
   });
 
+/** A projecting slab round a building (a chajja / sunshade or floor ledge): the footprint pushed out by `depth`, with
+ *  the building cut out of it, `t` metres thick, its top at `y`. */
+function ledge(b: Buf, p: XZ[], depth: number, y: number, t: number, c: THREE.Color) {
+  const outer = offset(p, depth).map(([x, z]) => new THREE.Vector2(x, -z));
+  const inner = p.map(([x, z]) => new THREE.Vector2(x, -z));
+  if (THREE.ShapeUtils.isClockWise(outer)) outer.reverse();
+  if (!THREE.ShapeUtils.isClockWise(inner)) inner.reverse();
+  const shape = new THREE.Shape(outer);
+  shape.holes.push(new THREE.Path(inner));
+  const g = new THREE.ExtrudeGeometry(shape, { depth: t, bevelEnabled: false });
+  g.rotateX(-Math.PI / 2);
+  g.translate(0, y - t, 0);
+  addGeo(b, g, M.identity(), c);
+  g.dispose();
+}
+
 /** Walls (one quad per edge, windows aligned to that wall) and a flat roof. */
 function shell(b: Buf, p: XZ[], y0: number, y1: number, wall: THREE.Color, roof: THREE.Color | null, style: number) {
   let along = 0;
@@ -160,6 +176,66 @@ const place = (x: number, y: number, z: number, sx: number, sy: number, sz: numb
   M.compose(P.set(x, y, z), Q.setFromEuler(E.set(0, ry, 0)), S.set(sx, sy, sz));
 
 export type Sign = { text: string; sub?: string; bg: string; fg: string; x: number; y: number; z: number; ry: number; w: number; h: number };
+/** A clock face on the tower: centre, facing, radius. */
+export type Clock = { x: number; y: number; z: number; ry: number; r: number };
+
+/**
+ * The clock tower at the CRC Block (our own design): a stepped stone plinth, a cream shaft with SRM-orange corner
+ * pilasters and banding, a clock stage with a face on every side, a maroon cornice, a pyramid roof and a gold spire.
+ */
+function clockTower(trim: Buf, walls: Buf, p: XZ[], H: number): Clock[] {
+  const cream = new THREE.Color("#efe4cc");
+  const orange = new THREE.Color("#e8935a");
+  const maroon = new THREE.Color("#8b2d32");
+  const stone = new THREE.Color("#c9bfae");
+  const c = p.reduce((s, q) => [s[0] + q[0] / p.length, s[1] + q[1] / p.length], [0, 0]) as XZ;
+  const ry = Math.atan2(p[1]![0] - p[0]![0], p[1]![1] - p[0]![1]);
+  ledge(trim, p, 1.4, 0.35, 0.35, stone);
+  ledge(trim, p, 0.8, 0.7, 0.35, stone);
+  const stage = H - 7;
+  // A solid stone shaft (no glass grid): plain cream walls, stone corner quoins, a few orange string courses and
+  // tall slit windows up the middle of each face.
+  shell(walls, p, 0, stage, cream, null, 0);
+  for (let y = 4.2; y < stage - 3; y += 9) ledge(trim, p, 0.22, y, 0.35, orange);
+  ledge(trim, p, 0.3, stage - 1.2, 0.3, orange);
+  for (const [x, z] of p) addGeo(trim, BOX, place(x, stage / 2, z, 0.9, stage, 0.9, ry), stone);
+  const slit = new THREE.Color("#3b3f4a");
+  for (let i = 0; i < p.length; i++) {
+    const a = p[i]!;
+    const b = p[(i + 1) % p.length]!;
+    const [nx, nz] = outward(p, i);
+    const mx = (a[0] + b[0]) / 2 + nx * 0.04;
+    const mz = (a[1] + b[1]) / 2 + nz * 0.04;
+    for (let y = 8.5; y < stage - 4; y += 9) addGeo(trim, BOX, place(mx, y, mz, 0.55, 2.6, 0.1, Math.atan2(nx, nz)), slit);
+  }
+  // An entrance on the first face.
+  {
+    const a = p[0]!;
+    const b = p[1]!;
+    const [nx, nz] = outward(p, 0);
+    addGeo(trim, BOX, place((a[0] + b[0]) / 2 + nx * 0.05, 1.6, (a[1] + b[1]) / 2 + nz * 0.05, 1.5, 2.6, 0.1, Math.atan2(nx, nz)), slit);
+  }
+  // The clock stage, a little wider than the shaft.
+  const wide = offset(p, 0.35);
+  shell(walls, wide, stage, H - 1.2, cream, null, 0);
+  ledge(trim, p, 0.6, stage + 0.25, 0.25, maroon);
+  shell(trim, offset(p, 0.75), H - 1.2, H - 0.6, maroon, maroon, 0);
+  // Pyramid roof and spire.
+  const half = Math.max(...p.map(([x, z]) => Math.hypot(x - c[0], z - c[1]))) + 0.9;
+  const roof = new THREE.ConeGeometry(half, 4.2, 4);
+  addGeo(trim, roof, M.compose(P.set(c[0], H - 0.6 + 2.1, c[1]), Q.setFromEuler(E.set(0, ry + Math.PI / 4, 0)), S.set(1, 1, 1)), maroon);
+  addGeo(trim, CYL, place(c[0], H + 4.6, c[1], 0.07, 2.2, 0.07), new THREE.Color("#e2b13c"));
+  addGeo(trim, new THREE.SphereGeometry(0.28, 10, 8), place(c[0], H + 3.7, c[1], 1, 1, 1), new THREE.Color("#e2b13c"));
+  // A face on every side of the stage.
+  const faces: Clock[] = [];
+  for (let i = 0; i < wide.length; i++) {
+    const a = wide[i]!;
+    const b = wide[(i + 1) % wide.length]!;
+    const [nx, nz] = outward(wide, i);
+    faces.push({ x: (a[0] + b[0]) / 2 + nx * 0.06, y: (stage + H - 1.2) / 2, z: (a[1] + b[1]) / 2 + nz * 0.06, ry: Math.atan2(nx, nz), r: Math.min(2.3, Math.hypot(b[0] - a[0], b[1] - a[1]) * 0.3) });
+  }
+  return faces;
+}
 
 /**
  * Everything for the buildings, as a few merged meshes:
@@ -174,6 +250,7 @@ export function buildCampus(world: World, names: Record<string, string>) {
   const trim = newBuf();
   const glass = newBuf();
   const signs: Sign[] = [];
+  const clocks: Clock[] = [];
   const col = (h: string) => new THREE.Color(h);
   const doorOf = new Map<number, { id: string; door: XZ }>();
   for (const [id, pl] of Object.entries(world.places)) if (pl.b !== undefined && !doorOf.has(pl.b)) doorOf.set(pl.b, { id, door: pl.door });
@@ -186,14 +263,43 @@ export function buildCampus(world: World, names: Record<string, string>) {
     const roof = col(st.roof);
     // Small sheds and huts: plain walls, no windows.
     const tiny = h < 7;
+    if (bld.n?.endsWith("-tower")) {
+      clocks.push(...clockTower(trim, walls, p, h));
+      return;
+    }
     shell(walls, p, 0, h, wall, roof, tiny ? 0 : st.win);
 
-    // Floor bands: white slabs every storey (hostels, homes, teaching blocks, hospitals).
-    if (st.bands && !tiny) {
-      const band = col(st.bands);
-      const ring = offset(p, 0.14);
-      for (let y = 3.4; y < h - 1; y += 3.4) shell(trim, ring, y - 0.12, y + 0.16, band, null, 0);
-      shell(trim, ring, 0, 0.45, col("#b9b1a2"), null, 0); // plinth
+    // Structure: floor ledges (hostels, homes, hospitals), sunshades over the windows (teaching blocks), corner
+    // columns and pilasters, and a plinth. These give the outlines and shadows that make a block read as built.
+    if (!tiny && bld.n !== undefined && bld.n.endsWith("-tower")) {
+      // (the clock tower is built below)
+    } else if (!tiny && st.win !== 4 && st.win !== 5) {
+      const floors = Math.max(1, Math.round(h / 3.4));
+      const trimC = col(st.bands ?? st.parapet ?? st.wall).offsetHSL(0, 0, -0.02);
+      if (st.bands) {
+        for (let f = 1; f < floors; f++) ledge(trim, p, st.win === 3 ? 0.42 : 0.3, f * 3.4 + 0.12, 0.22, col(st.bands));
+      } else if (st.win === 2) {
+        for (let f = 0; f < floors; f++) ledge(trim, p, 0.6, f * 3.4 + 2.85, 0.1, trimC);
+      }
+      ledge(trim, p, 0.25, 0.55, 0.55, col("#b9b1a2")); // plinth
+      const colC = col(st.wall).offsetHSL(0, -0.03, -0.06);
+      for (let i = 0; i < p.length; i++) {
+        const a = p[i]!;
+        const c = p[(i + 1) % p.length]!;
+        const len = Math.hypot(c[0] - a[0], c[1] - a[1]);
+        const ry = Math.atan2(c[0] - a[0], c[1] - a[1]);
+        // Corner column.
+        addGeo(trim, BOX, place(a[0], h / 2, a[1], 0.9, h + 0.2, 0.9, ry), colC);
+        // Pilasters every ~9 m on long walls.
+        if (len > 14 && st.win !== 1) {
+          const [nx, nz] = outward(p, i);
+          const n = Math.floor(len / 9);
+          for (let k = 1; k < n; k++) {
+            const t = k / n;
+            addGeo(trim, BOX, place(a[0] + (c[0] - a[0]) * t + nx * 0.12, h / 2, a[1] + (c[1] - a[1]) * t + nz * 0.12, 0.5, h, 0.3, Math.atan2(nx, nz)), colC);
+          }
+        }
+      }
     }
     // Roof: a parapet (low wall round the edge) or a cap that overhangs.
     if (st.cap) {
@@ -283,6 +389,15 @@ export function buildCampus(world: World, names: Record<string, string>) {
     const dz = (c[1] - a[1]) / (len || 1);
     const tDoor = Math.max(3, Math.min(len - 3, (entry.door[0] - a[0]) * dx + (entry.door[1] - a[1]) * dz));
     const at = (t: number, out: number) => [a[0] + dx * t + nx * out, a[1] + dz * t + nz * out] as XZ;
+    // The entrance: a glass double door in a dark frame, and two steps up to it.
+    {
+      const [ex, ez] = at(tDoor, 0.06);
+      addGeo(trim, BOX, M.compose(P.set(ex, 1.6, ez), Q.setFromEuler(E.set(0, ry, 0)), S.set(3.1, 3.2, 0.12)), col("#3a4048"));
+      addGeo(glass, BOX, M.compose(P.set(...withY(at(tDoor, 0.14), 1.45)), Q.setFromEuler(E.set(0, ry, 0)), S.set(2.6, 2.75, 0.06)), col("#3d5d78"));
+      addGeo(trim, BOX, M.compose(P.set(...withY(at(tDoor, 0.16), 1.45)), Q.setFromEuler(E.set(0, ry, 0)), S.set(0.08, 2.75, 0.06)), col("#2a2f36"));
+      addGeo(trim, BOX, M.compose(P.set(...withY(at(tDoor, 0.9), 0.1)), Q.setFromEuler(E.set(0, ry, 0)), S.set(4.2, 0.2, 1.8)), col("#cfc8b8"));
+      addGeo(trim, BOX, M.compose(P.set(...withY(at(tDoor, 0.55), 0.3)), Q.setFromEuler(E.set(0, ry, 0)), S.set(3.6, 0.2, 1.1)), col("#d9d3c5"));
+    }
 
     if (bld.n === "tech-park" || bld.n === "tech-park-2") {
       // Yellow frame round a tall blue glass panel, with red and blue stripes either side.
@@ -329,6 +444,7 @@ export function buildCampus(world: World, names: Record<string, string>) {
     trim: toGeo(trim),
     glass: glass.pos.length ? toGeo(glass) : null,
     signs,
+    clocks,
   };
 }
 
@@ -343,6 +459,8 @@ export function buildStreets(world: World) {
   const pole = col("#4b555a");
   const lamp = col("#f4efd8");
   const white = col("#f2f2ec");
+  const doors = Object.values(world.places).map((pl) => pl.door);
+  const nearDoor = (x: number, z: number, d: number) => doors.some(([dx, dz]) => Math.hypot(dx - x, dz - z) < d);
   for (const r of world.roads) {
     if (r.f || r.w < 5) continue;
     let carry = 0;
@@ -356,19 +474,41 @@ export function buildStreets(world: World) {
       const nx = -dz;
       const nz = dx;
       const ry = Math.atan2(dx, dz);
-      // Centre-line dashes on wider roads.
-      if (r.w >= 7)
-        for (let t = 2; t < len - 2; t += 7) addGeo(b, BOX, place(ax + dx * t, 0.075, az + dz * t, 0.16, 0.02, 2.6, ry), white);
+      void ry;
       // Lamp posts every 30 m, alternating sides.
       for (let t = 30 - carry; t < len; t += 30) {
         const side = rnd() > 0.5 ? 1 : -1;
         const x = ax + dx * t + nx * side * (r.w / 2 + 1.4);
         const z = az + dz * t + nz * side * (r.w / 2 + 1.4);
+        if (nearDoor(x, z, 6)) continue;
         addGeo(b, CYL, place(x, 3, z, 0.07, 6, 0.07), pole);
         addGeo(b, BOX, place(x - nx * side * 0.6, 6, z - nz * side * 0.6, 1.3, 0.1, 0.12, Math.atan2(nx, nz) + Math.PI / 2), pole);
         addGeo(b, BOX, place(x - nx * side * 1.2, 5.88, z - nz * side * 1.2, 0.5, 0.14, 0.26, Math.atan2(nx, nz) + Math.PI / 2), lamp);
       }
       carry = (carry + len) % 30;
+    }
+  }
+  // Zebra crossings where roads meet (OSM junctions: points shared by three or more road ends or bends).
+  const degree = new Map<string, number>();
+  for (const r of world.roads) if (!r.f) for (const [x, z] of r.p) degree.set(`${x},${z}`, (degree.get(`${x},${z}`) ?? 0) + 1);
+  const crossed = new Set<string>();
+  for (const r of world.roads) {
+    if (r.f || r.w < 6) continue;
+    for (const end of [0, r.p.length - 1]) {
+      const [jx, jz] = r.p[end]!;
+      const key = `${jx},${jz}`;
+      if ((degree.get(key) ?? 0) < 2) continue;
+      const nb = r.p[end === 0 ? 1 : r.p.length - 2]!;
+      const len = Math.hypot(nb[0] - jx, nb[1] - jz);
+      if (len < 14 || crossed.has(`${key}|${nb[0]},${nb[1]}`)) continue;
+      crossed.add(`${key}|${nb[0]},${nb[1]}`);
+      const ux = (nb[0] - jx) / len;
+      const uz = (nb[1] - jz) / len;
+      const cx = jx + ux * (r.w / 2 + 4);
+      const cz = jz + uz * (r.w / 2 + 4);
+      const ry = Math.atan2(ux, uz);
+      for (let k = -r.w / 2 + 0.6; k <= r.w / 2 - 0.4; k += 1.0)
+        addGeo(b, BOX, place(cx + -uz * k, 0.075, cz + ux * k, 0.5, 0.02, 2.8, ry), white);
     }
   }
   // Bus shelters at real bus stops.
@@ -378,14 +518,34 @@ export function buildStreets(world: World) {
     for (const s of [-1, 1]) addGeo(b, BOX, M.compose(P.set(x + Math.cos(ry) * s * 1.9, 1.3, z - Math.sin(ry) * s * 1.9), Q.setFromEuler(E.set(0, ry, 0)), S.set(0.12, 2.6, 0.12)), pole);
     addGeo(b, BOX, place(x, 0.5, z, 3, 0.1, 0.5, ry), col("#c9a37a"));
   }
-  // A bench and a bin by every named door.
+  // A bench and a bin beside every named door, set against the wall it is on so they never block the way in.
   for (const pl of Object.values(world.places)) {
-    if (pl.b === undefined) continue;
+    const bp = pl.b === undefined ? undefined : world.buildings[pl.b]?.p;
+    if (!bp) continue;
     const [x, z] = pl.door;
-    const ry = rnd() * Math.PI;
-    addGeo(b, BOX, place(x + 3.2, 0.45, z + 1.2, 1.8, 0.1, 0.5, ry), col("#b0784a"));
-    addGeo(b, BOX, place(x + 3.2, 0.22, z + 1.2, 1.6, 0.44, 0.08, ry), pole);
-    addGeo(b, CYL, place(x - 3, 0.45, z + 1.5, 0.26, 0.9, 0.26), col("#2f8f6b"));
+    let wi = 0;
+    let wd = Infinity;
+    for (let i = 0; i < bp.length; i++) {
+      const a = bp[i]!;
+      const c = bp[(i + 1) % bp.length]!;
+      const ex = c[0] - a[0];
+      const ez = c[1] - a[1];
+      const t = Math.max(0, Math.min(1, ((x - a[0]) * ex + (z - a[1]) * ez) / (ex * ex + ez * ez || 1)));
+      const d = Math.hypot(a[0] + ex * t - x, a[1] + ez * t - z);
+      if (d < wd) {
+        wd = d;
+        wi = i;
+      }
+    }
+    const [ox, oz] = outward(bp, wi);
+    const tx = -oz;
+    const tz = ox;
+    const ry = Math.atan2(-tz, tx);
+    const bx = x + tx * 4.2 + ox * 1.1;
+    const bz = z + tz * 4.2 + oz * 1.1;
+    addGeo(b, BOX, place(bx, 0.45, bz, 1.8, 0.1, 0.5, ry), col("#b0784a"));
+    addGeo(b, BOX, place(bx, 0.22, bz, 1.6, 0.44, 0.08, ry), pole);
+    addGeo(b, CYL, place(x - tx * 3.6 + ox * 1.1, 0.45, z - tz * 3.6 + oz * 1.1, 0.26, 0.9, 0.26), col("#2f8f6b"));
   }
   return toGeo(b);
 }
