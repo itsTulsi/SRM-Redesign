@@ -1,3 +1,4 @@
+import { safeJson } from "@/lib/jsonld";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
@@ -8,6 +9,8 @@ import { recommend } from "@/lib/recommend";
 import { SectionNav } from "@/components/grail/SectionNav";
 import { AskSenior, type SeniorThread } from "@/components/programme/AskSenior";
 import { CompareToggle } from "@/components/programme/CompareToggle";
+import { CostCalculator, type CostRoom } from "@/components/programme/CostCalculator";
+import hostelData from "@/content/hostels.json";
 import { SaveOffline } from "@/components/ui/SaveOffline";
 import { ParentModeToggle } from "@/components/programme/ParentModeToggle";
 import { getContent, isTodo, programmes } from "@/lib/content";
@@ -57,6 +60,12 @@ export default async function ProgrammePage({ params }: Params) {
   const becauseOf = new Map(recs.map((r) => [r.item.slug, r.because]));
   const threads: SeniorThread[] = seniorsByCollege[p.college] ?? seniorsByCollege.default ?? [];
   const phones = site.admissions.phones.slice(0, 2);
+  const ct = await getTranslations("Cost");
+  // Hostel rows from SRM's 2026–27 circulars (content/hostels.json); Kattankulathur only.
+  const rooms: CostRoom[] = (["men", "women"] as const).flatMap((group) =>
+    hostelData.fees[group].map((r) => ({ group, block: r.block, ac: r.ac, sharing: r.sharing, hostel: r.hostel, mess: r.mess, offCampus: "offCampus" in r ? !!r.offCampus : undefined })),
+  );
+  const atKtr = p.campuses.includes("kattankulathur");
   const level = p.level === "UG" ? t("ug") : t("pg");
   const duration = typeof p.durationYears === "number" ? t("years", { count: p.durationYears }) : null;
   const fees = typeof p.feesPerYearINR === "number" ? t("feesValue", { amount: inr.format(p.feesPerYearINR) }) : null;
@@ -115,7 +124,7 @@ export default async function ProgrammePage({ params }: Params) {
 
   return (
     <GrailPage>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJson(jsonLd) }} />
 
       <RecordView slug={p.slug} />
       <GrailHero
@@ -154,11 +163,23 @@ export default async function ProgrammePage({ params }: Params) {
           </>
         }
       >
-        <div className="mt-10 flex flex-wrap gap-3">
-          <Link href="/admissions#apply" data-magnetic className="grail-cta relative overflow-hidden">
+        {/* A/B test "programme-cta" (lib/ab.ts): B leads with the cost calculator, then Apply. */}
+        <div data-ab="programme-cta" data-ab-variant="b" className="mt-10 flex flex-wrap gap-3">
+          <a href="#cost" className="grail-cta">
+            {ct("jump")}
+          </a>
+          <Link href="/admissions#apply" data-ab-goal="programme-cta" className={ghostPill}>
             {t("apply")}
           </Link>
-          <Link href={`/admissions?programme=${p.slug}#enquiry`} className={ghostPill}>
+          <Link href={`/admissions?programme=${p.slug}#enquiry`} data-ab-goal="programme-cta" className={ghostPill}>
+            {t("enquire")}
+          </Link>
+        </div>
+        <div className="mt-10 flex flex-wrap gap-3 [[data-ab-programme-cta=b]_&]:mt-3">
+          <Link href="/admissions#apply" data-magnetic data-ab="programme-cta" data-ab-variant="a" data-ab-goal="programme-cta" className="grail-cta relative overflow-hidden">
+            {t("apply")}
+          </Link>
+          <Link href={`/admissions?programme=${p.slug}#enquiry`} data-ab="programme-cta" data-ab-variant="a" data-ab-goal="programme-cta" className={ghostPill}>
             {t("enquire")}
           </Link>
           <a href={`tel:${phones[0]!.tel}`} className={ghostPill}>
@@ -199,7 +220,17 @@ export default async function ProgrammePage({ params }: Params) {
                 </p>
               ),
             },
-            { q: pt("costQ"), a: <p>{fees ?? pt("costUnknown")}</p> },
+            {
+              q: pt("costQ"),
+              a: (
+                <p>
+                  {fees ?? pt("costUnknown")}{" "}
+                  <a href="#cost" className="inline-flex min-h-11 items-center font-semibold underline underline-offset-4">
+                    {ct("jump")} →
+                  </a>
+                </p>
+              ),
+            },
             {
               q: pt("admitQ"),
               a: <p>{[entrance, eligibility].filter(Boolean).join(" · ") || t("notPublished")}</p>,
@@ -272,6 +303,24 @@ export default async function ProgrammePage({ params }: Params) {
         </div>
       </GrailChapter>
 
+      {/* ── What will it cost? Shown in both views: tuition + hostel + mess for the whole course, SRM's figures only. ── */}
+      <GrailChapter id="cost" className="scroll-mt-24" tone="lilac" kicker={ct("kicker")} level={2} title={ct("title")} titleId="cost-title" intro={<p>{ct("intro")}</p>} size="text-[clamp(2.4rem,6vw,5.5rem)]">
+        <CostCalculator
+          tuition={typeof p.feesPerYearINR === "number" ? p.feesPerYearINR : null}
+          years={typeof p.durationYears === "number" ? p.durationYears : 0}
+          rooms={rooms}
+          laundry={hostelData.fees.laundry}
+          hostelCampus={atKtr ? null : campusList.map((c) => c.name).join(", ")}
+          btechRates={p.slug.startsWith("btech") || p.slug.startsWith("mtech")}
+          phone={{ display: phones[0]!.display, tel: phones[0]!.tel }}
+        />
+        <p className="mt-6 text-sm">
+          <a href={hostelData.fees.sources.men} className="inline-flex min-h-11 items-center underline underline-offset-4">
+            {ct("sources")}
+          </a>
+        </p>
+      </GrailChapter>
+
       {/* ── Student view ── */}
       <div className="student-view">
         <SectionNav
@@ -284,7 +333,7 @@ export default async function ProgrammePage({ params }: Params) {
             ...(related.length ? [{ id: "related", label: f("related") }] : []),
           ]}
         />
-        <GrailChapter id="facts" className="scroll-mt-32" tone="light" kicker={college?.shortName ?? ""} level={2} title={t("keyFacts")} titleId="facts-title">
+        <GrailChapter id="facts" className="scroll-mt-32" tone="light" kicker={college?.shortName ?? ""} level={3} title={t("keyFacts")} titleId="facts-title">
           <dl className="grid max-w-5xl gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {factRows.map((r) => (
               <div key={r.label} className="grail-paper flex flex-col gap-1 p-5">
@@ -304,7 +353,7 @@ export default async function ProgrammePage({ params }: Params) {
           </p>
         </GrailChapter>
 
-        <GrailChapter id="careers" className="scroll-mt-32" kicker={t("careers")} level={3} title={t("careers")} titleId="careers-title" intro={<p>{t("careersNote")}</p>}>
+        <GrailChapter id="careers" className="scroll-mt-32" kicker={t("careers")} level={4} title={t("careers")} titleId="careers-title" intro={<p>{t("careersNote")}</p>}>
           <ul className="flex flex-wrap gap-3">
             {p.outcomes.map((o, i) => (
               <li key={o} className="grail-paper flex items-center gap-3 rounded-full py-2 pr-5 pl-2 text-lg font-semibold">
@@ -320,7 +369,7 @@ export default async function ProgrammePage({ params }: Params) {
           className="scroll-mt-32"
           tone="lilac"
           kicker={g("proof.kicker")}
-          level={4}
+          level={5}
           title={t("placementsTitle", { season: placements.season })}
           titleId="placements-title"
           intro={<p>{t("placementsNote")}</p>}
@@ -340,7 +389,7 @@ export default async function ProgrammePage({ params }: Params) {
         </div>
 
         {related.length ? (
-          <GrailChapter id="related" className="scroll-mt-32" kicker={college?.shortName ?? ""} level={5} title={f("similar")} titleId="related-title" intro={<p>{f("similarWhy")}</p>} size="text-[clamp(2rem,5vw,4.5rem)]">
+          <GrailChapter id="related" className="scroll-mt-32" kicker={college?.shortName ?? ""} level={6} title={f("similar")} titleId="related-title" intro={<p>{f("similarWhy")}</p>} size="text-[clamp(2rem,5vw,4.5rem)]">
             <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {related.map((r) => (
                 <li key={r.slug}>
@@ -358,7 +407,7 @@ export default async function ProgrammePage({ params }: Params) {
         ) : null}
       </div>
 
-      <GrailStart level={related.length ? 6 : 5} />
+      <GrailStart level={related.length ? 7 : 6} />
     </GrailPage>
   );
 }

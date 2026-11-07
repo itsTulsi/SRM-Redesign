@@ -5,6 +5,8 @@ import { getMessages, getTranslations, setRequestLocale } from "next-intl/server
 import { AssistantLauncher } from "@/components/assistant/AssistantLauncher";
 import { SiteFooter } from "@/components/footer/SiteFooter";
 import { MotionDirector } from "@/components/motion/MotionDirector";
+import { AbTracker } from "@/components/ui/AbTracker";
+import { AB_STORAGE_KEY, applyAb, experimentVariants } from "@/lib/ab";
 import { ViewTransitions } from "@/components/motion/ViewTransitions";
 import { getNavData } from "@/components/nav/nav-data";
 import { SiteHeader } from "@/components/nav/SiteHeader";
@@ -20,14 +22,16 @@ import "../globals.css";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 // Keep in sync with useTranslations() calls in "use client" components (check: grep -rl useTranslations).
-const CLIENT_NAMESPACES = ["Lite", "Hero", "Ask", "Enquiry", "Senior", "Parent", "Assistant", "Palette", "Offline"] as const;
+const CLIENT_NAMESPACES = ["Lite", "Hero", "Ask", "Enquiry", "Senior", "Parent", "Assistant", "Palette", "Offline", "Cost"] as const;
 
 // Runs before first paint so Lite Mode and Parent Mode never flash. Failure is harmless: defaults apply.
 const liteAndParent = `try{(${applyLiteMode.toString()})(${JSON.stringify(LITE_STORAGE_KEY)})}catch(e){}try{(${applyParentMode.toString()})(${JSON.stringify(PARENT_STORAGE_KEY)})}catch(e){}`;
 // The scroll-driven gate intro (components/grail/IntroGate): first visit of a session, on the homepage only, and never in
 // Lite Mode or with reduced motion. Decided here, before first paint, so the page never jumps.
 const introGate = `try{var d=document.documentElement;if(/^\\/(ta|hi)?\\/?$/.test(location.pathname)&&d.dataset.motion==="full"&&d.dataset.lite!=="on"&&!sessionStorage.getItem("srm-intro-seen")&&!(navigator.connection&&navigator.connection.saveData))d.dataset.intro="on"}catch(e){}`;
-const initScript = liteAndParent + introGate;
+// A/B variants (lib/ab.ts), chosen before first paint so the page never swaps versions in front of you.
+const abScript = `try{(${applyAb.toString()})(${JSON.stringify(AB_STORAGE_KEY)},${JSON.stringify(experimentVariants)})}catch(e){}`;
+const initScript = liteAndParent + introGate + abScript;
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -85,6 +89,7 @@ export default async function LocaleLayout({
           {children}
           <SiteFooter />
           <MotionDirector />
+          <AbTracker />
           <ViewTransitions />
           <CompareTray />
           <AssistantLauncher call={nav.call} />

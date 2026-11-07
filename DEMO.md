@@ -14,6 +14,7 @@ Kept up to date as the build progresses (CLAUDE.md §10). Full audit results: [d
 10. ✅ **Ask SRM Assistant (Leafy)**: Tap the Leafy mascot button (bottom-right on any page) → verified answers on fees, deadlines, and hostels with Admissions direct dial, backed by a free AI fallback.
 11. ✅ **Works Offline**: Tap **Save for offline**, disconnect network and reload → offline service worker serves saved pages and helpful offline fallback.
 12. ✅ **3D Hostels**: Visit `/hostels` to explore every block with photos, warden contacts, 2026–27 fee tables, mess timings, and an interactive 3D campus model.
+13. ✅ **Walk SRM**: Open `/walk` → **Begin**. Walk the real Kattankulathur campus (WASD, tap the ground, or the thumb stick on a phone). Tap the yellow **Admissions counsellor** bubble: you walk there and she starts the **First day** quest. Press **M** for the map and **Jump there** to Java Food Court; the senior finishes the quest and offers the next one. 👕 changes your outfit. Every building card opens its real page.
 
 Before the demo: paste a programme link into WhatsApp Web and check the preview card appears (it needs `NEXT_PUBLIC_SITE_URL` set to the live https address in Vercel). Keep the walkthrough under 90 seconds, and record it as a screen capture in case the venue's Wi-Fi fails.
 

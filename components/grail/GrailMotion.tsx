@@ -49,6 +49,15 @@ export function GrailMotion() {
         return r.top <= y && r.bottom >= y;
       }).pop();
       dock.dataset.on = under?.dataset.tone ?? "hero";
+      // Never cover something you can click: if a link, button or field is under the dock, it steps aside.
+      const r = dock.getBoundingClientRect();
+      const pad = 8;
+      const points = [r.left - pad, r.left + r.width / 2, r.right + pad].flatMap((x) => [r.top - pad, r.top + r.height / 2, r.bottom].map((y) => [x, y] as const));
+      const covers = points.some(([x, y]) =>
+        document.elementsFromPoint(x, y).some((el) => !dock.contains(el) && !!el.closest("main a[href], main button, main input, main select, main summary, main textarea")),
+      );
+      if (covers) dock.dataset.hide = "";
+      else delete dock.dataset.hide;
     };
     const onScroll = () => {
       if (!frame) frame = requestAnimationFrame(toneUnderDock);

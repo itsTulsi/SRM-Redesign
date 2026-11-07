@@ -1236,6 +1236,14 @@ html:has([data-grail]) {
   display: none;
 }
 
+/* ── A/B variants (lib/ab.ts): the head script sets html[data-ab-<experiment>]; without it, variant A shows. ── */
+html:not([data-ab-hero-cta="b"]) [data-ab="hero-cta"][data-ab-variant="b"],
+html[data-ab-hero-cta="b"] [data-ab="hero-cta"][data-ab-variant="a"],
+html:not([data-ab-programme-cta="b"]) [data-ab="programme-cta"][data-ab-variant="b"],
+html[data-ab-programme-cta="b"] [data-ab="programme-cta"][data-ab-variant="a"] {
+  display: none;
+}
+
 /* The floating dock (desktop): it takes the colours of the section under it, as in the reference. */
 .grail-dock {
   display: none;
@@ -1271,6 +1279,17 @@ html:has([data-grail]) {
     translate: -50% 1.5rem;
     pointer-events: none;
     visibility: hidden;
+  }
+  /* …and steps aside whenever a link or button would be under it, so it never covers something you can click. */
+  .grail-dock[data-hide] {
+    opacity: 0;
+    translate: -50% 1.5rem;
+    pointer-events: none;
+    visibility: hidden;
+    transition:
+      opacity 200ms,
+      translate 200ms,
+      visibility 0s 200ms;
   }
   .grail-dock[data-on="light"] {
     background: rgb(255 255 255 / 0.9);
@@ -1320,14 +1339,14 @@ html:has([data-grail]) {
       transform: none;
       animation: grail-ink linear both;
       animation-timeline: --grail-ink;
-      animation-range: contain 0% contain 62%;
+      animation-range: entry 70% contain 55%;
     }
   }
 }
 @keyframes grail-ink {
   from {
-    -webkit-mask-size: 6vmax 6vmax;
-    mask-size: 6vmax 6vmax;
+    -webkit-mask-size: 16vmax 16vmax;
+    mask-size: 16vmax 16vmax;
   }
   45% {
     -webkit-mask-size: 85vmax 85vmax;
@@ -1462,6 +1481,19 @@ html:has([data-grail]) {
     animation-delay: calc(var(--i, 0) * 45ms);
   }
 }
+/* A number that just changed (the cost calculator's totals) settles into place. */
+@media (prefers-reduced-motion: no-preference) {
+  [data-motion="full"] .grail-pop {
+    display: inline-block;
+    animation: grail-pop 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+}
+@keyframes grail-pop {
+  from {
+    opacity: 0.4;
+    translate: 0 8px;
+  }
+}
 @keyframes grail-card-in {
   from {
     opacity: 0;
@@ -1522,7 +1554,7 @@ html:has([data-grail]) {
 }
 html[data-intro="on"] .grail-intro-spacer {
   display: block;
-  height: 300svh;
+  height: 220svh; /* 100svh + IntroGate's INTRO_SCREENS (1.2) */
 }
 /* The homepage's first chapter slides up under the fading picture. */
 html[data-intro="on"] [data-grail] > .grail-intro-spacer + .grail-intro + section {
@@ -1679,5 +1711,68 @@ html[data-intro="on"] .grail-intro {
   .grail-dock,
   .grail-ring-stage {
     display: none;
+  }
+}
+
+/* ── Walk SRM (components/walk): the game's HUD. Motion only when the visitor hasn't asked for less. ── */
+.walk-spinner {
+  animation: walk-spin 0.9s linear infinite;
+}
+@keyframes walk-spin {
+  to {
+    rotate: 360deg;
+  }
+}
+.walk-ripple-on {
+  animation: walk-ripple 0.6s ease-out forwards;
+}
+@keyframes walk-ripple {
+  from {
+    scale: 0.3;
+    opacity: 1;
+  }
+  to {
+    scale: 1.6;
+    opacity: 0;
+  }
+}
+.walk-ripple:not(.walk-ripple-on) {
+  opacity: 0;
+}
+.walk-label,
+.walk-bubble,
+.walk-emote,
+.walk-ripple {
+  will-change: transform;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .walk-sheet {
+    animation: walk-sheet 0.32s cubic-bezier(0.2, 0.9, 0.2, 1);
+  }
+  .walk-toast {
+    animation: walk-pop 0.35s cubic-bezier(0.2, 0.9, 0.2, 1.4);
+  }
+  .walk-act {
+    animation: walk-pulse 1.6s ease-in-out infinite;
+  }
+  .walk-card {
+    animation: walk-pop 0.3s ease-out;
+  }
+}
+@keyframes walk-sheet {
+  from {
+    translate: 0 40px;
+    opacity: 0;
+  }
+}
+@keyframes walk-pop {
+  from {
+    scale: 0.85;
+    opacity: 0;
+  }
+}
+@keyframes walk-pulse {
+  50% {
+    scale: 1.05;
   }
 }

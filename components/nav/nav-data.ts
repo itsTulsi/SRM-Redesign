@@ -1,6 +1,6 @@
 import { getLocale, getTranslations } from "next-intl/server";
 import { getContent } from "@/lib/content";
-import { missionAnchor, SECTION } from "@/lib/sections";
+import { HREF } from "@/lib/sections";
 import { researchCentres } from "@/lib/research-centres";
 import { LIFE_SECTIONS, lifeSections } from "@/lib/student-life";
 import type { NavData } from "./types";
@@ -60,7 +60,7 @@ export async function getNavData(): Promise<NavData> {
         groups: [
           {
             title: t("missions"),
-            links: missions.map((m) => ({ label: m.name, href: `/#${missionAnchor(m.slug)}` })),
+            links: missions.map((m) => ({ label: m.name, href: HREF.mission(m.slug) })),
           },
           {
             title: t("researchCentres"),
@@ -69,7 +69,7 @@ export async function getNavData(): Promise<NavData> {
               { label: t("patents"), href: "/research#patents" },
             ],
           },
-          { title: t("researchNumbers"), links: [{ label: t("researchNumbers"), href: `/#${SECTION.research}` }] },
+          { title: t("researchNumbers"), links: [{ label: t("researchNumbers"), href: HREF.researchNumbers }] },
         ],
       },
       {
@@ -83,6 +83,7 @@ export async function getNavData(): Promise<NavData> {
               .filter((s) => !s.title.startsWith("TODO:"))
               .map((s) => ({ label: s.title, href: `/stories/${s.slug}` })),
           },
+          { title: t("allStories"), links: [{ label: t("allStories"), href: HREF.stories }, { label: t("alumni"), href: HREF.alumni }] },
         ],
         feature: camber ? { eyebrow: t("featured"), title: camber.title, href: `/stories/${camber.slug}` } : undefined,
       },
@@ -93,9 +94,10 @@ export async function getNavData(): Promise<NavData> {
         groups: [
           {
             title: t("ourCampuses"),
-            links: campuses
-              .filter((c) => c.kind === "campus")
-              .map((c) => ({ label: c.name, href: `/campuses/${c.slug}` })),
+            links: [
+              { label: t("walk"), href: "/walk" },
+              ...campuses.filter((c) => c.kind === "campus").map((c) => ({ label: c.name, href: `/campuses/${c.slug}` })),
+            ],
           },
           {
             title: t("housing"),
@@ -127,9 +129,9 @@ export async function getNavData(): Promise<NavData> {
           {
             title: t("institution"),
             links: [
-              { label: t("rankings"), href: `/#${SECTION.rankings}` },
-              { label: t("alumni"), href: `/#${SECTION.alumni}` },
-              { label: t("thisWeek"), href: `/#${SECTION.thisWeek}` },
+              { label: t("rankings"), href: HREF.rankings },
+              { label: t("alumni"), href: HREF.alumni },
+              { label: t("thisWeek"), href: HREF.thisWeek },
               { label: t("admissions"), href: "/admissions" },
             ],
           },

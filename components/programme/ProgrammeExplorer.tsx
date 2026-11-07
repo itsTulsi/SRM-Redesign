@@ -50,6 +50,11 @@ type Level = "all" | "UG" | "PG";
  */
 export function ProgrammeExplorer({ cards, colleges, strings }: { cards: ExplorerCard[]; colleges: { slug: string; name: string }[]; strings: Strings }) {
   const [query, setQuery] = useState("");
+  // A search started elsewhere (the homepage's "What do you want to become?" box) arrives as ?q=.
+  useEffect(() => {
+    const q = new URLSearchParams(window.location.search).get("q")?.trim();
+    if (q) setQuery(q.slice(0, 120));
+  }, []);
   const [level, setLevel] = useState<Level>("all");
   const [college, setCollege] = useState<string | null>(null);
   const [hits, setHits] = useState<Set<string> | null>(null);

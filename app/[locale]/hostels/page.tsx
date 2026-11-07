@@ -39,6 +39,7 @@ export default async function HostelsPage({ params }: Params) {
   setRequestLocale(locale);
   const t = await getTranslations("Hostels");
   const nav = await getTranslations("Nav");
+  const walk = await getTranslations("Walk");
   const { site } = getContent(locale);
   const { contacts, dining, fees } = hostels;
   const ext = <span className="sr-only"> {nav("external")}</span>;
@@ -101,6 +102,9 @@ export default async function HostelsPage({ params }: Params) {
         className="z-[1] -mt-9 rounded-t-[36px] border-t border-white/15 bg-[#0a0a0a]"
       >
         <HostelFinder blocks={finderBlocks} feeYear={fees.year} />
+        <Link href="/walk" className="mt-6 inline-flex min-h-11 items-center font-semibold underline underline-offset-4">
+          🚶 {walk("promo.hostel")} →
+        </Link>
       </GrailChapter>
           {section(
             "accommodation",

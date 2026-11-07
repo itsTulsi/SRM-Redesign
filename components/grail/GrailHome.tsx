@@ -34,6 +34,8 @@ export async function GrailHome() {
   const ex = await getTranslations("Acts.explore");
   const nav = await getTranslations("Nav");
   const locale = await getLocale();
+  const hero = await getTranslations("Hero");
+  const walk = await getTranslations("Walk");
   const map = getMapData(locale);
   const all = await getMessages();
   const copy = all.Grail.quests as Record<string, QuestCopy>;
@@ -140,7 +142,9 @@ export async function GrailHome() {
           <div className="mx-auto flex max-w-3xl flex-col items-center gap-5 text-center">
             <p className="grail-num text-2xl tracking-wide text-[var(--action)]">Learn. Leap. Lead.</p>
             <p className="max-w-xl text-lg text-[var(--fg-muted)]">{t("hero.lead")}</p>
-            <div className="flex flex-wrap justify-center gap-3">
+            {/* A/B test "hero-cta" (lib/ab.ts). A: the game-style run button first. B: search first ("What do you want to
+                become?"), which opens the programme finder with the words already in it. */}
+            <div data-ab="hero-cta" data-ab-variant="a" data-ab-goal="hero-cta" className="flex flex-wrap justify-center gap-3">
               <Link href="/admissions#apply" className="grail-cta">
                 {t("hero.start")}
               </Link>
@@ -148,12 +152,37 @@ export async function GrailHome() {
                 {t("hero.find")}
               </Link>
             </div>
+            <div data-ab="hero-cta" data-ab-variant="b" data-ab-goal="hero-cta" className="flex w-full max-w-xl flex-col items-center gap-3">
+              <p aria-hidden="true" className="grail-display text-[clamp(1.6rem,3.4vw,2.4rem)] leading-tight">
+                {hero("title")}
+              </p>
+              <form role="search" action={locale === "en" ? "/programmes" : `/${locale}/programmes`} className="flex w-full items-center gap-2 rounded-full border border-white/25 bg-black/50 p-1.5 pl-5 backdrop-blur focus-within:border-[var(--fg)]">
+                <label htmlFor="hero-ask" className="sr-only">
+                  {hero("inputLabel")}
+                </label>
+                <input
+                  id="hero-ask"
+                  name="q"
+                  type="search"
+                  autoComplete="off"
+                  maxLength={120}
+                  placeholder={`${(hero.raw("examples") as string[]).slice(0, 3).join(" · ")}…`}
+                  className="min-h-11 min-w-0 flex-1 bg-transparent text-base text-[var(--fg)] outline-none placeholder:text-[var(--fg-muted)]"
+                />
+                <button type="submit" className="grail-cta min-h-11 shrink-0 px-5">
+                  {hero("submit")}
+                </button>
+              </form>
+              <Link href="/admissions#apply" className="inline-flex min-h-11 items-center font-semibold text-[var(--fg)] underline underline-offset-4">
+                {t("hero.start")} →
+              </Link>
+            </div>
           </div>
         </div>
       </section>
 
       {/* ── 02 Learn. Leap. Lead.: SRM's tagline as the site's three acts (black). Each word leads to its part of the site. ── */}
-      <section aria-labelledby="grail-slogan" data-tone="dark" className="grail-stack bg-black py-20 lg:py-28">
+      <section aria-labelledby="grail-slogan" data-tone="dark" className="relative bg-black py-20 lg:py-28">
         <div className="site-container">
           {corner(t("slogan.kicker"))}
           <Rise id="grail-slogan" text={t("slogan.title")} className="mt-4 text-[clamp(3rem,10vw,9rem)]" />
@@ -325,7 +354,7 @@ export async function GrailHome() {
       </section>
 
       {/* ── 05 Proof (sheet) ── */}
-      <section aria-labelledby="grail-proof" data-tone="light" className="grail-stack grail-sheet">
+      <section id={SECTION.rankings} aria-labelledby="grail-proof" data-tone="light" className="grail-stack grail-sheet scroll-mt-16">
         <div className="site-container py-16 lg:py-24">
           {corner(t("proof.kicker"))}
           <Rise id="grail-proof" text={t("proof.title")} className="mt-4 text-[clamp(2.8rem,8vw,7rem)]" />
@@ -394,6 +423,17 @@ export async function GrailHome() {
             <CampusExplorer campuses={map.campuses} clusters={map.clusters} groups={map.groups} states={getCities(locale)} aspect={mapAspect} mapSrc="/map/india.svg" />
           </div>
           <p className="mt-6 text-xs text-[var(--fg-muted)]">{ex("mapCredit")}</p>
+          {/* Walk SRM: the campus as a small walkable world (/walk). */}
+          <div className="mt-10 grid items-center gap-6 overflow-hidden rounded-[28px] border border-white/15 bg-gradient-to-br from-[#1f4fd8]/25 via-[#14101a] to-[#623562]/40 p-6 md:grid-cols-[1fr_auto] lg:p-10">
+            <div>
+              <p className="text-sm font-semibold text-[#ffd166]">{walk("promo.kicker")}</p>
+              <h3 className="grail-display mt-2 text-[clamp(2rem,4.5vw,3.5rem)] leading-none">{walk("promo.title")}</h3>
+              <p className="mt-3 max-w-xl text-[var(--fg-muted)]">{walk("promo.text")}</p>
+            </div>
+            <Link href="/walk" className="grail-cta w-fit">
+              {walk("promo.cta")} ▸
+            </Link>
+          </div>
         </div>
       </section>
 
